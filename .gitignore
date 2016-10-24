@@ -1,0 +1,20 @@
+
+#Visual Studio
+/projects/visualstudio/*.VC.db
+/projects/visualstudio/*.opendb
+/projects/visualstudio/*.sdf
+/projects/visualstudio/.vs
+/projects/visualstudio/build
+/projects/visualstudio/bin
+/test/FightGame/.vs
+/test/FightGame/build
+/test/FightGame/bin
+
+#Xcode
+.DS_Store
+/projects/xcode/*.xcodeproj/*.xcworkspace
+/projects/xcode/*.xcodeproj/xcuserdata
+/projects/xcode/*.xcworkspace/xcshareddata
+/projects/xcode/*.xcworkspace/xcuserdata
+/projects/xcode/Build
+/projects/xcode/DerivedData
