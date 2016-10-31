@@ -10,5 +10,36 @@
     <Filter Include="include\fightlib">
       <UniqueIdentifier>{0c6c2847-2985-4e84-9470-d408ee388285}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\entity">
+      <UniqueIdentifier>{73a976fd-2070-49b1-94d3-8a1339628bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\fightlib\entity\collision">
+      <UniqueIdentifier>{8bf511b7-cd93-484f-9c4f-32aa9dc05e73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\fightlib\Fight.h">
+      <Filter>include\fightlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\Character.h">
+      <Filter>include\fightlib\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\Entity.h">
+      <Filter>include\fightlib\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\Item.h">
+      <Filter>include\fightlib\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\Platform.h">
+      <Filter>include\fightlib\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\Hitbox.h">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Fight.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
