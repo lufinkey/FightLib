@@ -13,8 +13,14 @@
     <Filter Include="include\fightlib\entity">
       <UniqueIdentifier>{73a976fd-2070-49b1-94d3-8a1339628bde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\fightlib\entity\collision">
-      <UniqueIdentifier>{8bf511b7-cd93-484f-9c4f-32aa9dc05e73}</UniqueIdentifier>
+    <Filter Include="src\entity">
+      <UniqueIdentifier>{91bd6b8b-a0f7-494d-ac12-c563961e8723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\fightlib\entity\action">
+      <UniqueIdentifier>{9f82fac8-777e-41e8-b391-10f8206c2e1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\entity\action">
+      <UniqueIdentifier>{fc54c9c8-15ba-4a56-a00e-22c7b9c29e1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,13 +39,19 @@
     <ClInclude Include="..\..\include\fightlib\entity\Platform.h">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\Hitbox.h">
-      <Filter>include\fightlib\entity\collision</Filter>
+    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.h">
+      <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Fight.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\Entity.cpp">
+      <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\action\AnimationData.cpp">
+      <Filter>src\entity\action</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

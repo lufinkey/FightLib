@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-	std::cout << sizeof(GameLibrary::Animation) << std::endl;
+	std::cout << sizeof(fgl::ArrayList<void*>) << std::endl;
 	std::cin.ignore();
 	return 0;
 }
