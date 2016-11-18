@@ -3,12 +3,14 @@
 
 namespace fl
 {
-	class Hitbox
+	class AnimationHitbox
 	{
 	public:
-		Hitbox();
+		AnimationHitbox();
 
-		size_t index;
+		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
+
+		size_t tag;
 		float x;
 		float y;
 		float radius;
@@ -18,6 +20,8 @@ namespace fl
 	{
 	public:
 		AnimationMetaPoint();
+
+		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
 
 		typedef enum : fgl::byte
 		{
@@ -48,7 +52,7 @@ namespace fl
 		AnimationData();
 		~AnimationData();
 
-		bool loadFromFile(const fgl::String& path, fgl::String* error);
+		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error);
 
 		void drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics);
 
@@ -58,8 +62,8 @@ namespace fl
 	private:
 		struct FrameData
 		{
-			fgl::ArrayList<Hitbox> hitboxes;
-			fgl::ArrayList<AnimationMetaPoint> metaPoints;
+			fgl::ArrayList<AnimationHitbox> hitboxes;
+			fgl::ArrayList<AnimationMetaPoint> metapoints;
 		};
 
 		fgl::String name;
