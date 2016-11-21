@@ -10,6 +10,10 @@ namespace fl
 
 		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
 
+		void draw(fgl::Graphics graphics) const;
+
+		fgl::RectangleD getRect() const;
+
 		size_t tag;
 		float x;
 		float y;
@@ -22,6 +26,10 @@ namespace fl
 		AnimationMetaPoint();
 
 		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
+
+		void draw(fgl::Graphics graphics) const;
+
+		fgl::RectangleD getRect() const;
 
 		typedef enum : fgl::byte
 		{
@@ -54,10 +62,13 @@ namespace fl
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error);
 
-		void drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics);
+		void drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics, bool showFrames=false) const;
 
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
+
+		const fgl::ArrayList<AnimationHitbox>& getHitboxes(size_t frameNumber) const;
+		const fgl::ArrayList<AnimationMetaPoint>& getMetaPoints(size_t frameNumber) const;
 
 	private:
 		struct FrameData
@@ -68,6 +79,6 @@ namespace fl
 
 		fgl::String name;
 		fgl::Animation* animation;
-		fgl::ArrayList<FrameData> frameData;
+		fgl::ArrayList<FrameData> frameDatas;
 	};
 }

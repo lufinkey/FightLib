@@ -41,6 +41,17 @@ namespace fl
 		}
 	}
 
+	void AnimationHitbox::draw(fgl::Graphics graphics) const
+	{
+		graphics.setColor(fgl::Color::GREEN);
+		graphics.drawRect(getRect());
+	}
+
+	fgl::RectangleD AnimationHitbox::getRect() const
+	{
+		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
+	}
+
 	AnimationMetaPoint::AnimationMetaPoint() :
 		x(0),
 		y(0),
@@ -119,6 +130,53 @@ namespace fl
 		{
 			return_error("missing required field")
 		}
+	}
+
+	void AnimationMetaPoint::draw(fgl::Graphics graphics) const
+	{
+		if(behind)
+		{
+			graphics.compositeAlpha(0.7);
+		}
+		if(!visible)
+		{
+			graphics.compositeAlpha(0.3);
+		}
+
+		graphics.rotate((double)rotation, (double)x, (double)y);
+		switch(type)
+		{
+			case POINTTYPE_HEAD:
+			graphics.setColor(fgl::Color::RED);
+			break;
+
+			case POINTTYPE_LEFTHAND:
+			graphics.setColor(fgl::Color::PINK);
+			break;
+
+			case POINTTYPE_RIGHTHAND:
+			graphics.setColor(fgl::Color::PURPLE);
+			break;
+		}
+		fgl::RectangleD frame = getRect();
+		graphics.drawRect(frame);
+
+		graphics.setColor(graphics.getColor().negative());
+		switch(orientation)
+		{
+			case ORIENTATION_LEFT:
+			graphics.drawLine(frame.x, frame.y, frame.x, frame.y+frame.height);
+			break;
+
+			case ORIENTATION_RIGHT:
+			graphics.drawLine(frame.x+frame.width, frame.y, frame.x+frame.width, frame.y);
+			break;
+		}
+	}
+
+	fgl::RectangleD AnimationMetaPoint::getRect() const
+	{
+		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
 	}
 
 	AnimationData::AnimationData() : animation(nullptr)
@@ -210,7 +268,7 @@ namespace fl
 			}
 		}
 
-		fgl::ArrayList<FrameData> frmData;
+		fgl::ArrayList<FrameData> frmDatas;
 		fgl::ArrayList<fgl::Any> frameDataArray = fgl::extract<fgl::ArrayList<fgl::Any>>(plist, "framedata");
 		for(size_t i=0; i<frameDataArray.size(); i++)
 		{
@@ -226,6 +284,7 @@ namespace fl
 					AnimationHitbox hitbox;
 					fgl::String hitboxError;
 					bool hitboxSuccess = hitbox.loadFromDictionary(hitboxDict, &hitboxError);
+					//TODO check for hitbox duplicate tags in frame
 					if(hitboxSuccess)
 					{
 						frame.hitboxes.add(hitbox);
@@ -259,7 +318,7 @@ namespace fl
 				}
 			}
 
-			frmData.add(frame);
+			frmDatas.add(frame);
 		}
 
 		//load all the animation frames
@@ -270,18 +329,34 @@ namespace fl
 		}
 		name = animName;
 		animation = anim;
-		frameData = frmData;
+		frameDatas = frmDatas;
 		return true;
 	}
 
-	void AnimationData::drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics)
+	void AnimationData::drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics, bool showFrames) const
 	{
 		if(animation!=nullptr)
 		{
 			graphics.translate(x, y);
 			graphics.scale(scale, scale);
 			animation->drawFrame(graphics, frameIndex);
-			//TODO draw metapoints and hitboxes if preprocessor says so
+
+			fgl::RectangleD animFrame = animation->getRect(frameIndex);
+			graphics.setColor(fgl::Color::BLACK);
+			graphics.drawRect(animFrame);
+
+			graphics.translate(animFrame.x, animFrame.y);
+
+			const FrameData& frameData = frameDatas[frameIndex];
+			graphics.setColor(fgl::Color::GREEN);
+			for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
+			{
+				frameData.hitboxes[i].draw(graphics);
+			}
+			for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+			{
+				frameData.metapoints[i].draw(graphics);
+			}
 		}
 	}
 
@@ -293,5 +368,15 @@ namespace fl
 	fgl::Animation* AnimationData::getAnimation() const
 	{
 		return animation;
+	}
+
+	const fgl::ArrayList<AnimationHitbox>& AnimationData::getHitboxes(size_t frameNumber) const
+	{
+		return frameDatas[frameNumber].hitboxes;
+	}
+
+	const fgl::ArrayList<AnimationMetaPoint>& AnimationData::getMetaPoints(size_t frameNumber) const
+	{
+		return frameDatas[frameNumber].metapoints;
 	}
 }
