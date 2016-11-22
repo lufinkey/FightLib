@@ -60,7 +60,7 @@ namespace fl
 		AnimationData();
 		~AnimationData();
 
-		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error);
+		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 
 		void drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics, bool showFrames=false) const;
 

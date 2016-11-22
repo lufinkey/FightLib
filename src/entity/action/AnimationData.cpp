@@ -80,15 +80,15 @@ namespace fl
 			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation");
 
 			PointType typeValue;
-			if(typeStr=="head")
+			if(typeStr=="HEAD")
 			{
 				typeValue = POINTTYPE_HEAD;
 			}
-			else if(typeStr=="lefthand")
+			else if(typeStr=="LEFT_HAND")
 			{
 				typeValue = POINTTYPE_LEFTHAND;
 			}
-			else if(typeStr=="righthand")
+			else if(typeStr=="RIGHT_HAND")
 			{
 				typeValue = POINTTYPE_RIGHTHAND;
 			}
@@ -98,11 +98,11 @@ namespace fl
 			}
 
 			Orientation orientationValue;
-			if(orientationStr=="left")
+			if(orientationStr=="LEFT")
 			{
 				orientationValue = ORIENTATION_LEFT;
 			}
-			else if(orientationStr=="right")
+			else if(orientationStr=="RIGHT")
 			{
 				orientationValue = ORIENTATION_RIGHT;
 			}
@@ -198,11 +198,11 @@ namespace fl
 		fgl::String plistError;
 		if(!fgl::Plist::loadFromFile(&plist, path, &plistError))
 		{
-			return_error("Unable to load plist: "+plistError)
+			return_error("unable to load plist: "+plistError)
 		}
 
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
-		if(animName.length())
+		if(animName.length()==0)
 		{
 			return_error("animation must have a name")
 		}
@@ -236,10 +236,8 @@ namespace fl
 				return_error((fgl::String)"file at index "+i+" has no name");
 			}
 			fgl::String filePath = fgl::FileTools::combinePathStrings(animDirectory, name);
-			fgl::Number rows = fgl::extract<fgl::Number>(file, "rows", 1);
-			fgl::Number cols = fgl::extract<fgl::Number>(file, "columns", 1);
-			unsigned int rowsValue = rows.toArithmeticValue<unsigned int>();
-			unsigned int colsValue = cols.toArithmeticValue<unsigned int>();
+			unsigned int rows = fgl::extract<fgl::Number>(file, "rows", 1).toArithmeticValue<unsigned int>();
+			unsigned int cols = fgl::extract<fgl::Number>(file, "columns", 1).toArithmeticValue<unsigned int>();
 			if(file.has("sequence"))
 			{
 				fgl::ArrayList<fgl::Any> sequenceArray = fgl::extract<fgl::ArrayList<fgl::Any>>(file, "sequence");
@@ -284,9 +282,16 @@ namespace fl
 					AnimationHitbox hitbox;
 					fgl::String hitboxError;
 					bool hitboxSuccess = hitbox.loadFromDictionary(hitboxDict, &hitboxError);
-					//TODO check for hitbox duplicate tags in frame
 					if(hitboxSuccess)
 					{
+						for(size_t k=0; k<frame.hitboxes.size(); k++)
+						{
+							if(hitbox.tag!=(size_t)-1 && hitbox.tag==frame.hitboxes[k].tag)
+							{
+								delete anim;
+								return_error((fgl::String)"duplicate hitbox tag "+hitbox.tag+" in hitbox at index "+j+" for frame "+i)
+							}
+						}
 						frame.hitboxes.add(hitbox);
 					}
 					else
