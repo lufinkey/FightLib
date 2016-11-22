@@ -11,14 +11,14 @@ namespace fl
 		ANIMATIONEVENT_CHANGED
 	} AnimationEventType;
 
-	class Entity : public fgl::UpdateDrawable
+	class Entity
 	{
 	public:
 		Entity(double x, double y);
 		virtual ~Entity();
 
-		virtual void update(fgl::ApplicationData appData) override;
-		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
+		virtual void update(fgl::ApplicationData appData);
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
