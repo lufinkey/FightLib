@@ -93,6 +93,10 @@ namespace fl
 			{
 				typeValue = POINTTYPE_RIGHTHAND;
 			}
+			else if(typeStr=="HANDLE")
+			{
+				typeValue = POINTTYPE_HANDLE;
+			}
 			else
 			{
 				return_error("invalid \"type\" value: \""+typeStr+"\"")
@@ -158,6 +162,10 @@ namespace fl
 
 			case POINTTYPE_RIGHTHAND:
 			graphics.setColor(fgl::Color::PURPLE);
+			break;
+
+			case POINTTYPE_HANDLE:
+			graphics.setColor(fgl::Color::ORANGE);
 			break;
 		}
 		fgl::RectangleD frame = getRect();

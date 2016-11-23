@@ -12,5 +12,6 @@ public:
 	virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
 private:
-	fl::Entity* entity;
+	fl::Entity* character;
+	fl::Entity* sword;
 };

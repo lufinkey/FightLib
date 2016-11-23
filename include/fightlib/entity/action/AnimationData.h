@@ -35,7 +35,8 @@ namespace fl
 		{
 			POINTTYPE_HEAD,
 			POINTTYPE_LEFTHAND,
-			POINTTYPE_RIGHTHAND
+			POINTTYPE_RIGHTHAND,
+			POINTTYPE_HANDLE
 		} PointType;
 
 		typedef enum : fgl::byte
