@@ -78,6 +78,7 @@ namespace fl
 			}
 			fgl::String typeStr = fgl::extract<fgl::String>(dictionary, "type");
 			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation");
+			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
 
 			PointType typeValue;
 			if(typeStr=="HEAD")
@@ -116,6 +117,7 @@ namespace fl
 			radius = radiusValue;
 			type = typeValue;
 			orientation = orientationValue;
+			rotation = rotationValue;
 			if(dictionary.has("behind"))
 			{
 				behind = fgl::extract<fgl::Number>(dictionary, "behind").toArithmeticValue<bool>();
@@ -235,7 +237,7 @@ namespace fl
 				delete anim;
 				return_error((fgl::String)"file at index "+i+" has no name");
 			}
-			fgl::String filePath = fgl::FileTools::combinePathStrings(animDirectory, name);
+			fgl::String filePath = fgl::FileTools::combinePathStrings(animDirectory, fileName);
 			unsigned int rows = fgl::extract<fgl::Number>(file, "rows", 1).toArithmeticValue<unsigned int>();
 			unsigned int cols = fgl::extract<fgl::Number>(file, "columns", 1).toArithmeticValue<unsigned int>();
 			if(file.has("sequence"))
@@ -352,15 +354,19 @@ namespace fl
 
 			graphics.translate(animFrame.x, animFrame.y);
 
-			const FrameData& frameData = frameDatas[frameIndex];
-			graphics.setColor(fgl::Color::GREEN);
-			for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
+			//TODO fix frame datas to be same size as number of frames
+			if(frameIndex < frameDatas.size())
 			{
-				frameData.hitboxes[i].draw(graphics);
-			}
-			for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
-			{
-				frameData.metapoints[i].draw(graphics);
+				const FrameData& frameData = frameDatas[frameIndex];
+				graphics.setColor(fgl::Color::GREEN);
+				for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
+				{
+					frameData.hitboxes[i].draw(graphics);
+				}
+				for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+				{
+					frameData.metapoints[i].draw(graphics);
+				}
 			}
 		}
 	}
@@ -373,15 +379,5 @@ namespace fl
 	fgl::Animation* AnimationData::getAnimation() const
 	{
 		return animation;
-	}
-
-	const fgl::ArrayList<AnimationHitbox>& AnimationData::getHitboxes(size_t frameNumber) const
-	{
-		return frameDatas[frameNumber].hitboxes;
-	}
-
-	const fgl::ArrayList<AnimationMetaPoint>& AnimationData::getMetaPoints(size_t frameNumber) const
-	{
-		return frameDatas[frameNumber].metapoints;
 	}
 }

@@ -24,7 +24,8 @@
     <ClInclude Include="..\..\include\fightlib\entity\Entity.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Platform.h" />
-    <ClInclude Include="..\..\include\fightlib\Fight.h" />
+    <ClInclude Include="..\..\include\fightlib\fightlib.h" />
+    <ClInclude Include="..\..\include\fightlib\game\Fight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />

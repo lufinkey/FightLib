@@ -67,9 +67,6 @@ namespace fl
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
 
-		const fgl::ArrayList<AnimationHitbox>& getHitboxes(size_t frameNumber) const;
-		const fgl::ArrayList<AnimationMetaPoint>& getMetaPoints(size_t frameNumber) const;
-
 	private:
 		struct FrameData
 		{

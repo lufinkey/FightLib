@@ -22,11 +22,11 @@
     <Filter Include="src\entity\action">
       <UniqueIdentifier>{fc54c9c8-15ba-4a56-a00e-22c7b9c29e1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\game">
+      <UniqueIdentifier>{140ca6d2-eeb9-4e07-baa8-e32232cb5e6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\fightlib\Fight.h">
-      <Filter>include\fightlib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\Character.h">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
@@ -41,6 +41,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.h">
       <Filter>include\fightlib\entity\action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\game\Fight.h">
+      <Filter>include\fightlib\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\fightlib.h">
+      <Filter>include\fightlib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

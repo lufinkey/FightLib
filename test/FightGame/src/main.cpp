@@ -1,10 +1,10 @@
 
-#include <iostream>
-#include <GameLibrary/GameLibrary.h>
+#include "FightGame.h"
 
 int main(int argc, char* argv[])
 {
-	std::cout << sizeof(fgl::ArrayList<void*>) << std::endl;
-	std::cin.ignore();
-	return 0;
+	FightGame* fightGame = new FightGame();
+	int retVal = fightGame->run();
+	delete fightGame;
+	return retVal;
 }

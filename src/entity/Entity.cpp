@@ -38,7 +38,7 @@ namespace fl
 			{
 				fgl::Animation* animation = animData->getAnimation();
 				long double fps = (long double)animation->getFPS();
-				long long frameTime = (long long)(1.0L/fps);
+				long long frameTime = (long long)(1000.0L/fps);
 				if(frameTime==0)
 				{
 					frameTime = 1;
@@ -77,7 +77,7 @@ namespace fl
 		AnimationData* animData = getAnimationData(currentAnimationName);
 		if(animData!=nullptr)
 		{
-			animData->drawFrame(x, y, 1, currentAnimationFrame, graphics);
+			animData->drawFrame(x, y, 3.0, currentAnimationFrame, graphics);
 		}
 	}
 
