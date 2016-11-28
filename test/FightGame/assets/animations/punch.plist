@@ -4,6 +4,8 @@
 <dict>
 	<key>name</key>
 	<string>punch</string>
+	<key>orientation</key>
+	<string>LEFT</string>
 	<key>fps</key>
 	<real>0.2</real>
 	<key>files</key>

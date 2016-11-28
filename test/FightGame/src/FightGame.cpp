@@ -3,19 +3,19 @@
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
-	character = new fl::Entity(300, 200);
+	character = new fl::Entity(300, 200, fl::Entity::ORIENTATION_RIGHT);
 	character->setScale(3.0);
 	fgl::String animationError;
 	character->loadAnimation("assets/animations/punch.plist", assetManager);
 	character->changeAnimation("punch");
 
-	sword = new fl::Entity(200, 200);
+	sword = new fl::Entity(200, 200, fl::Entity::ORIENTATION_RIGHT);
 	sword->setScale(2.0);
 	fgl::String swordAnimationError;
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->changeAnimation("sword");
 	
-	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_RIGHTHAND, 0);
+	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_RIGHTHAND, 0, fgl::Vector2d(0, 0));
 }
 
 void FightGame::update(fgl::ApplicationData appData)

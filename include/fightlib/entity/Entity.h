@@ -14,7 +14,13 @@ namespace fl
 	class Entity
 	{
 	public:
-		Entity(double x, double y);
+		typedef enum
+		{
+			ORIENTATION_LEFT,
+			ORIENTATION_RIGHT,
+		} Orientation;
+
+		Entity(double x, double y, Entity::Orientation orientation);
 		virtual ~Entity();
 
 		virtual void update(fgl::ApplicationData appData);
@@ -24,6 +30,9 @@ namespace fl
 
 		float getScale() const;
 		void setScale(float scale);
+
+		Entity::Orientation getOrientation() const;
+		void setOrientation(Entity::Orientation orientation);
 
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
@@ -36,6 +45,7 @@ namespace fl
 	private:
 		double x;
 		double y;
+		Entity::Orientation orientation;
 
 		float scale;
 
@@ -63,5 +73,7 @@ namespace fl
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* offset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
+
+		AnimationOrientation getAnimationOrientation() const;
 	};
 }

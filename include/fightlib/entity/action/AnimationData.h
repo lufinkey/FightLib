@@ -3,6 +3,13 @@
 
 namespace fl
 {
+	typedef enum : fgl::byte
+	{
+		ANIMATIONORIENTATION_NEUTRAL,
+		ANIMATIONORIENTATION_LEFT,
+		ANIMATIONORIENTATION_RIGHT
+	} AnimationOrientation;
+
 	class AnimationHitbox
 	{
 	public:
@@ -39,18 +46,12 @@ namespace fl
 			POINTTYPE_HANDLE
 		} Type;
 
-		typedef enum : fgl::byte
-		{
-			ORIENTATION_LEFT,
-			ORIENTATION_RIGHT
-		} Orientation;
-
 		float x;
 		float y;
 		float radius;
 		float rotation;
 		AnimationMetaPoint::Type type;
-		AnimationMetaPoint::Orientation orientation;
+		AnimationOrientation orientation;
 		bool behind;
 		bool visible;
 	};
@@ -63,10 +64,11 @@ namespace fl
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 
-		void drawFrame(size_t frameIndex, fgl::Graphics& graphics, bool showFrames=false) const;
+		void drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation orientation=ANIMATIONORIENTATION_NEUTRAL, bool showFrames=false) const;
 
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
+		AnimationOrientation getOrientation() const;
 		fgl::Vector2d getSize(size_t frameIndex, double scale) const;
 
 		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
@@ -82,6 +84,7 @@ namespace fl
 
 		fgl::String name;
 		fgl::Animation* animation;
+		AnimationOrientation orientation;
 		fgl::ArrayList<FrameData> frameDatas;
 	};
 }

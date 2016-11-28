@@ -5,7 +5,8 @@ namespace fl
 {
 	#define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(double x, double y) : x(x), y(y), scale(1.0f),
+	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y), orientation(orientation),
+		scale(1.0f),
 		currentAnimationName(),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
@@ -77,7 +78,22 @@ namespace fl
 
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
-		graphics.translate(x, y);
+		if(parentEntity==nullptr)
+		{
+			graphics.translate(x, y);
+		}
+		else
+		{
+			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
+			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
+			{
+				graphics.translate(-x, y);
+			}
+			else
+			{
+				graphics.translate(x, y);
+			}
+		}
 
 		struct AnchorDrawData
 		{
@@ -118,7 +134,7 @@ namespace fl
 		AnimationData* animData = getAnimationData(currentAnimationName);
 		if(animData!=nullptr)
 		{
-			animData->drawFrame(currentAnimationFrame, selfGraphics, true);
+			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation(), true);
 		}
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
@@ -136,11 +152,21 @@ namespace fl
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const
 	{
+		fgl::Vector2d childOffset = fgl::Vector2d(x, y);
+		if(parentEntity!=nullptr)
+		{
+			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
+			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
+			{
+				childOffset.x = -childOffset.x;
+			}
+		}
+
 		fgl::Vector2d parentOffset;
 		float anchorRotation;
 		fgl::Vector2d anchorRotationPoint;
 		getAnchorData(&parentOffset, &anchorRotation, &anchorRotationPoint, nullptr, nullptr);
-		fgl::Vector2d offset = parentOffset;
+		fgl::Vector2d offset = parentOffset+childOffset;
 		if(anchorRotation!=0)
 		{
 			fgl::TransformD rotationTransform;
@@ -166,6 +192,16 @@ namespace fl
 	void Entity::setScale(float scale_arg)
 	{
 		scale = scale_arg;
+	}
+
+	Entity::Orientation Entity::getOrientation() const
+	{
+		return orientation;
+	}
+	
+	void Entity::setOrientation(Entity::Orientation orientation_arg)
+	{
+		orientation = orientation_arg;
 	}
 
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
@@ -285,7 +321,7 @@ namespace fl
 
 	bool Entity::getAnchorData(fgl::Vector2d* offset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
 	{
-		fgl::Vector2d childOffset = fgl::Vector2d(x, y);
+		//TODO determine how offset should behave with orientation
 		if(parentEntity!=nullptr)
 		{
 			Anchor anchor = parentEntity->getAnchor(this);
@@ -293,9 +329,9 @@ namespace fl
 			AnimationData* childAnimData = getAnimationData(currentAnimationName);
 			if(parentAnimData==nullptr || childAnimData==nullptr)
 			{
-				setOptionalArg(offset, childOffset)
+				setOptionalArg(offset, fgl::Vector2d(0,0))
 				setOptionalArg(rotation, 0)
-				setOptionalArg(rotationPoint, childOffset)
+				setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 				setOptionalArg(behind, false)
 				setOptionalArg(visible, false)
 				return false;
@@ -304,35 +340,65 @@ namespace fl
 			fgl::ArrayList<AnimationMetaPoint> childMetaPoints = childAnimData->getMetaPoints(currentAnimationFrame, anchor.childPoint);
 			if(anchor.parentPointIndex >= parentMetaPoints.size() || anchor.childPointIndex >= childMetaPoints.size())
 			{
-				setOptionalArg(offset, childOffset)
+				setOptionalArg(offset, fgl::Vector2d(0, 0))
 				setOptionalArg(rotation, 0)
-				setOptionalArg(rotationPoint, childOffset)
+				setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 				setOptionalArg(behind, false)
 				setOptionalArg(visible, false)
 				return false;
 			}
 			AnimationMetaPoint parentMetaPoint = parentMetaPoints[anchor.parentPointIndex];
 			AnimationMetaPoint childMetaPoint = childMetaPoints[anchor.childPointIndex];
+			float parentRotation = parentMetaPoint.rotation;
+			float childRotation = childMetaPoint.rotation;
+
 			fgl::Vector2d parentSize = parentAnimData->getSize(parentEntity->currentAnimationFrame, parentEntity->scale);
 			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-(parentSize.x/2), ((double)parentMetaPoint.y*parentEntity->scale)-(parentSize.y/2));
-			//TODO handle mirroring by making parentPointOffset.x negative
+			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
+			AnimationOrientation parentAnimationOrientation = parentAnimData->getOrientation();
+			if(parentOrientation!=parentAnimationOrientation && parentAnimationOrientation!=ANIMATIONORIENTATION_NEUTRAL)
+			{
+				parentPointOffset.x = -parentPointOffset.x;
+				parentRotation = -parentRotation;
+			}
+
 			fgl::Vector2d childSize = childAnimData->getSize(currentAnimationFrame, scale);
 			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-(childSize.x/2), ((double)childMetaPoint.y*scale)-(childSize.y/2));
-			//TODO handle mirroring by making childPointOffset.x negative
+			AnimationOrientation childOrientation = getAnimationOrientation();
+			AnimationOrientation childAnimationOrientation = childAnimData->getOrientation();
+			if(childOrientation!=childAnimationOrientation && childAnimationOrientation!=ANIMATIONORIENTATION_NEUTRAL)
+			{
+				childPointOffset.x = -childPointOffset.x;
+				childRotation = -childRotation;
+			}
+
 			fgl::Vector2d totalOffset = parentPointOffset - childPointOffset;
 			
-			setOptionalArg(offset, totalOffset+childOffset)
-			setOptionalArg(rotation, parentMetaPoint.rotation+childMetaPoint.rotation)
-			setOptionalArg(rotationPoint, parentPointOffset+childOffset)
+			setOptionalArg(offset, totalOffset)
+			setOptionalArg(rotation, parentRotation+childRotation)
+			setOptionalArg(rotationPoint, parentPointOffset)
 			setOptionalArg(behind, parentMetaPoint.behind)
 			setOptionalArg(visible, parentMetaPoint.visible)
 			return true;
 		}
-		setOptionalArg(offset, childOffset)
+		setOptionalArg(offset, fgl::Vector2d(0, 0))
 		setOptionalArg(rotation, 0)
-		setOptionalArg(rotationPoint, childOffset)
+		setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 		setOptionalArg(behind, false)
 		setOptionalArg(visible, true)
 		return true;
+	}
+
+	AnimationOrientation Entity::getAnimationOrientation() const
+	{
+		if(orientation==Entity::ORIENTATION_LEFT)
+		{
+			return ANIMATIONORIENTATION_LEFT;
+		}
+		else if(orientation==Entity::ORIENTATION_RIGHT)
+		{
+			return ANIMATIONORIENTATION_RIGHT;
+		}
+		throw fgl::IllegalStateException("Entity::orientation has an invalid value");
 	}
 }

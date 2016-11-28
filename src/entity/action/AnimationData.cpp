@@ -58,7 +58,7 @@ namespace fl
 		radius(0),
 		rotation(0),
 		type(POINTTYPE_HEAD),
-		orientation(ORIENTATION_LEFT),
+		orientation(ANIMATIONORIENTATION_NEUTRAL),
 		behind(false),
 		visible(true)
 	{
@@ -102,14 +102,18 @@ namespace fl
 				return_error("invalid \"type\" value: \""+typeStr+"\"")
 			}
 
-			AnimationMetaPoint::Orientation orientationValue;
-			if(orientationStr=="LEFT")
+			AnimationOrientation orientationValue;
+			if(orientationStr=="NEUTRAL")
 			{
-				orientationValue = ORIENTATION_LEFT;
+				orientationValue = ANIMATIONORIENTATION_NEUTRAL;
+			}
+			else if(orientationStr=="LEFT")
+			{
+				orientationValue = ANIMATIONORIENTATION_LEFT;
 			}
 			else if(orientationStr=="RIGHT")
 			{
-				orientationValue = ORIENTATION_RIGHT;
+				orientationValue = ANIMATIONORIENTATION_RIGHT;
 			}
 			else
 			{
@@ -174,12 +178,16 @@ namespace fl
 		graphics.setColor(graphics.getColor().negative());
 		switch(orientation)
 		{
-			case ORIENTATION_LEFT:
+			case ANIMATIONORIENTATION_NEUTRAL:
+			graphics.drawLine(frame.x+(frame.width/2), frame.y, frame.x+(frame.width/2), frame.y+frame.height);
+			break;
+
+			case ANIMATIONORIENTATION_LEFT:
 			graphics.drawLine(frame.x, frame.y, frame.x, frame.y+frame.height);
 			break;
 
-			case ORIENTATION_RIGHT:
-			graphics.drawLine(frame.x+frame.width, frame.y, frame.x+frame.width, frame.y);
+			case ANIMATIONORIENTATION_RIGHT:
+			graphics.drawLine(frame.x+frame.width, frame.y, frame.x+frame.width, frame.y+frame.height);
 			break;
 		}
 	}
@@ -189,7 +197,7 @@ namespace fl
 		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
 	}
 
-	AnimationData::AnimationData() : animation(nullptr)
+	AnimationData::AnimationData() : animation(nullptr), orientation(ANIMATIONORIENTATION_NEUTRAL)
 	{
 		//
 	}
@@ -214,7 +222,30 @@ namespace fl
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
 		if(animName.length()==0)
 		{
-			return_error("animation must have a name")
+			return_error("missing \"name\" field")
+		}
+
+		fgl::String orientationStr = fgl::extract<fgl::String>(plist, "orientation");
+		if(orientationStr.length()==0)
+		{
+			return_error("missing \"orientation\" field")
+		}
+		AnimationOrientation orientationValue;
+		if(orientationStr=="NEUTRAL")
+		{
+			orientationValue = ANIMATIONORIENTATION_NEUTRAL;
+		}
+		else if(orientationStr=="LEFT")
+		{
+			orientationValue = ANIMATIONORIENTATION_LEFT;
+		}
+		else if(orientationStr=="RIGHT")
+		{
+			orientationValue = ANIMATIONORIENTATION_RIGHT;
+		}
+		else
+		{
+			return_error("invalid \"orientation\" value: "+orientationStr)
 		}
 
 		fgl::Number fps = fgl::extract<fgl::Number>(plist, "fps");
@@ -344,35 +375,40 @@ namespace fl
 		}
 		name = animName;
 		animation = anim;
+		orientation = orientationValue;
 		frameDatas = frmDatas;
 		return true;
 	}
 
-	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics& graphics, bool showFrames) const
+	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawn_orientation, bool showFrames) const
 	{
 		if(animation!=nullptr)
 		{
+			if(orientation!=drawn_orientation && drawn_orientation!=ANIMATIONORIENTATION_NEUTRAL)
+			{
+				graphics.scale(-1.0, 1.0);
+			}
+
 			animation->drawFrame(graphics, frameIndex);
 
 			if(showFrames)
 			{
-				fgl::Graphics frameGraphics = graphics;
 				fgl::RectangleD animFrame = animation->getRect(frameIndex);
-				frameGraphics.setColor(fgl::Color::BLACK);
-				frameGraphics.drawRect(animFrame);
+				graphics.setColor(fgl::Color::BLACK);
+				graphics.drawRect(animFrame);
 
-				frameGraphics.translate(animFrame.x, animFrame.y);
+				graphics.translate(animFrame.x, animFrame.y);
 
 				if(frameIndex < frameDatas.size())
 				{
 					const FrameData& frameData = frameDatas[frameIndex];
 					for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
 					{
-						frameData.hitboxes[i].draw(frameGraphics);
+						frameData.hitboxes[i].draw(graphics);
 					}
 					for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
 					{
-						frameData.metapoints[i].draw(frameGraphics);
+						frameData.metapoints[i].draw(graphics);
 					}
 				}
 			}
@@ -387,6 +423,11 @@ namespace fl
 	fgl::Animation* AnimationData::getAnimation() const
 	{
 		return animation;
+	}
+
+	AnimationOrientation AnimationData::getOrientation() const
+	{
+		return orientation;
 	}
 
 	fgl::Vector2d AnimationData::getSize(size_t frameIndex, double scale) const
