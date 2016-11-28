@@ -80,7 +80,7 @@ namespace fl
 			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation");
 			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
 
-			PointType typeValue;
+			AnimationMetaPoint::Type typeValue;
 			if(typeStr=="HEAD")
 			{
 				typeValue = POINTTYPE_HEAD;
@@ -102,7 +102,7 @@ namespace fl
 				return_error("invalid \"type\" value: \""+typeStr+"\"")
 			}
 
-			Orientation orientationValue;
+			AnimationMetaPoint::Orientation orientationValue;
 			if(orientationStr=="LEFT")
 			{
 				orientationValue = ORIENTATION_LEFT;
@@ -239,11 +239,11 @@ namespace fl
 		for(size_t i=0; i<files.size(); i++)
 		{
 			fgl::Dictionary file = fgl::extract<fgl::Dictionary>(files, i);
-			fgl::String fileName = fgl::extract<fgl::String>(file, "name");
+			fgl::String fileName = fgl::extract<fgl::String>(file, "filename");
 			if(fileName.length()==0)
 			{
 				delete anim;
-				return_error((fgl::String)"file at index "+i+" has no name");
+				return_error((fgl::String)"file at index "+i+" has is missing \"filename\" field");
 			}
 			fgl::String filePath = fgl::FileTools::combinePathStrings(animDirectory, fileName);
 			unsigned int rows = fgl::extract<fgl::Number>(file, "rows", 1).toArithmeticValue<unsigned int>();
@@ -417,7 +417,7 @@ namespace fl
 		return frameDatas[frameIndex].metapoints;
 	}
 
-	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, AnimationMetaPoint::PointType pointType) const
+	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const
 	{
 		if(frameIndex >= frameDatas.size())
 		{

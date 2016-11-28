@@ -37,7 +37,7 @@ namespace fl
 			POINTTYPE_LEFTHAND,
 			POINTTYPE_RIGHTHAND,
 			POINTTYPE_HANDLE
-		} PointType;
+		} Type;
 
 		typedef enum : fgl::byte
 		{
@@ -49,8 +49,8 @@ namespace fl
 		float y;
 		float radius;
 		float rotation;
-		PointType type;
-		Orientation orientation;
+		AnimationMetaPoint::Type type;
+		AnimationMetaPoint::Orientation orientation;
 		bool behind;
 		bool visible;
 	};
@@ -71,7 +71,7 @@ namespace fl
 
 		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
-		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::PointType pointType) const;
+		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
 
 	private:
 		struct FrameData

@@ -222,7 +222,7 @@ namespace fl
 		return getAnimation(currentAnimationName);
 	}
 
-	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::PointType childPoint, size_t childPointIndex, AnimationMetaPoint::PointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset)
+	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset)
 	{
 		if(child->parentEntity!=nullptr)
 		{
@@ -243,7 +243,19 @@ namespace fl
 	
 	void Entity::removeAnchoredEntity(Entity* child)
 	{
-		//
+		for(size_t anchoredEntities_size=anchoredEntities.size(), i=0; i<anchoredEntities_size; i++)
+		{
+			const Anchor& anchor = anchoredEntities[i];
+			if(anchor.entity==child)
+			{
+				fgl::Vector2d position = child->getPosition();
+				//TODO do something about rotation when it gets released? maybe pass a pointer as an optional parameter? idk
+				child->x = position.x;
+				child->y = position.y;
+				child->parentEntity = nullptr;
+				anchoredEntities.remove(i);
+			}
+		}
 	}
 
 	AnimationData* Entity::getAnimationData(const fgl::String& name) const

@@ -9,7 +9,7 @@
 	<key>files</key>
 	<array>
 		<dict>
-			<key>name</key>
+			<key>filename</key>
 			<string>punch.png</string>
 			<key>rows</key>
 			<integer>6</integer>

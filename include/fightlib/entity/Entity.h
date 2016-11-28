@@ -30,7 +30,7 @@ namespace fl
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;
 
-		void anchorChildEntity(Entity* child, AnimationMetaPoint::PointType childPoint, size_t childPointIndex, AnimationMetaPoint::PointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset = fgl::Vector2d(0,0));
+		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset = fgl::Vector2d(0,0));
 		void removeAnchoredEntity(Entity* child);
 
 	private:
@@ -52,9 +52,9 @@ namespace fl
 		struct Anchor
 		{
 			Entity* entity;
-			AnimationMetaPoint::PointType parentPoint;
+			AnimationMetaPoint::Type parentPoint;
 			size_t parentPointIndex;
-			AnimationMetaPoint::PointType childPoint;
+			AnimationMetaPoint::Type childPoint;
 			size_t childPointIndex;
 		};
 

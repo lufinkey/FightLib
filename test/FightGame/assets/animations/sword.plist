@@ -9,7 +9,7 @@
 	<key>files</key>
 	<array>
 		<dict>
-			<key>name</key>
+			<key>filename</key>
 			<string>sword.png</string>
 		</dict>
 	</array>
