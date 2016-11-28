@@ -13,7 +13,7 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->changeAnimation("sword");
 	
-	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
+	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_RIGHTHAND, 0);
 }
 
 void FightGame::update(fgl::ApplicationData appData)
@@ -24,7 +24,9 @@ void FightGame::update(fgl::ApplicationData appData)
 void FightGame::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 {
 	character->draw(appData, graphics);
-	fgl::Vector2d position = sword->getPosition();
+	float rotation = 0;
+	fgl::Vector2d position = sword->getPosition(&rotation);
 	graphics.setColor(fgl::Color::RED);
+	graphics.rotate(rotation, position);
 	graphics.fillRect(position.x-10, position.y-10, 20, 20);
 }

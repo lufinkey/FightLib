@@ -305,7 +305,7 @@ namespace fl
 			fgl::Vector2d totalOffset = parentPointOffset - childPointOffset;
 			
 			setOptionalArg(offset, totalOffset+childOffset)
-			setOptionalArg(rotation, childMetaPoint.rotation)
+			setOptionalArg(rotation, parentMetaPoint.rotation+childMetaPoint.rotation)
 			setOptionalArg(rotationPoint, parentPointOffset+childOffset)
 			setOptionalArg(behind, parentMetaPoint.behind)
 			setOptionalArg(visible, parentMetaPoint.visible)
