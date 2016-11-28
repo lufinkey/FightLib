@@ -5,7 +5,7 @@ namespace fl
 {
 	#define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(double x, double y) : x(x), y(y), scale(3.0f),
+	Entity::Entity(double x, double y) : x(x), y(y), scale(1.0f),
 		currentAnimationName(),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
@@ -161,6 +161,11 @@ namespace fl
 	float Entity::getScale() const
 	{
 		return scale;
+	}
+
+	void Entity::setScale(float scale_arg)
+	{
+		scale = scale_arg;
 	}
 
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)

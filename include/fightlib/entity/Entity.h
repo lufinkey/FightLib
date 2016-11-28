@@ -23,6 +23,7 @@ namespace fl
 		fgl::Vector2d getPosition(float* rotation = nullptr) const;
 
 		float getScale() const;
+		void setScale(float scale);
 
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
