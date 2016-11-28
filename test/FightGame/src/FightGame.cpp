@@ -12,16 +12,19 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	fgl::String swordAnimationError;
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->changeAnimation("sword");
+	
+	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
 }
 
 void FightGame::update(fgl::ApplicationData appData)
 {
 	character->update(appData);
-	sword->update(appData);
 }
 
 void FightGame::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 {
 	character->draw(appData, graphics);
-	sword->draw(appData, graphics);
+	fgl::Vector2d position = sword->getPosition();
+	graphics.setColor(fgl::Color::RED);
+	graphics.fillRect(position.x-10, position.y-10, 20, 20);
 }

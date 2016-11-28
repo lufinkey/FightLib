@@ -348,32 +348,32 @@ namespace fl
 		return true;
 	}
 
-	void AnimationData::drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics, bool showFrames) const
+	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics& graphics, bool showFrames) const
 	{
 		if(animation!=nullptr)
 		{
-			graphics.translate(x, y);
-			graphics.scale(scale, scale);
 			animation->drawFrame(graphics, frameIndex);
 
-			fgl::RectangleD animFrame = animation->getRect(frameIndex);
-			graphics.setColor(fgl::Color::BLACK);
-			graphics.drawRect(animFrame);
-
-			graphics.translate(animFrame.x, animFrame.y);
-
-			//TODO fix frame datas to be same size as number of frames
-			if(frameIndex < frameDatas.size())
+			if(showFrames)
 			{
-				const FrameData& frameData = frameDatas[frameIndex];
-				graphics.setColor(fgl::Color::GREEN);
-				for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
+				fgl::Graphics frameGraphics = graphics;
+				fgl::RectangleD animFrame = animation->getRect(frameIndex);
+				frameGraphics.setColor(fgl::Color::BLACK);
+				frameGraphics.drawRect(animFrame);
+
+				frameGraphics.translate(animFrame.x, animFrame.y);
+
+				if(frameIndex < frameDatas.size())
 				{
-					frameData.hitboxes[i].draw(graphics);
-				}
-				for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
-				{
-					frameData.metapoints[i].draw(graphics);
+					const FrameData& frameData = frameDatas[frameIndex];
+					for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
+					{
+						frameData.hitboxes[i].draw(frameGraphics);
+					}
+					for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+					{
+						frameData.metapoints[i].draw(frameGraphics);
+					}
 				}
 			}
 		}
@@ -387,5 +387,51 @@ namespace fl
 	fgl::Animation* AnimationData::getAnimation() const
 	{
 		return animation;
+	}
+
+	fgl::Vector2d AnimationData::getSize(size_t frameIndex, double scale) const
+	{
+		if(animation==nullptr)
+		{
+			return fgl::Vector2d(0, 0);
+		}
+		fgl::RectangleD animRect = animation->getRect(frameIndex);
+		return fgl::Vector2d(animRect.width*scale, animRect.height*scale);
+	}
+
+	fgl::ArrayList<AnimationHitbox> AnimationData::getHitboxes(size_t frameIndex) const
+	{
+		if(frameIndex >= frameDatas.size())
+		{
+			return fgl::ArrayList<AnimationHitbox>();
+		}
+		return frameDatas[frameIndex].hitboxes;
+	}
+
+	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex) const
+	{
+		if(frameIndex >= frameDatas.size())
+		{
+			return fgl::ArrayList<AnimationMetaPoint>();
+		}
+		return frameDatas[frameIndex].metapoints;
+	}
+
+	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, AnimationMetaPoint::PointType pointType) const
+	{
+		if(frameIndex >= frameDatas.size())
+		{
+			return fgl::ArrayList<AnimationMetaPoint>();
+		}
+		const FrameData& frame = frameDatas[frameIndex];
+		fgl::ArrayList<AnimationMetaPoint> metaPoints;
+		for(size_t metapoints_size=frame.metapoints.size(), i=0; i<metapoints_size; i++)
+		{
+			if(frame.metapoints[i].type==pointType)
+			{
+				metaPoints.add(frame.metapoints[i]);
+			}
+		}
+		return metaPoints;
 	}
 }

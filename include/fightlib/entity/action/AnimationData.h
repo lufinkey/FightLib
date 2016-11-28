@@ -63,10 +63,15 @@ namespace fl
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 
-		void drawFrame(double x, double y, double scale, size_t frameIndex, fgl::Graphics graphics, bool showFrames=false) const;
+		void drawFrame(size_t frameIndex, fgl::Graphics& graphics, bool showFrames=false) const;
 
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
+		fgl::Vector2d getSize(size_t frameIndex, double scale) const;
+
+		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
+		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
+		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::PointType pointType) const;
 
 	private:
 		struct FrameData
