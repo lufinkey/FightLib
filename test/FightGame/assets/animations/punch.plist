@@ -75,6 +75,22 @@
 					<key>behind</key>
 					<false/>
 				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -131,6 +147,22 @@
 					<key>behind</key>
 					<false/>
 				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -186,6 +218,22 @@
 					<true/>
 					<key>behind</key>
 					<false/>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
 				</dict>
 			</array>
 			<key>hitboxes</key>
@@ -256,6 +304,22 @@
 					<key>behind</key>
 					<false/>
 				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
+				</dict>
 			</array>
 			<key>hitboxes</key>
 			<array>
@@ -325,6 +389,22 @@
 					<key>behind</key>
 					<false/>
 				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -380,6 +460,22 @@
 					<true/>
 					<key>behind</key>
 					<false/>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_TOPLEFT</string>
+					<key>x</key>
+					<real>14</real>
+					<key>y</key>
+					<real>17</real>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>BOUNDS_BOTTOMRIGHT</string>
+					<key>x</key>
+					<real>26</real>
+					<key>y</key>
+					<real>38</real>
 				</dict>
 			</array>
 		</dict>

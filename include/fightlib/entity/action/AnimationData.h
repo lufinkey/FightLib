@@ -43,6 +43,8 @@ namespace fl
 			POINTTYPE_HEAD,
 			POINTTYPE_LEFTHAND,
 			POINTTYPE_RIGHTHAND,
+			POINTTYPE_BOUNDS_TOPLEFT,
+			POINTTYPE_BOUNDS_BOTTOMRIGHT,
 			POINTTYPE_HANDLE
 		} Type;
 
@@ -74,6 +76,7 @@ namespace fl
 		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
+		fgl::ArrayList<fgl::RectangleD> getBounds(size_t frameIndex) const;
 
 	private:
 		struct FrameData

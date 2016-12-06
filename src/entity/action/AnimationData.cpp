@@ -67,19 +67,9 @@ namespace fl
 
 	bool AnimationMetaPoint::loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error)
 	{
-		if(dictionary.has("x") && dictionary.has("y") && dictionary.has("radius") && dictionary.has("type") && dictionary.has("orientation"))
+		if(dictionary.has("type") && dictionary.has("x") && dictionary.has("y"))
 		{
-			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
-			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
-			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius").toArithmeticValue<float>();
-			if(radiusValue <= 0)
-			{
-				return_error("invalid radius value")
-			}
 			fgl::String typeStr = fgl::extract<fgl::String>(dictionary, "type");
-			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation");
-			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
-
 			AnimationMetaPoint::Type typeValue;
 			if(typeStr=="HEAD")
 			{
@@ -93,6 +83,14 @@ namespace fl
 			{
 				typeValue = POINTTYPE_RIGHTHAND;
 			}
+			else if(typeStr=="BOUNDS_TOPLEFT")
+			{
+				typeValue = POINTTYPE_BOUNDS_TOPLEFT;
+			}
+			else if(typeStr=="BOUNDS_BOTTOMRIGHT")
+			{
+				typeValue = POINTTYPE_BOUNDS_BOTTOMRIGHT;
+			}
 			else if(typeStr=="HANDLE")
 			{
 				typeValue = POINTTYPE_HANDLE;
@@ -101,6 +99,19 @@ namespace fl
 			{
 				return_error("invalid \"type\" value: \""+typeStr+"\"")
 			}
+
+			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
+			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
+			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius", 0).toArithmeticValue<float>();
+			if(typeValue!=POINTTYPE_BOUNDS_TOPLEFT && typeValue!=POINTTYPE_BOUNDS_BOTTOMRIGHT)
+			{
+				if(radiusValue <= 0)
+				{
+					return_error("invalid radius value")
+				}
+			}
+			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation", "NEUTRAL");
+			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
 
 			AnimationOrientation orientationValue;
 			if(orientationStr=="NEUTRAL")
@@ -166,6 +177,14 @@ namespace fl
 
 			case POINTTYPE_RIGHTHAND:
 			graphics.setColor(fgl::Color::PURPLE);
+			break;
+
+			case POINTTYPE_BOUNDS_TOPLEFT:
+			graphics.setColor(fgl::Color::BLUE);
+			break;
+
+			case POINTTYPE_BOUNDS_BOTTOMRIGHT:
+			graphics.setColor(fgl::Color::AZURE);
 			break;
 
 			case POINTTYPE_HANDLE:
@@ -411,6 +430,13 @@ namespace fl
 						frameData.metapoints[i].draw(graphics);
 					}
 				}
+
+				fgl::ArrayList<fgl::RectangleD> bounds = getBounds(frameIndex);
+				graphics.setColor(fgl::Color::SKYBLUE);
+				for(size_t i=0; i<bounds.size(); i++)
+				{
+					graphics.drawRect(bounds[i]);
+				}
 			}
 		}
 	}
@@ -474,5 +500,35 @@ namespace fl
 			}
 		}
 		return metaPoints;
+	}
+
+	fgl::ArrayList<fgl::RectangleD> AnimationData::getBounds(size_t frameIndex) const
+	{
+		if(frameIndex >= frameDatas.size())
+		{
+			return fgl::ArrayList<fgl::RectangleD>();
+		}
+		const FrameData& frame = frameDatas[frameIndex];
+		fgl::ArrayList<AnimationMetaPoint> topLefts;
+		fgl::ArrayList<AnimationMetaPoint> bottomRights;
+		for(size_t metapoints_size=frame.metapoints.size(), i=0; i<metapoints_size; i++)
+		{
+			if(frame.metapoints[i].type==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT)
+			{
+				topLefts.add(frame.metapoints[i]);
+			}
+			else if(frame.metapoints[i].type==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
+			{
+				bottomRights.add(frame.metapoints[i]);
+			}
+		}
+		fgl::ArrayList<fgl::RectangleD> bounds;
+		for(size_t i=0; i<topLefts.size() && i<bottomRights.size(); i++)
+		{
+			const AnimationMetaPoint& topLeft = topLefts[i];
+			const AnimationMetaPoint& bottomRight = bottomRights[i];
+			bounds.add(fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y)));
+		}
+		return bounds;
 	}
 }
