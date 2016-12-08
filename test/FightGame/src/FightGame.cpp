@@ -1,6 +1,8 @@
 
 #include "FightGame.h"
 
+static bool colliding = false;
+
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
 	character = new fl::Entity(300, 200, fl::Entity::ORIENTATION_RIGHT);
@@ -14,21 +16,16 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	fgl::String swordAnimationError;
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->changeAnimation("sword");
-	
-	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_RIGHTHAND, 0, fgl::Vector2d(0, 0));
 }
 
 void FightGame::update(fgl::ApplicationData appData)
 {
 	character->update(appData);
+	sword->update(appData);
 }
 
 void FightGame::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 {
 	character->draw(appData, graphics);
-	float rotation = 0;
-	fgl::Vector2d position = sword->getPosition(&rotation);
-	graphics.setColor(fgl::Color::RED);
-	graphics.rotate(rotation, position);
-	graphics.fillRect(position.x-2, position.y-2, 4, 4);
+	sword->draw(appData, graphics);
 }

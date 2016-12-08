@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.h" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\BoxCollisionRect.h" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRect.h" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PixelCollisionRect.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.h" />
     <ClInclude Include="..\..\include\fightlib\entity\Platform.h" />
@@ -29,6 +32,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\BoxCollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\CollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\PixelCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\Fight.cpp" />
   </ItemGroup>

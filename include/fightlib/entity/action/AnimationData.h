@@ -47,6 +47,7 @@ namespace fl
 			POINTTYPE_BOUNDS_BOTTOMRIGHT,
 			POINTTYPE_HANDLE
 		} Type;
+		//TODO work on a better system for custom metapoint types
 
 		float x;
 		float y;
@@ -77,6 +78,8 @@ namespace fl
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
 		fgl::ArrayList<fgl::RectangleD> getBounds(size_t frameIndex) const;
+
+		bool isMirrored(AnimationOrientation drawn_orientation) const;
 
 	private:
 		struct FrameData

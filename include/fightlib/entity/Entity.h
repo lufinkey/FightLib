@@ -1,6 +1,7 @@
 
 #include <functional>
 #include "action/AnimationData.h"
+#include "collision/CollisionRect.h"
 
 namespace fl
 {
@@ -14,11 +15,19 @@ namespace fl
 	class Entity
 	{
 	public:
-		typedef enum
+		typedef enum : fgl::byte
 		{
 			ORIENTATION_LEFT,
 			ORIENTATION_RIGHT,
 		} Orientation;
+
+		typedef enum : fgl::byte
+		{
+			COLLISIONMETHOD_NONE,
+			COLLISIONMETHOD_FRAME,
+			COLLISIONMETHOD_BOUNDS,
+			COLLISIONMETHOD_PIXEL
+		} CollisionMethod;
 
 		Entity(double x, double y, Entity::Orientation orientation);
 		virtual ~Entity();
@@ -26,6 +35,7 @@ namespace fl
 		virtual void update(fgl::ApplicationData appData);
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 
+		fgl::Vector2d getSize() const;
 		fgl::Vector2d getPosition(float* rotation = nullptr) const;
 
 		float getScale() const;
@@ -33,6 +43,9 @@ namespace fl
 
 		Entity::Orientation getOrientation() const;
 		void setOrientation(Entity::Orientation orientation);
+
+		Entity::CollisionMethod getCollisionMethod() const;
+		void setCollisionMethod(Entity::CollisionMethod method);
 
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
@@ -42,12 +55,19 @@ namespace fl
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset = fgl::Vector2d(0,0));
 		void removeAnchoredEntity(Entity* child);
 
+		static bool testCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+	protected:
+		virtual CollisionRect* createCollisionRect() const;
+
 	private:
 		double x;
 		double y;
-		Entity::Orientation orientation;
 
 		float scale;
+
+		Entity::Orientation orientation;
+		Entity::CollisionMethod collisionMethod;
+		bool animationChanged;
 
 		fgl::ArrayList<AnimationData*> animations;
 
@@ -55,7 +75,6 @@ namespace fl
 		size_t currentAnimationFrame;
 		long long currentAnimationLastFrameTime;
 		std::function<void(AnimationEventType)> currentAnimationEventHandler;
-		bool animationChanged;
 
 		AnimationData* getAnimationData(const fgl::String& name) const;
 

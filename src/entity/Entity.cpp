@@ -1,17 +1,19 @@
 
 #include <fightlib/entity/Entity.h>
+#include <fightlib/entity/collision/BoxCollisionRect.h>
+#include <fightlib/entity/collision/PixelCollisionRect.h>
 
 namespace fl
 {
 	#define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y), orientation(orientation),
-		scale(1.0f),
+	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y), scale(1.0f), orientation(orientation),
+		collisionMethod(COLLISIONMETHOD_NONE),
+		animationChanged(false),
 		currentAnimationName(),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
 		currentAnimationEventHandler(nullptr),
-		animationChanged(false),
 		parentEntity(nullptr)
 	{
 		//
@@ -134,7 +136,7 @@ namespace fl
 		AnimationData* animData = getAnimationData(currentAnimationName);
 		if(animData!=nullptr)
 		{
-			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation(), true);
+			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation());
 		}
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
@@ -148,6 +150,16 @@ namespace fl
 			}
 			anchorData.entity->draw(appData, entityGraphics);
 		}
+	}
+
+	fgl::Vector2d Entity::getSize() const
+	{
+		AnimationData* animData = getAnimationData(currentAnimationName);
+		if(animData==nullptr)
+		{
+			return fgl::Vector2d(0, 0);
+		}
+		return animData->getSize(currentAnimationFrame, scale);
 	}
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const
@@ -204,6 +216,16 @@ namespace fl
 		orientation = orientation_arg;
 	}
 
+	Entity::CollisionMethod Entity::getCollisionMethod() const
+	{
+		return collisionMethod;
+	}
+
+	void Entity::setCollisionMethod(Entity::CollisionMethod collisionMethod_arg)
+	{
+		collisionMethod = collisionMethod_arg;
+	}
+
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
 	{
 		AnimationData* animData = new AnimationData();
@@ -258,6 +280,80 @@ namespace fl
 		return getAnimation(currentAnimationName);
 	}
 
+	CollisionRect* Entity::createCollisionRect() const
+	{
+		switch(collisionMethod)
+		{
+			case COLLISIONMETHOD_NONE:
+			return new CollisionRect();
+
+			case COLLISIONMETHOD_FRAME:
+			{
+				fgl::Vector2d size = getSize();
+				float rotation = 0;
+				fgl::Vector2d position = getPosition(&rotation);
+				if(rotation!=0.0)
+				{
+					return new BoxCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale));
+				}
+				return new BoxCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), fgl::Vector2d((double)scale, (double)scale));
+			}
+
+			case COLLISIONMETHOD_BOUNDS:
+			{
+				fgl::Vector2d size = getSize();
+				float rotation = 0;
+				fgl::Vector2d position = getPosition(&rotation);
+				AnimationData* animData = getAnimationData(currentAnimationName);
+				if(animData==nullptr)
+				{
+					return new CollisionRect();
+				}
+				fgl::ArrayList<fgl::RectangleD> boundsList = animData->getBounds(currentAnimationFrame);
+				if(boundsList.size()==0)
+				{
+					return new CollisionRect();
+				}
+				//TODO add a multi-box collision rect
+				fgl::RectangleD bounds = boundsList[0];
+				bounds = fgl::RectangleD((bounds.x*scale), (bounds.y*scale), bounds.width*scale, bounds.height*scale);
+				fgl::Vector2d origin = fgl::Vector2d((size.x/2)-bounds.x, (size.y/2)-bounds.y);
+				bounds = fgl::RectangleD(position.x-origin.x, position.y-origin.y, bounds.width, bounds.height);
+				if(rotation!=0.0)
+				{
+					return new BoxCollisionRect(bounds, rotation, origin, fgl::Vector2d((double)scale, (double)scale));
+				}
+				return new BoxCollisionRect(bounds, fgl::Vector2d((double)scale, (double)scale));
+			}
+
+			case COLLISIONMETHOD_PIXEL:
+			{
+				fgl::Vector2d size = getSize();
+				float rotation = 0;
+				fgl::Vector2d position = getPosition(&rotation);
+				AnimationData* animData = getAnimationData(currentAnimationName);
+				if(animData==nullptr)
+				{
+					return new CollisionRect();
+				}
+				fgl::Animation* animation = animData->getAnimation();
+				if(animation==nullptr)
+				{
+					return new CollisionRect();
+				}
+				fgl::TextureImage* img = animation->getImage(currentAnimationFrame);
+				fgl::RectangleU srcRect = animation->getImageSourceRect(currentAnimationFrame);
+				bool mirroredHorizontal = animData->isMirrored(getAnimationOrientation());
+				if(rotation!=0.0)
+				{
+					return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false);
+				}
+				return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), srcRect, img, mirroredHorizontal, false);
+			}
+		}
+		throw fgl::IllegalStateException("invalid collisionMethod enum value");
+	}
+
 	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset)
 	{
 		if(child->parentEntity!=nullptr)
@@ -292,6 +388,63 @@ namespace fl
 				anchoredEntities.remove(i);
 			}
 		}
+	}
+
+	bool Entity::testCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	{
+		if(collisionRect1->isEmpty() || collisionRect2->isEmpty())
+		{
+			return false;
+		}
+		fgl::RectangleD rect1 = collisionRect1->getRect();
+		fgl::RectangleD rect2 = collisionRect2->getRect();
+		if(rect1.intersects(rect2))
+		{
+			bool solid1 = collisionRect1->isSolid();
+			bool solid2 = collisionRect2->isSolid();
+			if(solid1 && solid2)
+			{
+				return true;
+			}
+			else if(solid1 || solid2)
+			{
+				CollisionRect* pixelRect = nullptr;
+				if(solid1)
+				{
+					pixelRect = collisionRect2;
+				}
+				else //if(solid2)
+				{
+					pixelRect = collisionRect1;
+				}
+				fgl::PixelIterator pixelIter = pixelRect->createPixelIterator(rect1.getIntersect(rect2), pixelRect->getPreferredIncrement());
+				while(pixelIter.nextPixelIndex())
+				{
+					if(pixelRect->check(pixelIter))
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			else
+			{
+				fgl::Vector2d increment1 = collisionRect1->getPreferredIncrement();
+				fgl::Vector2d increment2 = collisionRect2->getPreferredIncrement();
+				fgl::Vector2d increment = fgl::Vector2d(fgl::Math::min(increment1.x, increment2.x), fgl::Math::min(increment1.x, increment2.x));
+				fgl::PixelIterator pixelIter1 = collisionRect1->createPixelIterator(rect1.getIntersect(rect2), increment);
+				fgl::PixelIterator pixelIter2 = collisionRect2->createPixelIterator(rect2.getIntersect(rect1), increment);
+				while(pixelIter1.nextPixelIndex() && pixelIter2.nextPixelIndex())
+				{
+					if(collisionRect1->check(pixelIter1) && collisionRect2->check(pixelIter2))
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+		return false;
 	}
 
 	AnimationData* Entity::getAnimationData(const fgl::String& name) const
@@ -352,7 +505,7 @@ namespace fl
 			float parentRotation = parentMetaPoint.rotation;
 			float childRotation = childMetaPoint.rotation;
 
-			fgl::Vector2d parentSize = parentAnimData->getSize(parentEntity->currentAnimationFrame, parentEntity->scale);
+			fgl::Vector2d parentSize = parentEntity->getSize();
 			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-(parentSize.x/2), ((double)parentMetaPoint.y*parentEntity->scale)-(parentSize.y/2));
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			AnimationOrientation parentAnimationOrientation = parentAnimData->getOrientation();
@@ -362,7 +515,7 @@ namespace fl
 				parentRotation = -parentRotation;
 			}
 
-			fgl::Vector2d childSize = childAnimData->getSize(currentAnimationFrame, scale);
+			fgl::Vector2d childSize = getSize();
 			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-(childSize.x/2), ((double)childMetaPoint.y*scale)-(childSize.y/2));
 			AnimationOrientation childOrientation = getAnimationOrientation();
 			AnimationOrientation childAnimationOrientation = childAnimData->getOrientation();

@@ -25,6 +25,12 @@
     <Filter Include="include\fightlib\game">
       <UniqueIdentifier>{140ca6d2-eeb9-4e07-baa8-e32232cb5e6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\entity\collision">
+      <UniqueIdentifier>{2ea4db99-59e0-4cd0-81e8-824bd9c5144d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\entity\collision">
+      <UniqueIdentifier>{9eb770c1-3680-4a7c-bb01-6a203c1ae648}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\Character.h">
@@ -48,6 +54,15 @@
     <ClInclude Include="..\..\include\fightlib\fightlib.h">
       <Filter>include\fightlib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRect.h">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\BoxCollisionRect.h">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PixelCollisionRect.h">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Fight.cpp">
@@ -58,6 +73,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp">
       <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionRect.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\BoxCollisionRect.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\PixelCollisionRect.cpp">
+      <Filter>src\entity\collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

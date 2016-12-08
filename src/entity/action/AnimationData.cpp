@@ -403,7 +403,7 @@ namespace fl
 	{
 		if(animation!=nullptr)
 		{
-			if(orientation!=drawn_orientation && drawn_orientation!=ANIMATIONORIENTATION_NEUTRAL)
+			if(isMirrored(drawn_orientation))
 			{
 				graphics.scale(-1.0, 1.0);
 			}
@@ -530,5 +530,14 @@ namespace fl
 			bounds.add(fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y)));
 		}
 		return bounds;
+	}
+
+	bool AnimationData::isMirrored(AnimationOrientation drawn_orientation) const
+	{
+		if(orientation!=drawn_orientation && drawn_orientation!=ANIMATIONORIENTATION_NEUTRAL)
+		{
+			return true;
+		}
+		return false;
 	}
 }
