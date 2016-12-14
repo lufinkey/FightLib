@@ -3,8 +3,9 @@
 
 namespace fl
 {
-	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution)
 		: rect(rect),
+		velocity(velocity),
 		boundingRect(rect),
 		resolution(resolution),
 		usesTransform(false)
@@ -12,7 +13,7 @@ namespace fl
 		//
 	}
 
-	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
 		: rect(rect),
 		resolution(resolution),
 		usesTransform(true)
@@ -36,7 +37,7 @@ namespace fl
 		return boundingRect;
 	}
 
-	bool BoxCollisionRect::isSolid() const
+	bool BoxCollisionRect::isFilled() const
 	{
 		if(usesTransform)
 		{
@@ -60,6 +61,11 @@ namespace fl
 	bool BoxCollisionRect::check(const fgl::PixelIterator& iterator) const
 	{
 		return (iterator.getCurrentPixelIndex()>=0);
+	}
+
+	fgl::Vector2d BoxCollisionRect::getVelocity() const
+	{
+		return velocity;
 	}
 
 	fgl::Vector2d BoxCollisionRect::getPreferredIncrement() const

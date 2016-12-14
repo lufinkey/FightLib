@@ -3,8 +3,9 @@
 
 namespace fl
 {
-	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
+	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
 		: dstRect(dstRect),
+		velocity(velocity),
 		srcRect(srcRect),
 		boundingRect(dstRect),
 		image(image),
@@ -15,8 +16,9 @@ namespace fl
 		//
 	}
 
-	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
+	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
 		: dstRect(dstRect),
+		velocity(velocity),
 		srcRect(srcRect),
 		image(image),
 		mirroredHorizontal(mirroredHorizontal),
@@ -38,7 +40,7 @@ namespace fl
 		return boundingRect;
 	}
 
-	bool PixelCollisionRect::isSolid() const
+	bool PixelCollisionRect::isFilled() const
 	{
 		return false;
 	}
@@ -63,6 +65,11 @@ namespace fl
 			return image->checkPixel((unsigned int)index);
 		}
 		return false;
+	}
+
+	fgl::Vector2d PixelCollisionRect::getVelocity() const
+	{
+		return velocity;
 	}
 
 	fgl::Vector2d PixelCollisionRect::getPreferredIncrement() const

@@ -7,7 +7,10 @@ namespace fl
 {
 	#define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y), scale(1.0f), orientation(orientation),
+	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y),
+		velocity(0, 0),
+		scale(1.0f),
+		orientation(orientation),
 		collisionMethod(COLLISIONMETHOD_NONE),
 		animationChanged(false),
 		currentAnimationName(),
@@ -76,6 +79,9 @@ namespace fl
 				}
 			}
 		} while(animationChanged);
+
+		x += (velocity.x*appData.getFrameSpeedMultiplier());
+		y += (velocity.y*appData.getFrameSpeedMultiplier());
 	}
 
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
@@ -136,7 +142,7 @@ namespace fl
 		AnimationData* animData = getAnimationData(currentAnimationName);
 		if(animData!=nullptr)
 		{
-			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation());
+			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation(), true);
 		}
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
@@ -226,6 +232,11 @@ namespace fl
 		collisionMethod = collisionMethod_arg;
 	}
 
+	void Entity::setVelocity(const fgl::Vector2d& velocity_arg)
+	{
+		velocity = velocity_arg;
+	}
+
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
 	{
 		AnimationData* animData = new AnimationData();
@@ -292,11 +303,12 @@ namespace fl
 				fgl::Vector2d size = getSize();
 				float rotation = 0;
 				fgl::Vector2d position = getPosition(&rotation);
+				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
 				if(rotation!=0.0)
 				{
-					return new BoxCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale));
+					return new BoxCollisionRect(rect, velocity, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale));
 				}
-				return new BoxCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), fgl::Vector2d((double)scale, (double)scale));
+				return new BoxCollisionRect(rect, velocity, fgl::Vector2d((double)scale, (double)scale));
 			}
 
 			case COLLISIONMETHOD_BOUNDS:
@@ -309,7 +321,7 @@ namespace fl
 				{
 					return new CollisionRect();
 				}
-				fgl::ArrayList<fgl::RectangleD> boundsList = animData->getBounds(currentAnimationFrame);
+				fgl::ArrayList<fgl::RectangleD> boundsList = animData->getBounds(currentAnimationFrame, getAnimationOrientation());
 				if(boundsList.size()==0)
 				{
 					return new CollisionRect();
@@ -317,13 +329,13 @@ namespace fl
 				//TODO add a multi-box collision rect
 				fgl::RectangleD bounds = boundsList[0];
 				bounds = fgl::RectangleD((bounds.x*scale), (bounds.y*scale), bounds.width*scale, bounds.height*scale);
-				fgl::Vector2d origin = fgl::Vector2d((size.x/2)-bounds.x, (size.y/2)-bounds.y);
-				bounds = fgl::RectangleD(position.x-origin.x, position.y-origin.y, bounds.width, bounds.height);
+				fgl::Vector2d origin = fgl::Vector2d(bounds.x-(size.x/2), bounds.y-(size.y/2));
+				bounds = fgl::RectangleD(position.x+origin.x, position.y+origin.y, bounds.width, bounds.height);
 				if(rotation!=0.0)
 				{
-					return new BoxCollisionRect(bounds, rotation, origin, fgl::Vector2d((double)scale, (double)scale));
+					return new BoxCollisionRect(bounds, velocity, rotation, origin, fgl::Vector2d((double)scale, (double)scale));
 				}
-				return new BoxCollisionRect(bounds, fgl::Vector2d((double)scale, (double)scale));
+				return new BoxCollisionRect(bounds, velocity, fgl::Vector2d((double)scale, (double)scale));
 			}
 
 			case COLLISIONMETHOD_PIXEL:
@@ -346,9 +358,9 @@ namespace fl
 				bool mirroredHorizontal = animData->isMirrored(getAnimationOrientation());
 				if(rotation!=0.0)
 				{
-					return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false);
+					return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false);
 				}
-				return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), srcRect, img, mirroredHorizontal, false);
+				return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, img, mirroredHorizontal, false);
 			}
 		}
 		throw fgl::IllegalStateException("invalid collisionMethod enum value");
@@ -400,20 +412,20 @@ namespace fl
 		fgl::RectangleD rect2 = collisionRect2->getRect();
 		if(rect1.intersects(rect2))
 		{
-			bool solid1 = collisionRect1->isSolid();
-			bool solid2 = collisionRect2->isSolid();
-			if(solid1 && solid2)
+			bool filled1 = collisionRect1->isFilled();
+			bool filled2 = collisionRect2->isFilled();
+			if(filled1 && filled2)
 			{
 				return true;
 			}
-			else if(solid1 || solid2)
+			else if(filled1 || filled2)
 			{
 				CollisionRect* pixelRect = nullptr;
-				if(solid1)
+				if(filled1)
 				{
 					pixelRect = collisionRect2;
 				}
-				else //if(solid2)
+				else //if(filled2)
 				{
 					pixelRect = collisionRect1;
 				}

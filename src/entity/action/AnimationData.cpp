@@ -399,11 +399,11 @@ namespace fl
 		return true;
 	}
 
-	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawn_orientation, bool showFrames) const
+	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation, bool showFrames) const
 	{
 		if(animation!=nullptr)
 		{
-			if(isMirrored(drawn_orientation))
+			if(isMirrored(drawnOrientation))
 			{
 				graphics.scale(-1.0, 1.0);
 			}
@@ -502,12 +502,13 @@ namespace fl
 		return metaPoints;
 	}
 
-	fgl::ArrayList<fgl::RectangleD> AnimationData::getBounds(size_t frameIndex) const
+	fgl::ArrayList<fgl::RectangleD> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
 	{
 		if(frameIndex >= frameDatas.size())
 		{
 			return fgl::ArrayList<fgl::RectangleD>();
 		}
+		bool mirrored = isMirrored(drawnOrientation);
 		const FrameData& frame = frameDatas[frameIndex];
 		fgl::ArrayList<AnimationMetaPoint> topLefts;
 		fgl::ArrayList<AnimationMetaPoint> bottomRights;
@@ -522,19 +523,25 @@ namespace fl
 				bottomRights.add(frame.metapoints[i]);
 			}
 		}
+		fgl::Vector2d size = getSize(frameIndex, 1.0);
 		fgl::ArrayList<fgl::RectangleD> bounds;
 		for(size_t i=0; i<topLefts.size() && i<bottomRights.size(); i++)
 		{
 			const AnimationMetaPoint& topLeft = topLefts[i];
 			const AnimationMetaPoint& bottomRight = bottomRights[i];
-			bounds.add(fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y)));
+			fgl::RectangleD rect = fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y));
+			if(mirrored)
+			{
+				rect.x = size.x - (rect.x + rect.width);
+			}
+			bounds.add(rect);
 		}
 		return bounds;
 	}
 
-	bool AnimationData::isMirrored(AnimationOrientation drawn_orientation) const
+	bool AnimationData::isMirrored(AnimationOrientation drawnOrientation) const
 	{
-		if(orientation!=drawn_orientation && drawn_orientation!=ANIMATIONORIENTATION_NEUTRAL)
+		if(orientation!=drawnOrientation && drawnOrientation!=ANIMATIONORIENTATION_NEUTRAL)
 		{
 			return true;
 		}

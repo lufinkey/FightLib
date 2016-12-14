@@ -47,6 +47,8 @@ namespace fl
 		Entity::CollisionMethod getCollisionMethod() const;
 		void setCollisionMethod(Entity::CollisionMethod method);
 
+		void setVelocity(const fgl::Vector2d& velocity);
+
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
@@ -56,12 +58,17 @@ namespace fl
 		void removeAnchoredEntity(Entity* child);
 
 		static bool testCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
-	protected:
+
 		virtual CollisionRect* createCollisionRect() const;
 
-	private:
 		double x;
 		double y;
+
+	protected:
+
+	private:
+		fgl::Vector2d velocity;
+		fgl::Vector2d lastMovement;
 
 		float scale;
 

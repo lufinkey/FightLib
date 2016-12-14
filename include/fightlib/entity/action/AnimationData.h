@@ -67,7 +67,7 @@ namespace fl
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 
-		void drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation orientation=ANIMATIONORIENTATION_NEUTRAL, bool showFrames=false) const;
+		void drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL, bool showFrames=false) const;
 
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
@@ -77,9 +77,9 @@ namespace fl
 		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
-		fgl::ArrayList<fgl::RectangleD> getBounds(size_t frameIndex) const;
+		fgl::ArrayList<fgl::RectangleD> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 
-		bool isMirrored(AnimationOrientation drawn_orientation) const;
+		bool isMirrored(AnimationOrientation drawnOrientation) const;
 
 	private:
 		struct FrameData
