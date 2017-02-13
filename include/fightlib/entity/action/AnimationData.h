@@ -1,5 +1,5 @@
 
-#include <GameLibrary/GameLibrary.h>
+#include <GameLibrary/GameLibrary.hpp>
 
 namespace fl
 {

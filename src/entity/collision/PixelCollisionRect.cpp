@@ -30,11 +30,6 @@ namespace fl
 		boundingRect = fgl::RectangleD(dstRect.x+relBoundingRect.x, dstRect.y+relBoundingRect.y, relBoundingRect.width, relBoundingRect.height);
 	}
 
-	bool PixelCollisionRect::isEmpty() const
-	{
-		return false;
-	}
-	
 	fgl::RectangleD PixelCollisionRect::getRect() const
 	{
 		return boundingRect;

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <GameLibrary/GameLibrary.h>
+#include <GameLibrary/GameLibrary.hpp>
 #include <fightlib/fightlib.h>
 
 class FightGame : public fgl::Application

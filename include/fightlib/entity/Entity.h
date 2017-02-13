@@ -29,7 +29,7 @@ namespace fl
 			COLLISIONMETHOD_PIXEL
 		} CollisionMethod;
 
-		Entity(double x, double y, Entity::Orientation orientation);
+		Entity(const fgl::Vector2d& position, Entity::Orientation orientation);
 		virtual ~Entity();
 
 		virtual void update(fgl::ApplicationData appData);
@@ -47,28 +47,21 @@ namespace fl
 		Entity::CollisionMethod getCollisionMethod() const;
 		void setCollisionMethod(Entity::CollisionMethod method);
 
-		void setVelocity(const fgl::Vector2d& velocity);
-
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;
 
-		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset = fgl::Vector2d(0,0));
+		virtual fgl::ArrayList<CollisionRect*> createCollisionRects() const;
+
+		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
 
-		static bool testCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
-
-		virtual CollisionRect* createCollisionRect() const;
-
-		double x;
-		double y;
-
-	protected:
+		void shift(const fgl::Vector2d& offset);
 
 	private:
+		fgl::Vector2d offset;
 		fgl::Vector2d velocity;
-		fgl::Vector2d lastMovement;
 
 		float scale;
 
@@ -98,7 +91,7 @@ namespace fl
 		Entity* parentEntity;
 
 		Anchor getAnchor(const Entity* entity) const;
-		bool getAnchorData(fgl::Vector2d* offset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
+		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
 
 		AnimationOrientation getAnimationOrientation() const;
 	};

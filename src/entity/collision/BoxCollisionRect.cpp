@@ -23,15 +23,6 @@ namespace fl
 		boundingRect = fgl::RectangleD(rect.x+relBoundingRect.x, rect.y+relBoundingRect.y, relBoundingRect.width, relBoundingRect.height);
 	}
 
-	bool BoxCollisionRect::isEmpty() const
-	{
-		if(rect.width==0 || rect.height==0)
-		{
-			return true;
-		}
-		return false;
-	}
-
 	fgl::RectangleD BoxCollisionRect::getRect() const
 	{
 		return boundingRect;

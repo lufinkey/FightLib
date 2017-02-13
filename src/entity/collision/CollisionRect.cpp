@@ -3,52 +3,8 @@
 
 namespace fl
 {
-	CollisionRect::~CollisionRect()
-	{
-		//
-	}
-
-	bool CollisionRect::isEmpty() const
-	{
-		return true;
-	}
-
-	fgl::RectangleD CollisionRect::getRect() const
-	{
-		return fgl::RectangleD();
-	}
-
-	bool CollisionRect::isFilled() const
-	{
-		return false;
-	}
-
-	fgl::PixelIterator CollisionRect::createPixelIterator(const fgl::RectangleD& loopRect, const fgl::Vector2d& increment) const
-	{
-		return fgl::PixelIterator(fgl::Vector2u(1, 1), fgl::RectangleU(0, 0, 1, 1), fgl::RectangleD(-0.5, -0.5, 1, 1), fgl::RectangleD(-0.5, -0.5, 1, 1), increment.x, increment.y);
-	}
-
-	bool CollisionRect::check(const fgl::PixelIterator& iterator) const
-	{
-		return false;
-	}
-
-	fgl::Vector2d CollisionRect::getVelocity() const
-	{
-		return fgl::Vector2d(0, 0);
-	}
-
-	fgl::Vector2d CollisionRect::getPreferredIncrement() const
-	{
-		return fgl::Vector2d(1.0, 1.0);
-	}
-
 	fgl::Vector2d CollisionRect::checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
-		if(collisionRect1->isEmpty() || collisionRect2->isEmpty())
-		{
-			return fgl::Vector2d(0, 0);
-		}
 		fgl::RectangleD rect1 = collisionRect1->getRect();
 		fgl::RectangleD rect2 = collisionRect2->getRect();
 		if(rect1.intersects(rect2))

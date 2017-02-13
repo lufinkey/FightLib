@@ -7,7 +7,8 @@ namespace fl
 {
 	#define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(double x, double y, Entity::Orientation orientation) : x(x), y(y),
+	Entity::Entity(const fgl::Vector2d& position, Entity::Orientation orientation)
+		: offset(position),
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
@@ -80,26 +81,26 @@ namespace fl
 			}
 		} while(animationChanged);
 
-		x += (velocity.x*appData.getFrameSpeedMultiplier());
-		y += (velocity.y*appData.getFrameSpeedMultiplier());
+		offset.x += (velocity.x*appData.getFrameSpeedMultiplier());
+		offset.y += (velocity.y*appData.getFrameSpeedMultiplier());
 	}
 
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		if(parentEntity==nullptr)
 		{
-			graphics.translate(x, y);
+			graphics.translate(offset.x, offset.y);
 		}
 		else
 		{
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
 			{
-				graphics.translate(-x, y);
+				graphics.translate(-offset.x, offset.y);
 			}
 			else
 			{
-				graphics.translate(x, y);
+				graphics.translate(offset.x, offset.y);
 			}
 		}
 
@@ -170,7 +171,7 @@ namespace fl
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const
 	{
-		fgl::Vector2d childOffset = fgl::Vector2d(x, y);
+		fgl::Vector2d childOffset = fgl::Vector2d(offset.x, offset.y);
 		if(parentEntity!=nullptr)
 		{
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
@@ -184,22 +185,22 @@ namespace fl
 		float anchorRotation;
 		fgl::Vector2d anchorRotationPoint;
 		getAnchorData(&parentOffset, &anchorRotation, &anchorRotationPoint, nullptr, nullptr);
-		fgl::Vector2d offset = parentOffset+childOffset;
+		fgl::Vector2d fullOffset = parentOffset+childOffset;
 		if(anchorRotation!=0)
 		{
 			fgl::TransformD rotationTransform;
 			rotationTransform.rotate(anchorRotation, anchorRotationPoint);
-			offset = rotationTransform.transform(offset);
+			fullOffset = rotationTransform.transform(fullOffset);
 		}
 		if(parentEntity!=nullptr)
 		{
 			float parentRotation = 0;
 			fgl::Vector2d parentPosition = parentEntity->getPosition(&parentRotation);
 			setOptionalArg(rotation, parentRotation+anchorRotation)
-			return parentPosition+offset;
+			return parentPosition+fullOffset;
 		}
 		setOptionalArg(rotation, anchorRotation)
-		return offset;
+		return fullOffset;
 	}
 
 	float Entity::getScale() const
@@ -230,11 +231,6 @@ namespace fl
 	void Entity::setCollisionMethod(Entity::CollisionMethod collisionMethod_arg)
 	{
 		collisionMethod = collisionMethod_arg;
-	}
-
-	void Entity::setVelocity(const fgl::Vector2d& velocity_arg)
-	{
-		velocity = velocity_arg;
 	}
 
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
@@ -291,12 +287,12 @@ namespace fl
 		return getAnimation(currentAnimationName);
 	}
 
-	CollisionRect* Entity::createCollisionRect() const
+	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects() const
 	{
 		switch(collisionMethod)
 		{
 			case COLLISIONMETHOD_NONE:
-			return new CollisionRect();
+			return {};
 
 			case COLLISIONMETHOD_FRAME:
 			{
@@ -306,9 +302,9 @@ namespace fl
 				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
 				if(rotation!=0.0)
 				{
-					return new BoxCollisionRect(rect, velocity, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale));
+					return {new BoxCollisionRect(rect, velocity, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale))};
 				}
-				return new BoxCollisionRect(rect, velocity, fgl::Vector2d((double)scale, (double)scale));
+				return {new BoxCollisionRect(rect, velocity, fgl::Vector2d((double)scale, (double)scale))};
 			}
 
 			case COLLISIONMETHOD_BOUNDS:
@@ -319,23 +315,28 @@ namespace fl
 				AnimationData* animData = getAnimationData(currentAnimationName);
 				if(animData==nullptr)
 				{
-					return new CollisionRect();
+					return {};
 				}
 				fgl::ArrayList<fgl::RectangleD> boundsList = animData->getBounds(currentAnimationFrame, getAnimationOrientation());
 				if(boundsList.size()==0)
 				{
-					return new CollisionRect();
+					return {};
 				}
 				//TODO add a multi-box collision rect
-				fgl::RectangleD bounds = boundsList[0];
-				bounds = fgl::RectangleD((bounds.x*scale), (bounds.y*scale), bounds.width*scale, bounds.height*scale);
-				fgl::Vector2d origin = fgl::Vector2d(bounds.x-(size.x/2), bounds.y-(size.y/2));
-				bounds = fgl::RectangleD(position.x+origin.x, position.y+origin.y, bounds.width, bounds.height);
-				if(rotation!=0.0)
+				fgl::ArrayList<CollisionRect*> collisionRects;
+				for(size_t i=0; i<boundsList.size(); i++)
 				{
-					return new BoxCollisionRect(bounds, velocity, rotation, origin, fgl::Vector2d((double)scale, (double)scale));
+					fgl::RectangleD bounds = boundsList[i];
+					bounds = fgl::RectangleD((bounds.x*scale), (bounds.y*scale), bounds.width*scale, bounds.height*scale);
+					fgl::Vector2d origin = fgl::Vector2d(bounds.x-(size.x/2), bounds.y-(size.y/2));
+					bounds = fgl::RectangleD(position.x+origin.x, position.y+origin.y, bounds.width, bounds.height);
+					if(rotation!=0.0)
+					{
+						collisionRects.add(new BoxCollisionRect(bounds, velocity, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
+					}
+					collisionRects.add(new BoxCollisionRect(bounds, velocity, fgl::Vector2d((double)scale, (double)scale)));
 				}
-				return new BoxCollisionRect(bounds, velocity, fgl::Vector2d((double)scale, (double)scale));
+				return collisionRects;
 			}
 
 			case COLLISIONMETHOD_PIXEL:
@@ -346,27 +347,27 @@ namespace fl
 				AnimationData* animData = getAnimationData(currentAnimationName);
 				if(animData==nullptr)
 				{
-					return new CollisionRect();
+					return {};
 				}
 				fgl::Animation* animation = animData->getAnimation();
 				if(animation==nullptr)
 				{
-					return new CollisionRect();
+					return {};
 				}
 				fgl::TextureImage* img = animation->getImage(currentAnimationFrame);
 				fgl::RectangleU srcRect = animation->getImageSourceRect(currentAnimationFrame);
 				bool mirroredHorizontal = animData->isMirrored(getAnimationOrientation());
 				if(rotation!=0.0)
 				{
-					return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false);
+					return {new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false)};
 				}
-				return new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, img, mirroredHorizontal, false);
+				return {new PixelCollisionRect(fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y), velocity, srcRect, img, mirroredHorizontal, false)};
 			}
 		}
 		throw fgl::IllegalStateException("invalid collisionMethod enum value");
 	}
 
-	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& offset)
+	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
 	{
 		if(child->parentEntity!=nullptr)
 		{
@@ -374,8 +375,8 @@ namespace fl
 		}
 		//TODO check for another item attached at the same place? idk revisit this when I'm sober
 		Anchor anchor;
-		child->x = offset.x;
-		child->y = offset.y;
+		child->offset.x = childOffset.x;
+		child->offset.y = childOffset.y;
 		child->parentEntity = this;
 		anchor.entity = child;
 		anchor.childPoint = childPoint;
@@ -394,69 +395,23 @@ namespace fl
 			{
 				fgl::Vector2d position = child->getPosition();
 				//TODO do something about rotation when it gets released? maybe pass a pointer as an optional parameter? idk
-				child->x = position.x;
-				child->y = position.y;
+				child->offset.x = position.x;
+				child->offset.y = position.y;
 				child->parentEntity = nullptr;
 				anchoredEntities.remove(i);
 			}
 		}
 	}
 
-	bool Entity::testCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	void Entity::shift(const fgl::Vector2d& shiftOffset)
 	{
-		if(collisionRect1->isEmpty() || collisionRect2->isEmpty())
+		if(parentEntity!=nullptr)
 		{
-			return false;
+			parentEntity->shift(shiftOffset);
+			return;
 		}
-		fgl::RectangleD rect1 = collisionRect1->getRect();
-		fgl::RectangleD rect2 = collisionRect2->getRect();
-		if(rect1.intersects(rect2))
-		{
-			bool filled1 = collisionRect1->isFilled();
-			bool filled2 = collisionRect2->isFilled();
-			if(filled1 && filled2)
-			{
-				return true;
-			}
-			else if(filled1 || filled2)
-			{
-				CollisionRect* pixelRect = nullptr;
-				if(filled1)
-				{
-					pixelRect = collisionRect2;
-				}
-				else //if(filled2)
-				{
-					pixelRect = collisionRect1;
-				}
-				fgl::PixelIterator pixelIter = pixelRect->createPixelIterator(rect1.getIntersect(rect2), pixelRect->getPreferredIncrement());
-				while(pixelIter.nextPixelIndex())
-				{
-					if(pixelRect->check(pixelIter))
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-			else
-			{
-				fgl::Vector2d increment1 = collisionRect1->getPreferredIncrement();
-				fgl::Vector2d increment2 = collisionRect2->getPreferredIncrement();
-				fgl::Vector2d increment = fgl::Vector2d(fgl::Math::min(increment1.x, increment2.x), fgl::Math::min(increment1.x, increment2.x));
-				fgl::PixelIterator pixelIter1 = collisionRect1->createPixelIterator(rect1.getIntersect(rect2), increment);
-				fgl::PixelIterator pixelIter2 = collisionRect2->createPixelIterator(rect2.getIntersect(rect1), increment);
-				while(pixelIter1.nextPixelIndex() && pixelIter2.nextPixelIndex())
-				{
-					if(collisionRect1->check(pixelIter1) && collisionRect2->check(pixelIter2))
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-		}
-		return false;
+		offset.x += shiftOffset.x;
+		offset.y += shiftOffset.y;
 	}
 
 	AnimationData* Entity::getAnimationData(const fgl::String& name) const
@@ -484,7 +439,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("entity", "no anchor exists for the given entity");
 	}
 
-	bool Entity::getAnchorData(fgl::Vector2d* offset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
+	bool Entity::getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
 	{
 		//TODO determine how offset should behave with orientation
 		if(parentEntity!=nullptr)
@@ -494,7 +449,7 @@ namespace fl
 			AnimationData* childAnimData = getAnimationData(currentAnimationName);
 			if(parentAnimData==nullptr || childAnimData==nullptr)
 			{
-				setOptionalArg(offset, fgl::Vector2d(0,0))
+				setOptionalArg(posOffset, fgl::Vector2d(0,0))
 				setOptionalArg(rotation, 0)
 				setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 				setOptionalArg(behind, false)
@@ -505,7 +460,7 @@ namespace fl
 			fgl::ArrayList<AnimationMetaPoint> childMetaPoints = childAnimData->getMetaPoints(currentAnimationFrame, anchor.childPoint);
 			if(anchor.parentPointIndex >= parentMetaPoints.size() || anchor.childPointIndex >= childMetaPoints.size())
 			{
-				setOptionalArg(offset, fgl::Vector2d(0, 0))
+				setOptionalArg(posOffset, fgl::Vector2d(0, 0))
 				setOptionalArg(rotation, 0)
 				setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 				setOptionalArg(behind, false)
@@ -539,14 +494,14 @@ namespace fl
 
 			fgl::Vector2d totalOffset = parentPointOffset - childPointOffset;
 			
-			setOptionalArg(offset, totalOffset)
+			setOptionalArg(posOffset, totalOffset)
 			setOptionalArg(rotation, parentRotation+childRotation)
 			setOptionalArg(rotationPoint, parentPointOffset)
 			setOptionalArg(behind, parentMetaPoint.behind)
 			setOptionalArg(visible, parentMetaPoint.visible)
 			return true;
 		}
-		setOptionalArg(offset, fgl::Vector2d(0, 0))
+		setOptionalArg(posOffset, fgl::Vector2d(0, 0))
 		setOptionalArg(rotation, 0)
 		setOptionalArg(rotationPoint, fgl::Vector2d(0, 0))
 		setOptionalArg(behind, false)

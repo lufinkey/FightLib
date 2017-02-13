@@ -11,8 +11,6 @@ namespace fl
 		explicit BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
 		BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
 
-		virtual bool isEmpty() const override;
-
 		virtual fgl::RectangleD getRect() const override;
 		virtual bool isFilled() const override;
 		virtual fgl::PixelIterator createPixelIterator(const fgl::RectangleD& loopRect, const fgl::Vector2d& increment) const override;
