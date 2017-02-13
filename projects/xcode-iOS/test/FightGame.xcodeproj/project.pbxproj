@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F102E09C1E5252AB002B8FB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0ED1E524AF100855347 /* main.cpp */; };
+		F102E09E1E52531B002B8FB0 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E09D1E52531B002B8FB0 /* libSDL2.a */; };
+		F102E0A01E525321002B8FB0 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E09F1E525321002B8FB0 /* libSDL2_image.a */; };
+		F102E0A21E525326002B8FB0 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */; };
+		F102E0A41E52532E002B8FB0 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */; };
+		F102E0A61E525405002B8FB0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F102E0A51E525404002B8FB0 /* assets */; };
+		F19AB0D51E52499100855347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F19AB0D41E52499100855347 /* Assets.xcassets */; };
+		F19AB0D81E52499100855347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F19AB0D61E52499100855347 /* LaunchScreen.storyboard */; };
+		F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0EB1E524AF100855347 /* FightGame.cpp */; };
+		F19AB0F21E524C2400855347 /* libFightLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0F11E524C2400855347 /* libFightLib.a */; };
+		F19AB0F81E524C4700855347 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0F71E524C4700855347 /* Foundation.framework */; };
+		F19AB0FA1E524C4E00855347 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0F91E524C4E00855347 /* CoreGraphics.framework */; };
+		F19AB0FC1E524C5600855347 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0FB1E524C5600855347 /* GameController.framework */; };
+		F19AB0FE1E524C7800855347 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0FD1E524C7800855347 /* ImageIO.framework */; };
+		F19AB1001E524C8A00855347 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB0FF1E524C8A00855347 /* OpenGLES.framework */; };
+		F19AB1021E524C9100855347 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1011E524C9100855347 /* AVFoundation.framework */; };
+		F19AB1041E524C9600855347 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1031E524C9600855347 /* AudioToolbox.framework */; };
+		F19AB1061E524CA800855347 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1051E524CA800855347 /* UIKit.framework */; };
+		F19AB1081E524CBA00855347 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1071E524CBA00855347 /* QuartzCore.framework */; };
+		F19AB10A1E524CC600855347 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1091E524CC600855347 /* MobileCoreServices.framework */; };
+		F19AB10C1E524CCE00855347 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10B1E524CCE00855347 /* CoreMotion.framework */; };
+		F19AB10E1E524CF200855347 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10D1E524CF200855347 /* libGameLibrary.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F102E09D1E52531B002B8FB0 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = "../../../external/GameLibrary/external/SDL/SDL/Xcode-iOS/SDL/build/Debug-iphoneos/libSDL2.a"; sourceTree = "<group>"; };
+		F102E09F1E525321002B8FB0 /* libSDL2_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_image.a; path = "../../../external/GameLibrary/external/SDL/SDL_image/Xcode-iOS/build/Debug-iphoneos/libSDL2_image.a"; sourceTree = "<group>"; };
+		F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = "../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode-iOS/build/Debug-iphoneos/libSDL2_mixer.a"; sourceTree = "<group>"; };
+		F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode-iOS/build/Debug-iphoneos/libSDL2_ttf.a"; sourceTree = "<group>"; };
+		F102E0A51E525404002B8FB0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/FightGame/assets; sourceTree = "<group>"; };
+		F19AB0C51E52499100855347 /* FightGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FightGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F19AB0D41E52499100855347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F19AB0D71E52499100855347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F19AB0D91E52499100855347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F19AB0EB1E524AF100855347 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
+		F19AB0EC1E524AF100855347 /* FightGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightGame.h; sourceTree = "<group>"; };
+		F19AB0ED1E524AF100855347 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F19AB0F11E524C2400855347 /* libFightLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFightLib.a; path = "../build/Debug-iphoneos/libFightLib.a"; sourceTree = "<group>"; };
+		F19AB0F71E524C4700855347 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F19AB0F91E524C4E00855347 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F19AB0FB1E524C5600855347 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		F19AB0FD1E524C7800855347 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F19AB0FF1E524C8A00855347 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F19AB1011E524C9100855347 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F19AB1031E524C9600855347 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F19AB1051E524CA800855347 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F19AB1071E524CBA00855347 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F19AB1091E524CC600855347 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F19AB10B1E524CCE00855347 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		F19AB10D1E524CF200855347 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../external/GameLibrary/projects/xcode-iOS/build/Debug-iphoneos/libGameLibrary.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F19AB0C21E52499100855347 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F19AB0F81E524C4700855347 /* Foundation.framework in Frameworks */,
+				F19AB0FA1E524C4E00855347 /* CoreGraphics.framework in Frameworks */,
+				F19AB1061E524CA800855347 /* UIKit.framework in Frameworks */,
+				F19AB10C1E524CCE00855347 /* CoreMotion.framework in Frameworks */,
+				F19AB10A1E524CC600855347 /* MobileCoreServices.framework in Frameworks */,
+				F19AB1081E524CBA00855347 /* QuartzCore.framework in Frameworks */,
+				F19AB1041E524C9600855347 /* AudioToolbox.framework in Frameworks */,
+				F19AB1021E524C9100855347 /* AVFoundation.framework in Frameworks */,
+				F19AB1001E524C8A00855347 /* OpenGLES.framework in Frameworks */,
+				F19AB0FE1E524C7800855347 /* ImageIO.framework in Frameworks */,
+				F19AB0FC1E524C5600855347 /* GameController.framework in Frameworks */,
+				F102E09E1E52531B002B8FB0 /* libSDL2.a in Frameworks */,
+				F102E0A01E525321002B8FB0 /* libSDL2_image.a in Frameworks */,
+				F102E0A21E525326002B8FB0 /* libSDL2_mixer.a in Frameworks */,
+				F102E0A41E52532E002B8FB0 /* libSDL2_ttf.a in Frameworks */,
+				F19AB10E1E524CF200855347 /* libGameLibrary.a in Frameworks */,
+				F19AB0F21E524C2400855347 /* libFightLib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F19AB0BC1E52499100855347 = {
+			isa = PBXGroup;
+			children = (
+				F19AB0DF1E524A2F00855347 /* project_assets */,
+				F102E0A51E525404002B8FB0 /* assets */,
+				F19AB0EA1E524AF100855347 /* src */,
+				F19AB0C61E52499100855347 /* Products */,
+				F19AB0F01E524C2400855347 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F19AB0C61E52499100855347 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F19AB0C51E52499100855347 /* FightGame.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F19AB0DF1E524A2F00855347 /* project_assets */ = {
+			isa = PBXGroup;
+			children = (
+				F19AB0D41E52499100855347 /* Assets.xcassets */,
+				F19AB0D61E52499100855347 /* LaunchScreen.storyboard */,
+				F19AB0D91E52499100855347 /* Info.plist */,
+			);
+			path = project_assets;
+			sourceTree = "<group>";
+		};
+		F19AB0EA1E524AF100855347 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F19AB0EB1E524AF100855347 /* FightGame.cpp */,
+				F19AB0EC1E524AF100855347 /* FightGame.h */,
+				F19AB0ED1E524AF100855347 /* main.cpp */,
+			);
+			name = src;
+			path = ../../../test/FightGame/src;
+			sourceTree = "<group>";
+		};
+		F19AB0F01E524C2400855347 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */,
+				F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */,
+				F102E09F1E525321002B8FB0 /* libSDL2_image.a */,
+				F102E09D1E52531B002B8FB0 /* libSDL2.a */,
+				F19AB0F71E524C4700855347 /* Foundation.framework */,
+				F19AB0F91E524C4E00855347 /* CoreGraphics.framework */,
+				F19AB1051E524CA800855347 /* UIKit.framework */,
+				F19AB10B1E524CCE00855347 /* CoreMotion.framework */,
+				F19AB1091E524CC600855347 /* MobileCoreServices.framework */,
+				F19AB1071E524CBA00855347 /* QuartzCore.framework */,
+				F19AB1031E524C9600855347 /* AudioToolbox.framework */,
+				F19AB1011E524C9100855347 /* AVFoundation.framework */,
+				F19AB0FF1E524C8A00855347 /* OpenGLES.framework */,
+				F19AB0FD1E524C7800855347 /* ImageIO.framework */,
+				F19AB0FB1E524C5600855347 /* GameController.framework */,
+				F19AB10D1E524CF200855347 /* libGameLibrary.a */,
+				F19AB0F11E524C2400855347 /* libFightLib.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F19AB0C41E52499100855347 /* FightGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F19AB0DC1E52499100855347 /* Build configuration list for PBXNativeTarget "FightGame" */;
+			buildPhases = (
+				F19AB0C11E52499100855347 /* Sources */,
+				F19AB0C21E52499100855347 /* Frameworks */,
+				F19AB0C31E52499100855347 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FightGame;
+			productName = FightGame;
+			productReference = F19AB0C51E52499100855347 /* FightGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F19AB0BD1E52499100855347 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Luis Finke";
+				TargetAttributes = {
+					F19AB0C41E52499100855347 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F19AB0C01E52499100855347 /* Build configuration list for PBXProject "FightGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F19AB0BC1E52499100855347;
+			productRefGroup = F19AB0C61E52499100855347 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F19AB0C41E52499100855347 /* FightGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F19AB0C31E52499100855347 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F102E0A61E525405002B8FB0 /* assets in Resources */,
+				F19AB0D81E52499100855347 /* LaunchScreen.storyboard in Resources */,
+				F19AB0D51E52499100855347 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F19AB0C11E52499100855347 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F102E09C1E5252AB002B8FB0 /* main.cpp in Sources */,
+				F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F19AB0D61E52499100855347 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F19AB0D71E52499100855347 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F19AB0DA1E52499100855347 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F19AB0DB1E52499100855347 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F19AB0DD1E52499100855347 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../external/GameLibrary/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F19AB0DE1E52499100855347 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../external/GameLibrary/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F19AB0C01E52499100855347 /* Build configuration list for PBXProject "FightGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F19AB0DA1E52499100855347 /* Debug */,
+				F19AB0DB1E52499100855347 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F19AB0DC1E52499100855347 /* Build configuration list for PBXNativeTarget "FightGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F19AB0DD1E52499100855347 /* Debug */,
+				F19AB0DE1E52499100855347 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F19AB0BD1E52499100855347 /* Project object */;
+}

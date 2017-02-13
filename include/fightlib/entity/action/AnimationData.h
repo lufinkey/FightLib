@@ -1,5 +1,7 @@
 
-#include <GameLibrary/GameLibrary.h>
+#pragma once
+
+#include <GameLibrary/GameLibrary.hpp>
 
 namespace fl
 {

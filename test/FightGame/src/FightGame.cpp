@@ -3,14 +3,14 @@
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
-	character = new fl::Entity(300, 200, fl::Entity::ORIENTATION_RIGHT);
+	character = new fl::Entity(300, 200, fl::Entity::ORIENTATION_LEFT);
 	character->setScale(3.0);
 	fgl::String animationError;
 	character->loadAnimation("assets/animations/punch.plist", assetManager);
 	character->changeAnimation("punch");
 	character->setCollisionMethod(fl::Entity::COLLISIONMETHOD_PIXEL);
 
-	sword = new fl::Entity(200, 200, fl::Entity::ORIENTATION_RIGHT);
+	sword = new fl::Entity(200, 200, fl::Entity::ORIENTATION_LEFT);
 	sword->setScale(2.0);
 	fgl::String swordAnimationError;
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
