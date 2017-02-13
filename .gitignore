@@ -12,9 +12,15 @@
 
 #Xcode
 .DS_Store
-/projects/xcode/*.xcodeproj/*.xcworkspace
-/projects/xcode/*.xcodeproj/xcuserdata
-/projects/xcode/*.xcworkspace/xcshareddata
-/projects/xcode/*.xcworkspace/xcuserdata
-/projects/xcode/Build
-/projects/xcode/DerivedData
+/projects/xcode*/*.xcodeproj/*.xcworkspace
+/projects/xcode*/*.xcodeproj/xcuserdata
+/projects/xcode*/*.xcworkspace/xcshareddata
+/projects/xcode*/*.xcworkspace/xcuserdata
+/projects/xcode*/Build
+/projects/xcode*/DerivedData
+/projects/xcode*/test/*.xcodeproj/*.xcworkspace
+/projects/xcode*/test/*.xcodeproj/xcuserdata
+/projects/xcode*/test/*.xcworkspace/xcshareddata
+/projects/xcode*/test/*.xcworkspace/xcuserdata
+/projects/xcode*/test/Build
+/projects/xcode*/test/DerivedData

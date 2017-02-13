@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <GameLibrary/GameLibrary.hpp>
 
 namespace fl
