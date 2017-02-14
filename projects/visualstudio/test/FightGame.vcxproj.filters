@@ -6,10 +6,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\test\FightGame\src\FightGame.cpp" />
-    <ClCompile Include="..\..\..\test\FightGame\src\main.cpp" />
+    <ClCompile Include="..\..\..\test\FightGame\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\test\FightGame\src\FightGame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\test\FightGame\src\FightGame.h" />
+    <ClInclude Include="..\..\..\test\FightGame\src\FightGame.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

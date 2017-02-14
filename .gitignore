@@ -6,9 +6,12 @@
 /projects/visualstudio/.vs
 /projects/visualstudio/build
 /projects/visualstudio/bin
-/test/FightGame/.vs
-/test/FightGame/build
-/test/FightGame/bin
+/projects/visualstudio/test/*.VC.db
+/projects/visualstudio/test/*.opendb
+/projects/visualstudio/test/*.sdf
+/projects/visualstudio/test/.vs
+/projects/visualstudio/test/build
+/projects/visualstudio/test/bin
 
 #Xcode
 .DS_Store

@@ -16,6 +16,8 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->changeAnimation("sword");
 	sword->setCollisionMethod(fl::Entity::COLLISIONMETHOD_FRAME);
+
+	//character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
 }
 
 void FightGame::update(fgl::ApplicationData appData)
