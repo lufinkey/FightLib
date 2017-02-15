@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F15A1FB11E549FAE008D83E5 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */; };
+		F15A1FB21E549FAE008D83E5 /* BoxCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAC1E549FAE008D83E5 /* BoxCollisionRect.cpp */; };
+		F15A1FB31E549FAE008D83E5 /* CollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAD1E549FAE008D83E5 /* CollisionRect.cpp */; };
+		F15A1FB41E549FAE008D83E5 /* PixelCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAE1E549FAE008D83E5 /* PixelCollisionRect.cpp */; };
+		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
+		F15A1FB61E549FAE008D83E5 /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FB01E549FAE008D83E5 /* Fight.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F15A1F901E549F5E008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F15A1F9B1E549FA7008D83E5 /* AnimationData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationData.h; sourceTree = "<group>"; };
+		F15A1F9C1E549FA7008D83E5 /* Character.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		F15A1F9E1E549FA7008D83E5 /* BoxCollisionRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxCollisionRect.h; sourceTree = "<group>"; };
+		F15A1F9F1E549FA7008D83E5 /* CollisionRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollisionRect.h; sourceTree = "<group>"; };
+		F15A1FA01E549FA7008D83E5 /* PixelCollisionRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixelCollisionRect.h; sourceTree = "<group>"; };
+		F15A1FA11E549FA7008D83E5 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		F15A1FA21E549FA7008D83E5 /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		F15A1FA31E549FA7008D83E5 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		F15A1FA41E549FA7008D83E5 /* fightlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fightlib.h; sourceTree = "<group>"; };
+		F15A1FA61E549FA7008D83E5 /* Fight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fight.h; sourceTree = "<group>"; };
+		F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
+		F15A1FAC1E549FAE008D83E5 /* BoxCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollisionRect.cpp; sourceTree = "<group>"; };
+		F15A1FAD1E549FAE008D83E5 /* CollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRect.cpp; sourceTree = "<group>"; };
+		F15A1FAE1E549FAE008D83E5 /* PixelCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PixelCollisionRect.cpp; sourceTree = "<group>"; };
+		F15A1FAF1E549FAE008D83E5 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		F15A1FB01E549FAE008D83E5 /* Fight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F15A1F8D1E549F5E008D83E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F15A1F871E549F5E008D83E5 = {
+			isa = PBXGroup;
+			children = (
+				F15A1F971E549FA7008D83E5 /* include */,
+				F15A1FA71E549FAE008D83E5 /* src */,
+				F15A1F911E549F5E008D83E5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F15A1F911E549F5E008D83E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F901E549F5E008D83E5 /* libFightLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F15A1F971E549FA7008D83E5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F981E549FA7008D83E5 /* fightlib */,
+			);
+			name = include;
+			path = ../../include;
+			sourceTree = "<group>";
+		};
+		F15A1F981E549FA7008D83E5 /* fightlib */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F991E549FA7008D83E5 /* entity */,
+				F15A1FA41E549FA7008D83E5 /* fightlib.h */,
+				F15A1FA51E549FA7008D83E5 /* game */,
+			);
+			path = fightlib;
+			sourceTree = "<group>";
+		};
+		F15A1F991E549FA7008D83E5 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F9A1E549FA7008D83E5 /* action */,
+				F15A1F9C1E549FA7008D83E5 /* Character.h */,
+				F15A1F9D1E549FA7008D83E5 /* collision */,
+				F15A1FA11E549FA7008D83E5 /* Entity.h */,
+				F15A1FA21E549FA7008D83E5 /* Item.h */,
+				F15A1FA31E549FA7008D83E5 /* Platform.h */,
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		F15A1F9A1E549FA7008D83E5 /* action */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F9B1E549FA7008D83E5 /* AnimationData.h */,
+			);
+			path = action;
+			sourceTree = "<group>";
+		};
+		F15A1F9D1E549FA7008D83E5 /* collision */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1F9E1E549FA7008D83E5 /* BoxCollisionRect.h */,
+				F15A1F9F1E549FA7008D83E5 /* CollisionRect.h */,
+				F15A1FA01E549FA7008D83E5 /* PixelCollisionRect.h */,
+			);
+			path = collision;
+			sourceTree = "<group>";
+		};
+		F15A1FA51E549FA7008D83E5 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1FA61E549FA7008D83E5 /* Fight.h */,
+			);
+			path = game;
+			sourceTree = "<group>";
+		};
+		F15A1FA71E549FAE008D83E5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1FA81E549FAE008D83E5 /* entity */,
+				F15A1FB01E549FAE008D83E5 /* Fight.cpp */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		F15A1FA81E549FAE008D83E5 /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1FA91E549FAE008D83E5 /* action */,
+				F15A1FAB1E549FAE008D83E5 /* collision */,
+				F15A1FAF1E549FAE008D83E5 /* Entity.cpp */,
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		F15A1FA91E549FAE008D83E5 /* action */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */,
+			);
+			path = action;
+			sourceTree = "<group>";
+		};
+		F15A1FAB1E549FAE008D83E5 /* collision */ = {
+			isa = PBXGroup;
+			children = (
+				F15A1FAC1E549FAE008D83E5 /* BoxCollisionRect.cpp */,
+				F15A1FAD1E549FAE008D83E5 /* CollisionRect.cpp */,
+				F15A1FAE1E549FAE008D83E5 /* PixelCollisionRect.cpp */,
+			);
+			path = collision;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F15A1F8E1E549F5E008D83E5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F15A1F8F1E549F5E008D83E5 /* FightLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F15A1F941E549F5F008D83E5 /* Build configuration list for PBXNativeTarget "FightLib" */;
+			buildPhases = (
+				F15A1F8C1E549F5E008D83E5 /* Sources */,
+				F15A1F8D1E549F5E008D83E5 /* Frameworks */,
+				F15A1F8E1E549F5E008D83E5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FightLib;
+			productName = FightLib;
+			productReference = F15A1F901E549F5E008D83E5 /* libFightLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F15A1F881E549F5E008D83E5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Luis Finke";
+				TargetAttributes = {
+					F15A1F8F1E549F5E008D83E5 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F15A1F8B1E549F5E008D83E5 /* Build configuration list for PBXProject "FightLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F15A1F871E549F5E008D83E5;
+			productRefGroup = F15A1F911E549F5E008D83E5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F15A1F8F1E549F5E008D83E5 /* FightLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F15A1F8C1E549F5E008D83E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F15A1FB21E549FAE008D83E5 /* BoxCollisionRect.cpp in Sources */,
+				F15A1FB31E549FAE008D83E5 /* CollisionRect.cpp in Sources */,
+				F15A1FB11E549FAE008D83E5 /* AnimationData.cpp in Sources */,
+				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
+				F15A1FB61E549FAE008D83E5 /* Fight.cpp in Sources */,
+				F15A1FB41E549FAE008D83E5 /* PixelCollisionRect.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F15A1F921E549F5F008D83E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F15A1F931E549F5F008D83E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F15A1F951E549F5F008D83E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../include,
+					../../external/GameLibrary/include,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F15A1F961E549F5F008D83E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					../../include,
+					../../external/GameLibrary/include,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F15A1F8B1E549F5E008D83E5 /* Build configuration list for PBXProject "FightLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F15A1F921E549F5F008D83E5 /* Debug */,
+				F15A1F931E549F5F008D83E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F15A1F941E549F5F008D83E5 /* Build configuration list for PBXNativeTarget "FightLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F15A1F951E549F5F008D83E5 /* Debug */,
+				F15A1F961E549F5F008D83E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F15A1F881E549F5E008D83E5 /* Project object */;
+}
