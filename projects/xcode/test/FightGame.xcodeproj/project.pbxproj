@@ -293,7 +293,7 @@
 					../../include,
 					../../external/GameLibrary/include,
 				);
-				INFOPLIST_FILE = FightGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -309,7 +309,7 @@
 					../../include,
 					../../external/GameLibrary/include,
 				);
-				INFOPLIST_FILE = FightGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
