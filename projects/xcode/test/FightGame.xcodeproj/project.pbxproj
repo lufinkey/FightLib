@@ -15,6 +15,9 @@
 		F15A20131E54A8DD008D83E5 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20121E54A8DD008D83E5 /* libSDL2_image.a */; };
 		F15A20151E54A8E3008D83E5 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */; };
 		F15A20171E54A8E8008D83E5 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */; };
+		F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E01E54B07F008D83E5 /* FightGame.cpp */; };
+		F15A20E41E54B07F008D83E5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E21E54B07F008D83E5 /* main.cpp */; };
+		F15A20E61E54B08A008D83E5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F15A20E51E54B08A008D83E5 /* assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,10 @@
 		F15A20121E54A8DD008D83E5 /* libSDL2_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_image.a; path = ../../../external/GameLibrary/external/SDL/SDL_image/Xcode/build/Debug/libSDL2_image.a; sourceTree = "<group>"; };
 		F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = ../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode/build/Debug/libSDL2_mixer.a; sourceTree = "<group>"; };
 		F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = ../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode/build/Debug/libSDL2_ttf.a; sourceTree = "<group>"; };
+		F15A20E01E54B07F008D83E5 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
+		F15A20E11E54B07F008D83E5 /* FightGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightGame.h; sourceTree = "<group>"; };
+		F15A20E21E54B07F008D83E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F15A20E51E54B08A008D83E5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				F15A1FC21E54A02F008D83E5 /* project_assets */,
+				F15A20E51E54B08A008D83E5 /* assets */,
+				F15A20DF1E54B07F008D83E5 /* src */,
 				F15A1FC11E54A02F008D83E5 /* Products */,
 				F15A20071E54A873008D83E5 /* Frameworks */,
 			);
@@ -85,6 +94,17 @@
 				F15A20081E54A873008D83E5 /* libFightLib.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F15A20DF1E54B07F008D83E5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F15A20E01E54B07F008D83E5 /* FightGame.cpp */,
+				F15A20E11E54B07F008D83E5 /* FightGame.h */,
+				F15A20E21E54B07F008D83E5 /* main.cpp */,
+			);
+			name = src;
+			path = ../../../test/src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15A20E61E54B08A008D83E5 /* assets in Resources */,
 				F15A1FCA1E54A02F008D83E5 /* Assets.xcassets in Resources */,
 				F15A1FCD1E54A02F008D83E5 /* MainMenu.xib in Resources */,
 			);
@@ -157,6 +178,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15A20E41E54B07F008D83E5 /* main.cpp in Sources */,
+				F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +289,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					../../include,
+					../../external/GameLibrary/include,
+				);
 				INFOPLIST_FILE = FightGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
@@ -278,6 +305,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					../../include,
+					../../external/GameLibrary/include,
+				);
 				INFOPLIST_FILE = FightGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lufinkey.FightGame;
