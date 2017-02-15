@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\test\FightGame\src\FightGame.cpp" />
-    <ClCompile Include="..\..\..\test\FightGame\src\main.cpp" />
+    <ClCompile Include="..\..\..\test\src\FightGame.cpp" />
+    <ClCompile Include="..\..\..\test\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\test\FightGame\src\FightGame.h" />
+    <ClInclude Include="..\..\..\test\src\FightGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0C45C5B1-6B84-4A1A-B806-771ADB5DBCC0}</ProjectGuid>
