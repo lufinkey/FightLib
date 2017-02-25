@@ -1,7 +1,7 @@
 
-#include <fightlib/entity/Entity.h>
-#include <fightlib/entity/collision/BoxCollisionRect.h>
-#include <fightlib/entity/collision/PixelCollisionRect.h>
+#include <fightlib/entity/Entity.hpp>
+#include <fightlib/entity/collision/rects/BoxCollisionRect.hpp>
+#include <fightlib/entity/collision/rects/PixelCollisionRect.hpp>
 
 namespace fl
 {

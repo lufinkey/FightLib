@@ -1,5 +1,5 @@
 
-#include <fightlib/entity/action/AnimationData.h>
+#include <fightlib/entity/action/AnimationData.hpp>
 
 namespace fl
 {

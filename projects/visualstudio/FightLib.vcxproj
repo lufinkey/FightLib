@@ -19,22 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\Character.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\BoxCollisionRect.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRect.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\PixelCollisionRect.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\Entity.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\Item.h" />
-    <ClInclude Include="..\..\include\fightlib\entity\Platform.h" />
-    <ClInclude Include="..\..\include\fightlib\fightlib.h" />
-    <ClInclude Include="..\..\include\fightlib\game\Fight.h" />
+    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp" />
+    <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
+    <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\BoxCollisionRect.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\CollisionRect.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\PixelCollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\Fight.cpp" />
   </ItemGroup>

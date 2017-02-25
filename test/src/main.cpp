@@ -1,5 +1,5 @@
 
-#include "FightGame.h"
+#include "FightGame.hpp"
 
 int main(int argc, char* argv[])
 {

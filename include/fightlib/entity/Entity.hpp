@@ -1,7 +1,7 @@
 
 #include <functional>
-#include "action/AnimationData.h"
-#include "collision/CollisionRect.h"
+#include "action/AnimationData.hpp"
+#include "collision/rects/CollisionRect.hpp"
 
 namespace fl
 {

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "CollisionRect.h"
+#include "CollisionRect.hpp"
 
 namespace fl
 {

@@ -1,5 +1,5 @@
 
-#include <fightlib/entity/collision/PixelCollisionRect.h>
+#include <fightlib/entity/collision/rects/PixelCollisionRect.hpp>
 
 namespace fl
 {
