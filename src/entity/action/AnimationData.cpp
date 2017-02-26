@@ -348,12 +348,15 @@ namespace fl
 					bool hitboxSuccess = hitbox.loadFromDictionary(hitboxDict, &hitboxError);
 					if(hitboxSuccess)
 					{
-						for(size_t k=0; k<frame.hitboxes.size(); k++)
+						if(hitbox.tag!=(size_t)-1)
 						{
-							if(hitbox.tag!=(size_t)-1 && hitbox.tag==frame.hitboxes[k].tag)
+							for(auto& cmpHitbox : frame.hitboxes)
 							{
-								delete anim;
-								return_error((fgl::String)"duplicate hitbox tag "+hitbox.tag+" in hitbox at index "+j+" for frame "+i)
+								if(hitbox.tag==cmpHitbox.tag)
+								{
+									delete anim;
+									return_error((fgl::String)"duplicate hitbox tag "+hitbox.tag+" in hitbox at index "+j+" for frame "+i)
+								}
 							}
 						}
 						frame.hitboxes.add(hitbox);
@@ -377,6 +380,17 @@ namespace fl
 					bool metapointSuccess = metapoint.loadFromDictionary(metapointDict, &metapointError);
 					if(metapointSuccess)
 					{
+						if(metapoint.tag!=(size_t)-1)
+						{
+							for(auto cmpMetapoint : frame.metapoints)
+							{
+								if(metapoint.tag==cmpMetapoint.tag && metapoint.type==cmpMetapoint.type)
+								{
+									delete anim;
+									return_error((fgl::String)"duplicate metapoint tag "+metapoint.tag+" for type "+metapoint.type+" in metapoint at index "+j+" for frame "+i)
+								}
+							}
+						}
 						frame.metapoints.add(metapoint);
 					}
 					else
