@@ -51,6 +51,7 @@ namespace fl
 		} Type;
 		//TODO work on a better system for custom metapoint types
 
+		size_t tag;
 		float x;
 		float y;
 		float radius;

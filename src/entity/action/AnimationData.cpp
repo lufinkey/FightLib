@@ -53,6 +53,7 @@ namespace fl
 	}
 
 	AnimationMetaPoint::AnimationMetaPoint() :
+		tag(-1),
 		x(0),
 		y(0),
 		radius(0),
@@ -100,6 +101,8 @@ namespace fl
 				return_error("invalid \"type\" value: \""+typeStr+"\"")
 			}
 
+			size_t tagValue = fgl::extract<fgl::Number>(dictionary, "tag", -1).toArithmeticValue<size_t>();
+
 			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
 			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
 			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius", 0).toArithmeticValue<float>();
@@ -131,6 +134,7 @@ namespace fl
 				return_error("invalid \"orientation\" value: \""+orientationStr+"\"")
 			}
 
+			tag = tagValue;
 			x = xValue;
 			y = yValue;
 			radius = radiusValue;
