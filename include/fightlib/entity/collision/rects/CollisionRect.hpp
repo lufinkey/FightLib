@@ -8,8 +8,10 @@ namespace fl
 	class CollisionRect
 	{
 	public:
-		virtual ~CollisionRect() {}
+		CollisionRect(const fgl::String& tag);
+		virtual ~CollisionRect();
 
+		const fgl::String& getTag() const;
 		virtual fgl::RectangleD getRect() const = 0;
 		virtual bool isFilled() const = 0;
 		virtual fgl::PixelIterator createPixelIterator(const fgl::RectangleD& loopRect, const fgl::Vector2d& increment) const = 0;
@@ -27,5 +29,7 @@ namespace fl
 		static fgl::Vector2d checkFilledCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
 		static fgl::Vector2d checkPixelOnFilledCollision(CollisionRect* pixelRect, CollisionRect* filledRect);
 		static fgl::Vector2d checkPixelCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+
+		fgl::String tag;
 	};
 }

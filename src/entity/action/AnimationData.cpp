@@ -481,11 +481,11 @@ namespace fl
 					}
 				}
 
-				fgl::ArrayList<fgl::RectangleD> bounds = getBounds(frameIndex);
+				fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
 				graphics.setColor(fgl::Color::SKYBLUE);
 				for(size_t i=0; i<bounds.size(); i++)
 				{
-					graphics.drawRect(bounds[i]);
+					graphics.drawRect(bounds[i].rect);
 				}
 			}
 		}
@@ -520,7 +520,7 @@ namespace fl
 	{
 		if(frameIndex >= frameDatas.size())
 		{
-			return fgl::ArrayList<AnimationHitbox>();
+			return {};
 		}
 		return frameDatas[frameIndex].hitboxes;
 	}
@@ -529,7 +529,7 @@ namespace fl
 	{
 		if(frameIndex >= frameDatas.size())
 		{
-			return fgl::ArrayList<AnimationMetaPoint>();
+			return {};
 		}
 		return frameDatas[frameIndex].metapoints;
 	}
@@ -538,7 +538,7 @@ namespace fl
 	{
 		if(frameIndex >= frameDatas.size())
 		{
-			return fgl::ArrayList<AnimationMetaPoint>();
+			return {};
 		}
 		const FrameData& frame = frameDatas[frameIndex];
 		fgl::ArrayList<AnimationMetaPoint> metaPoints;
@@ -552,11 +552,11 @@ namespace fl
 		return metaPoints;
 	}
 
-	fgl::ArrayList<fgl::RectangleD> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
+	fgl::ArrayList<AnimationData::MetaBounds> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
 	{
 		if(frameIndex >= frameDatas.size())
 		{
-			return fgl::ArrayList<fgl::RectangleD>();
+			return {};
 		}
 		bool mirrored = isMirrored(drawnOrientation);
 		const FrameData& frame = frameDatas[frameIndex];
@@ -574,17 +574,27 @@ namespace fl
 			}
 		}
 		fgl::Vector2d size = getSize(frameIndex, 1.0);
-		fgl::ArrayList<fgl::RectangleD> bounds;
-		for(size_t i=0; i<topLefts.size() && i<bottomRights.size(); i++)
+		fgl::ArrayList<MetaBounds> bounds;
+		while(topLefts.size()>0)
 		{
-			const AnimationMetaPoint& topLeft = topLefts[i];
-			const AnimationMetaPoint& bottomRight = bottomRights[i];
-			fgl::RectangleD rect = fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y));
-			if(mirrored)
+			const AnimationMetaPoint& topLeft = topLefts[0];
+			for(size_t i=0; i<bottomRights.size(); i++)
 			{
-				rect.x = size.x - (rect.x + rect.width);
+				const AnimationMetaPoint& bottomRight = bottomRights[i];
+				if(topLeft.tag==bottomRight.tag)
+				{
+					fgl::RectangleD rect = fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y));
+					if(mirrored)
+					{
+						rect.x = size.x - (rect.x + rect.width);
+					}
+					MetaBounds metaBounds = { .tag=topLeft.tag, .rect=rect };
+					bounds.add(metaBounds);
+					bottomRights.remove(i);
+					break;
+				}
 			}
-			bounds.add(rect);
+			topLefts.remove(0);
 		}
 		return bounds;
 	}

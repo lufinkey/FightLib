@@ -3,8 +3,9 @@
 
 namespace fl
 {
-	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution)
-		: rect(rect),
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution)
+		: CollisionRect(tag),
+		rect(rect),
 		velocity(velocity),
 		boundingRect(rect),
 		resolution(resolution),
@@ -13,8 +14,9 @@ namespace fl
 		//
 	}
 
-	BoxCollisionRect::BoxCollisionRect(const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
-		: rect(rect),
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
+		: CollisionRect(tag),
+		rect(rect),
 		resolution(resolution),
 		usesTransform(true)
 	{

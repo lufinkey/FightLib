@@ -3,6 +3,22 @@
 
 namespace fl
 {
+	CollisionRect::CollisionRect(const fgl::String& tag)
+		: tag(tag)
+	{
+		//
+	}
+
+	CollisionRect::~CollisionRect()
+	{
+		//
+	}
+
+	const fgl::String& CollisionRect::getTag() const
+	{
+		return tag;
+	}
+
 	fgl::Vector2d CollisionRect::checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
 		fgl::RectangleD rect1 = collisionRect1->getRect();

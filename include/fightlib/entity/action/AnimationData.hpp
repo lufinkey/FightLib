@@ -62,6 +62,12 @@ namespace fl
 	class AnimationData
 	{
 	public:
+		struct MetaBounds
+		{
+			size_t tag;
+			fgl::RectangleD rect;
+		};
+
 		AnimationData();
 		~AnimationData();
 
@@ -77,7 +83,7 @@ namespace fl
 		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
-		fgl::ArrayList<fgl::RectangleD> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
+		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 
 		bool isMirrored(AnimationOrientation drawnOrientation) const;
 

@@ -3,8 +3,9 @@
 
 namespace fl
 {
-	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
-		: dstRect(dstRect),
+	PixelCollisionRect::PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
+		: CollisionRect(tag),
+		dstRect(dstRect),
 		velocity(velocity),
 		srcRect(srcRect),
 		boundingRect(dstRect),
@@ -16,8 +17,9 @@ namespace fl
 		//
 	}
 
-	PixelCollisionRect::PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
-		: dstRect(dstRect),
+	PixelCollisionRect::PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical)
+		: CollisionRect(tag),
+		dstRect(dstRect),
 		velocity(velocity),
 		srcRect(srcRect),
 		image(image),

@@ -8,8 +8,8 @@ namespace fl
 	class PixelCollisionRect : public CollisionRect
 	{
 	public:
-		PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
-		PixelCollisionRect(const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
+		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
+		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
 
 		virtual fgl::RectangleD getRect() const override;
 		virtual bool isFilled() const override;
