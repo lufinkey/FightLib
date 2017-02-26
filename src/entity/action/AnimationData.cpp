@@ -66,39 +66,71 @@ namespace fl
 		//
 	}
 
+	bool AnimationMetaPoint_type_from_string(const fgl::String& string, AnimationMetaPoint::Type* type)
+	{
+		if(string=="HEAD")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_HEAD;
+			return true;
+		}
+		else if(string=="LEFT_HAND")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_LEFTHAND;
+			return true;
+		}
+		else if(string=="RIGHT_HAND")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_RIGHTHAND;
+			return true;
+		}
+		else if(string=="BOUNDS_TOPLEFT")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT;
+			return true;
+		}
+		else if(string=="BOUNDS_BOTTOMRIGHT")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT;
+			return true;
+		}
+		else if(string=="HANDLE")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_HANDLE;
+			return true;
+		}
+		return false;
+	}
+
 	bool AnimationMetaPoint::loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error)
 	{
 		if(dictionary.has("type") && dictionary.has("x") && dictionary.has("y"))
 		{
-			fgl::String typeStr = fgl::extract<fgl::String>(dictionary, "type");
-			AnimationMetaPoint::Type typeValue;
-			if(typeStr=="HEAD")
+			fgl::Any typeAny = dictionary.get("type", fgl::Any());
+			Type typeValue = -1;
+			if(typeAny.isEmpty())
 			{
-				typeValue = POINTTYPE_HEAD;
+				return_error("missing required field")
 			}
-			else if(typeStr=="LEFT_HAND")
+			else if(typeAny.is<fgl::String>())
 			{
-				typeValue = POINTTYPE_LEFTHAND;
+				fgl::String typeStr = typeAny.as<fgl::String>();
+				if(!AnimationMetaPoint_type_from_string(typeStr, &typeValue))
+				{
+					return_error("invalid \"type\" value: \""+typeStr+"\"")
+				}
 			}
-			else if(typeStr=="RIGHT_HAND")
+			else if(typeAny.is<fgl::Number>())
 			{
-				typeValue = POINTTYPE_RIGHTHAND;
-			}
-			else if(typeStr=="BOUNDS_TOPLEFT")
-			{
-				typeValue = POINTTYPE_BOUNDS_TOPLEFT;
-			}
-			else if(typeStr=="BOUNDS_BOTTOMRIGHT")
-			{
-				typeValue = POINTTYPE_BOUNDS_BOTTOMRIGHT;
-			}
-			else if(typeStr=="HANDLE")
-			{
-				typeValue = POINTTYPE_HANDLE;
+				long long typeNum = typeAny.as<fgl::Number>().toArithmeticValue<long long>();
+				if(typeNum >= 255 || typeNum < 0)
+				{
+					return_error((fgl::String)"invalid \"type\" value outside of allowed range: \""+typeNum+"\"")
+				}
+				typeValue = (Type)typeNum;
 			}
 			else
 			{
-				return_error("invalid \"type\" value: \""+typeStr+"\"")
+				return_error("invalid \"type\" datatype")
 			}
 
 			size_t tagValue = fgl::extract<fgl::Number>(dictionary, "tag", -1).toArithmeticValue<size_t>();

@@ -40,16 +40,13 @@ namespace fl
 
 		fgl::RectangleD getRect() const;
 
-		typedef enum : fgl::byte
-		{
-			POINTTYPE_HEAD,
-			POINTTYPE_LEFTHAND,
-			POINTTYPE_RIGHTHAND,
-			POINTTYPE_BOUNDS_TOPLEFT,
-			POINTTYPE_BOUNDS_BOTTOMRIGHT,
-			POINTTYPE_HANDLE
-		} Type;
-		//TODO work on a better system for custom metapoint types
+		typedef fgl::Uint8 Type;
+		static const Type POINTTYPE_HEAD = 0;
+		static const Type POINTTYPE_LEFTHAND = 1;
+		static const Type POINTTYPE_RIGHTHAND = 2;
+		static const Type POINTTYPE_BOUNDS_TOPLEFT = 3;
+		static const Type POINTTYPE_BOUNDS_BOTTOMRIGHT = 4;
+		static const Type POINTTYPE_HANDLE = 5;
 
 		size_t tag;
 		float x;
