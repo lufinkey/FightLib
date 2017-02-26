@@ -19,6 +19,8 @@ namespace fl
 		virtual fgl::Vector2d getVelocity() const override;
 		virtual fgl::Vector2d getPreferredIncrement() const override;
 
+		virtual void shift(const fgl::Vector2d& shiftAmount) override;
+
 	private:
 		fgl::RectangleD rect;
 		fgl::Vector2d velocity;

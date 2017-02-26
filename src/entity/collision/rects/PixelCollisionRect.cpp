@@ -71,4 +71,12 @@ namespace fl
 	{
 		return fgl::Vector2d(dstRect.width/srcRect.width, dstRect.height/srcRect.height);
 	}
+
+	void PixelCollisionRect::shift(const fgl::Vector2d& shiftAmount)
+	{
+		dstRect.x += shiftAmount.x;
+		dstRect.y += shiftAmount.y;
+		boundingRect.x += shiftAmount.x;
+		boundingRect.y += shiftAmount.y;
+	}
 }

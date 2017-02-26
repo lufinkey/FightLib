@@ -63,4 +63,12 @@ namespace fl
 	{
 		return resolution;
 	}
+
+	void BoxCollisionRect::shift(const fgl::Vector2d& shiftAmount)
+	{
+		rect.x += shiftAmount.x;
+		rect.y += shiftAmount.y;
+		boundingRect.x += shiftAmount.x;
+		boundingRect.y += shiftAmount.y;
+	}
 }

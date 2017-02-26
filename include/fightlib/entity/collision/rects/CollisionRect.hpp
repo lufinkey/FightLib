@@ -18,6 +18,8 @@ namespace fl
 		virtual fgl::Vector2d getVelocity() const = 0;
 		virtual fgl::Vector2d getPreferredIncrement() const = 0;
 
+		virtual void shift(const fgl::Vector2d& shiftAmount) = 0;
+
 		//offset is rect2's offset to avoid rect1
 		static fgl::Vector2d checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
 
