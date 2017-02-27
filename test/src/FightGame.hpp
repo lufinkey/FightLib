@@ -13,5 +13,11 @@ public:
 
 private:
 	fl::Entity* character;
-	fl::Entity* sword;
+
+	fl::Entity* block1;
+	fl::Entity* block2;
+	fl::Entity* block3;
+	fl::Entity* block4;
+
+	fl::CollisionManager collisionManager;
 };

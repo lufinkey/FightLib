@@ -2,6 +2,7 @@
 #include <functional>
 #include "action/AnimationData.hpp"
 #include "collision/rects/CollisionRect.hpp"
+#include "collision/CollisionManager.hpp"
 
 namespace fl
 {
@@ -15,6 +16,8 @@ namespace fl
 	class Entity
 	{
 	public:
+		friend class CollisionManager;
+
 		typedef enum : fgl::byte
 		{
 			ORIENTATION_LEFT,
@@ -47,6 +50,9 @@ namespace fl
 		Entity::CollisionMethod getCollisionMethod() const;
 		void setCollisionMethod(Entity::CollisionMethod method);
 
+		bool isStaticCollisionBody() const;
+		void setStaticCollisionBody(bool staticCollisionBody);
+
 		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
@@ -57,7 +63,10 @@ namespace fl
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
 
+	protected:
 		void shift(const fgl::Vector2d& offset);
+
+		virtual void onCollision(Entity* entity, CollisionSide side);
 
 	private:
 		fgl::Vector2d offset;
@@ -67,6 +76,7 @@ namespace fl
 
 		Entity::Orientation orientation;
 		Entity::CollisionMethod collisionMethod;
+		bool staticCollisionBody;
 		bool animationChanged;
 
 		fgl::ArrayList<AnimationData*> animations;

@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
@@ -32,6 +34,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />

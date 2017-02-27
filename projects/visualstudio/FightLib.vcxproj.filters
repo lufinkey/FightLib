@@ -69,6 +69,12 @@
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp">
       <Filter>include\fightlib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Fight.cpp">
@@ -88,6 +94,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp">
       <Filter>src\entity\collision\rects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp">
+      <Filter>src\entity\collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

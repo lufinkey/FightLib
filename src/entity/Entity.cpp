@@ -13,6 +13,7 @@ namespace fl
 		scale(1.0f),
 		orientation(orientation),
 		collisionMethod(COLLISIONMETHOD_NONE),
+		staticCollisionBody(false),
 		animationChanged(false),
 		currentAnimationName(),
 		currentAnimationFrame(0),
@@ -81,6 +82,7 @@ namespace fl
 			}
 		} while(animationChanged);
 
+		//offset for velocity
 		offset.x += (velocity.x*appData.getFrameSpeedMultiplier());
 		offset.y += (velocity.y*appData.getFrameSpeedMultiplier());
 	}
@@ -231,6 +233,16 @@ namespace fl
 	void Entity::setCollisionMethod(Entity::CollisionMethod collisionMethod_arg)
 	{
 		collisionMethod = collisionMethod_arg;
+	}
+
+	bool Entity::isStaticCollisionBody() const
+	{
+		return staticCollisionBody;
+	}
+
+	void Entity::setStaticCollisionBody(bool staticCollisionBody_arg)
+	{
+		staticCollisionBody = staticCollisionBody_arg;
 	}
 
 	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
@@ -418,6 +430,11 @@ namespace fl
 		}
 		offset.x += shiftOffset.x;
 		offset.y += shiftOffset.y;
+	}
+
+	void Entity::onCollision(Entity* entity, CollisionSide side)
+	{
+		//
 	}
 
 	AnimationData* Entity::getAnimationData(const fgl::String& name) const
