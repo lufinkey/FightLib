@@ -32,9 +32,9 @@
 		F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = ../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode/build/Debug/libSDL2_mixer.a; sourceTree = "<group>"; };
 		F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = ../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode/build/Debug/libSDL2_ttf.a; sourceTree = "<group>"; };
 		F15A20E01E54B07F008D83E5 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
-		F15A20E11E54B07F008D83E5 /* FightGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightGame.h; sourceTree = "<group>"; };
 		F15A20E21E54B07F008D83E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F15A20E51E54B08A008D83E5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
+		F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				F15A20E01E54B07F008D83E5 /* FightGame.cpp */,
-				F15A20E11E54B07F008D83E5 /* FightGame.h */,
+				F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */,
 				F15A20E21E54B07F008D83E5 /* main.cpp */,
 			);
 			name = src;

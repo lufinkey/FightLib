@@ -37,12 +37,12 @@
 		F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = "../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode-iOS/build/Debug-iphoneos/libSDL2_mixer.a"; sourceTree = "<group>"; };
 		F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode-iOS/build/Debug-iphoneos/libSDL2_ttf.a"; sourceTree = "<group>"; };
 		F102E0A51E525404002B8FB0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
+		F17BBC041E64977500A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
 		F19AB0C51E52499100855347 /* FightGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FightGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19AB0D41E52499100855347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F19AB0D71E52499100855347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F19AB0D91E52499100855347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F19AB0EB1E524AF100855347 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
-		F19AB0EC1E524AF100855347 /* FightGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightGame.h; sourceTree = "<group>"; };
 		F19AB0ED1E524AF100855347 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F19AB0F11E524C2400855347 /* libFightLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFightLib.a; path = "../build/Debug-iphoneos/libFightLib.a"; sourceTree = "<group>"; };
 		F19AB0F71E524C4700855347 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				F19AB0EB1E524AF100855347 /* FightGame.cpp */,
-				F19AB0EC1E524AF100855347 /* FightGame.h */,
+				F17BBC041E64977500A7F8F4 /* FightGame.hpp */,
 				F19AB0ED1E524AF100855347 /* main.cpp */,
 			);
 			name = src;
