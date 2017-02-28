@@ -83,6 +83,8 @@ namespace fl
 				fgl::ArrayList<CollisionRect*>& rects1 = collisionRects.valueAt(rectsIndex1);
 				fgl::ArrayList<CollisionRect*>& rects2 = collisionRects.valueAt(rectsIndex2);
 
+				CollisionPair newPair(entity1, entity2);
+
 				fgl::ArrayList<CollisionRectPair> rectPairs = pair.getCollisionRectPairs(rects1, rects2);
 				for(auto& rectPair : rectPairs)
 				{
@@ -98,6 +100,9 @@ namespace fl
 							}
 							entity2->onCollision(entity1, getCollisionSide(shiftAmount));
 							entity1->onCollision(entity2, getCollisionSide(-shiftAmount));
+
+							CollisionPair::PriorityRect priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							newPair.priorityRects.add(priorityRect);
 						}
 						else if(entity2->isStaticCollisionBody())
 						{
@@ -109,12 +114,20 @@ namespace fl
 							}
 							entity1->onCollision(entity2, getCollisionSide(shiftAmount));
 							entity2->onCollision(entity1, getCollisionSide(-shiftAmount));
+
+							CollisionPair::PriorityRect priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							newPair.priorityRects.add(priorityRect);
 						}
 						else
 						{
 							//TODO make a case here for two non-static bodies colliding
 						}
 					}
+				}
+
+				if(newPair.priorityRects.size() > 0)
+				{
+					previousCollisions.add(newPair);
 				}
 			}
 		}
