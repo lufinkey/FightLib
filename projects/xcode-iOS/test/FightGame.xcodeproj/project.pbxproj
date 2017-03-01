@@ -13,6 +13,7 @@
 		F102E0A21E525326002B8FB0 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */; };
 		F102E0A41E52532E002B8FB0 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */; };
 		F102E0A61E525405002B8FB0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F102E0A51E525404002B8FB0 /* assets */; };
+		F14464FD1E6737AB0088EAA3 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14464FB1E6737AB0088EAA3 /* Player.cpp */; };
 		F19AB0D51E52499100855347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F19AB0D41E52499100855347 /* Assets.xcassets */; };
 		F19AB0D81E52499100855347 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F19AB0D61E52499100855347 /* LaunchScreen.storyboard */; };
 		F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0EB1E524AF100855347 /* FightGame.cpp */; };
@@ -37,6 +38,8 @@
 		F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = "../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode-iOS/build/Debug-iphoneos/libSDL2_mixer.a"; sourceTree = "<group>"; };
 		F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode-iOS/build/Debug-iphoneos/libSDL2_ttf.a"; sourceTree = "<group>"; };
 		F102E0A51E525404002B8FB0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
+		F14464FB1E6737AB0088EAA3 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		F14464FC1E6737AB0088EAA3 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		F17BBC041E64977500A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
 		F19AB0C51E52499100855347 /* FightGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FightGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19AB0D41E52499100855347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				F19AB0EB1E524AF100855347 /* FightGame.cpp */,
 				F17BBC041E64977500A7F8F4 /* FightGame.hpp */,
 				F19AB0ED1E524AF100855347 /* main.cpp */,
+				F14464FB1E6737AB0088EAA3 /* Player.cpp */,
+				F14464FC1E6737AB0088EAA3 /* Player.hpp */,
 			);
 			name = src;
 			path = ../../../test/src;
@@ -224,6 +229,7 @@
 			files = (
 				F102E09C1E5252AB002B8FB0 /* main.cpp in Sources */,
 				F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */,
+				F14464FD1E6737AB0088EAA3 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,8 @@
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
+	fgl::FileTools::setCurrentWorkingDirectory(getResourceDirectory());
+	
 	character = new Player(fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
 	character->setScale(3.0);
 	character->loadAnimation("assets/animations/punch.plist", assetManager);
