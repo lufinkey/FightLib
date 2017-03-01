@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F102E09C1E5252AB002B8FB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0ED1E524AF100855347 /* main.cpp */; };
-		F102E09E1E52531B002B8FB0 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E09D1E52531B002B8FB0 /* libSDL2.a */; };
-		F102E0A01E525321002B8FB0 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E09F1E525321002B8FB0 /* libSDL2_image.a */; };
-		F102E0A21E525326002B8FB0 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */; };
-		F102E0A41E52532E002B8FB0 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */; };
 		F102E0A61E525405002B8FB0 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F102E0A51E525404002B8FB0 /* assets */; };
 		F14464FD1E6737AB0088EAA3 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14464FB1E6737AB0088EAA3 /* Player.cpp */; };
 		F19AB0D51E52499100855347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F19AB0D41E52499100855347 /* Assets.xcassets */; };
@@ -33,10 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F102E09D1E52531B002B8FB0 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = "../../../external/GameLibrary/external/SDL/SDL/Xcode-iOS/SDL/build/Debug-iphoneos/libSDL2.a"; sourceTree = "<group>"; };
-		F102E09F1E525321002B8FB0 /* libSDL2_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_image.a; path = "../../../external/GameLibrary/external/SDL/SDL_image/Xcode-iOS/build/Debug-iphoneos/libSDL2_image.a"; sourceTree = "<group>"; };
-		F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = "../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode-iOS/build/Debug-iphoneos/libSDL2_mixer.a"; sourceTree = "<group>"; };
-		F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode-iOS/build/Debug-iphoneos/libSDL2_ttf.a"; sourceTree = "<group>"; };
 		F102E0A51E525404002B8FB0 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
 		F14464FB1E6737AB0088EAA3 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		F14464FC1E6737AB0088EAA3 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
@@ -78,10 +70,6 @@
 				F19AB1001E524C8A00855347 /* OpenGLES.framework in Frameworks */,
 				F19AB0FE1E524C7800855347 /* ImageIO.framework in Frameworks */,
 				F19AB0FC1E524C5600855347 /* GameController.framework in Frameworks */,
-				F102E09E1E52531B002B8FB0 /* libSDL2.a in Frameworks */,
-				F102E0A01E525321002B8FB0 /* libSDL2_image.a in Frameworks */,
-				F102E0A21E525326002B8FB0 /* libSDL2_mixer.a in Frameworks */,
-				F102E0A41E52532E002B8FB0 /* libSDL2_ttf.a in Frameworks */,
 				F19AB10E1E524CF200855347 /* libGameLibrary.a in Frameworks */,
 				F19AB0F21E524C2400855347 /* libFightLib.a in Frameworks */,
 			);
@@ -135,10 +123,6 @@
 		F19AB0F01E524C2400855347 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F102E0A31E52532E002B8FB0 /* libSDL2_ttf.a */,
-				F102E0A11E525326002B8FB0 /* libSDL2_mixer.a */,
-				F102E09F1E525321002B8FB0 /* libSDL2_image.a */,
-				F102E09D1E52531B002B8FB0 /* libSDL2.a */,
 				F19AB0F71E524C4700855347 /* Foundation.framework */,
 				F19AB0F91E524C4E00855347 /* CoreGraphics.framework */,
 				F19AB1051E524CA800855347 /* UIKit.framework */,
