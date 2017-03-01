@@ -7,33 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F14464E31E672E050088EAA3 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14464E11E672E050088EAA3 /* Player.cpp */; };
+		F14464E81E672F110088EAA3 /* FreeType.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14464E71E672F110088EAA3 /* FreeType.framework */; };
+		F14464E91E672F110088EAA3 /* FreeType.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F14464E71E672F110088EAA3 /* FreeType.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F14464ED1E672F900088EAA3 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14464EC1E672F900088EAA3 /* Carbon.framework */; };
+		F14464F11E6730440088EAA3 /* webp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14464F01E6730440088EAA3 /* webp.framework */; };
+		F14464F21E6730440088EAA3 /* webp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F14464F01E6730440088EAA3 /* webp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F15A1FCA1E54A02F008D83E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F15A1FC91E54A02F008D83E5 /* Assets.xcassets */; };
 		F15A1FCD1E54A02F008D83E5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F15A1FCB1E54A02F008D83E5 /* MainMenu.xib */; };
 		F15A20091E54A873008D83E5 /* libFightLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20081E54A873008D83E5 /* libFightLib.a */; };
-		F15A200B1E54A87A008D83E5 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A200A1E54A87A008D83E5 /* libGameLibrary.a */; };
-		F15A20111E54A8D7008D83E5 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20101E54A8D7008D83E5 /* libSDL2.a */; };
-		F15A20131E54A8DD008D83E5 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20121E54A8DD008D83E5 /* libSDL2_image.a */; };
-		F15A20151E54A8E3008D83E5 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */; };
-		F15A20171E54A8E8008D83E5 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */; };
 		F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E01E54B07F008D83E5 /* FightGame.cpp */; };
 		F15A20E41E54B07F008D83E5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E21E54B07F008D83E5 /* main.cpp */; };
 		F15A20E61E54B08A008D83E5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F15A20E51E54B08A008D83E5 /* assets */; };
+		F16F10FF1E6722CF009A465C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F10FE1E6722CF009A465C /* ImageIO.framework */; };
+		F16F11011E6722DF009A465C /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11001E6722DF009A465C /* ForceFeedback.framework */; };
+		F16F11031E6722F4009A465C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11021E6722F4009A465C /* IOKit.framework */; };
+		F16F11051E6722FE009A465C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11041E6722FE009A465C /* AudioToolbox.framework */; };
+		F16F11071E672306009A465C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11061E672306009A465C /* CoreVideo.framework */; };
+		F16F11091E67230D009A465C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11081E67230D009A465C /* CoreAudio.framework */; };
+		F16F110B1E672315009A465C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110A1E672315009A465C /* CoreGraphics.framework */; };
+		F16F110D1E67231F009A465C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110C1E67231F009A465C /* CoreFoundation.framework */; };
+		F16F110F1E672326009A465C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110E1E672326009A465C /* AppKit.framework */; };
+		F16F11111E67232F009A465C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11101E67232F009A465C /* Foundation.framework */; };
+		F16F114B1E6724F9009A465C /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F114A1E6724F9009A465C /* libGameLibrary.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F14464E01E672D8F0088EAA3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F14464F21E6730440088EAA3 /* webp.framework in Embed Frameworks */,
+				F14464E91E672F110088EAA3 /* FreeType.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		F14464E11E672E050088EAA3 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		F14464E21E672E050088EAA3 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		F14464E71E672F110088EAA3 /* FreeType.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FreeType.framework; path = ../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode/Frameworks/FreeType.framework; sourceTree = "<group>"; };
+		F14464EC1E672F900088EAA3 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		F14464F01E6730440088EAA3 /* webp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = webp.framework; path = ../../../external/GameLibrary/external/SDL/SDL_image/Xcode/Frameworks/webp.framework; sourceTree = "<group>"; };
 		F15A1FC01E54A02F008D83E5 /* FightGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FightGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15A1FC91E54A02F008D83E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F15A1FCC1E54A02F008D83E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F15A1FCE1E54A02F008D83E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F15A20081E54A873008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFightLib.a; path = ../build/Debug/libFightLib.a; sourceTree = "<group>"; };
-		F15A200A1E54A87A008D83E5 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = ../../../external/GameLibrary/projects/xcode/build/Debug/libGameLibrary.a; sourceTree = "<group>"; };
-		F15A20101E54A8D7008D83E5 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../../external/GameLibrary/external/SDL/SDL/Xcode/SDL/build/Debug/libSDL2.a; sourceTree = "<group>"; };
-		F15A20121E54A8DD008D83E5 /* libSDL2_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_image.a; path = ../../../external/GameLibrary/external/SDL/SDL_image/Xcode/build/Debug/libSDL2_image.a; sourceTree = "<group>"; };
-		F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_mixer.a; path = ../../../external/GameLibrary/external/SDL/SDL_mixer/Xcode/build/Debug/libSDL2_mixer.a; sourceTree = "<group>"; };
-		F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = ../../../external/GameLibrary/external/SDL/SDL_ttf/Xcode/build/Debug/libSDL2_ttf.a; sourceTree = "<group>"; };
 		F15A20E01E54B07F008D83E5 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
 		F15A20E21E54B07F008D83E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F15A20E51E54B08A008D83E5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
+		F16F10FE1E6722CF009A465C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F16F11001E6722DF009A465C /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = System/Library/Frameworks/ForceFeedback.framework; sourceTree = SDKROOT; };
+		F16F11021E6722F4009A465C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		F16F11041E6722FE009A465C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F16F11061E672306009A465C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		F16F11081E67230D009A465C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		F16F110A1E672315009A465C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F16F110C1E67231F009A465C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		F16F110E1E672326009A465C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F16F11101E67232F009A465C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F16F114A1E6724F9009A465C /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/FightLib-avrgvqsgtiqwqtgjfspxcfhjrkjm/Build/Products/Debug/libGameLibrary.a"; sourceTree = "<group>"; };
 		F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,11 +80,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F15A20111E54A8D7008D83E5 /* libSDL2.a in Frameworks */,
-				F15A20131E54A8DD008D83E5 /* libSDL2_image.a in Frameworks */,
-				F15A20151E54A8E3008D83E5 /* libSDL2_mixer.a in Frameworks */,
-				F15A20171E54A8E8008D83E5 /* libSDL2_ttf.a in Frameworks */,
-				F15A200B1E54A87A008D83E5 /* libGameLibrary.a in Frameworks */,
+				F14464E81E672F110088EAA3 /* FreeType.framework in Frameworks */,
+				F16F11111E67232F009A465C /* Foundation.framework in Frameworks */,
+				F16F110F1E672326009A465C /* AppKit.framework in Frameworks */,
+				F16F110D1E67231F009A465C /* CoreFoundation.framework in Frameworks */,
+				F16F110B1E672315009A465C /* CoreGraphics.framework in Frameworks */,
+				F16F11091E67230D009A465C /* CoreAudio.framework in Frameworks */,
+				F16F11071E672306009A465C /* CoreVideo.framework in Frameworks */,
+				F16F11051E6722FE009A465C /* AudioToolbox.framework in Frameworks */,
+				F16F11031E6722F4009A465C /* IOKit.framework in Frameworks */,
+				F16F11011E6722DF009A465C /* ForceFeedback.framework in Frameworks */,
+				F16F10FF1E6722CF009A465C /* ImageIO.framework in Frameworks */,
+				F14464ED1E672F900088EAA3 /* Carbon.framework in Frameworks */,
+				F16F114B1E6724F9009A465C /* libGameLibrary.a in Frameworks */,
+				F14464F11E6730440088EAA3 /* webp.framework in Frameworks */,
 				F15A20091E54A873008D83E5 /* libFightLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,11 +133,20 @@
 		F15A20071E54A873008D83E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F15A20161E54A8E8008D83E5 /* libSDL2_ttf.a */,
-				F15A20141E54A8E3008D83E5 /* libSDL2_mixer.a */,
-				F15A20121E54A8DD008D83E5 /* libSDL2_image.a */,
-				F15A20101E54A8D7008D83E5 /* libSDL2.a */,
-				F15A200A1E54A87A008D83E5 /* libGameLibrary.a */,
+				F16F11101E67232F009A465C /* Foundation.framework */,
+				F16F110E1E672326009A465C /* AppKit.framework */,
+				F16F110C1E67231F009A465C /* CoreFoundation.framework */,
+				F16F110A1E672315009A465C /* CoreGraphics.framework */,
+				F16F11081E67230D009A465C /* CoreAudio.framework */,
+				F16F11061E672306009A465C /* CoreVideo.framework */,
+				F16F11041E6722FE009A465C /* AudioToolbox.framework */,
+				F16F11021E6722F4009A465C /* IOKit.framework */,
+				F16F11001E6722DF009A465C /* ForceFeedback.framework */,
+				F16F10FE1E6722CF009A465C /* ImageIO.framework */,
+				F14464EC1E672F900088EAA3 /* Carbon.framework */,
+				F14464E71E672F110088EAA3 /* FreeType.framework */,
+				F14464F01E6730440088EAA3 /* webp.framework */,
+				F16F114A1E6724F9009A465C /* libGameLibrary.a */,
 				F15A20081E54A873008D83E5 /* libFightLib.a */,
 			);
 			name = Frameworks;
@@ -102,6 +158,8 @@
 				F15A20E01E54B07F008D83E5 /* FightGame.cpp */,
 				F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */,
 				F15A20E21E54B07F008D83E5 /* main.cpp */,
+				F14464E11E672E050088EAA3 /* Player.cpp */,
+				F14464E21E672E050088EAA3 /* Player.hpp */,
 			);
 			name = src;
 			path = ../../../test/src;
@@ -117,6 +175,7 @@
 				F15A1FBC1E54A02F008D83E5 /* Sources */,
 				F15A1FBD1E54A02F008D83E5 /* Frameworks */,
 				F15A1FBE1E54A02F008D83E5 /* Resources */,
+				F14464E01E672D8F0088EAA3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,6 +239,7 @@
 			files = (
 				F15A20E41E54B07F008D83E5 /* main.cpp in Sources */,
 				F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */,
+				F14464E31E672E050088EAA3 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,9 +349,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../../external/GameLibrary/projects/xcode/EmbeddedFrameworks;
 				HEADER_SEARCH_PATHS = (
-					../../include,
-					../../external/GameLibrary/include,
+					../../../include,
+					../../../external/GameLibrary/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -305,9 +366,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../../external/GameLibrary/projects/xcode/EmbeddedFrameworks;
 				HEADER_SEARCH_PATHS = (
-					../../include,
-					../../external/GameLibrary/include,
+					../../../include,
+					../../../external/GameLibrary/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/project_assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
