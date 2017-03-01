@@ -430,6 +430,19 @@ namespace fl
 		}
 		offset.x += shiftOffset.x;
 		offset.y += shiftOffset.y;
+
+		offset.y = fgl::Math::round(offset.y, 12);
+		offset.x = fgl::Math::round(offset.x, 12);
+	}
+
+	void Entity::setVelocity(const fgl::Vector2d& velocity_arg)
+	{
+		velocity = velocity_arg;
+	}
+
+	const fgl::Vector2d& Entity::getVelocity() const
+	{
+		return velocity;
 	}
 
 	void Entity::onCollision(Entity* entity, CollisionSide side)

@@ -363,9 +363,6 @@ namespace fl
 
 	fgl::Vector2d CollisionRect_getRectCollisionOffset(const fgl::RectangleD& rect1, const fgl::Vector2d& velocity1, const fgl::RectangleD& rect2, const fgl::Vector2d& velocity2)
 	{
-		//precision fix, before I figured out the real bug
-		double pfix = 0; //0.0000001;
-
 		CollisionRectDirection dir = CollisionRect_findRectCollisionDirection(rect1, velocity1, rect2, velocity2);
 		switch(dir)
 		{
@@ -373,16 +370,16 @@ namespace fl
 			return fgl::Vector2d(0, 0);
 
 			case DIR_UP:
-			return fgl::Vector2d(0, rect1.y-(rect2.y+rect2.height)-pfix);
+			return fgl::Vector2d(0, rect1.y-(rect2.y+rect2.height));
 
 			case DIR_DOWN:
-			return fgl::Vector2d(0, (rect1.y+rect1.height)-rect2.y+pfix);
+			return fgl::Vector2d(0, (rect1.y+rect1.height)-rect2.y);
 
 			case DIR_LEFT:
-			return fgl::Vector2d(rect1.x-(rect2.x+rect2.width)-pfix, 0);
+			return fgl::Vector2d(rect1.x-(rect2.x+rect2.width), 0);
 
 			case DIR_RIGHT:
-			return fgl::Vector2d((rect1.x+rect1.width)-rect2.x+pfix, 0);
+			return fgl::Vector2d((rect1.x+rect1.width)-rect2.x, 0);
 		}
 		return fgl::Vector2d(0, 0);
 	}

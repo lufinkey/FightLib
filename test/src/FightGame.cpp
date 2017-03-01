@@ -1,9 +1,10 @@
 
 #include "FightGame.hpp"
+#include "Player.hpp"
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
-	character = new fl::Entity(fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
+	character = new Player(fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
 	character->setScale(3.0);
 	character->loadAnimation("assets/animations/punch.plist", assetManager);
 	character->changeAnimation("punch");

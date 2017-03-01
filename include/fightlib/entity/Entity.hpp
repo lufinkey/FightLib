@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <functional>
 #include "action/AnimationData.hpp"
 #include "collision/rects/CollisionRect.hpp"
@@ -65,6 +67,8 @@ namespace fl
 
 	protected:
 		void shift(const fgl::Vector2d& offset);
+		void setVelocity(const fgl::Vector2d& velocity);
+		const fgl::Vector2d& getVelocity() const;
 
 		virtual void onCollision(Entity* entity, CollisionSide side);
 
