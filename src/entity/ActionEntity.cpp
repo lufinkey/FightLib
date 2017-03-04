@@ -69,4 +69,21 @@ namespace fl
 		}
 		return nullptr;
 	}
+
+	const fgl::String& ActionEntity::getActionName(Action* action) const
+	{
+		for(auto& actionPair : actions)
+		{
+			if(actionPair.second==action)
+			{
+				return actionPair.first;
+			}
+		}
+		throw fgl::IllegalArgumentException("action", "does not belong to this entity");
+	}
+
+	Action* ActionEntity::getCurrentAction() const
+	{
+		return currentAction;
+	}
 }

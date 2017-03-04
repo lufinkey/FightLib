@@ -19,12 +19,12 @@ namespace fl
 
 	protected:
 		void addAction(const fgl::String& name, Action* action);
+		void endAction(Action* action);
+		Action* getAction(const fgl::String& name) const;
+		const fgl::String& getActionName(Action* action) const;
+		Action* getCurrentAction() const;
 
 	private:
-		void endAction(Action* action);
-
-		Action* getAction(const fgl::String& name) const;
-
 		Action* currentAction;
 		fgl::ArrayList<std::pair<fgl::String, Action*>> actions;
 	};
