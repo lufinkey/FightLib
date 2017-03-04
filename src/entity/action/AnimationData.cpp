@@ -269,10 +269,17 @@ namespace fl
 	{
 		fgl::Dictionary plist;
 		fgl::String plistError;
-		if(!fgl::Plist::loadFromFile(&plist, path, &plistError))
+		FILE* plistFile = assetManager->openFile(path, "rb");
+		if(plistFile==nullptr)
 		{
+			return_error("unable to open file");
+		}
+		if(!fgl::Plist::loadFromFile(&plist, plistFile, &plistError))
+		{
+			fclose(plistFile);
 			return_error("unable to load plist: "+plistError)
 		}
+		fclose(plistFile);
 
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
 		if(animName.length()==0)

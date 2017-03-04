@@ -245,20 +245,15 @@ namespace fl
 		staticCollisionBody = staticCollisionBody_arg;
 	}
 
-	bool Entity::loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)
+	bool Entity::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
 	{
-		AnimationData* animData = new AnimationData();
-		bool animationSuccess = animData->loadFromFile(path, assetManager, error);
+		bool animationSuccess = assetManager->loadAnimationData(path, error);
 		if(animationSuccess)
 		{
-			animations.add(animData);
+			animations.add(assetManager->getAnimationData(path));
 			return true;
 		}
-		else
-		{
-			delete animData;
-			return false;
-		}
+		return false;
 	}
 
 	void Entity::changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent)

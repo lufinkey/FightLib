@@ -11,6 +11,8 @@ public:
 	virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
 private:
+	fl::AnimationAssetManager* animationAssetManager;
+
 	fl::Entity* character;
 
 	fl::Entity* block1;

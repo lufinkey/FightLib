@@ -3,6 +3,7 @@
 
 #include <functional>
 #include "action/AnimationData.hpp"
+#include "action/AnimationAssetManager.hpp"
 #include "collision/rects/CollisionRect.hpp"
 #include "collision/CollisionManager.hpp"
 
@@ -55,7 +56,7 @@ namespace fl
 		bool isStaticCollisionBody() const;
 		void setStaticCollisionBody(bool staticCollisionBody);
 
-		bool loadAnimation(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
+		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;

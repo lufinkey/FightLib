@@ -3,9 +3,9 @@
 
 namespace fl
 {
-	AnimationAssetManager::AnimationAssetManager(fgl::Window& window, const fgl::String& root) : AssetManager(window, root)
+	AnimationAssetManager::AnimationAssetManager(fgl::AssetManager* assetManager) : AssetManager(assetManager->getWindow(), assetManager->getRootDirectory())
 	{
-		//
+		addAssetManager(assetManager);
 	}
 
 	AnimationAssetManager::~AnimationAssetManager()
@@ -26,20 +26,7 @@ namespace fl
 		//TODO load from dependent asset managers maybe?
 
 		AnimationData* animData = new AnimationData();
-		fgl::String fullpath = fgl::FileTools::combinePathStrings(getRootDirectory(), path);
-		bool success = animData->loadFromFile(fullpath, this, error);
-		if(!success)
-		{
-			for(auto& secondaryRoot : getSecondaryRoots())
-			{
-				fullpath = fgl::FileTools::combinePathStrings(secondaryRoot, path);
-				success = animData->loadFromFile(fullpath, this, error);
-				if(success)
-				{
-					break;
-				}
-			}
-		}
+		bool success = animData->loadFromFile(path, this, error);
 		if(success)
 		{
 			if(error!=nullptr)
@@ -141,5 +128,11 @@ namespace fl
 			}
 			return successCounter;
 		}
+	}
+
+	void AnimationAssetManager::unload()
+	{
+		AssetManager::unload();
+		unloadAllAnimationData();
 	}
 }

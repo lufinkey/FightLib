@@ -4,34 +4,34 @@
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
-	fgl::FileTools::setCurrentWorkingDirectory(getResourceDirectory());
-	
+	animationAssetManager = new fl::AnimationAssetManager(assetManager);
+
 	character = new Player(fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
 	character->setScale(3.0);
-	character->loadAnimation("assets/animations/punch.plist", assetManager);
+	character->loadAnimation("assets/animations/punch.plist", animationAssetManager);
 	character->changeAnimation("punch");
 	character->setCollisionMethod(fl::Entity::COLLISIONMETHOD_BOUNDS);
 
 	block1 = new fl::Entity(fgl::Vector2d(300, 300), fl::Entity::ORIENTATION_LEFT);
-	block1->loadAnimation("assets/animations/block.plist", assetManager);
+	block1->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block1->changeAnimation("block");
 	block1->setCollisionMethod(fl::Entity::COLLISIONMETHOD_FRAME);
 	block1->setStaticCollisionBody(true);
 
 	block2 = new fl::Entity(fgl::Vector2d(350, 300), fl::Entity::ORIENTATION_LEFT);
-	block2->loadAnimation("assets/animations/block.plist", assetManager);
+	block2->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block2->changeAnimation("block");
 	block2->setCollisionMethod(fl::Entity::COLLISIONMETHOD_FRAME);
 	block2->setStaticCollisionBody(true);
 
 	block3 = new fl::Entity(fgl::Vector2d(250, 300), fl::Entity::ORIENTATION_LEFT);
-	block3->loadAnimation("assets/animations/block.plist", assetManager);
+	block3->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block3->changeAnimation("block");
 	block3->setCollisionMethod(fl::Entity::COLLISIONMETHOD_FRAME);
 	block3->setStaticCollisionBody(true);
 
 	block4 = new fl::Entity(fgl::Vector2d(200, 250), fl::Entity::ORIENTATION_LEFT);
-	block4->loadAnimation("assets/animations/block.plist", assetManager);
+	block4->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block4->changeAnimation("block");
 	block4->setCollisionMethod(fl::Entity::COLLISIONMETHOD_FRAME);
 	block4->setStaticCollisionBody(true);
