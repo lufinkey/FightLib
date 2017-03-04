@@ -29,6 +29,11 @@ namespace fl
 		//
 	}
 
+	bool Action::getFlag(const fgl::String& flag) const
+	{
+		return false;
+	}
+
 	void Action::onPerform(ActionEntity* entity, ActionParamsPtr params)
 	{
 		//Open for implementation
