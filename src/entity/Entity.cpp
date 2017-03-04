@@ -26,10 +26,7 @@ namespace fl
 
 	Entity::~Entity()
 	{
-		for(size_t animations_size=animations.size(), i=0; i<animations_size; i++)
-		{
-			delete animations[i];
-		}
+		//
 	}
 
 	void Entity::update(fgl::ApplicationData appData)
