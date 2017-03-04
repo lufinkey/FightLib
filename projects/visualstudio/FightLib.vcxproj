@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationAssetManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
@@ -34,6 +36,8 @@
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
+    <ClCompile Include="..\..\src\entity\action\Action.cpp" />
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
     <ClCompile Include="..\..\src\entity\action\AnimationAssetManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />

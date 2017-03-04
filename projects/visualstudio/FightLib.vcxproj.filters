@@ -81,6 +81,12 @@
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationAssetManager.hpp">
       <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp">
+      <Filter>include\fightlib\entity\action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp">
+      <Filter>include\fightlib\entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -109,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\action\AnimationAssetManager.cpp">
       <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\action\Action.cpp">
+      <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\ActionEntity.cpp">
+      <Filter>src\entity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
