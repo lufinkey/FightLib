@@ -45,6 +45,7 @@ namespace fl
 
 	protected:
 		virtual void onPerform(ActionEntity* entity, ActionParamsPtr params = nullptr);
+		virtual void onUpdate(ActionEntity* entity, fgl::ApplicationData appData);
 		virtual void onEnd(ActionEntity* entity);
 		virtual void onEvent(ActionEntity* entity, ActionEventPtr event);
 

@@ -18,6 +18,15 @@ namespace fl
 		}
 	}
 
+	void ActionEntity::update(fgl::ApplicationData appData)
+	{
+		if(currentAction!=nullptr)
+		{
+			currentAction->onUpdate(this, appData);
+		}
+		Entity::update(appData);
+	}
+
 	bool ActionEntity::performAction(const fgl::String& name, ActionParamsPtr params)
 	{
 		if(currentAction!=nullptr)

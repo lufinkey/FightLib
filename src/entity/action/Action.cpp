@@ -34,6 +34,11 @@ namespace fl
 		//Open for implementation
 	}
 
+	void Action::onUpdate(ActionEntity* entity, fgl::ApplicationData appData)
+	{
+		//Open for implementation
+	}
+
 	void Action::onEnd(ActionEntity* entity)
 	{
 		//Open for implementation

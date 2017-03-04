@@ -13,6 +13,8 @@ namespace fl
 		ActionEntity(const fgl::Vector2d& position, Entity::Orientation orientation);
 		virtual ~ActionEntity();
 
+		virtual void update(fgl::ApplicationData appData) override;
+
 		bool performAction(const fgl::String& name, ActionParamsPtr params = nullptr);
 
 	protected:
