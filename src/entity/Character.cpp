@@ -18,6 +18,11 @@ namespace fl
 		ActionEntity::update(appData);
 	}
 
+	fgl::String Character::getIdleAnimationName() const
+	{
+		return "";
+	}
+
 	double Character::getMoveSpeed(double amount) const
 	{
 		return 20;
@@ -44,7 +49,16 @@ namespace fl
 
 	void Character::updateMoveAnimation(const fgl::ApplicationData& appData)
 	{
-		fgl::String animName = getMoveAnimationName(fgl::Math::abs(getDirection().x));
+		double moveAmount = fgl::Math::abs(getDirection().x);
+		fgl::String animName;
+		if(moveAmount==0)
+		{
+			animName = getIdleAnimationName();
+		}
+		else
+		{
+			animName = getMoveAnimationName(moveAmount);
+		}
 		if(animName.length() > 0 && animName!=getCurrentAnimationName())
 		{
 			//TODO add frame preservation?
