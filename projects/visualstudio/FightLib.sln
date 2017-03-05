@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FightGame", "test\FightGame.vcxproj", "{0C45C5B1-6B84-4A1A-B806-771ADB5DBCC0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{865CCF04-F0E6-42A1-8694-98E95821E8CE} = {865CCF04-F0E6-42A1-8694-98E95821E8CE}
+		{68890E50-B78E-43FB-BFF3-C96E86766C57} = {68890E50-B78E-43FB-BFF3-C96E86766C57}
+	EndProjectSection
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FightLib", "FightLib.vcxproj", "{865CCF04-F0E6-42A1-8694-98E95821E8CE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{68890E50-B78E-43FB-BFF3-C96E86766C57} = {68890E50-B78E-43FB-BFF3-C96E86766C57}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameLibrary", "..\..\external\GameLibrary\projects\visualstudio\GameLibrary.vcxproj", "{68890E50-B78E-43FB-BFF3-C96E86766C57}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FightGame", "test\FightGame.vcxproj", "{0C45C5B1-6B84-4A1A-B806-771ADB5DBCC0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{865CCF04-F0E6-42A1-8694-98E95821E8CE} = {865CCF04-F0E6-42A1-8694-98E95821E8CE}
-		{68890E50-B78E-43FB-BFF3-C96E86766C57} = {68890E50-B78E-43FB-BFF3-C96E86766C57}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
