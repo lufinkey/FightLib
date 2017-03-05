@@ -21,13 +21,13 @@ namespace fl
 	public:
 		friend class CollisionManager;
 
-		typedef enum : fgl::byte
+		typedef enum : fgl::Uint8
 		{
 			ORIENTATION_LEFT,
 			ORIENTATION_RIGHT,
 		} Orientation;
 
-		typedef enum : fgl::byte
+		typedef enum : fgl::Uint8
 		{
 			COLLISIONMETHOD_NONE,
 			COLLISIONMETHOD_FRAME,

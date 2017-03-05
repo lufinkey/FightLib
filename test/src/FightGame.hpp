@@ -13,7 +13,7 @@ public:
 private:
 	fl::AnimationAssetManager* animationAssetManager;
 
-	fl::Entity* character;
+	fl::Character* character;
 
 	fl::Entity* block1;
 	fl::Entity* block2;

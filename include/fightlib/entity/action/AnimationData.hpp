@@ -5,7 +5,7 @@
 
 namespace fl
 {
-	typedef enum : fgl::byte
+	typedef enum : fgl::Uint8
 	{
 		ANIMATIONORIENTATION_NEUTRAL,
 		ANIMATIONORIENTATION_LEFT,

@@ -3,6 +3,11 @@
 
 namespace fl
 {
+	Character::Character(const fgl::Vector2d& position, Entity::Orientation orientation) : ActionEntity(position, orientation)
+	{
+		//
+	}
+
 	void Character::update(fgl::ApplicationData appData)
 	{
 		if(getCurrentAction()==nullptr)
@@ -25,10 +30,16 @@ namespace fl
 
 	void Character::updateMovement(const fgl::ApplicationData& appData)
 	{
-		double moveSpeed = getMoveSpeed(fgl::Math::abs(getDirection().x));
+		double moveSpeed = 0;
+		double moveAmount = fgl::Math::abs(getDirection().x);
+		if(moveAmount!=0)
+		{
+			moveSpeed = getMoveSpeed(moveAmount);
+		}
 		//TODO add gradual movement toward the move speed
 		fgl::Vector2d velocity = getVelocity();
-		velocity.x = (direction.x > 0) ? moveSpeed : -moveSpeed;
+		velocity.x = (direction.x >= 0) ? moveSpeed : -moveSpeed;
+		setVelocity(velocity);
 	}
 
 	void Character::updateMoveAnimation(const fgl::ApplicationData& appData)

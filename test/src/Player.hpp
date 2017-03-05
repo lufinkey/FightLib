@@ -3,7 +3,7 @@
 
 #include <fightlib/fightlib.hpp>
 
-class Player : public fl::Entity
+class Player : public fl::Character
 {
 public:
 	Player(const fgl::Vector2d& position, fl::Entity::Orientation orientation);

@@ -8,6 +8,8 @@ namespace fl
 	class Character : public ActionEntity
 	{
 	public:
+		Character(const fgl::Vector2d& position, Entity::Orientation orientation);
+
 		virtual void update(fgl::ApplicationData appData) override;
 
 		virtual double getMoveSpeed(double amount) const;
