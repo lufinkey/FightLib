@@ -1,10 +1,15 @@
 
 #include "Player.hpp"
 
-Player::Player(const fgl::Vector2d& position, fl::Entity::Orientation orientation)
+Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& position, fl::Entity::Orientation orientation)
 	: Character(position, orientation)
 {
-	//
+	setScale(3.0);
+	setCollisionMethod(fl::Entity::COLLISIONMETHOD_BOUNDS);
+
+	loadAnimation("assets/animations/idle.plist", assetManager);
+	loadAnimation("assets/animations/punch.plist", assetManager);
+	changeAnimation("idle");
 }
 
 void Player::update(fgl::ApplicationData appData)
@@ -33,6 +38,11 @@ void Player::update(fgl::ApplicationData appData)
 	setVelocity(velocity);
 
 	Character::update(appData);
+}
+
+fgl::String Player::getIdleAnimationName() const
+{
+	return "punch";
 }
 
 void Player::onCollision(fl::Entity* entity, fl::CollisionSide side)

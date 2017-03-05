@@ -6,11 +6,7 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
 	animationAssetManager = new fl::AnimationAssetManager(assetManager);
 
-	character = new Player(fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
-	character->setScale(3.0);
-	character->loadAnimation("assets/animations/punch.plist", animationAssetManager);
-	character->changeAnimation("punch");
-	character->setCollisionMethod(fl::Entity::COLLISIONMETHOD_BOUNDS);
+	character = new Player(animationAssetManager, fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
 
 	block1 = new fl::Entity(fgl::Vector2d(300, 300), fl::Entity::ORIENTATION_LEFT);
 	block1->loadAnimation("assets/animations/block.plist", animationAssetManager);
