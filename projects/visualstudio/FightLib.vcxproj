@@ -40,6 +40,7 @@
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
     <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
     <ClCompile Include="..\..\src\entity\action\AnimationAssetManager.cpp" />
+    <ClCompile Include="..\..\src\entity\Character.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />

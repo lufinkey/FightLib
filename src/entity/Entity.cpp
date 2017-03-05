@@ -253,7 +253,7 @@ namespace fl
 		return false;
 	}
 
-	void Entity::changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent)
+	void Entity::changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent)
 	{
 		if(name.length()==0)
 		{
@@ -289,6 +289,11 @@ namespace fl
 	fgl::Animation* Entity::getCurrentAnimation() const
 	{
 		return getAnimation(currentAnimationName);
+	}
+
+	fgl::String Entity::getCurrentAnimationName() const
+	{
+		return currentAnimationName;
 	}
 
 	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects() const

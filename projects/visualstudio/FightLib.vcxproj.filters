@@ -122,5 +122,8 @@
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp">
       <Filter>src\entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\entity\Character.cpp">
+      <Filter>src\entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

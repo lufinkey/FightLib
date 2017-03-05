@@ -57,9 +57,10 @@ namespace fl
 		void setStaticCollisionBody(bool staticCollisionBody);
 
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
-		void changeAnimation(const fgl::String& name, std::function<void(AnimationEventType)> onevent=nullptr);
+		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;
+		fgl::String getCurrentAnimationName() const;
 
 		virtual fgl::ArrayList<CollisionRect*> createCollisionRects() const;
 
