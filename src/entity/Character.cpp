@@ -45,6 +45,15 @@ namespace fl
 		fgl::Vector2d velocity = getVelocity();
 		velocity.x = (direction.x >= 0) ? moveSpeed : -moveSpeed;
 		setVelocity(velocity);
+
+		if(direction.x < 0)
+		{
+			setOrientation(ORIENTATION_LEFT);
+		}
+		else if(direction.x > 0)
+		{
+			setOrientation(ORIENTATION_RIGHT);
+		}
 	}
 
 	void Character::updateMoveAnimation(const fgl::ApplicationData& appData)
