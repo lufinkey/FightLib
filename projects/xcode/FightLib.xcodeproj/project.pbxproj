@@ -21,6 +21,7 @@
 		F17D96D41E6DB531003F4D85 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */; };
 		F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */; };
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
+		F17D97CA1E6DCDAB003F4D85 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
 		F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEntity.cpp; sourceTree = "<group>"; };
 		F17D96D61E6DB53B003F4D85 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = ../../external/GameLibrary/projects/xcode/build/Debug/libGameLibrary.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17D97CA1E6DCDAB003F4D85 /* libGameLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +90,7 @@
 				F15A1F971E549FA7008D83E5 /* include */,
 				F15A1FA71E549FAE008D83E5 /* src */,
 				F15A1F911E549F5E008D83E5 /* Products */,
+				F17D97C81E6DCDAB003F4D85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -211,6 +215,14 @@
 				F17BBBFB1E6496DB00A7F8F4 /* PixelCollisionRect.hpp */,
 			);
 			path = rects;
+			sourceTree = "<group>";
+		};
+		F17D97C81E6DCDAB003F4D85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

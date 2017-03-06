@@ -25,7 +25,6 @@
 		F19AB1081E524CBA00855347 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1071E524CBA00855347 /* QuartzCore.framework */; };
 		F19AB10A1E524CC600855347 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1091E524CC600855347 /* MobileCoreServices.framework */; };
 		F19AB10C1E524CCE00855347 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10B1E524CCE00855347 /* CoreMotion.framework */; };
-		F19AB10E1E524CF200855347 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10D1E524CF200855347 /* libGameLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +69,6 @@
 				F19AB1001E524C8A00855347 /* OpenGLES.framework in Frameworks */,
 				F19AB0FE1E524C7800855347 /* ImageIO.framework in Frameworks */,
 				F19AB0FC1E524C5600855347 /* GameController.framework in Frameworks */,
-				F19AB10E1E524CF200855347 /* libGameLibrary.a in Frameworks */,
 				F19AB0F21E524C2400855347 /* libFightLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

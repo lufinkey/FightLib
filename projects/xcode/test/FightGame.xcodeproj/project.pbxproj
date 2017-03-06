@@ -29,7 +29,6 @@
 		F16F110D1E67231F009A465C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110C1E67231F009A465C /* CoreFoundation.framework */; };
 		F16F110F1E672326009A465C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110E1E672326009A465C /* AppKit.framework */; };
 		F16F11111E67232F009A465C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11101E67232F009A465C /* Foundation.framework */; };
-		F16F114B1E6724F9009A465C /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F114A1E6724F9009A465C /* libGameLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,7 +91,6 @@
 				F16F11011E6722DF009A465C /* ForceFeedback.framework in Frameworks */,
 				F16F10FF1E6722CF009A465C /* ImageIO.framework in Frameworks */,
 				F14464ED1E672F900088EAA3 /* Carbon.framework in Frameworks */,
-				F16F114B1E6724F9009A465C /* libGameLibrary.a in Frameworks */,
 				F14464F11E6730440088EAA3 /* webp.framework in Frameworks */,
 				F15A20091E54A873008D83E5 /* libFightLib.a in Frameworks */,
 			);

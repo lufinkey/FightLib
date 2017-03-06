@@ -17,6 +17,7 @@
 		F17D96EF1E6DB5DE003F4D85 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96ED1E6DB5DE003F4D85 /* AnimationAssetManager.cpp */; };
 		F17D96F21E6DB5E8003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96F01E6DB5E8003F4D85 /* ActionEntity.cpp */; };
 		F17D96F31E6DB5E8003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96F11E6DB5E8003F4D85 /* Character.cpp */; };
+		F17D979C1E6DCB3E003F4D85 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F17D979B1E6DCB3E003F4D85 /* libGameLibrary.a */; };
 		F19AB0A31E52471A00855347 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0A01E52470600855347 /* Entity.cpp */; };
 		F19AB0A71E52472400855347 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB09B1E52470600855347 /* AnimationData.cpp */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		F17D96ED1E6DB5DE003F4D85 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
 		F17D96F01E6DB5E8003F4D85 /* ActionEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEntity.cpp; sourceTree = "<group>"; };
 		F17D96F11E6DB5E8003F4D85 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		F17D979B1E6DCB3E003F4D85 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../external/GameLibrary/projects/xcode-iOS/build/Debug-iphoneos/libGameLibrary.a"; sourceTree = "<group>"; };
 		F19AB08C1E52469200855347 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19AB09B1E52470600855347 /* AnimationData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
 		F19AB0A01E52470600855347 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17D979C1E6DCB3E003F4D85 /* libGameLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,12 +106,21 @@
 			path = rects;
 			sourceTree = "<group>";
 		};
+		F17D979A1E6DCB3E003F4D85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F17D979B1E6DCB3E003F4D85 /* libGameLibrary.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F19AB0831E52469200855347 = {
 			isa = PBXGroup;
 			children = (
 				F19AB0A81E52473400855347 /* include */,
 				F19AB0981E52470600855347 /* src */,
 				F19AB08D1E52469200855347 /* Products */,
+				F17D979A1E6DCB3E003F4D85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
