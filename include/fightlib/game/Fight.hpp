@@ -5,11 +5,11 @@
 
 namespace fl
 {
-	class Fight : public GameLibrary::UpdateDrawable
+	class Fight
 	{
 	public:
-		virtual void update(GameLibrary::ApplicationData appData) override;
-		virtual void draw(GameLibrary::ApplicationData appData, GameLibrary::Graphics graphics) const override;
+		virtual void update(GameLibrary::ApplicationData appData);
+		virtual void draw(GameLibrary::ApplicationData appData, GameLibrary::Graphics graphics) const;
 
 	private:
 		GameLibrary::RectangleD frame;
