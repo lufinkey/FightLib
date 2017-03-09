@@ -21,7 +21,6 @@
 		F17D96D41E6DB531003F4D85 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */; };
 		F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */; };
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
-		F17D97CA1E6DCDAB003F4D85 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17D97CA1E6DCDAB003F4D85 /* libGameLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

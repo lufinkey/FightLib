@@ -19,6 +19,7 @@
 		F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E01E54B07F008D83E5 /* FightGame.cpp */; };
 		F15A20E41E54B07F008D83E5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A20E21E54B07F008D83E5 /* main.cpp */; };
 		F15A20E61E54B08A008D83E5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F15A20E51E54B08A008D83E5 /* assets */; };
+		F15F59F61E71DFBB00FAFD86 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15F59F51E71DFBB00FAFD86 /* libGameLibrary.a */; };
 		F16F10FF1E6722CF009A465C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F10FE1E6722CF009A465C /* ImageIO.framework */; };
 		F16F11011E6722DF009A465C /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11001E6722DF009A465C /* ForceFeedback.framework */; };
 		F16F11031E6722F4009A465C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11021E6722F4009A465C /* IOKit.framework */; };
@@ -60,6 +61,7 @@
 		F15A20E01E54B07F008D83E5 /* FightGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightGame.cpp; sourceTree = "<group>"; };
 		F15A20E21E54B07F008D83E5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F15A20E51E54B08A008D83E5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../test/assets; sourceTree = "<group>"; };
+		F15F59F51E71DFBB00FAFD86 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/FightLib-bxtoxjsgitasaubdottnphxzqntr/Build/Products/Debug/libGameLibrary.a"; sourceTree = "<group>"; };
 		F16F10FE1E6722CF009A465C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F16F11001E6722DF009A465C /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = System/Library/Frameworks/ForceFeedback.framework; sourceTree = SDKROOT; };
 		F16F11021E6722F4009A465C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -93,6 +95,7 @@
 				F14464ED1E672F900088EAA3 /* Carbon.framework in Frameworks */,
 				F14464F11E6730440088EAA3 /* webp.framework in Frameworks */,
 				F15A20091E54A873008D83E5 /* libFightLib.a in Frameworks */,
+				F15F59F61E71DFBB00FAFD86 /* libGameLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +134,7 @@
 		F15A20071E54A873008D83E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F15F59F51E71DFBB00FAFD86 /* libGameLibrary.a */,
 				F16F11101E67232F009A465C /* Foundation.framework */,
 				F16F110E1E672326009A465C /* AppKit.framework */,
 				F16F110C1E67231F009A465C /* CoreFoundation.framework */,
