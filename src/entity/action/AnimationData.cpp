@@ -457,6 +457,15 @@ namespace fl
 		}
 		return frameDatas[frameIndex].metapoints;
 	}
+	
+	void AnimationData::setMetaPoints(size_t frameIndex, const fgl::ArrayList<AnimationMetaPoint>& metaPoints)
+	{
+		while(frameIndex >= frameDatas.size())
+		{
+			frameDatas.add(FrameData());
+		}
+		frameDatas[frameIndex].metapoints = metaPoints;
+	}
 
 	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const
 	{
