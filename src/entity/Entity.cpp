@@ -142,7 +142,7 @@ namespace fl
 		AnimationData* animData = getAnimationData(currentAnimationName);
 		if(animData!=nullptr)
 		{
-			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation(), true);
+			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation());
 		}
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
