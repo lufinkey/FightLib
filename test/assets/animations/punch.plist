@@ -235,10 +235,9 @@
 					<key>y</key>
 					<real>38</real>
 				</dict>
-			</array>
-			<key>hitboxes</key>
-			<array>
 				<dict>
+					<key>type</key>
+					<string>HITBOX</string>
 					<key>tag</key>
 					<integer>0</integer>
 					<key>x</key>
@@ -320,10 +319,9 @@
 					<key>y</key>
 					<real>38</real>
 				</dict>
-			</array>
-			<key>hitboxes</key>
-			<array>
 				<dict>
+					<key>type</key>
+					<string>HITBOX</string>
 					<key>tag</key>
 					<integer>0</integer>
 					<key>x</key>

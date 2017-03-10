@@ -5,53 +5,6 @@ namespace fl
 {
 	#define return_error(err) if(error!=nullptr) {*error = err;} return false;
 
-	AnimationHitbox::AnimationHitbox() :
-		tag(-1),
-		x(0),
-		y(0),
-		radius(0)
-	{
-		//
-	}
-
-	bool AnimationHitbox::loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error)
-	{
-		if(dictionary.has("x") && dictionary.has("y") && dictionary.has("radius"))
-		{
-			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
-			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
-			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius").toArithmeticValue<float>();
-			if(radiusValue<=0)
-			{
-				return_error("invalid radius value")
-			}
-
-			x = xValue;
-			y = yValue;
-			radius = radiusValue;
-			if(dictionary.has("tag"))
-			{
-				tag = fgl::extract<fgl::Number>(dictionary, "tag").toArithmeticValue<size_t>();
-			}
-			return true;
-		}
-		else
-		{
-			return_error("missing required field")
-		}
-	}
-
-	void AnimationHitbox::draw(fgl::Graphics graphics) const
-	{
-		graphics.setColor(fgl::Color::GREEN);
-		graphics.drawRect(getRect());
-	}
-
-	fgl::RectangleD AnimationHitbox::getRect() const
-	{
-		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
-	}
-
 	AnimationMetaPoint::AnimationMetaPoint() :
 		tag(-1),
 		x(0),
@@ -68,6 +21,11 @@ namespace fl
 
 	bool AnimationMetaPoint_type_from_string(const fgl::String& string, AnimationMetaPoint::Type* type)
 	{
+		if(string=="HITBOX")
+		{
+			*type = AnimationMetaPoint::POINTTYPE_HITBOX;
+			return true;
+		}
 		if(string=="HEAD")
 		{
 			*type = AnimationMetaPoint::POINTTYPE_HEAD;
@@ -203,6 +161,10 @@ namespace fl
 		graphics.rotate((double)rotation, (double)x, (double)y);
 		switch(type)
 		{
+			case POINTTYPE_HITBOX:
+			graphics.setColor(fgl::Color::GREEN);
+			break;
+				
 			case POINTTYPE_HEAD:
 			graphics.setColor(fgl::Color::RED);
 			break;
@@ -375,39 +337,7 @@ namespace fl
 		{
 			FrameData frame;
 			fgl::Dictionary frameDict = fgl::extract<fgl::Dictionary>(frameDataArray, i);
-
-			fgl::ArrayList<fgl::Any> hitboxesArray = fgl::extract<fgl::ArrayList<fgl::Any>>(frameDict, "hitboxes");
-			for(size_t j=0; j<hitboxesArray.size(); j++)
-			{
-				fgl::Dictionary hitboxDict = fgl::extract<fgl::Dictionary>(hitboxesArray, j);
-				if(!hitboxDict.isEmpty())
-				{
-					AnimationHitbox hitbox;
-					fgl::String hitboxError;
-					bool hitboxSuccess = hitbox.loadFromDictionary(hitboxDict, &hitboxError);
-					if(hitboxSuccess)
-					{
-						if(hitbox.tag!=(size_t)-1)
-						{
-							for(auto& cmpHitbox : frame.hitboxes)
-							{
-								if(hitbox.tag==cmpHitbox.tag)
-								{
-									delete anim;
-									return_error((fgl::String)"duplicate hitbox tag "+hitbox.tag+" in hitbox at index "+j+" for frame "+i)
-								}
-							}
-						}
-						frame.hitboxes.add(hitbox);
-					}
-					else
-					{
-						delete anim;
-						return_error((fgl::String)"unable to load hitbox at index "+j+" for frame "+i+": "+hitboxError)
-					}
-				}
-			}
-
+			
 			fgl::ArrayList<fgl::Any> metapointsArray = fgl::extract<fgl::ArrayList<fgl::Any>>(frameDict, "metapoints");
 			for(size_t j=0; j<metapointsArray.size(); j++)
 			{
@@ -478,10 +408,6 @@ namespace fl
 				if(frameIndex < frameDatas.size())
 				{
 					const FrameData& frameData = frameDatas[frameIndex];
-					for(size_t hitboxes_size=frameData.hitboxes.size(), i=0; i<hitboxes_size; i++)
-					{
-						frameData.hitboxes[i].draw(graphics);
-					}
 					for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
 					{
 						frameData.metapoints[i].draw(graphics);
@@ -521,15 +447,6 @@ namespace fl
 		}
 		fgl::RectangleD animRect = animation->getRect(frameIndex);
 		return fgl::Vector2d(animRect.width*scale, animRect.height*scale);
-	}
-
-	fgl::ArrayList<AnimationHitbox> AnimationData::getHitboxes(size_t frameIndex) const
-	{
-		if(frameIndex >= frameDatas.size())
-		{
-			return {};
-		}
-		return frameDatas[frameIndex].hitboxes;
 	}
 
 	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex) const

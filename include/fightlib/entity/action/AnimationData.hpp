@@ -12,23 +12,6 @@ namespace fl
 		ANIMATIONORIENTATION_RIGHT
 	} AnimationOrientation;
 
-	class AnimationHitbox
-	{
-	public:
-		AnimationHitbox();
-
-		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
-
-		void draw(fgl::Graphics graphics) const;
-
-		fgl::RectangleD getRect() const;
-
-		size_t tag;
-		float x;
-		float y;
-		float radius;
-	};
-
 	class AnimationMetaPoint
 	{
 	public:
@@ -41,12 +24,13 @@ namespace fl
 		fgl::RectangleD getRect() const;
 
 		typedef fgl::Uint8 Type;
-		static const Type POINTTYPE_HEAD = 0;
-		static const Type POINTTYPE_LEFTHAND = 1;
-		static const Type POINTTYPE_RIGHTHAND = 2;
-		static const Type POINTTYPE_BOUNDS_TOPLEFT = 3;
-		static const Type POINTTYPE_BOUNDS_BOTTOMRIGHT = 4;
-		static const Type POINTTYPE_HANDLE = 5;
+		static const Type POINTTYPE_HITBOX = 0;
+		static const Type POINTTYPE_HEAD = 1;
+		static const Type POINTTYPE_LEFTHAND = 2;
+		static const Type POINTTYPE_RIGHTHAND = 3;
+		static const Type POINTTYPE_BOUNDS_TOPLEFT = 4;
+		static const Type POINTTYPE_BOUNDS_BOTTOMRIGHT = 5;
+		static const Type POINTTYPE_HANDLE = 6;
 
 		size_t tag;
 		float x;
@@ -80,7 +64,6 @@ namespace fl
 		AnimationOrientation getOrientation() const;
 		fgl::Vector2d getSize(size_t frameIndex, double scale) const;
 
-		fgl::ArrayList<AnimationHitbox> getHitboxes(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
 		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
@@ -90,7 +73,6 @@ namespace fl
 	private:
 		struct FrameData
 		{
-			fgl::ArrayList<AnimationHitbox> hitboxes;
 			fgl::ArrayList<AnimationMetaPoint> metapoints;
 		};
 
