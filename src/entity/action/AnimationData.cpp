@@ -413,8 +413,7 @@ namespace fl
 		graphics.translate(dstRect.x, dstRect.y);
 		
 		fgl::RectangleD animFrame = animation->getRect(frameIndex);
-		fgl::Vector2d scaleFactor = fgl::Vector2d(animFrame.width/dstRect.width, animFrame.height/dstRect.height);
-		graphics.scale(scaleFactor);
+		graphics.scale(dstRect.width/animFrame.width, dstRect.height/animFrame.height);
 		
 		if(frameIndex < frameDatas.size())
 		{
