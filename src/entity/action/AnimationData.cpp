@@ -400,27 +400,36 @@ namespace fl
 			if(showFrames)
 			{
 				fgl::RectangleD animFrame = animation->getRect(frameIndex);
+				drawMetaPoints(frameIndex, animFrame, graphics, drawnOrientation);
+				
 				graphics.setColor(fgl::Color::BLACK);
 				graphics.drawRect(animFrame);
-
-				graphics.translate(animFrame.x, animFrame.y);
-
-				if(frameIndex < frameDatas.size())
-				{
-					const FrameData& frameData = frameDatas[frameIndex];
-					for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
-					{
-						frameData.metapoints[i].draw(graphics);
-					}
-				}
-
-				fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
-				graphics.setColor(fgl::Color::SKYBLUE);
-				for(size_t i=0; i<bounds.size(); i++)
-				{
-					graphics.drawRect(bounds[i].rect);
-				}
 			}
+		}
+	}
+	
+	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation) const
+	{
+		graphics.translate(dstRect.x, dstRect.y);
+		
+		fgl::RectangleD animFrame = animation->getRect(frameIndex);
+		fgl::Vector2d scaleFactor = fgl::Vector2d(animFrame.width/dstRect.width, animFrame.height/dstRect.height);
+		graphics.scale(scaleFactor);
+		
+		if(frameIndex < frameDatas.size())
+		{
+			const FrameData& frameData = frameDatas[frameIndex];
+			for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+			{
+				frameData.metapoints[i].draw(graphics);
+			}
+		}
+		
+		fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
+		graphics.setColor(fgl::Color::SKYBLUE);
+		for(size_t i=0; i<bounds.size(); i++)
+		{
+			graphics.drawRect(bounds[i].rect);
 		}
 	}
 
