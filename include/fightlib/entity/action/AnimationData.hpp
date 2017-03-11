@@ -18,6 +18,7 @@ namespace fl
 		AnimationMetaPoint();
 
 		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
+		bool saveToDictionary(fgl::Dictionary* dictionary, fgl::String* error) const;
 
 		void draw(fgl::Graphics graphics) const;
 
@@ -56,6 +57,7 @@ namespace fl
 		~AnimationData();
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
+		bool saveToFile(const fgl::String& path, fgl::String* error=nullptr) const;
 
 		void drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL, bool showFrames=false) const;
 		void drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation) const;
@@ -64,6 +66,10 @@ namespace fl
 		fgl::Animation* getAnimation() const;
 		AnimationOrientation getOrientation() const;
 		fgl::Vector2d getSize(size_t frameIndex, double scale) const;
+
+		void setName(const fgl::String& name);
+		void setAnimation(fgl::Animation* animation);
+		void setOrientation(AnimationOrientation orientation);
 
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;

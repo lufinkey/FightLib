@@ -5,13 +5,49 @@ namespace fl
 {
 	#define return_error(err) if(error!=nullptr) {*error = err;} return false;
 
+	bool AnimationOrientation_fromString(const fgl::String& string, AnimationOrientation* orientation)
+	{
+		if(string=="NEUTRAL")
+		{
+			*orientation = ANIMATIONORIENTATION_NEUTRAL;
+			return true;
+		}
+		else if(string=="LEFT")
+		{
+			*orientation = ANIMATIONORIENTATION_LEFT;
+			return true;
+		}
+		else if(string=="RIGHT")
+		{
+			*orientation = ANIMATIONORIENTATION_RIGHT;
+			return true;
+		}
+		return false;
+	}
+
+	fgl::String AnimationOrientation_toString(AnimationOrientation orientation)
+	{
+		switch(orientation)
+		{
+			case ANIMATIONORIENTATION_NEUTRAL:
+			return "NEUTRAL";
+
+			case ANIMATIONORIENTATION_LEFT:
+			return "LEFT";
+
+			case ANIMATIONORIENTATION_RIGHT:
+			return "RIGHT";
+		}
+		return "";
+	}
+
 	AnimationMetaPoint::AnimationMetaPoint() :
 		tag(-1),
 		x(0),
 		y(0),
 		radius(0),
 		rotation(0),
-		type(POINTTYPE_HEAD),
+		type(POINTTYPE_HITBOX),
 		orientation(ANIMATIONORIENTATION_NEUTRAL),
 		behind(false),
 		visible(true)
@@ -19,7 +55,7 @@ namespace fl
 		//
 	}
 
-	bool AnimationMetaPoint_type_from_string(const fgl::String& string, AnimationMetaPoint::Type* type)
+	bool AnimationMetaPointType_fromString(const fgl::String& string, AnimationMetaPoint::Type* type)
 	{
 		if(string=="HITBOX")
 		{
@@ -59,6 +95,34 @@ namespace fl
 		return false;
 	}
 
+	fgl::Any AnimationMetaPointType_toAny(AnimationMetaPoint::Type type)
+	{
+		switch(type)
+		{
+			case AnimationMetaPoint::POINTTYPE_HITBOX:
+			return fgl::String("HITBOX");
+
+			case AnimationMetaPoint::POINTTYPE_HEAD:
+			return fgl::String("HEAD");
+
+			case AnimationMetaPoint::POINTTYPE_LEFTHAND:
+			return fgl::String("LEFT_HAND");
+
+			case AnimationMetaPoint::POINTTYPE_RIGHTHAND:
+			return fgl::String("RIGHT_HAND");
+
+			case AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT:
+			return fgl::String("BOUNDS_TOPLEFT");
+
+			case AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT:
+			return fgl::String("BOUNDS_BOTTOMRIGHT");
+
+			case AnimationMetaPoint::POINTTYPE_HANDLE:
+			return fgl::String("HANDLE");
+		}
+		return fgl::Number(type);
+	}
+
 	bool AnimationMetaPoint::loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error)
 	{
 		if(dictionary.has("type") && dictionary.has("x") && dictionary.has("y"))
@@ -67,14 +131,14 @@ namespace fl
 			Type typeValue = -1;
 			if(typeAny.isEmpty())
 			{
-				return_error("missing required field")
+				return_error("missing required field");
 			}
 			else if(typeAny.is<fgl::String>())
 			{
 				fgl::String typeStr = typeAny.as<fgl::String>();
-				if(!AnimationMetaPoint_type_from_string(typeStr, &typeValue))
+				if(!AnimationMetaPointType_fromString(typeStr, &typeValue))
 				{
-					return_error("invalid \"type\" value: \""+typeStr+"\"")
+					return_error("invalid \"type\" value: \""+typeStr+"\"");
 				}
 			}
 			else if(typeAny.is<fgl::Number>())
@@ -82,13 +146,13 @@ namespace fl
 				long long typeNum = typeAny.as<fgl::Number>().toArithmeticValue<long long>();
 				if(typeNum >= 255 || typeNum < 0)
 				{
-					return_error((fgl::String)"invalid \"type\" value outside of allowed range: \""+typeNum+"\"")
+					return_error((fgl::String)"invalid \"type\" value outside of allowed range: \""+typeNum+"\"");
 				}
 				typeValue = (Type)typeNum;
 			}
 			else
 			{
-				return_error("invalid \"type\" datatype")
+				return_error("invalid \"type\" datatype");
 			}
 
 			size_t tagValue = fgl::extract<fgl::Number>(dictionary, "tag", -1).toArithmeticValue<size_t>();
@@ -96,33 +160,17 @@ namespace fl
 			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
 			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
 			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius", 0).toArithmeticValue<float>();
-			if(typeValue!=POINTTYPE_BOUNDS_TOPLEFT && typeValue!=POINTTYPE_BOUNDS_BOTTOMRIGHT)
+			if(radiusValue < 0)
 			{
-				if(radiusValue <= 0)
-				{
-					return_error("invalid radius value")
-				}
+				return_error("invalid radius value");
 			}
 			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation", "NEUTRAL");
-			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
-
 			AnimationOrientation orientationValue;
-			if(orientationStr=="NEUTRAL")
+			if(!AnimationOrientation_fromString(orientationStr, &orientationValue))
 			{
-				orientationValue = ANIMATIONORIENTATION_NEUTRAL;
+				return_error("invalid \"orientation\" value: \""+orientationStr+"\"");
 			}
-			else if(orientationStr=="LEFT")
-			{
-				orientationValue = ANIMATIONORIENTATION_LEFT;
-			}
-			else if(orientationStr=="RIGHT")
-			{
-				orientationValue = ANIMATIONORIENTATION_RIGHT;
-			}
-			else
-			{
-				return_error("invalid \"orientation\" value: \""+orientationStr+"\"")
-			}
+			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
 
 			tag = tagValue;
 			x = xValue;
@@ -145,6 +193,43 @@ namespace fl
 		{
 			return_error("missing required field")
 		}
+	}
+
+	bool AnimationMetaPoint::saveToDictionary(fgl::Dictionary* dictionary, fgl::String* error) const
+	{
+		fgl::Dictionary dst;
+		dst["type"] = AnimationMetaPointType_toAny(type);
+		if(orientation!=ANIMATIONORIENTATION_NEUTRAL)
+		{
+			fgl::String orientationStr = AnimationOrientation_toString(orientation);
+			if(orientationStr.length()==0)
+			{
+				return_error("invalid orientation value");
+			}
+			dst["orientation"] = orientationStr;
+		}
+		dst["x"] = fgl::Number(x);
+		dst["y"] = fgl::Number(y);
+		if(radius < 0)
+		{
+			return_error("invalid radius value");
+		}
+		if(radius!=0)
+		{
+			dst["radius"] = fgl::Number(radius);
+		}
+		if(rotation!=0)
+		{
+			dst["rotation"] = fgl::Number(rotation);
+		}
+		if(tag!=-1)
+		{
+			dst["tag"] = fgl::Number(tag);
+		}
+		dst["visible"] = fgl::Number(visible);
+		dst["behind"] = fgl::Number(behind);
+		*dictionary = dst;
+		return true;
 	}
 
 	void AnimationMetaPoint::draw(fgl::Graphics graphics) const
@@ -214,7 +299,7 @@ namespace fl
 		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
 	}
 
-	AnimationData::AnimationData() : animation(nullptr), orientation(ANIMATIONORIENTATION_NEUTRAL)
+	AnimationData::AnimationData() : animation(new fgl::Animation(1.0)), orientation(ANIMATIONORIENTATION_NEUTRAL)
 	{
 		//
 	}
@@ -239,51 +324,35 @@ namespace fl
 		if(!fgl::Plist::loadFromFile(&plist, plistFile, &plistError))
 		{
 			fclose(plistFile);
-			return_error("unable to load plist: "+plistError)
+			return_error("unable to load plist: "+plistError);
 		}
 		fclose(plistFile);
 
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
 		if(animName.length()==0)
 		{
-			return_error("missing \"name\" field")
+			return_error("missing \"name\" field");
 		}
 
 		fgl::String orientationStr = fgl::extract<fgl::String>(plist, "orientation");
 		if(orientationStr.length()==0)
 		{
-			return_error("missing \"orientation\" field")
+			return_error("missing \"orientation\" field");
 		}
 		AnimationOrientation orientationValue;
-		if(orientationStr=="NEUTRAL")
+		if(!AnimationOrientation_fromString(orientationStr, &orientationValue))
 		{
-			orientationValue = ANIMATIONORIENTATION_NEUTRAL;
-		}
-		else if(orientationStr=="LEFT")
-		{
-			orientationValue = ANIMATIONORIENTATION_LEFT;
-		}
-		else if(orientationStr=="RIGHT")
-		{
-			orientationValue = ANIMATIONORIENTATION_RIGHT;
-		}
-		else
-		{
-			return_error("invalid \"orientation\" value: "+orientationStr)
+			return_error("invalid \"orientation\" value: "+orientationStr);
 		}
 
 		fgl::Number fps = fgl::extract<fgl::Number>(plist, "fps");
 		float fpsValue = fps.toArithmeticValue<float>();
 		if(fpsValue <= 0)
 		{
-			return_error("fps must specified and must be a value greater than 0")
+			return_error("fps must specified and must be a value greater than 0");
 		}
 
 		fgl::ArrayList<fgl::Any> files = fgl::extract<fgl::ArrayList<fgl::Any>>(plist, "files");
-		if(files.size()==0)
-		{
-			return_error("animation must have atleast one frame")
-		}
 
 		fgl::String animDirectory = fgl::FileTools::getDirectoryComponent(path);
 		fgl::Animation* anim = new fgl::Animation(fpsValue);
@@ -356,7 +425,7 @@ namespace fl
 								if(metapoint.tag==cmpMetapoint.tag && metapoint.type==cmpMetapoint.type)
 								{
 									delete anim;
-									return_error((fgl::String)"duplicate metapoint tag "+metapoint.tag+" for type "+metapoint.type+" in metapoint at index "+j+" for frame "+i)
+									return_error((fgl::String)"duplicate metapoint tag "+metapoint.tag+" for type "+metapoint.type+" in metapoint at index "+j+" for frame "+i);
 								}
 							}
 						}
@@ -379,11 +448,151 @@ namespace fl
 			std::function<void()> func = loadingFunctions[i];
 			func();
 		}
+		if(animation!=nullptr)
+		{
+			delete animation;
+			animation = nullptr;
+		}
 		name = animName;
 		animation = anim;
 		orientation = orientationValue;
 		frameDatas = frmDatas;
 		return true;
+	}
+
+	bool AnimationData::saveToFile(const fgl::String& path, fgl::String* error) const
+	{
+		fgl::Dictionary plist;
+
+		//save the main properties
+		plist["name"] = name;
+		fgl::String orientationStr = AnimationOrientation_toString(orientation);
+		if(orientationStr.length()==0)
+		{
+			return_error("invalid orientation value");
+		}
+		plist["orientation"] = orientationStr;
+		plist["fps"] = fgl::Number(animation->getFPS());
+
+		fgl::ArrayList<fgl::Any> files;
+		
+		//save "files"
+		fgl::String lastFile;
+		unsigned int lastRows = 0;
+		unsigned int lastCols = 0;
+		unsigned int imageFrameCount = 0;
+		fgl::ArrayList<fgl::Vector2u> sequence;
+		bool framesNeedSequence = false;
+		bool sequenceFinished = false;
+		for(auto& frame : animation->getFrames())
+		{
+			if(frame.file!=lastFile || frame.rows!=lastRows || frame.cols!=lastCols)
+			{
+				if(lastFile.length()!=0)
+				{
+					//save the file into the files array
+					fgl::ArrayList<fgl::Any> sequenceArr;
+					if(framesNeedSequence || !sequenceFinished)
+					{
+						for(auto& seq : sequence)
+						{
+							fgl::Dictionary seqDict = {{"row",fgl::Number(seq.y)},{"column",fgl::Number(seq.x)}};
+							sequenceArr.add(seqDict);
+						}
+					}
+					fgl::Dictionary file;
+					file["filename"] = lastFile;
+					file["rows"] = fgl::Number(lastRows);
+					file["columns"] = fgl::Number(lastCols);
+					if(framesNeedSequence || !sequenceFinished)
+					{
+						file["sequence"] = sequenceArr;
+					}
+					files.add(file);
+				}
+
+				lastFile = frame.file;
+				lastRows = frame.rows;
+				lastCols = frame.cols;
+				imageFrameCount = 0;
+				sequence = {};
+				framesNeedSequence = false;
+				sequenceFinished = false;
+			}
+			if(sequenceFinished)
+			{
+				//we had more frames than expected, so we need the sequence specified
+				framesNeedSequence = true;
+			}
+			else if(!framesNeedSequence)
+			{
+				//make sure the frame falls in sequence
+				unsigned int seqIndex = (frame.cols*frame.y)+frame.x;
+				if(seqIndex!=imageFrameCount)
+				{
+					//sequence needs to be specified
+					framesNeedSequence = true;
+				}
+				else if(imageFrameCount==((frame.rows*frame.cols)-1))
+				{
+					//sequence should be complete
+					sequenceFinished = true;
+				}
+			}
+			sequence.add(fgl::Vector2u(frame.x, frame.y));
+			imageFrameCount++;
+		}
+		//add the current file to the files array
+		if(lastFile.length()!=0)
+		{
+			//save the file into the files array
+			fgl::ArrayList<fgl::Any> sequenceArr;
+			if(framesNeedSequence || !sequenceFinished)
+			{
+				for(auto& seq : sequence)
+				{
+					fgl::Dictionary seqDict ={{"row",fgl::Number(seq.y)},{"column",fgl::Number(seq.x)}};
+					sequenceArr.add(seqDict);
+				}
+			}
+			fgl::Dictionary file;
+			file["filename"] = lastFile;
+			file["rows"] = fgl::Number(lastRows);
+			file["columns"] = fgl::Number(lastCols);
+			if(framesNeedSequence || !sequenceFinished)
+			{
+				file["sequence"] = sequenceArr;
+			}
+			files.add(file);
+		}
+		plist["files"] = files;
+
+		fgl::ArrayList<fgl::Any> frameDatasArray;
+		size_t framedataIndex = 0;
+		for(auto& framedata : frameDatas)
+		{
+			fgl::Dictionary frameDataDict;
+			fgl::ArrayList<fgl::Any> metaPointsArray;
+			size_t metapointIndex = 0;
+			for(auto& metapoint : framedata.metapoints)
+			{
+				fgl::Dictionary metapointDict;
+				fgl::String metapointError;
+				if(!metapoint.saveToDictionary(&metapointDict, &metapointError))
+				{
+					return_error((fgl::String)"unable to save metapoint at index "+metapointIndex+" for frame at index "+framedataIndex+": "+metapointError);
+				}
+				metaPointsArray.add(metapointDict);
+				metapointIndex++;
+			}
+			frameDataDict["metapoints"] = metaPointsArray;
+			frameDatasArray.add(frameDataDict);
+
+			framedataIndex++;
+		}
+		plist["framedata"] = frameDatasArray;
+		
+		return fgl::Plist::saveToFile(plist, path, error);
 	}
 
 	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation, bool showFrames) const
@@ -437,14 +646,29 @@ namespace fl
 		return name;
 	}
 
+	void AnimationData::setName(const fgl::String& name_arg)
+	{
+		name = name_arg;
+	}
+
 	fgl::Animation* AnimationData::getAnimation() const
 	{
 		return animation;
 	}
 
+	void AnimationData::setAnimation(fgl::Animation* animation_arg)
+	{
+		animation = animation_arg;
+	}
+
 	AnimationOrientation AnimationData::getOrientation() const
 	{
 		return orientation;
+	}
+
+	void AnimationData::setOrientation(AnimationOrientation orientation_arg)
+	{
+		orientation = orientation_arg;
 	}
 
 	fgl::Vector2d AnimationData::getSize(size_t frameIndex, double scale) const
