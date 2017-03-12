@@ -597,7 +597,7 @@ namespace fl
 
 	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation, bool showFrames) const
 	{
-		if(animation!=nullptr)
+		if(animation!=nullptr && animation->getTotalFrames() > 0)
 		{
 			if(isMirrored(drawnOrientation))
 			{
@@ -619,25 +619,28 @@ namespace fl
 	
 	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation) const
 	{
-		graphics.translate(dstRect.x, dstRect.y);
-		
-		fgl::RectangleD animFrame = animation->getRect(frameIndex);
-		graphics.scale(dstRect.width/animFrame.width, dstRect.height/animFrame.height);
-		
-		if(frameIndex < frameDatas.size())
+		if(animation!=nullptr && animation->getTotalFrames() > 0)
 		{
-			const FrameData& frameData = frameDatas[frameIndex];
-			for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+			graphics.translate(dstRect.x, dstRect.y);
+
+			fgl::RectangleD animFrame = animation->getRect(frameIndex);
+			graphics.scale(dstRect.width/animFrame.width, dstRect.height/animFrame.height);
+
+			if(frameIndex < frameDatas.size())
 			{
-				frameData.metapoints[i].draw(graphics);
+				const FrameData& frameData = frameDatas[frameIndex];
+				for(size_t metapoints_size=frameData.metapoints.size(), i=0; i<metapoints_size; i++)
+				{
+					frameData.metapoints[i].draw(graphics);
+				}
 			}
-		}
-		
-		fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
-		graphics.setColor(fgl::Color::SKYBLUE);
-		for(size_t i=0; i<bounds.size(); i++)
-		{
-			graphics.drawRect(bounds[i].rect);
+
+			fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
+			graphics.setColor(fgl::Color::SKYBLUE);
+			for(size_t i=0; i<bounds.size(); i++)
+			{
+				graphics.drawRect(bounds[i].rect);
+			}
 		}
 	}
 
