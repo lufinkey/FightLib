@@ -673,11 +673,23 @@ namespace fl
 				}
 			}
 			
-			fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
-			graphics.setColor(fgl::Color::SKYBLUE);
-			for(size_t i=0; i<bounds.size(); i++)
+			if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT || metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
 			{
-				graphics.drawRect(bounds[i].rect);
+				fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
+				graphics.setColor(fgl::Color::SKYBLUE);
+				for(auto& metaBounds : bounds)
+				{
+					if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT)
+					{
+						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y, metaBounds.rect.width, 1.0);
+						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y, 1.0, metaBounds.rect.height);
+					}
+					else if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
+					{
+						graphics.fillRect(metaBounds.rect.x+metaBounds.rect.width-1.0, metaBounds.rect.y, 1.0, metaBounds.rect.height);
+						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y+metaBounds.rect.height-1.0, metaBounds.rect.width, 1.0);
+					}
+				}
 			}
 		}
 	}
