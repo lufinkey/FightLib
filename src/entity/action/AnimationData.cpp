@@ -40,6 +40,14 @@ namespace fl
 		}
 		return "";
 	}
+	
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HITBOX;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HEAD;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_LEFTHAND;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_RIGHTHAND;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT;
+	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HANDLE;
 
 	AnimationMetaPoint::AnimationMetaPoint() :
 		tag(-1),
