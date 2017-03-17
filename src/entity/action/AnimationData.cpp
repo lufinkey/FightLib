@@ -289,15 +289,15 @@ namespace fl
 		switch(orientation)
 		{
 			case ANIMATIONORIENTATION_NEUTRAL:
-			graphics.drawLine(frame.x+(frame.width/2), frame.y, frame.x+(frame.width/2), frame.y+frame.height);
+			graphics.fillRect(frame.x+(frame.width/2)-1, frame.y, 2, frame.height);
 			break;
 
 			case ANIMATIONORIENTATION_LEFT:
-			graphics.drawLine(frame.x, frame.y, frame.x, frame.y+frame.height);
+			graphics.fillRect(frame.x, frame.y, 1, frame.height);
 			break;
 
 			case ANIMATIONORIENTATION_RIGHT:
-			graphics.drawLine(frame.x+frame.width, frame.y, frame.x+frame.width, frame.y+frame.height);
+			graphics.fillRect(frame.x+frame.width-1, frame.y, 1, frame.height);
 			break;
 		}
 	}
