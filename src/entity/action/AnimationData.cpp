@@ -284,6 +284,7 @@ namespace fl
 		}
 		fgl::RectangleD frame = getRect();
 		graphics.drawRect(frame);
+		graphics.fillRect(x-0.5, y-0.5, 1.0, 1.0);
 
 		graphics.setColor(graphics.getColor().negative());
 		switch(orientation)
