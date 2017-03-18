@@ -74,9 +74,11 @@ namespace fl
 
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex) const;
 		fgl::ArrayList<AnimationMetaPoint> getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const;
-		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
-		
+		const AnimationMetaPoint& getMetaPoint(size_t frameIndex, size_t metaPointIndex) const;
 		void setMetaPoints(size_t frameIndex, const fgl::ArrayList<AnimationMetaPoint>& metaPoints);
+		void setMetaPoint(size_t frameIndex, size_t metaPointIndex, const AnimationMetaPoint& metaPoint);
+
+		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 		
 		bool isMirrored(AnimationOrientation drawnOrientation) const;
 

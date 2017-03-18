@@ -771,6 +771,16 @@ namespace fl
 		return metaPoints;
 	}
 
+	const AnimationMetaPoint& AnimationData::getMetaPoint(size_t frameIndex, size_t metaPointIndex) const
+	{
+		return frameDatas[frameIndex].metapoints[metaPointIndex];
+	}
+
+	void AnimationData::setMetaPoint(size_t frameIndex, size_t metaPointIndex, const AnimationMetaPoint& metaPoint)
+	{
+		frameDatas[frameIndex].metapoints[metaPointIndex] = metaPoint;
+	}
+
 	fgl::ArrayList<AnimationData::MetaBounds> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
 	{
 		if(frameIndex >= frameDatas.size())
