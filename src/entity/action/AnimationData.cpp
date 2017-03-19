@@ -725,14 +725,13 @@ namespace fl
 		orientation = orientation_arg;
 	}
 
-	fgl::Vector2d AnimationData::getSize(size_t frameIndex, double scale) const
+	fgl::Vector2u AnimationData::getSize(size_t frameIndex) const
 	{
 		if(animation==nullptr)
 		{
-			return fgl::Vector2d(0, 0);
+			return fgl::Vector2u(0, 0);
 		}
-		fgl::RectangleD animRect = animation->getRect(frameIndex);
-		return fgl::Vector2d(animRect.width*scale, animRect.height*scale);
+		return animation->getFrameSize(frameIndex);
 	}
 
 	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex) const
@@ -802,7 +801,7 @@ namespace fl
 				bottomRights.add(frame.metapoints[i]);
 			}
 		}
-		fgl::Vector2d size = getSize(frameIndex, 1.0);
+		fgl::Vector2u size = getSize(frameIndex);
 		fgl::ArrayList<MetaBounds> bounds;
 		while(topLefts.size()>0)
 		{
@@ -815,7 +814,7 @@ namespace fl
 					fgl::RectangleD rect = fgl::RectangleD((double)topLeft.x, (double)topLeft.y, (double)(bottomRight.x-topLeft.x), (double)(bottomRight.y - topLeft.y));
 					if(mirrored)
 					{
-						rect.x = size.x - (rect.x + rect.width);
+						rect.x = (double)size.x - (rect.x + rect.width);
 					}
 					MetaBounds metaBounds = { .tag=topLeft.tag, .rect=rect };
 					bounds.add(metaBounds);

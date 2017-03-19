@@ -165,7 +165,7 @@ namespace fl
 		{
 			return fgl::Vector2d(0, 0);
 		}
-		return animData->getSize(currentAnimationFrame, scale);
+		return ((fgl::Vector2d)animData->getSize(currentAnimationFrame)) * (double)scale;
 	}
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const

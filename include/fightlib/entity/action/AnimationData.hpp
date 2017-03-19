@@ -66,7 +66,7 @@ namespace fl
 		const fgl::String& getName() const;
 		fgl::Animation* getAnimation() const;
 		AnimationOrientation getOrientation() const;
-		fgl::Vector2d getSize(size_t frameIndex, double scale) const;
+		fgl::Vector2u getSize(size_t frameIndex) const;
 
 		void setName(const fgl::String& name);
 		void setAnimation(fgl::Animation* animation);
