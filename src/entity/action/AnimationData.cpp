@@ -62,6 +62,22 @@ namespace fl
 	{
 		//
 	}
+	
+	bool AnimationMetaPoint::operator==(const fl::AnimationMetaPoint& metaPoint) const
+	{
+		if(tag==metaPoint.tag && x==metaPoint.x && y==metaPoint.y && radius==metaPoint.radius
+		   && rotation==metaPoint.rotation && type==metaPoint.type && orientation==metaPoint.orientation
+		   && behind==metaPoint.behind && visible==metaPoint.visible)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	bool AnimationMetaPoint::operator!=(const fl::AnimationMetaPoint& metaPoint) const
+	{
+		return !operator==(metaPoint);
+	}
 
 	bool AnimationMetaPointType_fromString(const fgl::String& string, AnimationMetaPoint::Type* type)
 	{
@@ -308,9 +324,29 @@ namespace fl
 		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
 	}
 
-	AnimationData::AnimationData() : animation(new fgl::Animation(1.0)), orientation(ANIMATIONORIENTATION_NEUTRAL)
+	AnimationData::AnimationData()
+		: animation(new fgl::Animation(1.0)),
+		orientation(ANIMATIONORIENTATION_NEUTRAL)
 	{
 		//
+	}
+	
+	AnimationData::AnimationData(const AnimationData& animationData)
+		: name(animationData.name),
+		animation(new fgl::Animation(*animationData.animation)),
+		orientation(animationData.orientation),
+		frameDatas(animationData.frameDatas)
+	{
+		//
+	}
+	
+	AnimationData::AnimationData(AnimationData&& animationData)
+		: name(animationData.name),
+		animation(animationData.animation),
+		orientation(animationData.orientation),
+		frameDatas(animationData.frameDatas)
+	{
+		animationData.animation = nullptr;
 	}
 
 	AnimationData::~AnimationData()
@@ -319,6 +355,99 @@ namespace fl
 		{
 			delete animation;
 		}
+	}
+	
+	AnimationData& AnimationData::operator=(const fl::AnimationData& animationData)
+	{
+		name = animationData.name;
+		if(animation!=nullptr)
+		{
+			delete animation;
+			animation = nullptr;
+		}
+		if(animationData.animation!=nullptr)
+		{
+			animation = new fgl::Animation(*animationData.animation);
+		}
+		orientation = animationData.orientation;
+		frameDatas = animationData.frameDatas;
+		return *this;
+	}
+	
+	AnimationData& AnimationData::operator=(fl::AnimationData&& animationData)
+	{
+		name = animationData.name;
+		if(animation!=nullptr)
+		{
+			delete animation;
+			animation = nullptr;
+		}
+		if(animationData.animation!=nullptr)
+		{
+			animation = animationData.animation;
+			animationData.animation = nullptr;
+		}
+		orientation = animationData.orientation;
+		frameDatas = animationData.frameDatas;
+		return *this;
+	}
+	
+	bool AnimationData::operator==(const fl::AnimationData& animationData) const
+	{
+		if(animation!=nullptr)
+		{
+			if(animationData.animation!=nullptr)
+			{
+				if(*animation != *animationData.animation)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(animationData.animation!=nullptr)
+		{
+			return false;
+		}
+		
+		if(name!=animationData.name || orientation!=animationData.orientation)
+		{
+			return false;
+		}
+		
+		if(frameDatas.size() != animationData.frameDatas.size())
+		{
+			return false;
+		}
+		
+		for(size_t i=0; i<frameDatas.size(); i++)
+		{
+			auto& frameData = frameDatas[i];
+			auto& cmpFrameData = animationData.frameDatas[i];
+			if(frameData.metapoints.size() != cmpFrameData.metapoints.size())
+			{
+				return false;
+			}
+			for(size_t j=0; j<frameData.metapoints.size(); j++)
+			{
+				auto& metaPoint = frameData.metapoints[j];
+				auto& cmpMetaPoint = cmpFrameData.metapoints[j];
+				if(metaPoint != cmpMetaPoint)
+				{
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	bool AnimationData::operator!=(const fl::AnimationData& animationData) const
+	{
+		return !operator==(animationData);
 	}
 
 	bool AnimationData::loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error)

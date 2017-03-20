@@ -16,6 +16,9 @@ namespace fl
 	{
 	public:
 		AnimationMetaPoint();
+		
+		bool operator==(const AnimationMetaPoint&) const;
+		bool operator!=(const AnimationMetaPoint&) const;
 
 		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
 		bool saveToDictionary(fgl::Dictionary* dictionary, fgl::String* error) const;
@@ -54,7 +57,15 @@ namespace fl
 		};
 
 		AnimationData();
+		AnimationData(const AnimationData&);
+		AnimationData(AnimationData&&);
 		~AnimationData();
+		
+		AnimationData& operator=(const AnimationData&);
+		AnimationData& operator=(AnimationData&&);
+		
+		bool operator==(const AnimationData&) const;
+		bool operator!=(const AnimationData&) const;
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
 		bool saveToFile(const fgl::String& path, fgl::String* error=nullptr) const;
