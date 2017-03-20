@@ -344,7 +344,11 @@ namespace fl
 		}
 		else
 		{
-			fullPath = fgl::FileTools::getFullPath(path);
+			fullPath = fgl::FileTools::getAbsolutePath(path);
+			if(fullPath.length()==0)
+			{
+				return_error("unable to resolve animation path")
+			}
 		}
 
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
@@ -374,6 +378,10 @@ namespace fl
 		fgl::ArrayList<fgl::Any> files = fgl::extract<fgl::ArrayList<fgl::Any>>(plist, "files");
 
 		fgl::String animDirectory = fgl::FileTools::getDirectoryComponent(fullPath);
+		if(animDirectory.length()==0)
+		{
+			return_error("unable to resolve animation directory")
+		}
 		fgl::Animation* anim = new fgl::Animation(fpsValue);
 
 		//use list of functions so that files aren't loaded into the asset manager before the loading potentially fails
@@ -388,7 +396,15 @@ namespace fl
 				delete anim;
 				return_error((fgl::String)"file at index "+i+" has is missing \"filename\" field");
 			}
-			fgl::String filePath = fgl::FileTools::combinePathStrings(animDirectory, fileName);
+			fgl::String filePath;
+			if(fgl::FileTools::isPathAbsolute(fileName))
+			{
+				filePath = fileName;
+			}
+			else
+			{
+				filePath = fgl::FileTools::combinePathStrings(animDirectory, fileName);
+			}
 			unsigned int rows = fgl::extract<fgl::Number>(file, "rows", 1).toArithmeticValue<unsigned int>();
 			unsigned int cols = fgl::extract<fgl::Number>(file, "columns", 1).toArithmeticValue<unsigned int>();
 			if(file.has("sequence"))
@@ -492,6 +508,8 @@ namespace fl
 		}
 		plist["orientation"] = orientationStr;
 		plist["fps"] = fgl::Number(animation->getFPS());
+		
+		fgl::String animDirectory = fgl::FileTools::getDirectoryComponent(path);
 
 		fgl::ArrayList<fgl::Any> files;
 		
@@ -520,7 +538,12 @@ namespace fl
 						}
 					}
 					fgl::Dictionary file;
-					file["filename"] = lastFile;
+					fgl::String relativePath = fgl::FileTools::getRelativePath(animDirectory, lastFile);
+					if(relativePath.length()==0)
+					{
+						return_error("unable to resolve image path "+lastFile);
+					}
+					file["filename"] = relativePath;
 					file["rows"] = fgl::Number(lastRows);
 					file["columns"] = fgl::Number(lastCols);
 					if(framesNeedSequence || !sequenceFinished)
@@ -575,7 +598,12 @@ namespace fl
 				}
 			}
 			fgl::Dictionary file;
-			file["filename"] = lastFile;
+			fgl::String relativePath = fgl::FileTools::getRelativePath(animDirectory, lastFile);
+			if(relativePath.length()==0)
+			{
+				return_error("unable to resolve image path "+lastFile);
+			}
+			file["filename"] = relativePath;
 			file["rows"] = fgl::Number(lastRows);
 			file["columns"] = fgl::Number(lastCols);
 			if(framesNeedSequence || !sequenceFinished)
