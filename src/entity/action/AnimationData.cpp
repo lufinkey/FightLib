@@ -337,6 +337,16 @@ namespace fl
 		}
 		fclose(plistFile);
 
+		fgl::String fullPath;
+		if(fgl::FileTools::isPathAbsolute(path))
+		{
+			fullPath = path;
+		}
+		else
+		{
+			fullPath = fgl::FileTools::getFullPath(path);
+		}
+
 		fgl::String animName = fgl::extract<fgl::String>(plist, "name");
 		if(animName.length()==0)
 		{
@@ -363,7 +373,7 @@ namespace fl
 
 		fgl::ArrayList<fgl::Any> files = fgl::extract<fgl::ArrayList<fgl::Any>>(plist, "files");
 
-		fgl::String animDirectory = fgl::FileTools::getDirectoryComponent(path);
+		fgl::String animDirectory = fgl::FileTools::getDirectoryComponent(fullPath);
 		fgl::Animation* anim = new fgl::Animation(fpsValue);
 
 		//use list of functions so that files aren't loaded into the asset manager before the loading potentially fails
