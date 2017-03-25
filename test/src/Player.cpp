@@ -30,10 +30,10 @@ void Player::update(fgl::ApplicationData appData)
 	setDirection(direction);
 
 	fgl::Vector2d velocity = getVelocity();
-	velocity.y += (100*appData.getFrameSpeedMultiplier());
+	velocity.y += (1800*appData.getFrameSpeedMultiplier());
 	if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::UPARROW) && !fgl::Keyboard::wasKeyPressed(fgl::Keyboard::UPARROW))
 	{
-		velocity.y = -100;
+		velocity.y = -600;
 	}
 	setVelocity(velocity);
 
