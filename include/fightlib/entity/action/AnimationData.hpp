@@ -89,6 +89,7 @@ namespace fl
 		void setMetaPoints(size_t frameIndex, const fgl::ArrayList<AnimationMetaPoint>& metaPoints);
 		void setMetaPoint(size_t frameIndex, size_t metaPointIndex, const AnimationMetaPoint& metaPoint);
 		size_t addMetaPoint(size_t frameIndex, const AnimationMetaPoint& metaPoint);
+		void removeMetaPoint(size_t frameIndex, size_t metaPointIndex);
 
 		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 		

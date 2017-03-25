@@ -958,6 +958,11 @@ namespace fl
 		return metaPointIndex;
 	}
 
+	void AnimationData::removeMetaPoint(size_t frameIndex, size_t metaPointIndex)
+	{
+		frameDatas[frameIndex].metapoints.remove(metaPointIndex);
+	}
+
 	fgl::ArrayList<AnimationData::MetaBounds> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
 	{
 		if(frameIndex >= frameDatas.size())
