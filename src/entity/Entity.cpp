@@ -346,6 +346,10 @@ namespace fl
 					{
 						tag = (fgl::String)"bounds:"+metaBounds.tag;
 					}
+					else
+					{
+						tag = (fgl::String)"bounds:index"+i;
+					}
 					if(rotation!=0.0)
 					{
 						collisionRects.add(new BoxCollisionRect(tag, bounds, velocity, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
