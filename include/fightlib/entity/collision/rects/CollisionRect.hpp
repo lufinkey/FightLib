@@ -12,6 +12,7 @@ namespace fl
 		virtual ~CollisionRect();
 
 		const fgl::String& getTag() const;
+		fgl::Vector2d getCenter() const;
 		virtual fgl::RectangleD getRect() const = 0;
 		virtual bool isFilled() const = 0;
 		virtual fgl::PixelIterator createPixelIterator(const fgl::RectangleD& loopRect, const fgl::Vector2d& increment) const = 0;

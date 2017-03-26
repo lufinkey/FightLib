@@ -19,6 +19,11 @@ namespace fl
 		return tag;
 	}
 
+	fgl::Vector2d CollisionRect::getCenter() const
+	{
+		return getRect().getCenter();
+	}
+
 	fgl::Vector2d CollisionRect::checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
 		fgl::RectangleD rect1 = collisionRect1->getRect();
