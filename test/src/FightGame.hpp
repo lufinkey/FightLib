@@ -14,6 +14,7 @@ private:
 	fl::AnimationAssetManager* animationAssetManager;
 
 	fl::Character* character;
+	fl::Entity* sword;
 
 	fl::Entity* block1;
 	fl::Entity* block2;

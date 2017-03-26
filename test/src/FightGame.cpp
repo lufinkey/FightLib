@@ -8,6 +8,13 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 
 	character = new Player(animationAssetManager, fgl::Vector2d(300, 200), fl::Entity::ORIENTATION_LEFT);
 
+	sword = new fl::Entity(fgl::Vector2d(0, 0), fl::Entity::ORIENTATION_LEFT);
+	sword->loadAnimation("assets/animations/sword.plist", animationAssetManager);
+	sword->setScale(2.0);
+	sword->changeAnimation("sword");
+	
+	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
+
 	block1 = new fl::Entity(fgl::Vector2d(300, 300), fl::Entity::ORIENTATION_LEFT);
 	block1->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block1->changeAnimation("block");
@@ -42,6 +49,7 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 void FightGame::update(fgl::ApplicationData appData)
 {
 	character->update(appData);
+	sword->update(appData);
 	block1->update(appData);
 	block2->update(appData);
 	block3->update(appData);
