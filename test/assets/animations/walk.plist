@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>name</key>
+		<string>walk</string>
+		<key>orientation</key>
+		<string>LEFT</string>
+		<key>fps</key>
+		<real>8</real>
+		<key>files</key>
+		<array>
+			<dict>
+				<key>filename</key>
+				<string>walk.png</string>
+				<key>rows</key>
+				<integer>4</integer>
+				<key>columns</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>framedata</key>
+		<array>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>20</real>
+						<key>y</key>
+						<real>21</real>
+						<key>radius</key>
+						<real>5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>14.5</real>
+						<key>y</key>
+						<real>26.5</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>-15</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<true />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>24.5</real>
+						<key>y</key>
+						<real>30</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>-50</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>15</real>
+						<key>y</key>
+						<real>16</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>25</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>20</real>
+						<key>y</key>
+						<real>20</real>
+						<key>radius</key>
+						<real>5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>16</real>
+						<key>y</key>
+						<real>28.5</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>-47</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<true />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>21.5</real>
+						<key>y</key>
+						<real>28</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>15</real>
+						<key>y</key>
+						<real>16</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>25</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>20</real>
+						<key>y</key>
+						<real>20</real>
+						<key>radius</key>
+						<real>5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>20.5</real>
+						<key>y</key>
+						<real>30.5</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>-90</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<true />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>17.5</real>
+						<key>y</key>
+						<real>27</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>35</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>15</real>
+						<key>y</key>
+						<real>16</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>25</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>20</real>
+						<key>y</key>
+						<real>20</real>
+						<key>radius</key>
+						<real>5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>16</real>
+						<key>y</key>
+						<real>28.5</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>rotation</key>
+						<real>-47</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<true />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>21.5</real>
+						<key>y</key>
+						<real>28</real>
+						<key>radius</key>
+						<real>2.5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>15</real>
+						<key>y</key>
+						<real>16</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>25</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</plist>
