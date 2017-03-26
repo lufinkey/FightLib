@@ -283,7 +283,7 @@ namespace fl
 			break;
 
 			case POINTTYPE_RIGHTHAND:
-			graphics.setColor(fgl::Color::PURPLE);
+			graphics.setColor(fgl::Color::VIOLET);
 			break;
 
 			case POINTTYPE_BOUNDS_TOPLEFT:
@@ -291,7 +291,7 @@ namespace fl
 			break;
 
 			case POINTTYPE_BOUNDS_BOTTOMRIGHT:
-			graphics.setColor(fgl::Color::AZURE);
+			graphics.setColor(fgl::Color::SKYBLUE);
 			break;
 
 			case POINTTYPE_HANDLE:
