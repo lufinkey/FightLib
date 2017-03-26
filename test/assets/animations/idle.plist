@@ -7,14 +7,14 @@
 		<key>orientation</key>
 		<string>LEFT</string>
 		<key>fps</key>
-		<real>3</real>
+		<real>8</real>
 		<key>files</key>
 		<array>
 			<dict>
 				<key>filename</key>
 				<string>idle.png</string>
 				<key>rows</key>
-				<integer>9</integer>
+				<integer>8</integer>
 				<key>columns</key>
 				<integer>1</integer>
 			</dict>
@@ -173,7 +173,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>27.5</real>
+						<real>28</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -254,7 +254,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>27.5</real>
+						<real>28</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -335,7 +335,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>27.5</real>
+						<real>28</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -660,87 +660,6 @@
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
 						<real>25</real>
-						<key>y</key>
-						<real>38</real>
-						<key>visible</key>
-						<true />
-						<key>behind</key>
-						<false />
-					</dict>
-				</array>
-			</dict>
-			<dict>
-				<key>metapoints</key>
-				<array>
-					<dict>
-						<key>type</key>
-						<string>HEAD</string>
-						<key>orientation</key>
-						<string>LEFT</string>
-						<key>x</key>
-						<real>21</real>
-						<key>y</key>
-						<real>20</real>
-						<key>radius</key>
-						<real>5</real>
-						<key>visible</key>
-						<true />
-						<key>behind</key>
-						<false />
-					</dict>
-					<dict>
-						<key>type</key>
-						<string>RIGHT_HAND</string>
-						<key>orientation</key>
-						<string>LEFT</string>
-						<key>x</key>
-						<real>13</real>
-						<key>y</key>
-						<real>29</real>
-						<key>radius</key>
-						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
-						<key>visible</key>
-						<true />
-						<key>behind</key>
-						<false />
-					</dict>
-					<dict>
-						<key>type</key>
-						<string>LEFT_HAND</string>
-						<key>orientation</key>
-						<string>LEFT</string>
-						<key>x</key>
-						<real>28</real>
-						<key>y</key>
-						<real>30</real>
-						<key>radius</key>
-						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
-						<key>visible</key>
-						<true />
-						<key>behind</key>
-						<false />
-					</dict>
-					<dict>
-						<key>type</key>
-						<string>BOUNDS_TOPLEFT</string>
-						<key>x</key>
-						<real>16</real>
-						<key>y</key>
-						<real>16</real>
-						<key>visible</key>
-						<true />
-						<key>behind</key>
-						<false />
-					</dict>
-					<dict>
-						<key>type</key>
-						<string>BOUNDS_BOTTOMRIGHT</string>
-						<key>x</key>
-						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
