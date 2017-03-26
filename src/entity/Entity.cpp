@@ -335,7 +335,7 @@ namespace fl
 				});
 				if(matchingRectIndex!=-1)
 				{
-					diff = rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
+					diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
 				}
 				if(rotation!=0.0)
 				{
@@ -387,7 +387,7 @@ namespace fl
 					});
 					if(matchingRectIndex!=-1)
 					{
-						diff = rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
+						diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
 					}
 					if(rotation!=0.0)
 					{
@@ -427,7 +427,7 @@ namespace fl
 				});
 				if(matchingRectIndex!=-1)
 				{
-					diff = rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
+					diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
 				}
 				if(rotation!=0.0)
 				{
