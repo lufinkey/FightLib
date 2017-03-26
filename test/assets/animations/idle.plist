@@ -51,8 +51,6 @@
 						<real>29</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -69,8 +67,6 @@
 						<real>30</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -132,8 +128,6 @@
 						<real>28</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-21</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -151,7 +145,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>1</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -214,7 +208,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-21</real>
+						<real>4</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -232,7 +226,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>2</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -294,8 +288,6 @@
 						<real>28</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-21</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -313,7 +305,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>1</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -375,8 +367,6 @@
 						<real>29</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -393,8 +383,6 @@
 						<real>30</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -456,8 +444,6 @@
 						<real>30</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -475,7 +461,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>-2</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -538,7 +524,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>-4</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -556,7 +542,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>-4</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -618,8 +604,6 @@
 						<real>30</real>
 						<key>radius</key>
 						<real>3</real>
-						<key>rotation</key>
-						<real>-45</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -637,7 +621,7 @@
 						<key>radius</key>
 						<real>3</real>
 						<key>rotation</key>
-						<real>-45</real>
+						<real>-2</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
