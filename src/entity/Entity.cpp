@@ -297,6 +297,8 @@ namespace fl
 
 	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects() const
 	{
+		//TODO compare the collision rect against the last collision rect to get a more accurate velocity
+		//TODO also make the velocity that's given be modified by the last frame speed multiplier
 		switch(collisionMethod)
 		{
 			case COLLISIONMETHOD_NONE:
