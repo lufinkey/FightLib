@@ -155,7 +155,7 @@
 						<key>type</key>
 						<string>BOUNDS_TOPLEFT</string>
 						<key>x</key>
-						<real>18</real>
+						<real>16</real>
 						<key>y</key>
 						<real>16</real>
 						<key>visible</key>
@@ -167,7 +167,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>28</real>
+						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -236,9 +236,9 @@
 						<key>type</key>
 						<string>BOUNDS_TOPLEFT</string>
 						<key>x</key>
-						<real>18</real>
+						<real>16</real>
 						<key>y</key>
-						<real>17</real>
+						<real>16</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -248,7 +248,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>28</real>
+						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -315,7 +315,7 @@
 						<key>type</key>
 						<string>BOUNDS_TOPLEFT</string>
 						<key>x</key>
-						<real>18</real>
+						<real>16</real>
 						<key>y</key>
 						<real>16</real>
 						<key>visible</key>
@@ -327,7 +327,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>28</real>
+						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -471,7 +471,7 @@
 						<key>type</key>
 						<string>BOUNDS_TOPLEFT</string>
 						<key>x</key>
-						<real>15</real>
+						<real>16</real>
 						<key>y</key>
 						<real>16</real>
 						<key>visible</key>
@@ -483,7 +483,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>25</real>
+						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
@@ -554,7 +554,7 @@
 						<key>x</key>
 						<real>16</real>
 						<key>y</key>
-						<real>17</real>
+						<real>16</real>
 						<key>visible</key>
 						<true />
 						<key>behind</key>
@@ -631,7 +631,7 @@
 						<key>type</key>
 						<string>BOUNDS_TOPLEFT</string>
 						<key>x</key>
-						<real>15</real>
+						<real>16</real>
 						<key>y</key>
 						<real>16</real>
 						<key>visible</key>
@@ -643,7 +643,7 @@
 						<key>type</key>
 						<string>BOUNDS_BOTTOMRIGHT</string>
 						<key>x</key>
-						<real>25</real>
+						<real>26</real>
 						<key>y</key>
 						<real>38</real>
 						<key>visible</key>
