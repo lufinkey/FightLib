@@ -71,13 +71,13 @@ namespace fl
 				if(rectsIndex1==(size_t)-1)
 				{
 					rectsIndex1 = collisionRects.size();
-					collisionRects.set(entity1, entity1->createCollisionRects());
+					collisionRects.set(entity1, entity1->getCollisionRects());
 				}
 				size_t rectsIndex2 = collisionRects.indexOfKey(entity2);
 				if(rectsIndex2==(size_t)-1)
 				{
 					rectsIndex2 = collisionRects.size();
-					collisionRects.set(entity2, entity2->createCollisionRects());
+					collisionRects.set(entity2, entity2->getCollisionRects());
 				}
 
 				fgl::ArrayList<CollisionRect*>& rects1 = collisionRects.valueAt(rectsIndex1);
@@ -129,17 +129,6 @@ namespace fl
 				{
 					previousCollisions.add(newPair);
 				}
-			}
-		}
-
-		//delete the collision rects
-		auto& contents = collisionRects.getContents();
-		for(auto& pair : contents)
-		{
-			auto& rectList = pair.second;
-			for(auto rect : rectList)
-			{
-				delete rect;
 			}
 		}
 	}

@@ -56,13 +56,13 @@ namespace fl
 		bool isStaticCollisionBody() const;
 		void setStaticCollisionBody(bool staticCollisionBody);
 
+		const fgl::ArrayList<CollisionRect*>& getCollisionRects() const;
+
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;
 		fgl::String getCurrentAnimationName() const;
-
-		virtual fgl::ArrayList<CollisionRect*> createCollisionRects() const;
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
@@ -73,6 +73,8 @@ namespace fl
 		const fgl::Vector2d& getVelocity() const;
 
 		virtual void onCollision(Entity* entity, CollisionSide side);
+
+		virtual fgl::ArrayList<CollisionRect*> createCollisionRects(double framespeedMult, const fgl::ArrayList<CollisionRect*>& previousRects={}) const;
 
 	private:
 		fgl::Vector2d offset;
@@ -91,6 +93,8 @@ namespace fl
 		size_t currentAnimationFrame;
 		long long currentAnimationLastFrameTime;
 		std::function<void(AnimationEventType)> currentAnimationEventHandler;
+
+		fgl::ArrayList<CollisionRect*> collisionRects;
 
 		AnimationData* getAnimationData(const fgl::String& name) const;
 
