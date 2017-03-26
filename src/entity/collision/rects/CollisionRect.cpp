@@ -127,6 +127,7 @@ namespace fl
 				{
 					if(dirY==DIR_NONE)
 					{
+						//TODO have a fallback rather than just returning up
 						return DIR_UP;
 					}
 					else

@@ -80,8 +80,7 @@ namespace fl
 		} while(animationChanged);
 
 		//offset for velocity
-		offset.x += (velocity.x*appData.getFrameSpeedMultiplier());
-		offset.y += (velocity.y*appData.getFrameSpeedMultiplier());
+		offset += (velocity*appData.getFrameSpeedMultiplier());
 	}
 
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
