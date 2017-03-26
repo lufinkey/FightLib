@@ -306,7 +306,7 @@ namespace fl
 		switch(orientation)
 		{
 			case ANIMATIONORIENTATION_NEUTRAL:
-			graphics.fillRect(frame.x+(frame.width/2)-1, frame.y, 2, frame.height);
+			graphics.fillRect(frame.x+(frame.width/2)-0.5, frame.y, 1.0, frame.height);
 			break;
 
 			case ANIMATIONORIENTATION_LEFT:
