@@ -42,7 +42,7 @@ void Player::update(fgl::ApplicationData appData)
 
 fgl::String Player::getIdleAnimationName() const
 {
-	return "punch";
+	return "idle";
 }
 
 void Player::onCollision(fl::Entity* entity, fl::CollisionSide side)
