@@ -18,7 +18,7 @@ namespace fl
 	{
 	public:
 		virtual bool isStaticCollisionBody() const = 0;
-		virtual const fgl::ArrayList<CollisionRect*>& getCollisionRects() const = 0;
+		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;
 
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) = 0;
