@@ -7,12 +7,6 @@
 
 namespace fl
 {
-	typedef enum : fgl::Uint8
-	{
-		ORIENTATION_LEFT,
-		ORIENTATION_RIGHT,
-	} Orientation;
-
 	typedef enum
 	{
 		ANIMATIONEVENT_FRAMECHANGED,
@@ -20,17 +14,17 @@ namespace fl
 		ANIMATIONEVENT_CHANGED
 	} AnimationEventType;
 
-	class Animatable
+	class Sprite
 	{
 	public:
-		Animatable(const fgl::Vector2d& position);
-		virtual ~Animatable();
+		Sprite();
+		virtual ~Sprite();
 
 		virtual void update(const fgl::ApplicationData& appData);
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;
 
 		fgl::Vector2d getSize() const;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const;
+		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const = 0;
 
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
@@ -47,7 +41,7 @@ namespace fl
 	private:
 		AnimationData* getAnimationData(const fgl::String& name) const;
 
-		virtual fgl::Vector2d getDrawPosition() const;
+		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const = 0;
 
 		fgl::ArrayList<AnimationData*> animations;
 

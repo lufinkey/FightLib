@@ -1,9 +1,9 @@
 
-#include <fightlib/entity/draw/Animatable.hpp>
+#include <fightlib/entity/draw/Sprite.hpp>
 
 namespace fl
 {
-	Animatable::Animatable(const fgl::Vector2d& position)
+	Sprite::Sprite()
 		: currentAnimationData(nullptr),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
@@ -13,12 +13,12 @@ namespace fl
 		//
 	}
 
-	Animatable::~Animatable()
+	Sprite::~Sprite()
 	{
 		//
 	}
 
-	void Animatable::update(const fgl::ApplicationData& appData)
+	void Sprite::update(const fgl::ApplicationData& appData)
 	{
 		long long currentTimeMillis = appData.getTime().getMilliseconds();
 
@@ -68,9 +68,18 @@ namespace fl
 		} while(animationChanged);
 	}
 
-	void Animatable::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	void Sprite::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
-		graphics.translate(getDrawPosition());
+		float rotation = 0;
+		auto position = getDrawPosition(&rotation);
+		if(position.x!=0 || position.y!=0)
+		{
+			graphics.translate(position);
+		}
+		if(rotation!=0)
+		{
+			graphics.rotate(rotation);
+		}
 		float scale = getScale();
 		graphics.scale(scale, scale);
 		if(currentAnimationData!=nullptr)
@@ -79,7 +88,7 @@ namespace fl
 		}
 	}
 
-	fgl::Vector2d Animatable::getSize() const
+	fgl::Vector2d Sprite::getSize() const
 	{
 		if(currentAnimationData==nullptr)
 		{
@@ -88,21 +97,7 @@ namespace fl
 		return ((fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame)) * (double)getScale();
 	}
 
-	fgl::Vector2d Animatable::getPosition(float* rotation) const
-	{
-		if(rotation!=nullptr)
-		{
-			rotation = 0;
-		}
-		return fgl::Vector2d(0,0);
-	}
-
-	fgl::Vector2d Animatable::getDrawPosition() const
-	{
-		return fgl::Vector2d(0, 0);
-	}
-
-	bool Animatable::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
+	bool Sprite::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
 	{
 		bool animationSuccess = assetManager->loadAnimationData(path, error);
 		if(animationSuccess)
@@ -113,7 +108,7 @@ namespace fl
 		return false;
 	}
 
-	void Animatable::changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent)
+	void Sprite::changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent)
 	{
 		if(name.length()==0)
 		{
@@ -136,7 +131,7 @@ namespace fl
 		}
 	}
 
-	fgl::Animation* Animatable::getAnimation(const fgl::String& name) const
+	fgl::Animation* Sprite::getAnimation(const fgl::String& name) const
 	{
 		AnimationData* animData = getAnimationData(name);
 		if(animData!=nullptr)
@@ -146,7 +141,7 @@ namespace fl
 		return nullptr;
 	}
 
-	fgl::Animation* Animatable::getCurrentAnimation() const
+	fgl::Animation* Sprite::getCurrentAnimation() const
 	{
 		if(currentAnimationData==nullptr)
 		{
@@ -155,7 +150,7 @@ namespace fl
 		return currentAnimationData->getAnimation();
 	}
 
-	fgl::String Animatable::getCurrentAnimationName() const
+	fgl::String Sprite::getCurrentAnimationName() const
 	{
 		if(currentAnimationData==nullptr)
 		{
@@ -164,22 +159,22 @@ namespace fl
 		return currentAnimationData->getName();
 	}
 
-	AnimationData* Animatable::getCurrentAnimationData() const
+	AnimationData* Sprite::getCurrentAnimationData() const
 	{
 		return currentAnimationData;
 	}
 
-	float Animatable::getScale() const
+	float Sprite::getScale() const
 	{
 		return 1.0f;
 	}
 
-	AnimationOrientation Animatable::getAnimationOrientation() const
+	AnimationOrientation Sprite::getAnimationOrientation() const
 	{
 		return ANIMATIONORIENTATION_NEUTRAL;
 	}
 
-	AnimationData* Animatable::getAnimationData(const fgl::String& name) const
+	AnimationData* Sprite::getAnimationData(const fgl::String& name) const
 	{
 		for(auto animData : animations)
 		{
