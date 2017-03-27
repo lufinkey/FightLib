@@ -46,11 +46,12 @@ namespace fl
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
+		
+		void setVelocity(const fgl::Vector2d& velocity);
+		const fgl::Vector2d& getVelocity() const;
 
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) override;
-		void setVelocity(const fgl::Vector2d& velocity);
-		const fgl::Vector2d& getVelocity() const;
 
 		virtual fgl::ArrayList<CollisionRect*> createCollisionRects(const fgl::ApplicationData& appData, const fgl::ArrayList<CollisionRect*>& previousRects={}) const;
 

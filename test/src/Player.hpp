@@ -11,6 +11,7 @@ public:
 	virtual void update(const fgl::ApplicationData& appData) override;
 
 	virtual fgl::String getIdleAnimationName() const override;
+	virtual fgl::String getMoveAnimationName(double amount) const override;
 
 protected:
 	virtual void onCollision(fl::Collidable* entity, fl::CollisionSide side) override;

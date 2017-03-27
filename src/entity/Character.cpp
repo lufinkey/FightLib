@@ -10,9 +10,12 @@ namespace fl
 
 	void Character::update(const fgl::ApplicationData& appData)
 	{
-		if(getCurrentAction()==nullptr)
+		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag("AllowMovement"))
 		{
 			updateMovement(appData);
+		}
+		if(getCurrentAction()==nullptr)
+		{
 			updateMoveAnimation();
 		}
 		ActionEntity::update(appData);

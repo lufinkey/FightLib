@@ -30,6 +30,7 @@
 		F16F110D1E67231F009A465C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110C1E67231F009A465C /* CoreFoundation.framework */; };
 		F16F110F1E672326009A465C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110E1E672326009A465C /* AppKit.framework */; };
 		F16F11111E67232F009A465C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11101E67232F009A465C /* Foundation.framework */; };
+		F1A7DF671E89854700472DB2 /* JumpAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF651E89854700472DB2 /* JumpAction.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,8 @@
 		F16F11101E67232F009A465C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F16F114A1E6724F9009A465C /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/FightLib-avrgvqsgtiqwqtgjfspxcfhjrkjm/Build/Products/Debug/libGameLibrary.a"; sourceTree = "<group>"; };
 		F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
+		F1A7DF651E89854700472DB2 /* JumpAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpAction.cpp; sourceTree = "<group>"; };
+		F1A7DF661E89854700472DB2 /* JumpAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JumpAction.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,8 @@
 				F15A20E21E54B07F008D83E5 /* main.cpp */,
 				F14464E11E672E050088EAA3 /* Player.cpp */,
 				F14464E21E672E050088EAA3 /* Player.hpp */,
+				F1A7DF651E89854700472DB2 /* JumpAction.cpp */,
+				F1A7DF661E89854700472DB2 /* JumpAction.hpp */,
 			);
 			name = src;
 			path = ../../../test/src;
@@ -240,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F15A20E41E54B07F008D83E5 /* main.cpp in Sources */,
+				F1A7DF671E89854700472DB2 /* JumpAction.cpp in Sources */,
 				F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */,
 				F14464E31E672E050088EAA3 /* Player.cpp in Sources */,
 			);
