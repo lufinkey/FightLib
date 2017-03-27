@@ -74,6 +74,7 @@ namespace fl
 			changeAnimation(animName);
 		}
 	}
+	//TODO I might need update the move animation when an action ends
 
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
 	{
