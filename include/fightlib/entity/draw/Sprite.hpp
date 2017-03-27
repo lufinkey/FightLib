@@ -3,6 +3,7 @@
 
 #include "AnimationData.hpp"
 #include "AnimationAssetManager.hpp"
+#include "Drawable.hpp"
 #include <functional>
 
 namespace fl
@@ -14,14 +15,14 @@ namespace fl
 		ANIMATIONEVENT_CHANGED
 	} AnimationEventType;
 
-	class Sprite
+	class Sprite : public Drawable
 	{
 	public:
 		Sprite();
 		virtual ~Sprite();
 
 		virtual void update(const fgl::ApplicationData& appData);
-		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;
+		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		fgl::Vector2d getSize() const;
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const = 0;
