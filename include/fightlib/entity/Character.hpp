@@ -12,8 +12,8 @@ namespace fl
 
 		virtual void update(const fgl::ApplicationData& appData) override;
 
-		virtual fgl::String getIdleAnimationName() const;
-		virtual fgl::String getMoveAnimationName(double amount) const;
+		virtual fgl::String getIdleAnimationName() const = 0;
+		virtual fgl::String getMoveAnimationName(double amount) const = 0;
 		virtual double getMoveSpeed(double amount) const;
 
 		void setDirection(const fgl::Vector2f& direction);

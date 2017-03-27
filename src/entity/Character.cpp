@@ -21,19 +21,9 @@ namespace fl
 		ActionEntity::update(appData);
 	}
 
-	fgl::String Character::getIdleAnimationName() const
-	{
-		return "";
-	}
-
 	double Character::getMoveSpeed(double amount) const
 	{
 		return 20;
-	}
-
-	fgl::String Character::getMoveAnimationName(double amount) const
-	{
-		return "";
 	}
 
 	void Character::updateMovement(const fgl::ApplicationData& appData)
@@ -71,6 +61,7 @@ namespace fl
 		{
 			animName = getMoveAnimationName(moveAmount);
 		}
+		//TODO maybe throw some sort of exception if either function returns an empty string?
 		if(animName.length() > 0 && animName!=getCurrentAnimationName())
 		{
 			//TODO add frame preservation?
