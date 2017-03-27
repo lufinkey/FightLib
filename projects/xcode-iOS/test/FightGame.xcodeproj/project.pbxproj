@@ -26,6 +26,7 @@
 		F19AB1081E524CBA00855347 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1071E524CBA00855347 /* QuartzCore.framework */; };
 		F19AB10A1E524CC600855347 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1091E524CC600855347 /* MobileCoreServices.framework */; };
 		F19AB10C1E524CCE00855347 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10B1E524CCE00855347 /* CoreMotion.framework */; };
+		F1A7DF721E898AE700472DB2 /* JumpAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF701E898AE700472DB2 /* JumpAction.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		F19AB1091E524CC600855347 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F19AB10B1E524CCE00855347 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		F19AB10D1E524CF200855347 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../external/GameLibrary/projects/xcode-iOS/build/Debug-iphoneos/libGameLibrary.a"; sourceTree = "<group>"; };
+		F1A7DF701E898AE700472DB2 /* JumpAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpAction.cpp; sourceTree = "<group>"; };
+		F1A7DF711E898AE700472DB2 /* JumpAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JumpAction.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				F19AB0EB1E524AF100855347 /* FightGame.cpp */,
 				F17BBC041E64977500A7F8F4 /* FightGame.hpp */,
 				F19AB0ED1E524AF100855347 /* main.cpp */,
+				F1A7DF701E898AE700472DB2 /* JumpAction.cpp */,
+				F1A7DF711E898AE700472DB2 /* JumpAction.hpp */,
 				F14464FB1E6737AB0088EAA3 /* Player.cpp */,
 				F14464FC1E6737AB0088EAA3 /* Player.hpp */,
 			);
@@ -214,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F102E09C1E5252AB002B8FB0 /* main.cpp in Sources */,
+				F1A7DF721E898AE700472DB2 /* JumpAction.cpp in Sources */,
 				F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */,
 				F14464FD1E6737AB0088EAA3 /* Player.cpp in Sources */,
 			);
