@@ -27,7 +27,7 @@ namespace fl
 		Entity::update(appData);
 	}
 	
-	void ActionEntity::onActionEnd(fl::Action* action)
+	void ActionEntity::onActionEnd(Action* action)
 	{
 		//Open for implementation
 	}

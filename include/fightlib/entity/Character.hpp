@@ -21,7 +21,9 @@ namespace fl
 
 	protected:
 		virtual void updateMovement(const fgl::ApplicationData& appData);
-		virtual void updateMoveAnimation(const fgl::ApplicationData& appData);
+		virtual void updateMoveAnimation();
+		
+		virtual void onActionEnd(Action* action) override;
 
 	private:
 		fgl::Vector2f direction;

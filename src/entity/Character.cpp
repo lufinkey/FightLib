@@ -13,7 +13,7 @@ namespace fl
 		if(getCurrentAction()==nullptr)
 		{
 			updateMovement(appData);
-			updateMoveAnimation(appData);
+			updateMoveAnimation();
 		}
 		ActionEntity::update(appData);
 	}
@@ -56,7 +56,7 @@ namespace fl
 		}
 	}
 
-	void Character::updateMoveAnimation(const fgl::ApplicationData& appData)
+	void Character::updateMoveAnimation()
 	{
 		double moveAmount = fgl::Math::abs(getDirection().x);
 		fgl::String animName;
@@ -84,5 +84,13 @@ namespace fl
 	const fgl::Vector2f& Character::getDirection() const
 	{
 		return direction;
+	}
+	
+	void Character::onActionEnd(Action* action)
+	{
+		if(getCurrentAction()==nullptr)
+		{
+			updateMoveAnimation();
+		}
 	}
 }
