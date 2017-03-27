@@ -36,6 +36,8 @@ namespace fl
 	{
 		if(currentAction!=nullptr)
 		{
+			//TODO maybe in the future, send an event telling the current action another action wants to be performed
+			// then, if the current action ends itself, then the next action can be performed.
 			return false;
 		}
 		Action* action = getAction(name);
