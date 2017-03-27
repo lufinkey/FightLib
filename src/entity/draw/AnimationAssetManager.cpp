@@ -1,5 +1,5 @@
 
-#include <fightlib/entity/action/AnimationAssetManager.hpp>
+#include <fightlib/entity/draw/AnimationAssetManager.hpp>
 
 namespace fl
 {

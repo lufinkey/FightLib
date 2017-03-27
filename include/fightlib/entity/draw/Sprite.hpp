@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "../action/AnimationData.hpp"
-#include "../action/AnimationAssetManager.hpp"
+#include "AnimationData.hpp"
+#include "AnimationAssetManager.hpp"
 #include <functional>
 
 namespace fl

@@ -2,8 +2,8 @@
 #pragma once
 
 #include <functional>
-#include "action/AnimationData.hpp"
-#include "action/AnimationAssetManager.hpp"
+#include "draw/AnimationData.hpp"
+#include "draw/AnimationAssetManager.hpp"
 #include "collision/rects/CollisionRect.hpp"
 #include "collision/CollisionManager.hpp"
 

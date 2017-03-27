@@ -21,15 +21,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationAssetManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\draw\Animatable.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationAssetManager.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp" />
@@ -39,15 +40,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
-    <ClCompile Include="..\..\src\entity\action\AnimationData.cpp" />
-    <ClCompile Include="..\..\src\entity\action\AnimationAssetManager.cpp" />
     <ClCompile Include="..\..\src\entity\Character.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />
-    <ClCompile Include="..\..\src\entity\draw\Animatable.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\Sprite.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
   </ItemGroup>

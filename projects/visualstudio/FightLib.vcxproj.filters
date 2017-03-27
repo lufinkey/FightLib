@@ -48,9 +48,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp">
-      <Filter>include\fightlib\entity\action</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
       <Filter>include\fightlib\entity\collision\rects</Filter>
     </ClInclude>
@@ -84,25 +81,28 @@
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp">
       <Filter>include\fightlib\entity\collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\action\AnimationAssetManager.hpp">
-      <Filter>include\fightlib\entity\action</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp">
       <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\draw\Animatable.hpp">
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationAssetManager.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
       <Filter>src\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\action\AnimationData.cpp">
-      <Filter>src\entity\action</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp">
       <Filter>src\entity\collision\rects</Filter>
@@ -122,9 +122,6 @@
     <ClCompile Include="..\..\src\game\Fight.cpp">
       <Filter>src\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\entity\action\AnimationAssetManager.cpp">
-      <Filter>src\entity\action</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\entity\action\Action.cpp">
       <Filter>src\entity\action</Filter>
     </ClCompile>
@@ -134,7 +131,13 @@
     <ClCompile Include="..\..\src\entity\Character.cpp">
       <Filter>src\entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\entity\draw\Animatable.cpp">
+    <ClCompile Include="..\..\src\entity\draw\Sprite.cpp">
+      <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp">
+      <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp">
       <Filter>src\entity\draw</Filter>
     </ClCompile>
   </ItemGroup>
