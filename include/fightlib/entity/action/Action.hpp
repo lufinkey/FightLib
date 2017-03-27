@@ -21,6 +21,7 @@ namespace fl
 
 
 	typedef fgl::Uint32 ActionEventType;
+	ActionEventType registerActionEventType();
 
 	class ActionEvent
 	{

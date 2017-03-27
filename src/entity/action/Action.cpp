@@ -23,6 +23,15 @@ namespace fl
 	{
 		return eventType;
 	}
+	
+	ActionEventType ActionEventType_nextType = 1;
+	
+	ActionEventType registerActionEventType()
+	{
+		ActionEventType eventType = ActionEventType_nextType;
+		ActionEventType_nextType++;
+		return eventType;
+	}
 
 	Action::~Action()
 	{
