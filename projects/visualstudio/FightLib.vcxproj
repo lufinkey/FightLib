@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />

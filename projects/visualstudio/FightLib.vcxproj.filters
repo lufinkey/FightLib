@@ -99,6 +99,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
