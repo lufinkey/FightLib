@@ -159,6 +159,11 @@ namespace fl
 		return currentAnimationData->getName();
 	}
 
+	size_t Sprite::getCurrentAnimationFrameIndex() const
+	{
+		return currentAnimationFrame;
+	}
+
 	AnimationData* Sprite::getCurrentAnimationData() const
 	{
 		return currentAnimationData;

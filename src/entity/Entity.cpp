@@ -7,18 +7,13 @@ namespace fl
 {
 #define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
-	Entity::Entity(const fgl::Vector2d& position, Entity::Orientation orientation)
+	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
 		: offset(position),
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
 		collisionMethod(COLLISIONMETHOD_NONE),
 		staticCollisionBody(false),
-		animationChanged(false),
-		currentAnimationName(),
-		currentAnimationFrame(0),
-		currentAnimationLastFrameTime(0),
-		currentAnimationEventHandler(nullptr),
 		parentEntity(nullptr)
 	{
 		//
@@ -32,68 +27,28 @@ namespace fl
 		}
 	}
 
-	void Entity::update(fgl::ApplicationData appData)
+	void Entity::update(const fgl::ApplicationData& appData)
 	{
-		long long currentTimeMillis = appData.getTime().getMilliseconds();
-
-		//handle animation
-		do
-		{
-			if(animationChanged)
-			{
-				currentAnimationLastFrameTime = currentTimeMillis;
-				animationChanged = false;
-			}
-			AnimationData* animData = getAnimationData(currentAnimationName);
-			if(animData!=nullptr)
-			{
-				fgl::Animation* animation = animData->getAnimation();
-				long double fps = (long double)animation->getFPS();
-				long long frameTime = (long long)(1000.0L/fps);
-				if(frameTime==0)
-				{
-					frameTime = 1;
-				}
-				long long timeDiff = currentTimeMillis - currentAnimationLastFrameTime;
-				if(timeDiff>=frameTime)
-				{
-					currentAnimationFrame++;
-					currentAnimationLastFrameTime = currentTimeMillis;
-					if(currentAnimationFrame>=animation->getTotalFrames())
-					{
-						currentAnimationFrame = 0;
-						if(currentAnimationEventHandler)
-						{
-							currentAnimationEventHandler(ANIMATIONEVENT_FINISHED);
-							if(!animationChanged)
-							{
-								currentAnimationEventHandler(ANIMATIONEVENT_FRAMECHANGED);
-							}
-						}
-					}
-					else
-					{
-						if(currentAnimationEventHandler)
-						{
-							currentAnimationEventHandler(ANIMATIONEVENT_FRAMECHANGED);
-						}
-					}
-				}
-			}
-		} while(animationChanged);
+		Collidable::update(appData);
 
 		//offset for velocity
 		offset += (velocity*appData.getFrameSpeedMultiplier());
 
 		auto previousRects = collisionRects;
-		collisionRects = createCollisionRects(appData.getFrameSpeedMultiplier(), previousRects);
+		collisionRects = createCollisionRects(appData, previousRects);
 		for(auto collisionRect : previousRects)
 		{
 			delete collisionRect;
 		}
 	}
 
-	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
+	fgl::Vector2d Entity::getDrawPosition(float* rotation) const
+	{
+		//TODO find some better way to actually use this when I'm sober
+		return fgl::Vector2d(0, 0);
+	}
+
+	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
 		if(parentEntity==nullptr)
 		{
@@ -146,13 +101,7 @@ namespace fl
 			}
 		}
 
-		fgl::Graphics selfGraphics = graphics;
-		selfGraphics.scale(scale, scale);
-		AnimationData* animData = getAnimationData(currentAnimationName);
-		if(animData!=nullptr)
-		{
-			animData->drawFrame(currentAnimationFrame, selfGraphics, getAnimationOrientation());
-		}
+		Collidable::draw(appData, graphics);
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
 		{
@@ -165,16 +114,6 @@ namespace fl
 			}
 			anchorData.entity->draw(appData, entityGraphics);
 		}
-	}
-
-	fgl::Vector2d Entity::getSize() const
-	{
-		AnimationData* animData = getAnimationData(currentAnimationName);
-		if(animData==nullptr)
-		{
-			return fgl::Vector2d(0, 0);
-		}
-		return ((fgl::Vector2d)animData->getSize(currentAnimationFrame)) * (double)scale;
 	}
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const
@@ -221,22 +160,22 @@ namespace fl
 		scale = scale_arg;
 	}
 
-	Entity::Orientation Entity::getOrientation() const
+	Orientation Entity::getOrientation() const
 	{
 		return orientation;
 	}
 
-	void Entity::setOrientation(Entity::Orientation orientation_arg)
+	void Entity::setOrientation(Orientation orientation_arg)
 	{
 		orientation = orientation_arg;
 	}
 
-	Entity::CollisionMethod Entity::getCollisionMethod() const
+	CollisionMethod Entity::getCollisionMethod() const
 	{
 		return collisionMethod;
 	}
 
-	void Entity::setCollisionMethod(Entity::CollisionMethod collisionMethod_arg)
+	void Entity::setCollisionMethod(CollisionMethod collisionMethod_arg)
 	{
 		collisionMethod = collisionMethod_arg;
 	}
@@ -251,66 +190,12 @@ namespace fl
 		staticCollisionBody = staticCollisionBody_arg;
 	}
 
-	const fgl::ArrayList<CollisionRect*>& Entity::getCollisionRects() const
+	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
 	{
 		return collisionRects;
 	}
 
-	bool Entity::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
-	{
-		bool animationSuccess = assetManager->loadAnimationData(path, error);
-		if(animationSuccess)
-		{
-			animations.add(assetManager->getAnimationData(path));
-			return true;
-		}
-		return false;
-	}
-
-	void Entity::changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent)
-	{
-		if(name.length()==0)
-		{
-			throw fgl::IllegalArgumentException("name", "cannot be an empty string");
-		}
-		AnimationData* animData = getAnimationData(name);
-		if(animData==nullptr)
-		{
-			throw fgl::IllegalArgumentException("name", "no animation exists with the name "+name);
-		}
-		animationChanged = true;
-		std::function<void(AnimationEventType)> prevAnimationEventHandler = currentAnimationEventHandler;
-		currentAnimationName = name;
-		currentAnimationFrame = 0;
-		currentAnimationLastFrameTime = 0;
-		currentAnimationEventHandler = onevent;
-		if(prevAnimationEventHandler)
-		{
-			prevAnimationEventHandler(ANIMATIONEVENT_CHANGED);
-		}
-	}
-
-	fgl::Animation* Entity::getAnimation(const fgl::String& name) const
-	{
-		AnimationData* animData = getAnimationData(name);
-		if(animData!=nullptr)
-		{
-			return animData->getAnimation();
-		}
-		return nullptr;
-	}
-
-	fgl::Animation* Entity::getCurrentAnimation() const
-	{
-		return getAnimation(currentAnimationName);
-	}
-
-	fgl::String Entity::getCurrentAnimationName() const
-	{
-		return currentAnimationName;
-	}
-
-	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects(double framespeedMult, const fgl::ArrayList<CollisionRect*>& previousRects) const
+	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects(const fgl::ApplicationData& appData, const fgl::ArrayList<CollisionRect*>& previousRects) const
 	{
 		//TODO compare the collision rect against the last collision rect to get a more accurate velocity
 		//TODO also make the velocity that's given be modified by the last frame speed multiplier
@@ -325,7 +210,7 @@ namespace fl
 				float rotation = 0;
 				fgl::Vector2d position = getPosition(&rotation);
 				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity*framespeedMult;
+				fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
 				size_t matchingRectIndex = previousRects.indexWhere([](CollisionRect* const & rect) -> bool {
 					if(rect->getTag()=="all")
 					{
@@ -349,12 +234,12 @@ namespace fl
 				fgl::Vector2d size = getSize();
 				float rotation = 0;
 				fgl::Vector2d position = getPosition(&rotation);
-				AnimationData* animData = getAnimationData(currentAnimationName);
+				AnimationData* animData = getCurrentAnimationData();
 				if(animData==nullptr)
 				{
 					return {};
 				}
-				fgl::ArrayList<AnimationData::MetaBounds> boundsList = animData->getBounds(currentAnimationFrame, getAnimationOrientation());
+				fgl::ArrayList<AnimationData::MetaBounds> boundsList = animData->getBounds(getCurrentAnimationFrameIndex(), getAnimationOrientation());
 				if(boundsList.size()==0)
 				{
 					return {};
@@ -377,7 +262,7 @@ namespace fl
 					{
 						tag = (fgl::String)"bounds:index"+i;
 					}
-					fgl::Vector2d diff = velocity*framespeedMult;
+					fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
 					size_t matchingRectIndex = previousRects.indexWhere([&](CollisionRect* const & rect) -> bool {
 						if(rect->getTag()==tag)
 						{
@@ -403,7 +288,7 @@ namespace fl
 				fgl::Vector2d size = getSize();
 				float rotation = 0;
 				fgl::Vector2d position = getPosition(&rotation);
-				AnimationData* animData = getAnimationData(currentAnimationName);
+				AnimationData* animData = getCurrentAnimationData();
 				if(animData==nullptr)
 				{
 					return {};
@@ -413,11 +298,12 @@ namespace fl
 				{
 					return {};
 				}
-				fgl::TextureImage* img = animation->getImage(currentAnimationFrame);
-				fgl::RectangleU srcRect = animation->getImageSourceRect(currentAnimationFrame);
+				size_t frameIndex = getCurrentAnimationFrameIndex();
+				fgl::TextureImage* img = animation->getImage(frameIndex);
+				fgl::RectangleU srcRect = animation->getImageSourceRect(frameIndex);
 				bool mirroredHorizontal = animData->isMirrored(getAnimationOrientation());
 				auto rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity*framespeedMult;
+				fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
 				size_t matchingRectIndex = previousRects.indexWhere([](CollisionRect* const & rect) -> bool {
 					if(rect->getTag()=="all")
 					{
@@ -499,24 +385,6 @@ namespace fl
 		return velocity;
 	}
 
-	void Entity::onCollision(Entity* entity, CollisionSide side)
-	{
-		//
-	}
-
-	AnimationData* Entity::getAnimationData(const fgl::String& name) const
-	{
-		for(size_t animations_size=animations.size(), i=0; i<animations_size; i++)
-		{
-			AnimationData* animData = animations[i];
-			if(animData->getName()==name)
-			{
-				return animData;
-			}
-		}
-		return nullptr;
-	}
-
 	Entity::Anchor Entity::getAnchor(const Entity* entity) const
 	{
 		for(size_t anchoredEntities_size=anchoredEntities.size(), i=0; i<anchoredEntities_size; i++)
@@ -535,8 +403,8 @@ namespace fl
 		if(parentEntity!=nullptr)
 		{
 			Anchor anchor = parentEntity->getAnchor(this);
-			AnimationData* parentAnimData = parentEntity->getAnimationData(parentEntity->currentAnimationName);
-			AnimationData* childAnimData = getAnimationData(currentAnimationName);
+			AnimationData* parentAnimData = parentEntity->getCurrentAnimationData();
+			AnimationData* childAnimData = getCurrentAnimationData();
 			if(parentAnimData==nullptr || childAnimData==nullptr)
 			{
 				setOptionalArg(posOffset, fgl::Vector2d(0,0))
@@ -546,8 +414,10 @@ namespace fl
 				setOptionalArg(visible, false)
 				return false;
 			}
-			fgl::ArrayList<AnimationMetaPoint> parentMetaPoints = parentAnimData->getMetaPoints(parentEntity->currentAnimationFrame, anchor.parentPoint);
-			fgl::ArrayList<AnimationMetaPoint> childMetaPoints = childAnimData->getMetaPoints(currentAnimationFrame, anchor.childPoint);
+			size_t parentFrameIndex = parentEntity->getCurrentAnimationFrameIndex();
+			size_t frameIndex = getCurrentAnimationFrameIndex();
+			fgl::ArrayList<AnimationMetaPoint> parentMetaPoints = parentAnimData->getMetaPoints(parentFrameIndex, anchor.parentPoint);
+			fgl::ArrayList<AnimationMetaPoint> childMetaPoints = childAnimData->getMetaPoints(frameIndex, anchor.childPoint);
 			if(anchor.parentPointIndex >= parentMetaPoints.size() || anchor.childPointIndex >= childMetaPoints.size())
 			{
 				setOptionalArg(posOffset, fgl::Vector2d(0, 0))
@@ -601,11 +471,11 @@ namespace fl
 
 	AnimationOrientation Entity::getAnimationOrientation() const
 	{
-		if(orientation==Entity::ORIENTATION_LEFT)
+		if(orientation==ORIENTATION_LEFT)
 		{
 			return ANIMATIONORIENTATION_LEFT;
 		}
-		else if(orientation==Entity::ORIENTATION_RIGHT)
+		else if(orientation==ORIENTATION_RIGHT)
 		{
 			return ANIMATIONORIENTATION_RIGHT;
 		}

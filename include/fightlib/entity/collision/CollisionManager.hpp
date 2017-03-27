@@ -1,35 +1,25 @@
 
 #pragma once
 
+#include "Collidable.hpp"
 #include "CollisionPair.hpp"
-#include "rects/CollisionRect.hpp"
 
 namespace fl
 {
-	class Entity;
-
-	typedef enum
-	{
-		COLLISIONSIDE_TOP,
-		COLLISIONSIDE_BOTTOM,
-		COLLISIONSIDE_LEFT,
-		COLLISIONSIDE_RIGHT
-	} CollisionSide;
-
 	class CollisionManager
 	{
 	public:
 		CollisionManager();
 
-		void addEntity(Entity* entity);
-		void removeEntity(Entity* entity);
+		void addCollidable(Collidable* entity);
+		void removeCollidable(Collidable* entity);
 
-		void update(fgl::ApplicationData appData);
+		void update(const fgl::ApplicationData& appData);
 
 	private:
 		CollisionSide getCollisionSide(const fgl::Vector2d& shiftAmount) const;
 
-		fgl::ArrayList<Entity*> entities;
+		fgl::ArrayList<Collidable*> collidables;
 		fgl::ArrayList<CollisionPair> previousCollisions;
 
 		fgl::ArrayList<CollisionPair> getCollisionPairs() const;

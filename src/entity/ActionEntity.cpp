@@ -3,7 +3,7 @@
 
 namespace fl
 {
-	ActionEntity::ActionEntity(const fgl::Vector2d& position, Entity::Orientation orientation)
+	ActionEntity::ActionEntity(const fgl::Vector2d& position, Orientation orientation)
 		: Entity(position, orientation),
 		currentAction(nullptr)
 	{
@@ -18,7 +18,7 @@ namespace fl
 		}
 	}
 
-	void ActionEntity::update(fgl::ApplicationData appData)
+	void ActionEntity::update(const fgl::ApplicationData& appData)
 	{
 		if(currentAction!=nullptr)
 		{

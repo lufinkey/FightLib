@@ -1,18 +1,18 @@
 
 #include "Player.hpp"
 
-Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& position, fl::Entity::Orientation orientation)
+Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& position, fl::Orientation orientation)
 	: Character(position, orientation)
 {
 	setScale(3.0);
-	setCollisionMethod(fl::Entity::COLLISIONMETHOD_BOUNDS);
+	setCollisionMethod(fl::COLLISIONMETHOD_BOUNDS);
 
 	loadAnimation("assets/animations/idle.plist", assetManager);
 	loadAnimation("assets/animations/punch.plist", assetManager);
 	changeAnimation("idle");
 }
 
-void Player::update(fgl::ApplicationData appData)
+void Player::update(const fgl::ApplicationData& appData)
 {
 	fgl::Vector2f direction = getDirection();
 	if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::LEFTARROW))
@@ -45,7 +45,7 @@ fgl::String Player::getIdleAnimationName() const
 	return "idle";
 }
 
-void Player::onCollision(fl::Entity* entity, fl::CollisionSide side)
+void Player::onCollision(fl::Collidable* entity, fl::CollisionSide side)
 {
 	if(side==fl::COLLISIONSIDE_TOP)
 	{

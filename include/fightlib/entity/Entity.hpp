@@ -1,102 +1,74 @@
 
 #pragma once
 
-#include <functional>
-#include "draw/AnimationData.hpp"
-#include "draw/AnimationAssetManager.hpp"
-#include "collision/rects/CollisionRect.hpp"
-#include "collision/CollisionManager.hpp"
+#include "collision/Collidable.hpp"
 
 namespace fl
 {
-	typedef enum
+	typedef enum : fgl::Uint8
 	{
-		ANIMATIONEVENT_FRAMECHANGED,
-		ANIMATIONEVENT_FINISHED,
-		ANIMATIONEVENT_CHANGED
-	} AnimationEventType;
+		ORIENTATION_LEFT,
+		ORIENTATION_RIGHT,
+	} Orientation;
 
-	class Entity
+	typedef enum : fgl::Uint8
+	{
+		COLLISIONMETHOD_NONE,
+		COLLISIONMETHOD_FRAME,
+		COLLISIONMETHOD_BOUNDS,
+		COLLISIONMETHOD_PIXEL
+	} CollisionMethod;
+
+	class Entity : public Collidable
 	{
 	public:
-		friend class CollisionManager;
-
-		typedef enum : fgl::Uint8
-		{
-			ORIENTATION_LEFT,
-			ORIENTATION_RIGHT,
-		} Orientation;
-
-		typedef enum : fgl::Uint8
-		{
-			COLLISIONMETHOD_NONE,
-			COLLISIONMETHOD_FRAME,
-			COLLISIONMETHOD_BOUNDS,
-			COLLISIONMETHOD_PIXEL
-		} CollisionMethod;
-
-		Entity(const fgl::Vector2d& position, Entity::Orientation orientation);
+		Entity(const fgl::Vector2d& position, Orientation orientation);
 		virtual ~Entity();
 
-		virtual void update(fgl::ApplicationData appData);
-		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+		virtual void update(const fgl::ApplicationData& appData) override;
+		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
-		fgl::Vector2d getSize() const;
-		fgl::Vector2d getPosition(float* rotation = nullptr) const;
+		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 
-		float getScale() const;
+		virtual float getScale() const override;
 		void setScale(float scale);
 
-		Entity::Orientation getOrientation() const;
-		void setOrientation(Entity::Orientation orientation);
+		Orientation getOrientation() const;
+		void setOrientation(Orientation orientation);
 
-		Entity::CollisionMethod getCollisionMethod() const;
-		void setCollisionMethod(Entity::CollisionMethod method);
+		CollisionMethod getCollisionMethod() const;
+		void setCollisionMethod(CollisionMethod method);
 
-		bool isStaticCollisionBody() const;
+		virtual bool isStaticCollisionBody() const override;
 		void setStaticCollisionBody(bool staticCollisionBody);
 
-		const fgl::ArrayList<CollisionRect*>& getCollisionRects() const;
-
-		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
-		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
-		fgl::Animation* getAnimation(const fgl::String& name) const;
-		fgl::Animation* getCurrentAnimation() const;
-		fgl::String getCurrentAnimationName() const;
+		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
 
 	protected:
-		void shift(const fgl::Vector2d& offset);
+		virtual void shift(const fgl::Vector2d& offset) override;
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;
 
-		virtual void onCollision(Entity* entity, CollisionSide side);
+		virtual fgl::ArrayList<CollisionRect*> createCollisionRects(const fgl::ApplicationData& appData, const fgl::ArrayList<CollisionRect*>& previousRects={}) const;
 
-		virtual fgl::ArrayList<CollisionRect*> createCollisionRects(double framespeedMult, const fgl::ArrayList<CollisionRect*>& previousRects={}) const;
+		virtual AnimationOrientation getAnimationOrientation() const override;
 
 	private:
+		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
+
 		fgl::Vector2d offset;
 		fgl::Vector2d velocity;
 
 		float scale;
 
-		Entity::Orientation orientation;
-		Entity::CollisionMethod collisionMethod;
+		Orientation orientation;
+		CollisionMethod collisionMethod;
 		bool staticCollisionBody;
-		bool animationChanged;
-
-		fgl::ArrayList<AnimationData*> animations;
-
-		fgl::String currentAnimationName;
-		size_t currentAnimationFrame;
-		long long currentAnimationLastFrameTime;
-		std::function<void(AnimationEventType)> currentAnimationEventHandler;
 
 		fgl::ArrayList<CollisionRect*> collisionRects;
-
-		AnimationData* getAnimationData(const fgl::String& name) const;
 
 		struct Anchor
 		{
@@ -112,7 +84,5 @@ namespace fl
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
-
-		AnimationOrientation getAnimationOrientation() const;
 	};
 }

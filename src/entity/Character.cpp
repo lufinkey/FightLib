@@ -3,12 +3,12 @@
 
 namespace fl
 {
-	Character::Character(const fgl::Vector2d& position, Entity::Orientation orientation) : ActionEntity(position, orientation)
+	Character::Character(const fgl::Vector2d& position, Orientation orientation) : ActionEntity(position, orientation)
 	{
 		//
 	}
 
-	void Character::update(fgl::ApplicationData appData)
+	void Character::update(const fgl::ApplicationData& appData)
 	{
 		if(getCurrentAction()==nullptr)
 		{

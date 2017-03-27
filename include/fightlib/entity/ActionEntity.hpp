@@ -10,10 +10,10 @@ namespace fl
 	{
 		friend class Action;
 	public:
-		ActionEntity(const fgl::Vector2d& position, Entity::Orientation orientation);
+		ActionEntity(const fgl::Vector2d& position, Orientation orientation);
 		virtual ~ActionEntity();
 
-		virtual void update(fgl::ApplicationData appData) override;
+		virtual void update(const fgl::ApplicationData& appData) override;
 
 		bool performAction(const fgl::String& name, ActionParamsPtr params = nullptr);
 

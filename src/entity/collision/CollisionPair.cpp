@@ -3,15 +3,15 @@
 
 namespace fl
 {
-	CollisionPair::CollisionPair(Entity* entity1, Entity* entity2)
-		: entity1(entity1), entity2(entity2)
+	CollisionPair::CollisionPair(Collidable* collidable1, Collidable* collidable2)
+		: collidable1(collidable1), collidable2(collidable2)
 	{
 		//
 	}
 
 	bool CollisionPair::operator==(const CollisionPair& pair) const
 	{
-		if((entity1==pair.entity1 && entity2==pair.entity2) || (entity1==pair.entity2 && entity2==pair.entity1))
+		if((collidable1==pair.collidable1 && collidable2==pair.collidable2) || (collidable1==pair.collidable2 && collidable2==pair.collidable1))
 		{
 			return true;
 		}

@@ -5,15 +5,15 @@
 
 namespace fl
 {
-	class Entity;
+	class Collidable;
 
 	typedef std::pair<CollisionRect*, CollisionRect*> CollisionRectPair;
 
 	class CollisionPair
 	{
 	public:
-		Entity* entity1;
-		Entity* entity2;
+		Collidable* collidable1;
+		Collidable* collidable2;
 		struct PriorityRect
 		{
 			fgl::String rectTag1;
@@ -21,7 +21,7 @@ namespace fl
 		};
 		fgl::ArrayList<PriorityRect> priorityRects;
 
-		CollisionPair(Entity* entity1, Entity* entity2);
+		CollisionPair(Collidable* collidable1, Collidable* collidable2);
 
 		bool operator==(const CollisionPair& pair) const;
 		bool operator!=(const CollisionPair& pair) const;

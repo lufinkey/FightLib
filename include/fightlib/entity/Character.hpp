@@ -8,9 +8,9 @@ namespace fl
 	class Character : public ActionEntity
 	{
 	public:
-		Character(const fgl::Vector2d& position, Entity::Orientation orientation);
+		Character(const fgl::Vector2d& position, Orientation orientation);
 
-		virtual void update(fgl::ApplicationData appData) override;
+		virtual void update(const fgl::ApplicationData& appData) override;
 
 		virtual fgl::String getIdleAnimationName() const;
 		virtual fgl::String getMoveAnimationName(double amount) const;

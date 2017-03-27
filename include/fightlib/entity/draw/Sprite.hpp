@@ -32,6 +32,7 @@ namespace fl
 		fgl::Animation* getAnimation(const fgl::String& name) const;
 		fgl::Animation* getCurrentAnimation() const;
 		fgl::String getCurrentAnimationName() const;
+		size_t getCurrentAnimationFrameIndex() const;
 
 	protected:
 		virtual float getScale() const;
