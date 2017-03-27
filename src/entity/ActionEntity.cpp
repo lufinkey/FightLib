@@ -26,6 +26,11 @@ namespace fl
 		}
 		Entity::update(appData);
 	}
+	
+	void ActionEntity::onActionEnd(fl::Action* action)
+	{
+		//Open for implementation
+	}
 
 	bool ActionEntity::performAction(const fgl::String& name, ActionParamsPtr params)
 	{
@@ -56,6 +61,7 @@ namespace fl
 		}
 		currentAction = nullptr;
 		action->onEnd(this);
+		onActionEnd(action);
 	}
 
 	Action* ActionEntity::getAction(const fgl::String& name) const

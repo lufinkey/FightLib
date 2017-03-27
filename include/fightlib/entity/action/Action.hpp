@@ -43,7 +43,7 @@ namespace fl
 	public:
 		virtual ~Action();
 
-		bool getFlag(const fgl::String& flag) const;
+		virtual bool getFlag(const fgl::String& flag) const;
 
 	protected:
 		virtual void onPerform(ActionEntity* entity, ActionParamsPtr params = nullptr);
