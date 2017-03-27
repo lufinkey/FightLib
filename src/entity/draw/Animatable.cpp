@@ -4,8 +4,7 @@
 namespace fl
 {
 	Animatable::Animatable(const fgl::Vector2d& position)
-		: position(position),
-		currentAnimationData(nullptr),
+		: currentAnimationData(nullptr),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
 		currentAnimationEventHandler(nullptr),
@@ -71,7 +70,7 @@ namespace fl
 
 	void Animatable::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
-		graphics.translate(position.x, position.y);
+		graphics.translate(getDrawPosition());
 		float scale = getScale();
 		graphics.scale(scale, scale);
 		if(currentAnimationData!=nullptr)
@@ -95,7 +94,12 @@ namespace fl
 		{
 			rotation = 0;
 		}
-		return position;
+		return fgl::Vector2d(0,0);
+	}
+
+	fgl::Vector2d Animatable::getDrawPosition() const
+	{
+		return fgl::Vector2d(0, 0);
 	}
 
 	bool Animatable::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)

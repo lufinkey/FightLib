@@ -47,7 +47,7 @@ namespace fl
 	private:
 		AnimationData* getAnimationData(const fgl::String& name) const;
 
-		fgl::Vector2d position;
+		virtual fgl::Vector2d getDrawPosition() const;
 
 		fgl::ArrayList<AnimationData*> animations;
 
