@@ -40,6 +40,12 @@
     <Filter Include="src\game">
       <UniqueIdentifier>{e473c8be-d1bf-48f8-b322-7a96627bcf09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\entity\draw">
+      <UniqueIdentifier>{8c594138-83d0-4992-b89b-d38ba729a639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\entity\draw">
+      <UniqueIdentifier>{0a7f8420-e45e-4ef2-977a-d83bd3687e5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\action\AnimationData.hpp">
@@ -87,6 +93,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Animatable.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -124,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\Character.cpp">
       <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\Animatable.cpp">
+      <Filter>src\entity\draw</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
