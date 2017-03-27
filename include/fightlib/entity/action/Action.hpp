@@ -54,4 +54,7 @@ namespace fl
 
 		void end(ActionEntity* entity);
 	};
+	
+	static const fgl::String ACTIONFLAG_ALLOWSMOVEMENT = "AllowsMovement";
+	static const fgl::String ACTIONFLAG_ALLOWSORIENTATIONCHANGE = "AllowsOrientationChange";
 }

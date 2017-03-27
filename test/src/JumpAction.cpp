@@ -3,7 +3,7 @@
 
 bool JumpAction::getFlag(const fgl::String& flag) const
 {
-	if(flag=="AllowMovement")
+	if(flag==fl::ACTIONFLAG_ALLOWSMOVEMENT)
 	{
 		return true;
 	}
