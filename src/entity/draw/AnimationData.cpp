@@ -454,26 +454,27 @@ namespace fl
 	{
 		fgl::Dictionary plist;
 		fgl::String plistError;
-		FILE* plistFile = assetManager->openFile(path, "rb");
+		fgl::String resolvedPath;
+		FILE* plistFile = assetManager->openFile(path, "rb", &resolvedPath);
 		if(plistFile==nullptr)
 		{
 			return_error("unable to open file");
 		}
 		if(!fgl::Plist::loadFromFile(&plist, plistFile, &plistError))
 		{
-			fclose(plistFile);
+			std::fclose(plistFile);
 			return_error("unable to load plist: "+plistError);
 		}
-		fclose(plistFile);
+		std::fclose(plistFile);
 
 		fgl::String fullPath;
-		if(fgl::FileTools::isPathAbsolute(path))
+		if(fgl::FileTools::isPathAbsolute(resolvedPath))
 		{
-			fullPath = path;
+			fullPath = resolvedPath;
 		}
 		else
 		{
-			fullPath = fgl::FileTools::getAbsolutePath(path);
+			fullPath = fgl::FileTools::getAbsolutePath(resolvedPath);
 			if(fullPath.length()==0)
 			{
 				return_error("unable to resolve animation path")
