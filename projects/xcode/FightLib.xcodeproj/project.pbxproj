@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F15A1FB11E549FAE008D83E5 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */; };
 		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
 		F17BBBE91E64965800A7F8F4 /* BoxCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */; };
 		F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */; };
@@ -15,19 +14,19 @@
 		F17BBBEE1E64965E00A7F8F4 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBEC1E64965E00A7F8F4 /* CollisionManager.cpp */; };
 		F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBED1E64965E00A7F8F4 /* CollisionPair.cpp */; };
 		F17D96CD1E6DB50B003F4D85 /* Action.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F17D96CB1E6DB50B003F4D85 /* Action.hpp */; };
-		F17D96CE1E6DB50B003F4D85 /* AnimationAssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F17D96CC1E6DB50B003F4D85 /* AnimationAssetManager.hpp */; };
 		F17D96D01E6DB51B003F4D85 /* ActionEntity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F17D96CF1E6DB51B003F4D85 /* ActionEntity.hpp */; };
 		F17D96D31E6DB531003F4D85 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D11E6DB531003F4D85 /* Action.cpp */; };
-		F17D96D41E6DB531003F4D85 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */; };
 		F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */; };
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
+		F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */; };
+		F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF491E893E2F00472DB2 /* AnimationData.cpp */; };
+		F1A7DF4D1E893E2F00472DB2 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF4A1E893E2F00472DB2 /* Sprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F1209DF81E68AF5A00E1BF4F /* Fight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fight.hpp; sourceTree = "<group>"; };
 		F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
 		F15A1F901E549F5E008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
 		F15A1FAF1E549FAE008D83E5 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollisionRect.cpp; sourceTree = "<group>"; };
 		F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRect.cpp; sourceTree = "<group>"; };
@@ -39,20 +38,25 @@
 		F17BBBF21E6496A900A7F8F4 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		F17BBBF31E6496A900A7F8F4 /* Item.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Item.hpp; sourceTree = "<group>"; };
 		F17BBBF41E6496A900A7F8F4 /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
-		F17BBBF51E6496B300A7F8F4 /* AnimationData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationData.hpp; sourceTree = "<group>"; };
 		F17BBBF61E6496C200A7F8F4 /* CollisionManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionManager.hpp; sourceTree = "<group>"; };
 		F17BBBF71E6496C200A7F8F4 /* CollisionPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionPair.hpp; sourceTree = "<group>"; };
 		F17BBBF91E6496DB00A7F8F4 /* BoxCollisionRect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BoxCollisionRect.hpp; sourceTree = "<group>"; };
 		F17BBBFA1E6496DB00A7F8F4 /* CollisionRect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionRect.hpp; sourceTree = "<group>"; };
 		F17BBBFB1E6496DB00A7F8F4 /* PixelCollisionRect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PixelCollisionRect.hpp; sourceTree = "<group>"; };
 		F17D96CB1E6DB50B003F4D85 /* Action.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Action.hpp; sourceTree = "<group>"; };
-		F17D96CC1E6DB50B003F4D85 /* AnimationAssetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AnimationAssetManager.hpp; sourceTree = "<group>"; };
 		F17D96CF1E6DB51B003F4D85 /* ActionEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ActionEntity.hpp; sourceTree = "<group>"; };
 		F17D96D11E6DB531003F4D85 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
-		F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
 		F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEntity.cpp; sourceTree = "<group>"; };
 		F17D96D61E6DB53B003F4D85 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = ../../external/GameLibrary/projects/xcode/build/Debug/libGameLibrary.a; sourceTree = "<group>"; };
+		F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
+		F1A7DF491E893E2F00472DB2 /* AnimationData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
+		F1A7DF4A1E893E2F00472DB2 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		F1A7DF4E1E893E4800472DB2 /* Collidable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Collidable.hpp; sourceTree = "<group>"; };
+		F1A7DF511E893E5400472DB2 /* AnimationAssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationAssetManager.hpp; sourceTree = "<group>"; };
+		F1A7DF521E893E5400472DB2 /* AnimationData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimationData.hpp; sourceTree = "<group>"; };
+		F1A7DF531E893E5400472DB2 /* Drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Drawable.hpp; sourceTree = "<group>"; };
+		F1A7DF541E893E5400472DB2 /* Sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			children = (
 				F15A1F9A1E549FA7008D83E5 /* action */,
 				F15A1F9D1E549FA7008D83E5 /* collision */,
+				F1A7DF501E893E5400472DB2 /* draw */,
 				F17D96CF1E6DB51B003F4D85 /* ActionEntity.hpp */,
 				F17BBBF11E6496A900A7F8F4 /* Character.hpp */,
 				F17BBBF21E6496A900A7F8F4 /* Entity.hpp */,
@@ -137,8 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				F17D96CB1E6DB50B003F4D85 /* Action.hpp */,
-				F17D96CC1E6DB50B003F4D85 /* AnimationAssetManager.hpp */,
-				F17BBBF51E6496B300A7F8F4 /* AnimationData.hpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				F17BBBF81E6496DB00A7F8F4 /* rects */,
+				F1A7DF4E1E893E4800472DB2 /* Collidable.hpp */,
 				F17BBBF61E6496C200A7F8F4 /* CollisionManager.hpp */,
 				F17BBBF71E6496C200A7F8F4 /* CollisionPair.hpp */,
 			);
@@ -168,6 +172,7 @@
 			children = (
 				F15A1FA91E549FAE008D83E5 /* action */,
 				F15A1FAB1E549FAE008D83E5 /* collision */,
+				F1A7DF471E893E2F00472DB2 /* draw */,
 				F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */,
 				F17D96D61E6DB53B003F4D85 /* Character.cpp */,
 				F15A1FAF1E549FAE008D83E5 /* Entity.cpp */,
@@ -179,8 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				F17D96D11E6DB531003F4D85 /* Action.cpp */,
-				F17D96D21E6DB531003F4D85 /* AnimationAssetManager.cpp */,
-				F15A1FAA1E549FAE008D83E5 /* AnimationData.cpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -223,6 +226,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F1A7DF471E893E2F00472DB2 /* draw */ = {
+			isa = PBXGroup;
+			children = (
+				F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */,
+				F1A7DF491E893E2F00472DB2 /* AnimationData.cpp */,
+				F1A7DF4A1E893E2F00472DB2 /* Sprite.cpp */,
+			);
+			path = draw;
+			sourceTree = "<group>";
+		};
+		F1A7DF501E893E5400472DB2 /* draw */ = {
+			isa = PBXGroup;
+			children = (
+				F1A7DF511E893E5400472DB2 /* AnimationAssetManager.hpp */,
+				F1A7DF521E893E5400472DB2 /* AnimationData.hpp */,
+				F1A7DF531E893E5400472DB2 /* Drawable.hpp */,
+				F1A7DF541E893E5400472DB2 /* Sprite.hpp */,
+			);
+			path = draw;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -230,7 +254,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F17D96CE1E6DB50B003F4D85 /* AnimationAssetManager.hpp in Headers */,
 				F17D96CD1E6DB50B003F4D85 /* Action.hpp in Headers */,
 				F17D96D01E6DB51B003F4D85 /* ActionEntity.hpp in Headers */,
 			);
@@ -295,15 +318,16 @@
 			files = (
 				F17BBBE91E64965800A7F8F4 /* BoxCollisionRect.cpp in Sources */,
 				F17D96D31E6DB531003F4D85 /* Action.cpp in Sources */,
-				F15A1FB11E549FAE008D83E5 /* AnimationData.cpp in Sources */,
+				F1A7DF4D1E893E2F00472DB2 /* Sprite.cpp in Sources */,
 				F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */,
+				F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */,
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
 				F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */,
 				F17BBBEE1E64965E00A7F8F4 /* CollisionManager.cpp in Sources */,
 				F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */,
 				F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
-				F17D96D41E6DB531003F4D85 /* AnimationAssetManager.cpp in Sources */,
+				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
