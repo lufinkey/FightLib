@@ -50,6 +50,12 @@ namespace fl
 		}
 		else
 		{
+			//don't draw if entity is not being drawn from parent
+			if(!fgl::extract<bool>(appData.additionalData, "DrawnFromParent", false))
+			{
+				return;
+			}
+			
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
 			{
@@ -60,6 +66,9 @@ namespace fl
 				graphics.translate(offset.x, offset.y);
 			}
 		}
+		
+		auto childrenAppData = appData;
+		childrenAppData.additionalData["DrawnFromParent"] = true;
 
 		struct AnchorDrawData
 		{
@@ -86,7 +95,7 @@ namespace fl
 					{
 						entityGraphics.rotate(anchorData.rotation, anchorData.rotationPoint-anchorData.offset);
 					}
-					anchorData.entity->draw(appData, entityGraphics);
+					anchorData.entity->draw(childrenAppData, entityGraphics);
 				}
 				else
 				{
@@ -106,7 +115,7 @@ namespace fl
 			{
 				entityGraphics.rotate(anchorData.rotation, anchorData.rotationPoint-anchorData.offset);
 			}
-			anchorData.entity->draw(appData, entityGraphics);
+			anchorData.entity->draw(childrenAppData, entityGraphics);
 		}
 	}
 
