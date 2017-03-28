@@ -64,3 +64,11 @@ void Player::onCollision(fl::Collidable* collided, fl::CollisionSide side)
 		setVelocity(velocity);
 	}
 }
+
+void Player::onCollisionFinish(fl::Collidable* collided, fl::CollisionSide side)
+{
+	if(side==fl::COLLISIONSIDE_TOP)
+	{
+		fgl::Console::writeLine("ended top collision");
+	}
+}
