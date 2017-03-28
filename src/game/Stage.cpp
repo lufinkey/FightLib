@@ -35,4 +35,16 @@ namespace fl
 		collisionManager.removeCollidable(platform);
 		drawManager.removeDrawable(platform);
 	}
+	
+	void Stage::addEntity(Entity* entity)
+	{
+		collisionManager.addCollidable(entity);
+		drawManager.addDrawable(entity);
+	}
+	
+	void Stage::removeEntity(Entity* entity)
+	{
+		collisionManager.removeCollidable(entity);
+		drawManager.removeDrawable(entity);
+	}
 }
