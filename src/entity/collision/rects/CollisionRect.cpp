@@ -457,7 +457,7 @@ namespace fl
 
 	fgl::Vector2d CollisionRect::checkPixelCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
-		//TODO implement this
+		//TODO implement pixel on pixel collisions
 		return fgl::Vector2d(0, 0);
 	}
 }
