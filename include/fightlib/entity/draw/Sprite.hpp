@@ -21,7 +21,7 @@ namespace fl
 		Sprite();
 		virtual ~Sprite();
 
-		virtual void update(const fgl::ApplicationData& appData);
+		virtual void update(const fgl::ApplicationData& appData) override;
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		fgl::Vector2d getSize() const;
