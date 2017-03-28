@@ -3,7 +3,9 @@
 
 namespace fl
 {
-	Character::Character(const fgl::Vector2d& position, Orientation orientation) : ActionEntity(position, orientation)
+	Character::Character(const fgl::Vector2d& position, Orientation orientation)
+		: ActionEntity(position, orientation),
+		topCollidedCount(0)
 	{
 		//
 	}
@@ -82,7 +84,40 @@ namespace fl
 		return direction;
 	}
 	
+	bool Character::isOnGround() const
+	{
+		if(topCollidedCount > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	void Character::onActionEnd(Action* action)
+	{
+		if(getCurrentAction()==nullptr)
+		{
+			updateMoveAnimation();
+		}
+	}
+	
+	void Character::onCollision(fl::Collidable* collided, CollisionSide side)
+	{
+		if(side==COLLISIONSIDE_TOP)
+		{
+			topCollidedCount++;
+		}
+	}
+	
+	void Character::onCollisionFinish(fl::Collidable* collided, CollisionSide side)
+	{
+		if(side==COLLISIONSIDE_TOP)
+		{
+			topCollidedCount--;
+		}
+	}
+	
+	void Character::onFinishCollisionUpdates()
 	{
 		if(getCurrentAction()==nullptr)
 		{

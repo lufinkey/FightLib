@@ -57,18 +57,11 @@ fgl::String Player::getMoveAnimationName(double amount) const
 
 void Player::onCollision(fl::Collidable* collided, fl::CollisionSide side)
 {
+	Character::onCollision(collided, side);
 	if(side==fl::COLLISIONSIDE_TOP)
 	{
 		fgl::Vector2d velocity = getVelocity();
 		velocity.y = 0;
 		setVelocity(velocity);
-	}
-}
-
-void Player::onCollisionFinish(fl::Collidable* collided, fl::CollisionSide side)
-{
-	if(side==fl::COLLISIONSIDE_TOP)
-	{
-		fgl::Console::writeLine("ended top collision");
 	}
 }

@@ -22,6 +22,7 @@ namespace fl
 		}
 		for(size_t i=(previousCollisions.size()-1); i!=(size_t)-1; i--)
 		{
+			//TODO queue an onCollisionFinish call?
 			const CollisionPair& pair = previousCollisions[i];
 			if(pair.collidable1==entity || pair.collidable2==entity)
 			{
@@ -151,7 +152,7 @@ namespace fl
 				}
 				
 				//add to finished collision calls
-				onCollisionFinishCalls.add([=]{
+				onCollisionFinishCalls.add([=, &updatedCollidables]{
 					for(auto prevCollisionSide : pair.previousCollisionSides)
 					{
 						if(!newPair.previousCollisionSides.contains(prevCollisionSide))
@@ -170,6 +171,16 @@ namespace fl
 							{
 								//TODO make a case here for two non-static bodies colliding
 							}
+							
+							//add collidables to the list of updated collidables
+							if(!updatedCollidables.contains(collidable1))
+							{
+								updatedCollidables.add(collidable1);
+							}
+							if(!updatedCollidables.contains(collidable2))
+							{
+								updatedCollidables.add(collidable2);
+							}
 						}
 					}
 				});
@@ -178,19 +189,22 @@ namespace fl
 				onCollisionCalls.add([=]{
 					for(auto collisionSide : newPair.previousCollisionSides)
 					{
-						if(collidable1->isStaticCollisionBody())
+						if(!pair.previousCollisionSides.contains(collisionSide))
 						{
-							collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
-							collidable1->onCollision(collidable2, collisionSide);
-						}
-						else if(collidable2->isStaticCollisionBody())
-						{
-							collidable1->onCollision(collidable2, collisionSide);
-							collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
-						}
-						else
-						{
-							//TODO make a case here for two non-static bodies colliding
+							if(collidable1->isStaticCollisionBody())
+							{
+								collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
+								collidable1->onCollision(collidable2, collisionSide);
+							}
+							else if(collidable2->isStaticCollisionBody())
+							{
+								collidable1->onCollision(collidable2, collisionSide);
+								collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
+							}
+							else
+							{
+								//TODO make a case here for two non-static bodies colliding
+							}
 						}
 					}
 				});

@@ -15,5 +15,4 @@ public:
 
 protected:
 	virtual void onCollision(fl::Collidable* collided, fl::CollisionSide side) override;
-	virtual void onCollisionFinish(fl::Collidable* collided, fl::CollisionSide side) override;
 };
