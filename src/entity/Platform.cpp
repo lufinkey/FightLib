@@ -4,7 +4,8 @@
 namespace fl
 {
 	Platform::Platform(const fgl::Vector2d& position)
-		: position(position)
+		: position(position),
+		scale(1.0f)
 	{
 		setCollisionMethod(COLLISIONMETHOD_PIXEL);
 	}
@@ -25,6 +26,16 @@ namespace fl
 		return position;
 	}
 	
+	float Platform::getScale() const
+	{
+		return scale;
+	}
+	
+	void Platform::setScale(float scale_arg)
+	{
+		scale = scale_arg;
+	}
+	
 	fgl::Vector2d Platform::getDrawPosition(float* rotation) const
 	{
 		if(rotation!=nullptr)
@@ -32,6 +43,11 @@ namespace fl
 			*rotation = 0;
 		}
 		return position;
+	}
+	
+	float Platform::getDrawScale() const
+	{
+		return scale;
 	}
 	
 	bool Platform::isStaticCollisionBody() const
