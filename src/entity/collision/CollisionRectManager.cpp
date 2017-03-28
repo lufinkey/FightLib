@@ -95,7 +95,6 @@ namespace fl
 				{
 					return {};
 				}
-				//TODO add a multi-box collision rect
 				fgl::ArrayList<CollisionRect*> collisionRects;
 				collisionRects.reserve(boundsList.size());
 				for(size_t i=0; i<boundsList.size(); i++)
