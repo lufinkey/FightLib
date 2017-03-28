@@ -76,13 +76,13 @@ namespace fl
 		{
 			Collidable* collidable1 = pair.collidable1;
 			Collidable* collidable2 = pair.collidable2;
+			CollisionPair newPair(collidable1, collidable2);
+			
 			if((collidable1->isStaticCollisionBody() && !collidable2->isStaticCollisionBody())
 				|| (!collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
 			{
 				fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
 				fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
-
-				CollisionPair newPair(collidable1, collidable2);
 				
 				fgl::ArrayList<CollisionRectPair> rectPairs = pair.getCollisionRectPairs(rects1, rects2);
 				for(auto& rectPair : rectPairs)
@@ -142,84 +142,92 @@ namespace fl
 					}
 				}
 				
-				//add to finished collision calls
-				onCollisionFinishCalls.add([=, &updatedCollidables]{
-					for(auto prevCollisionSide : pair.previousCollisionSides)
-					{
-						if(!newPair.previousCollisionSides.contains(prevCollisionSide))
-						{
-							if(collidable1->isStaticCollisionBody())
-							{
-								collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
-								collidable1->onCollisionFinish(collidable2, prevCollisionSide);
-							}
-							else if(collidable2->isStaticCollisionBody())
-							{
-								collidable1->onCollisionFinish(collidable2, prevCollisionSide);
-								collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
-							}
-							else
-							{
-								//TODO make a case here for two non-static bodies colliding
-							}
-							
-							//add collidables to the list of updated collidables
-							if(!updatedCollidables.contains(collidable1))
-							{
-								updatedCollidables.add(collidable1);
-							}
-							if(!updatedCollidables.contains(collidable2))
-							{
-								updatedCollidables.add(collidable2);
-							}
-						}
-					}
-				});
-				
 				//add to collision calls
-				onCollisionCalls.add([=]{
-					for(auto collisionSide : newPair.previousCollisionSides)
+				for(auto collisionSide : newPair.previousCollisionSides)
+				{
+					if(!pair.previousCollisionSides.contains(collisionSide))
 					{
-						if(!pair.previousCollisionSides.contains(collisionSide))
+						if(collidable1->isStaticCollisionBody())
 						{
-							if(collidable1->isStaticCollisionBody())
-							{
+							onCollisionCalls.add([=]{
 								collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
 								collidable1->onCollision(collidable2, collisionSide);
-							}
-							else if(collidable2->isStaticCollisionBody())
-							{
+							});
+						}
+						else if(collidable2->isStaticCollisionBody())
+						{
+							onCollisionCalls.add([=]{
 								collidable1->onCollision(collidable2, collisionSide);
 								collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
-							}
-							else
-							{
-								//TODO make a case here for two non-static bodies colliding
-							}
+							});
 						}
 						else
 						{
-							if(collidable1->isStaticCollisionBody())
-							{
-								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
-								collidable1->onCollisionUpdate(collidable2, collisionSide);
-							}
-							else if(collidable2->isStaticCollisionBody())
-							{
-								collidable1->onCollisionUpdate(collidable2, collisionSide);
-								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
-							}
-							else
-							{
-								//TODO make a case here for two non-static bodies colliding
-							}
+							//TODO make a case here for two non-static bodies colliding
 						}
 					}
-				});
+					else
+					{
+						if(collidable1->isStaticCollisionBody())
+						{
+							onCollisionCalls.add([=]{
+								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
+								collidable1->onCollisionUpdate(collidable2, collisionSide);
+							});
+						}
+						else if(collidable2->isStaticCollisionBody())
+						{
+							onCollisionCalls.add([=]{
+								collidable1->onCollisionUpdate(collidable2, collisionSide);
+								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
+							});
+						}
+						else
+						{
+							//TODO make a case here for two non-static bodies colliding
+						}
+					}
+				}
 
 				if(newPair.priorityRects.size() > 0)
 				{
 					previousCollisions.add(newPair);
+				}
+			}
+			
+			//add to finished collision calls
+			for(auto prevCollisionSide : pair.previousCollisionSides)
+			{
+				if(!newPair.previousCollisionSides.contains(prevCollisionSide))
+				{
+					if(collidable1->isStaticCollisionBody())
+					{
+						onCollisionFinishCalls.add([=]{
+							collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
+							collidable1->onCollisionFinish(collidable2, prevCollisionSide);
+						});
+					}
+					else if(collidable2->isStaticCollisionBody())
+					{
+						onCollisionFinishCalls.add([=]{
+							collidable1->onCollisionFinish(collidable2, prevCollisionSide);
+							collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
+						});
+					}
+					else
+					{
+						//TODO make a case here for two non-static bodies colliding
+					}
+					
+					//add collidables to the list of updated collidables
+					if(!updatedCollidables.contains(collidable1))
+					{
+						updatedCollidables.add(collidable1);
+					}
+					if(!updatedCollidables.contains(collidable2))
+					{
+						updatedCollidables.add(collidable2);
+					}
 				}
 			}
 		}
