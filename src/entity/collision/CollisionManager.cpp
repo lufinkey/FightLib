@@ -50,6 +50,25 @@ namespace fl
 		}
 		throw fgl::IllegalArgumentException("shiftAmount", "cannot be 0,0");
 	}
+	
+	CollisionSide CollisionManager::getOppositeCollisionSide(CollisionSide side)
+	{
+		switch(side)
+		{
+			case COLLISIONSIDE_LEFT:
+				return COLLISIONSIDE_RIGHT;
+				
+			case COLLISIONSIDE_RIGHT:
+				return COLLISIONSIDE_LEFT;
+				
+			case COLLISIONSIDE_TOP:
+				return COLLISIONSIDE_BOTTOM;
+				
+			case COLLISIONSIDE_BOTTOM:
+				return COLLISIONSIDE_TOP;
+		}
+		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
+	}
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
