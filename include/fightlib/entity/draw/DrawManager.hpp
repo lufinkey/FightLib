@@ -12,7 +12,7 @@ namespace fl
 		void removeDrawable(Drawable* drawable);
 		
 		void update(const fgl::ApplicationData& appData);
-		void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics);
+		void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;
 		
 	private:
 		fgl::ArrayList<Drawable*> drawables;

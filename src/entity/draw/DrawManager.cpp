@@ -25,7 +25,7 @@ namespace fl
 		}
 	}
 	
-	void DrawManager::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics)
+	void DrawManager::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
 		for(auto drawable : drawables)
 		{
