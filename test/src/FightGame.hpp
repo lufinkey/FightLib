@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <fightlib/fightlib.hpp>
+#include "TestStage.hpp"
 
 class FightGame : public fgl::Application
 {
@@ -13,13 +13,5 @@ public:
 private:
 	fl::AnimationAssetManager* animationAssetManager;
 
-	fl::Character* character;
-	fl::Entity* sword;
-
-	fl::Platform* block1;
-	fl::Platform* block2;
-	fl::Platform* block3;
-	fl::Platform* block4;
-
-	fl::CollisionManager collisionManager;
+	TestStage* testStage;
 };

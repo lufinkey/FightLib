@@ -5,3 +5,4 @@
 #include "entity/Character.hpp"
 #include "entity/Platform.hpp"
 #include "entity/collision/CollisionManager.hpp"
+#include "game/Stage.hpp"
