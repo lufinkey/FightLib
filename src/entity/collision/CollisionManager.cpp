@@ -206,6 +206,23 @@ namespace fl
 								//TODO make a case here for two non-static bodies colliding
 							}
 						}
+						else
+						{
+							if(collidable1->isStaticCollisionBody())
+							{
+								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
+								collidable1->onCollisionUpdate(collidable2, collisionSide);
+							}
+							else if(collidable2->isStaticCollisionBody())
+							{
+								collidable1->onCollisionUpdate(collidable2, collisionSide);
+								collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
+							}
+							else
+							{
+								//TODO make a case here for two non-static bodies colliding
+							}
+						}
 					}
 				});
 

@@ -11,6 +11,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	loadAnimation("assets/animations/idle.plist", assetManager);
 	loadAnimation("assets/animations/walk.plist", assetManager);
 	loadAnimation("assets/animations/jump.plist", assetManager);
+	loadAnimation("assets/animations/fall.plist", assetManager);
 	loadAnimation("assets/animations/punch.plist", assetManager);
 	changeAnimation("idle");
 	
@@ -47,17 +48,36 @@ void Player::update(const fgl::ApplicationData& appData)
 
 fgl::String Player::getIdleAnimationName() const
 {
-	return "idle";
+	if(isOnGround())
+	{
+		return "idle";
+	}
+	return "fall";
 }
 
 fgl::String Player::getMoveAnimationName(double amount) const
 {
-	return "walk";
+	if(isOnGround())
+	{
+		return "walk";
+	}
+	return "fall";
 }
 
 void Player::onCollision(fl::Collidable* collided, fl::CollisionSide side)
 {
 	Character::onCollision(collided, side);
+	if(side==fl::COLLISIONSIDE_TOP)
+	{
+		fgl::Vector2d velocity = getVelocity();
+		velocity.y = 0;
+		setVelocity(velocity);
+	}
+}
+
+void Player::onCollisionUpdate(fl::Collidable* collided, fl::CollisionSide side)
+{
+	Character::onCollisionUpdate(collided, side);
 	if(side==fl::COLLISIONSIDE_TOP)
 	{
 		fgl::Vector2d velocity = getVelocity();
