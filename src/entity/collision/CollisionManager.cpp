@@ -55,8 +55,6 @@ namespace fl
 	{
 		fgl::ArrayList<CollisionPair> pairs = getCollisionPairs();
 		previousCollisions.clear();
-		fgl::BasicDictionary<Collidable*, fgl::ArrayList<CollisionRect*>> collisionRects;
-		collisionRects.reserve(collidables.size());
 
 		//handle collisions
 		for(auto& pair : pairs)
@@ -66,21 +64,8 @@ namespace fl
 			if((collidable1->isStaticCollisionBody() && !collidable2->isStaticCollisionBody())
 				|| (!collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
 			{
-				size_t rectsIndex1 = collisionRects.indexOfKey(collidable1);
-				if(rectsIndex1==(size_t)-1)
-				{
-					rectsIndex1 = collisionRects.size();
-					collisionRects.set(collidable1, collidable1->getCollisionRects());
-				}
-				size_t rectsIndex2 = collisionRects.indexOfKey(collidable2);
-				if(rectsIndex2==(size_t)-1)
-				{
-					rectsIndex2 = collisionRects.size();
-					collisionRects.set(collidable2, collidable2->getCollisionRects());
-				}
-
-				fgl::ArrayList<CollisionRect*>& rects1 = collisionRects.valueAt(rectsIndex1);
-				fgl::ArrayList<CollisionRect*>& rects2 = collisionRects.valueAt(rectsIndex2);
+				fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
+				fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
 
 				CollisionPair newPair(collidable1, collidable2);
 
