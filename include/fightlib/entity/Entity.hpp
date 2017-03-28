@@ -32,7 +32,6 @@ namespace fl
 		void setCollisionMethod(CollisionMethod method);
 
 		virtual bool isStaticCollisionBody() const override;
-		void setStaticCollisionBody(bool staticCollisionBody);
 
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
@@ -57,7 +56,6 @@ namespace fl
 
 		Orientation orientation;
 		CollisionRectManager collisionRectManager;
-		bool staticCollisionBody;
 
 		struct Anchor
 		{

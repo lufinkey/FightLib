@@ -15,29 +15,25 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	
 	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
 
-	block1 = new fl::Entity(fgl::Vector2d(300, 300), fl::ORIENTATION_LEFT);
+	block1 = new fl::Platform(fgl::Vector2d(300, 300));
 	block1->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block1->changeAnimation("block");
 	block1->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
-	block1->setStaticCollisionBody(true);
 
-	block2 = new fl::Entity(fgl::Vector2d(350, 300), fl::ORIENTATION_LEFT);
+	block2 = new fl::Platform(fgl::Vector2d(350, 300));
 	block2->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block2->changeAnimation("block");
 	block2->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
-	block2->setStaticCollisionBody(true);
 
-	block3 = new fl::Entity(fgl::Vector2d(250, 300), fl::ORIENTATION_LEFT);
+	block3 = new fl::Platform(fgl::Vector2d(250, 300));
 	block3->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block3->changeAnimation("block");
 	block3->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
-	block3->setStaticCollisionBody(true);
 
-	block4 = new fl::Entity(fgl::Vector2d(200, 250), fl::ORIENTATION_LEFT);
+	block4 = new fl::Platform(fgl::Vector2d(200, 250));
 	block4->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block4->changeAnimation("block");
 	block4->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
-	block4->setStaticCollisionBody(true);
 
 	collisionManager.addCollidable(character);
 	collisionManager.addCollidable(block1);

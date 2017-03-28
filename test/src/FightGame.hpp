@@ -16,10 +16,10 @@ private:
 	fl::Character* character;
 	fl::Entity* sword;
 
-	fl::Entity* block1;
-	fl::Entity* block2;
-	fl::Entity* block3;
-	fl::Entity* block4;
+	fl::Platform* block1;
+	fl::Platform* block2;
+	fl::Platform* block3;
+	fl::Platform* block4;
 
 	fl::CollisionManager collisionManager;
 };

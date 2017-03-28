@@ -12,10 +12,9 @@ namespace fl
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
-		staticCollisionBody(false),
 		parentEntity(nullptr)
 	{
-		//
+		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
 
 	void Entity::update(const fgl::ApplicationData& appData)
@@ -168,12 +167,7 @@ namespace fl
 
 	bool Entity::isStaticCollisionBody() const
 	{
-		return staticCollisionBody;
-	}
-	
-	void Entity::setStaticCollisionBody(bool staticCollisionBody_arg)
-	{
-		staticCollisionBody = staticCollisionBody_arg;
+		return false;
 	}
 
 	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const

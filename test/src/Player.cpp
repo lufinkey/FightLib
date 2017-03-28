@@ -6,7 +6,6 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	: Character(position, orientation)
 {
 	setScale(3.0);
-	setCollisionMethod(fl::COLLISIONMETHOD_BOUNDS);
 
 	loadAnimation("assets/animations/idle.plist", assetManager);
 	loadAnimation("assets/animations/walk.plist", assetManager);
