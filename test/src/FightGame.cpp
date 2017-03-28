@@ -18,22 +18,18 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	block1 = new fl::Platform(fgl::Vector2d(300, 300));
 	block1->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block1->changeAnimation("block");
-	block1->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
 
 	block2 = new fl::Platform(fgl::Vector2d(350, 300));
 	block2->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block2->changeAnimation("block");
-	block2->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
 
 	block3 = new fl::Platform(fgl::Vector2d(250, 300));
 	block3->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block3->changeAnimation("block");
-	block3->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
 
 	block4 = new fl::Platform(fgl::Vector2d(200, 250));
 	block4->loadAnimation("assets/animations/block.plist", animationAssetManager);
 	block4->changeAnimation("block");
-	block4->setCollisionMethod(fl::COLLISIONMETHOD_FRAME);
 
 	collisionManager.addCollidable(character);
 	collisionManager.addCollidable(block1);
