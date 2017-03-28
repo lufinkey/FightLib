@@ -20,15 +20,6 @@ namespace fl
 		{
 			collidables.remove(index);
 		}
-		for(size_t i=(previousCollisions.size()-1); i!=(size_t)-1; i--)
-		{
-			//TODO queue an onCollisionFinish call?
-			const CollisionPair& pair = previousCollisions[i];
-			if(pair.collidable1==entity || pair.collidable2==entity)
-			{
-				previousCollisions.remove(i);
-			}
-		}
 	}
 
 	CollisionSide CollisionManager::getCollisionSide(const fgl::Vector2d& shiftAmount) const
