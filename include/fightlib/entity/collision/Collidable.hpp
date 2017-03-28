@@ -17,6 +17,7 @@ namespace fl
 	class Collidable : public Sprite
 	{
 		friend class CollisionManager;
+		friend class CollisionRectManager;
 	public:
 		virtual bool isStaticCollisionBody() const = 0;
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;

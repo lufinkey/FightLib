@@ -12,19 +12,10 @@ namespace fl
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
-		collisionMethod(COLLISIONMETHOD_NONE),
 		staticCollisionBody(false),
 		parentEntity(nullptr)
 	{
 		//
-	}
-
-	Entity::~Entity()
-	{
-		for(auto collisionRect : collisionRects)
-		{
-			delete collisionRect;
-		}
 	}
 
 	void Entity::update(const fgl::ApplicationData& appData)
@@ -34,12 +25,7 @@ namespace fl
 		//offset for velocity
 		offset += (velocity*appData.getFrameSpeedMultiplier());
 
-		auto previousRects = collisionRects;
-		collisionRects = createCollisionRects(appData, previousRects);
-		for(auto collisionRect : previousRects)
-		{
-			delete collisionRect;
-		}
+		collisionRectManager.update(appData, this, velocity*appData.getFrameSpeedMultiplier());
 	}
 
 	fgl::Vector2d Entity::getDrawPosition(float* rotation) const
@@ -172,19 +158,19 @@ namespace fl
 
 	CollisionMethod Entity::getCollisionMethod() const
 	{
-		return collisionMethod;
+		return collisionRectManager.getCollisionMethod();
 	}
 
-	void Entity::setCollisionMethod(CollisionMethod collisionMethod_arg)
+	void Entity::setCollisionMethod(CollisionMethod collisionMethod)
 	{
-		collisionMethod = collisionMethod_arg;
+		collisionRectManager.setCollisionMethod(collisionMethod);
 	}
 
 	bool Entity::isStaticCollisionBody() const
 	{
 		return staticCollisionBody;
 	}
-
+	
 	void Entity::setStaticCollisionBody(bool staticCollisionBody_arg)
 	{
 		staticCollisionBody = staticCollisionBody_arg;
@@ -192,139 +178,9 @@ namespace fl
 
 	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
 	{
-		return collisionRects;
+		return collisionRectManager.getCollisionRects();
 	}
-
-	fgl::ArrayList<CollisionRect*> Entity::createCollisionRects(const fgl::ApplicationData& appData, const fgl::ArrayList<CollisionRect*>& previousRects) const
-	{
-		//TODO compare the collision rect against the last collision rect to get a more accurate velocity
-		//TODO also make the velocity that's given be modified by the last frame speed multiplier
-		switch(collisionMethod)
-		{
-			case COLLISIONMETHOD_NONE:
-			return {};
-
-			case COLLISIONMETHOD_FRAME:
-			{
-				fgl::Vector2d size = getSize();
-				float rotation = 0;
-				fgl::Vector2d position = getPosition(&rotation);
-				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
-				size_t matchingRectIndex = previousRects.indexWhere([](CollisionRect* const & rect) -> bool {
-					if(rect->getTag()=="all")
-					{
-						return true;
-					}
-					return false;
-				});
-				if(matchingRectIndex!=-1)
-				{
-					diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
-				}
-				if(rotation!=0.0)
-				{
-					return {new BoxCollisionRect("all", rect, diff, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale))};
-				}
-				return {new BoxCollisionRect("all", rect, diff, fgl::Vector2d((double)scale, (double)scale))};
-			}
-
-			case COLLISIONMETHOD_BOUNDS:
-			{
-				fgl::Vector2d size = getSize();
-				float rotation = 0;
-				fgl::Vector2d position = getPosition(&rotation);
-				AnimationData* animData = getCurrentAnimationData();
-				if(animData==nullptr)
-				{
-					return {};
-				}
-				fgl::ArrayList<AnimationData::MetaBounds> boundsList = animData->getBounds(getCurrentAnimationFrameIndex(), getAnimationOrientation());
-				if(boundsList.size()==0)
-				{
-					return {};
-				}
-				//TODO add a multi-box collision rect
-				fgl::ArrayList<CollisionRect*> collisionRects;
-				collisionRects.reserve(boundsList.size());
-				for(size_t i=0; i<boundsList.size(); i++)
-				{
-					auto& metaBounds = boundsList[i];
-					fgl::RectangleD rect = fgl::RectangleD((metaBounds.rect.x*scale), (metaBounds.rect.y*scale), metaBounds.rect.width*scale, metaBounds.rect.height*scale);
-					fgl::Vector2d origin = fgl::Vector2d(rect.x-(size.x/2), rect.y-(size.y/2));
-					rect = fgl::RectangleD(position.x+origin.x, position.y+origin.y, rect.width, rect.height);
-					fgl::String tag;
-					if(metaBounds.tag!=-1)
-					{
-						tag = (fgl::String)"bounds:"+metaBounds.tag;
-					}
-					else
-					{
-						tag = (fgl::String)"bounds:index"+i;
-					}
-					fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
-					size_t matchingRectIndex = previousRects.indexWhere([&](CollisionRect* const & rect) -> bool {
-						if(rect->getTag()==tag)
-						{
-							return true;
-						}
-						return false;
-					});
-					if(matchingRectIndex!=-1)
-					{
-						diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
-					}
-					if(rotation!=0.0)
-					{
-						collisionRects.add(new BoxCollisionRect(tag, rect, diff, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
-					}
-					collisionRects.add(new BoxCollisionRect(tag, rect, diff, fgl::Vector2d((double)scale, (double)scale)));
-				}
-				return collisionRects;
-			}
-
-			case COLLISIONMETHOD_PIXEL:
-			{
-				fgl::Vector2d size = getSize();
-				float rotation = 0;
-				fgl::Vector2d position = getPosition(&rotation);
-				AnimationData* animData = getCurrentAnimationData();
-				if(animData==nullptr)
-				{
-					return {};
-				}
-				fgl::Animation* animation = animData->getAnimation();
-				if(animation==nullptr)
-				{
-					return {};
-				}
-				size_t frameIndex = getCurrentAnimationFrameIndex();
-				fgl::TextureImage* img = animation->getImage(frameIndex);
-				fgl::RectangleU srcRect = animation->getImageSourceRect(frameIndex);
-				bool mirroredHorizontal = animData->isMirrored(getAnimationOrientation());
-				auto rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity*appData.getFrameSpeedMultiplier();
-				size_t matchingRectIndex = previousRects.indexWhere([](CollisionRect* const & rect) -> bool {
-					if(rect->getTag()=="all")
-					{
-						return true;
-					}
-					return false;
-				});
-				if(matchingRectIndex!=-1)
-				{
-					diff += rect.getCenter() - previousRects[matchingRectIndex]->getCenter();
-				}
-				if(rotation!=0.0)
-				{
-					return {new PixelCollisionRect("all", rect, diff, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false)};
-				}
-				return {new PixelCollisionRect("all", rect, diff, srcRect, img, mirroredHorizontal, false)};
-			}
-		}
-		throw fgl::IllegalStateException("invalid collisionMethod enum value");
-	}
-
+	
 	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
 	{
 		if(child->parentEntity!=nullptr)

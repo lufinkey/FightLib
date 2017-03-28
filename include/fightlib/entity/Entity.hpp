@@ -2,6 +2,7 @@
 #pragma once
 
 #include "collision/Collidable.hpp"
+#include "collision/CollisionRectManager.hpp"
 
 namespace fl
 {
@@ -11,19 +12,10 @@ namespace fl
 		ORIENTATION_RIGHT,
 	} Orientation;
 
-	typedef enum : fgl::Uint8
-	{
-		COLLISIONMETHOD_NONE,
-		COLLISIONMETHOD_FRAME,
-		COLLISIONMETHOD_BOUNDS,
-		COLLISIONMETHOD_PIXEL
-	} CollisionMethod;
-
 	class Entity : public Collidable
 	{
 	public:
 		Entity(const fgl::Vector2d& position, Orientation orientation);
-		virtual ~Entity();
 
 		virtual void update(const fgl::ApplicationData& appData) override;
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
@@ -53,8 +45,6 @@ namespace fl
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) override;
 
-		virtual fgl::ArrayList<CollisionRect*> createCollisionRects(const fgl::ApplicationData& appData, const fgl::ArrayList<CollisionRect*>& previousRects={}) const;
-
 		virtual AnimationOrientation getAnimationOrientation() const override;
 
 	private:
@@ -66,10 +56,8 @@ namespace fl
 		float scale;
 
 		Orientation orientation;
-		CollisionMethod collisionMethod;
+		CollisionRectManager collisionRectManager;
 		bool staticCollisionBody;
-
-		fgl::ArrayList<CollisionRect*> collisionRects;
 
 		struct Anchor
 		{
