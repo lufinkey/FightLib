@@ -22,7 +22,7 @@ namespace fl
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 
-		virtual float getScale() const override;
+		float getScale() const;
 		void setScale(float scale);
 
 		Orientation getOrientation() const;
@@ -48,6 +48,7 @@ namespace fl
 
 	private:
 		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
+		virtual float getDrawScale() const override;
 
 		fgl::Vector2d offset;
 		fgl::Vector2d velocity;

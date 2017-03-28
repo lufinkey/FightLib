@@ -35,16 +35,15 @@ namespace fl
 		size_t getCurrentAnimationFrameIndex() const;
 
 	protected:
-		virtual float getScale() const;
 		virtual AnimationOrientation getAnimationOrientation() const;
 
 		AnimationData* getCurrentAnimationData() const;
+		AnimationData* getAnimationData(const fgl::String& name) const;
+		
+		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const = 0;
+		virtual float getDrawScale() const;
 
 	private:
-		AnimationData* getAnimationData(const fgl::String& name) const;
-
-		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const = 0;
-
 		fgl::ArrayList<AnimationData*> animations;
 
 		AnimationData* currentAnimationData;

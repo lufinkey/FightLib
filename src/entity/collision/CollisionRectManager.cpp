@@ -56,7 +56,7 @@ namespace fl
 				fgl::Vector2d size = collidable->getSize();
 				float rotation = 0;
 				fgl::Vector2d position = collidable->getPosition(&rotation);
-				double scale = collidable->getScale();
+				double scale = (double)collidable->getDrawScale();
 				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
 				fgl::Vector2d diff = velocity;
 				size_t matchingRectIndex = collisionRects.indexWhere([](CollisionRect* const & rect) -> bool {
@@ -82,7 +82,7 @@ namespace fl
 				fgl::Vector2d size = collidable->getSize();
 				float rotation = 0;
 				fgl::Vector2d position = collidable->getPosition(&rotation);
-				double scale = collidable->getScale();
+				double scale = (double)collidable->getDrawScale();
 				AnimationData* animData = collidable->getCurrentAnimationData();
 				if(animData==nullptr)
 				{

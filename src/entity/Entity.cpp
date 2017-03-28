@@ -30,7 +30,16 @@ namespace fl
 	fgl::Vector2d Entity::getDrawPosition(float* rotation) const
 	{
 		//TODO find some better way to actually use this when I'm sober
+		if(rotation!=nullptr)
+		{
+			*rotation = 0;
+		}
 		return fgl::Vector2d(0, 0);
+	}
+	
+	float Entity::getDrawScale() const
+	{
+		return scale;
 	}
 
 	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
