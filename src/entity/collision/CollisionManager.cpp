@@ -85,6 +85,7 @@ namespace fl
 				fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
 				
 				fgl::ArrayList<CollisionRectPair> rectPairs = pair.getCollisionRectPairs(rects1, rects2);
+				//check each CollisionRect for a collision
 				for(auto& rectPair : rectPairs)
 				{
 					fgl::Vector2d shiftAmount = CollisionRect::checkCollision(rectPair.first, rectPair.second);
