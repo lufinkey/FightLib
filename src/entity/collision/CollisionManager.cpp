@@ -20,6 +20,7 @@ namespace fl
 		{
 			collidables.remove(index);
 		}
+		//TODO what do I do about deleted collidables after they're removed? Queue deletion?
 	}
 
 	CollisionSide CollisionManager::getCollisionSide(const fgl::Vector2d& shiftAmount) const
