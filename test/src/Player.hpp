@@ -14,5 +14,5 @@ public:
 	virtual fgl::String getMoveAnimationName(double amount) const override;
 
 protected:
-	virtual void onCollision(fl::Collidable* entity, fl::CollisionSide side) override;
+	virtual void onCollision(fl::Collidable* collided, fl::CollisionSide side) override;
 };

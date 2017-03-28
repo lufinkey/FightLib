@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "Collidable.hpp"
 #include "rects/CollisionRect.hpp"
 
 namespace fl
@@ -20,6 +21,7 @@ namespace fl
 			fgl::String rectTag2;
 		};
 		fgl::ArrayList<PriorityRect> priorityRects;
+		fgl::ArrayList<CollisionSide> previousCollisionSides;
 
 		CollisionPair(Collidable* collidable1, Collidable* collidable2);
 

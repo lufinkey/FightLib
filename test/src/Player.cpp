@@ -55,7 +55,7 @@ fgl::String Player::getMoveAnimationName(double amount) const
 	return "walk";
 }
 
-void Player::onCollision(fl::Collidable* entity, fl::CollisionSide side)
+void Player::onCollision(fl::Collidable* collided, fl::CollisionSide side)
 {
 	if(side==fl::COLLISIONSIDE_TOP)
 	{
