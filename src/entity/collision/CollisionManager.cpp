@@ -77,6 +77,7 @@ namespace fl
 		
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
+		fgl::ArrayList<Collidable*> updatedCollidables;
 
 		//handle collisions
 		for(auto& pair : pairs)
@@ -135,6 +136,16 @@ namespace fl
 						else
 						{
 							//TODO make a case here for two non-static bodies colliding
+						}
+						
+						//add collidables to the list of updated collidables
+						if(!updatedCollidables.contains(collidable1))
+						{
+							updatedCollidables.add(collidable1);
+						}
+						if(!updatedCollidables.contains(collidable2))
+						{
+							updatedCollidables.add(collidable2);
 						}
 					}
 				}
@@ -201,6 +212,12 @@ namespace fl
 		for(auto& onCollision : onCollisionCalls)
 		{
 			onCollision();
+		}
+		
+		//tell updated collidables that their collision updates have finished
+		for(auto collidable : updatedCollidables)
+		{
+			collidable->onFinishCollisionUpdates();
 		}
 	}
 

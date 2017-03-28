@@ -26,5 +26,6 @@ namespace fl
 
 		virtual void onCollision(Collidable* collided, CollisionSide side) {}
 		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) {}
+		virtual void onFinishCollisionUpdates() {}
 	};
 }
