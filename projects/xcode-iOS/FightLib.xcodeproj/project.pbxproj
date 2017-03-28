@@ -16,6 +16,7 @@
 		F17D96EE1E6DB5DE003F4D85 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96EC1E6DB5DE003F4D85 /* Action.cpp */; };
 		F17D96F21E6DB5E8003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96F01E6DB5E8003F4D85 /* ActionEntity.cpp */; };
 		F17D96F31E6DB5E8003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96F11E6DB5E8003F4D85 /* Character.cpp */; };
+		F181962C1E8AC053009BD55F /* CollisionRectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F181962B1E8AC053009BD55F /* CollisionRectManager.cpp */; };
 		F19AB0A31E52471A00855347 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F19AB0A01E52470600855347 /* Entity.cpp */; };
 		F1A7DF3D1E893D9300472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF3A1E893D9300472DB2 /* AnimationAssetManager.cpp */; };
 		F1A7DF3E1E893D9300472DB2 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF3B1E893D9300472DB2 /* AnimationData.cpp */; };
@@ -58,6 +59,8 @@
 		F17D96F01E6DB5E8003F4D85 /* ActionEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEntity.cpp; sourceTree = "<group>"; };
 		F17D96F11E6DB5E8003F4D85 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		F17D979B1E6DCB3E003F4D85 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../external/GameLibrary/projects/xcode-iOS/build/Debug-iphoneos/libGameLibrary.a"; sourceTree = "<group>"; };
+		F181962A1E8AC039009BD55F /* CollisionRectManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionRectManager.hpp; sourceTree = "<group>"; };
+		F181962B1E8AC053009BD55F /* CollisionRectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRectManager.cpp; sourceTree = "<group>"; };
 		F19AB08C1E52469200855347 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19AB0A01E52470600855347 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		F1A7DF2E1E893CE700472DB2 /* Collidable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Collidable.hpp; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				F17BBC091E64979700A7F8F4 /* rects */,
 				F17BBC051E64978E00A7F8F4 /* CollisionManager.cpp */,
 				F17BBC061E64978E00A7F8F4 /* CollisionPair.cpp */,
+				F181962B1E8AC053009BD55F /* CollisionRectManager.cpp */,
 			);
 			path = collision;
 			sourceTree = "<group>";
@@ -225,6 +229,7 @@
 				F1A7DF2E1E893CE700472DB2 /* Collidable.hpp */,
 				F17BBC151E6497DB00A7F8F4 /* CollisionManager.hpp */,
 				F17BBC161E6497DB00A7F8F4 /* CollisionPair.hpp */,
+				F181962A1E8AC039009BD55F /* CollisionRectManager.hpp */,
 			);
 			path = collision;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				F17BBC081E64978E00A7F8F4 /* CollisionPair.cpp in Sources */,
 				F17BBC0E1E64979700A7F8F4 /* CollisionRect.cpp in Sources */,
 				F1A7DF3E1E893D9300472DB2 /* AnimationData.cpp in Sources */,
+				F181962C1E8AC053009BD55F /* CollisionRectManager.cpp in Sources */,
 				F17D96EE1E6DB5DE003F4D85 /* Action.cpp in Sources */,
 				F17BBC0D1E64979700A7F8F4 /* BoxCollisionRect.cpp in Sources */,
 				F1A7DF3D1E893D9300472DB2 /* AnimationAssetManager.cpp in Sources */,
