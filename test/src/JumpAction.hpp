@@ -10,4 +10,5 @@ public:
 
 protected:
 	virtual void onPerform(fl::ActionParamsPtr params) override;
+	virtual void onEvent(fl::ActionEventPtr event) override;
 };

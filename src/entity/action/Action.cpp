@@ -4,6 +4,9 @@
 
 namespace fl
 {
+	const fgl::String ACTIONFLAG_ALLOWMOVEMENT = "AllowMovement";
+	const fgl::String ACTIONFLAG_ALLOWORIENTATIONCHANGE = "AllowOrientationChange";
+	
 	ActionParams::~ActionParams()
 	{
 		//

@@ -1,5 +1,6 @@
 
 #include <fightlib/entity/ActionEntity.hpp>
+#include <fightlib/entity/action/ActionInterruptEvent.hpp>
 
 namespace fl
 {
@@ -34,16 +35,20 @@ namespace fl
 
 	bool ActionEntity::performAction(const fgl::String& name, ActionParamsPtr params)
 	{
-		if(currentAction!=nullptr)
-		{
-			//TODO maybe in the future, send an event telling the current action another action wants to be performed
-			// then, if the current action ends itself, then the next action can be performed.
-			return false;
-		}
 		Action* action = getAction(name);
 		if(action==nullptr)
 		{
 			throw fgl::IllegalArgumentException("name", "does not match any actions");
+		}
+		if(currentAction!=nullptr)
+		{
+			//send an ActionInterruptEvent to give the current action a chance to end itself
+			currentAction->onEvent(std::shared_ptr<ActionEvent>(new ActionInterruptEvent(action)));
+			if(currentAction!=nullptr)
+			{
+				//the current action did not end itself
+				return false;
+			}
 		}
 		currentAction = action;
 		currentAction->performing = true;
@@ -81,11 +86,21 @@ namespace fl
 		onActionEnd(action);
 	}
 	
-	void ActionEntity::sendActionEvent(ActionEventPtr event)
+	void ActionEntity::sendActionEvent(ActionEventPtr event, bool currentActionOnly)
 	{
-		for(auto actionPair : actions)
+		if(currentActionOnly)
 		{
-			actionPair.second->onEvent(event);
+			if(currentAction!=nullptr)
+			{
+				currentAction->onEvent(event);
+			}
+		}
+		else
+		{
+			for(auto actionPair : actions)
+			{
+				actionPair.second->onEvent(event);
+			}
 		}
 	}
 

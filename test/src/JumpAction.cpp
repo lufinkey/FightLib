@@ -35,3 +35,14 @@ void JumpAction::onPerform(fl::ActionParamsPtr params)
 		});
 	}
 }
+
+void JumpAction::onEvent(fl::ActionEventPtr event)
+{
+	if(isPerforming())
+	{
+		if(event->getEventType()==fl::ACTIONEVENT_INTERRUPT)
+		{
+			end();
+		}
+	}
+}

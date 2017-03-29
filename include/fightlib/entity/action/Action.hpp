@@ -40,6 +40,6 @@ namespace fl
 		bool performing;
 	};
 	
-	static const fgl::String ACTIONFLAG_ALLOWMOVEMENT = "AllowMovement";
-	static const fgl::String ACTIONFLAG_ALLOWORIENTATIONCHANGE = "AllowOrientationChange";
+	extern const fgl::String ACTIONFLAG_ALLOWMOVEMENT;
+	extern const fgl::String ACTIONFLAG_ALLOWORIENTATIONCHANGE;
 }
