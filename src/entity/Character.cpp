@@ -12,7 +12,7 @@ namespace fl
 
 	void Character::update(const fgl::ApplicationData& appData)
 	{
-		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWSMOVEMENT))
+		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWMOVEMENT))
 		{
 			updateMovement(appData);
 		}
@@ -41,7 +41,7 @@ namespace fl
 		velocity.x = (direction.x >= 0) ? moveSpeed : -moveSpeed;
 		setVelocity(velocity);
 
-		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWSORIENTATIONCHANGE))
+		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWORIENTATIONCHANGE))
 		{
 			if(direction.x < 0)
 			{
