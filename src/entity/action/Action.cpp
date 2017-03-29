@@ -32,10 +32,27 @@ namespace fl
 		ActionEventType_nextType++;
 		return eventType;
 	}
+	
+	Action::Action()
+		: entity(nullptr),
+		performing(false)
+	{
+		//
+	}
 
 	Action::~Action()
 	{
 		//
+	}
+	
+	ActionEntity* Action::getEntity() const
+	{
+		return entity;
+	}
+	
+	bool Action::isPerforming() const
+	{
+		return performing;
 	}
 
 	bool Action::getFlag(const fgl::String& flag) const
@@ -43,27 +60,27 @@ namespace fl
 		return false;
 	}
 
-	void Action::onPerform(ActionEntity* entity, ActionParamsPtr params)
+	void Action::onPerform(ActionParamsPtr params)
 	{
 		//Open for implementation
 	}
 
-	void Action::onUpdate(ActionEntity* entity, fgl::ApplicationData appData)
+	void Action::onUpdate(const fgl::ApplicationData& appData)
 	{
 		//Open for implementation
 	}
 
-	void Action::onEnd(ActionEntity* entity)
+	void Action::onEnd()
 	{
 		//Open for implementation
 	}
 
-	void Action::onEvent(ActionEntity* entity, ActionEventPtr event)
+	void Action::onEvent(ActionEventPtr event)
 	{
 		//Open for implementation
 	}
 
-	void Action::end(ActionEntity* entity)
+	void Action::end()
 	{
 		entity->endAction(this);
 	}

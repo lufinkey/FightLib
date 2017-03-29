@@ -22,7 +22,7 @@ namespace fl
 	{
 		if(currentAction!=nullptr)
 		{
-			currentAction->onUpdate(this, appData);
+			currentAction->onUpdate(appData);
 		}
 		Entity::update(appData);
 	}
@@ -46,23 +46,34 @@ namespace fl
 			throw fgl::IllegalArgumentException("name", "does not match any actions");
 		}
 		currentAction = action;
-		currentAction->onPerform(this, params);
+		currentAction->performing = true;
+		currentAction->onPerform(params);
 		return true;
 	}
 
 	void ActionEntity::addAction(const fgl::String& name, Action* action)
 	{
+		if(action->entity != nullptr)
+		{
+			throw fgl::IllegalArgumentException("action", "cannot be added to multiple entities at the same time");
+		}
+		action->entity = this;
 		actions.add(std::pair<fgl::String, Action*>(name, action));
 	}
 
 	void ActionEntity::endAction(Action* action)
 	{
-		if(action!=currentAction)
+		if(action==nullptr)
+		{
+			throw fgl::IllegalArgumentException("action", "cannot be null");
+		}
+		else if(action!=currentAction)
 		{
 			throw fgl::IllegalArgumentException("action", "is not currently being performed by this entity");
 		}
+		currentAction->performing = false;
 		currentAction = nullptr;
-		action->onEnd(this);
+		action->onEnd();
 		onActionEnd(action);
 	}
 

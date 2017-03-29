@@ -10,27 +10,27 @@ bool JumpAction::getFlag(const fgl::String& flag) const
 	return false;
 }
 
-void JumpAction::onPerform(fl::ActionEntity* entity, fl::ActionParamsPtr params)
+void JumpAction::onPerform(fl::ActionParamsPtr params)
 {
-	auto velocity = entity->getVelocity();
+	fl::Character* character = (fl::Character*)getEntity();
+	auto velocity = character->getVelocity();
 	velocity.y = -600;
-	entity->setVelocity(velocity);
-	fl::Character* character = (fl::Character*)entity;
+	character->setVelocity(velocity);
 	if(character->isOnGround())
 	{
-		entity->changeAnimation("jump", [=](fl::AnimationEventType event){
+		character->changeAnimation("jump", [=](fl::AnimationEventType event){
 			if(event==fl::ANIMATIONEVENT_FINISHED)
 			{
-				end(entity);
+				end();
 			}
 		});
 	}
 	else
 	{
-		entity->changeAnimation("jump2", [=](fl::AnimationEventType event){
+		character->changeAnimation("jump2", [=](fl::AnimationEventType event){
 			if(event==fl::ANIMATIONEVENT_FINISHED)
 			{
-				end(entity);
+				end();
 			}
 		});
 	}

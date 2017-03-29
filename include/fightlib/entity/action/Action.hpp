@@ -42,17 +42,25 @@ namespace fl
 	{
 		friend class ActionEntity;
 	public:
+		Action();
 		virtual ~Action();
+		
+		ActionEntity* getEntity() const;
+		bool isPerforming() const;
 
 		virtual bool getFlag(const fgl::String& flag) const;
 
 	protected:
-		virtual void onPerform(ActionEntity* entity, ActionParamsPtr params = nullptr);
-		virtual void onUpdate(ActionEntity* entity, fgl::ApplicationData appData);
-		virtual void onEnd(ActionEntity* entity);
-		virtual void onEvent(ActionEntity* entity, ActionEventPtr event);
+		virtual void onPerform(ActionParamsPtr params = nullptr);
+		virtual void onUpdate(const fgl::ApplicationData& appData);
+		virtual void onEnd();
+		virtual void onEvent(ActionEventPtr event);
 
-		void end(ActionEntity* entity);
+		void end();
+		
+	private:
+		ActionEntity* entity;
+		bool performing;
 	};
 	
 	static const fgl::String ACTIONFLAG_ALLOWMOVEMENT = "AllowMovement";
