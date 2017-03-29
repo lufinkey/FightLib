@@ -20,9 +20,9 @@ namespace fl
 
 	void ActionEntity::update(const fgl::ApplicationData& appData)
 	{
-		if(currentAction!=nullptr)
+		for(auto actionPair : actions)
 		{
-			currentAction->onUpdate(appData);
+			actionPair.second->onUpdate(appData);
 		}
 		Entity::update(appData);
 	}
