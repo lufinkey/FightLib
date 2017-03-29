@@ -76,6 +76,14 @@ namespace fl
 		action->onEnd();
 		onActionEnd(action);
 	}
+	
+	void ActionEntity::sendActionEvent(ActionEventPtr event)
+	{
+		for(auto actionPair : actions)
+		{
+			actionPair.second->onEvent(event);
+		}
+	}
 
 	Action* ActionEntity::getAction(const fgl::String& name) const
 	{
