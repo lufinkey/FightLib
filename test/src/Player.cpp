@@ -10,6 +10,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	loadAnimation("assets/animations/idle.plist", assetManager);
 	loadAnimation("assets/animations/walk.plist", assetManager);
 	loadAnimation("assets/animations/jump.plist", assetManager);
+	loadAnimation("assets/animations/jump2.plist", assetManager);
 	loadAnimation("assets/animations/fall.plist", assetManager);
 	loadAnimation("assets/animations/punch.plist", assetManager);
 	changeAnimation("idle");

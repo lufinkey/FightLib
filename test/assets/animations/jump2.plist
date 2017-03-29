@@ -7,7 +7,7 @@
 		<key>orientation</key>
 		<string>LEFT</string>
 		<key>fps</key>
-		<real>24</real>
+		<real>40</real>
 		<key>files</key>
 		<array>
 			<dict>
