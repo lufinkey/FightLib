@@ -86,20 +86,20 @@ namespace fl
 		onActionEnd(action);
 	}
 	
-	void ActionEntity::sendActionEvent(ActionEventPtr event, bool currentActionOnly)
+	void ActionEntity::sendActionEvent(ActionEventPtr event, bool allActions)
 	{
-		if(currentActionOnly)
-		{
-			if(currentAction!=nullptr)
-			{
-				currentAction->onEvent(event);
-			}
-		}
-		else
+		if(allActions)
 		{
 			for(auto actionPair : actions)
 			{
 				actionPair.second->onEvent(event);
+			}
+		}
+		else
+		{
+			if(currentAction!=nullptr)
+			{
+				currentAction->onEvent(event);
 			}
 		}
 	}
