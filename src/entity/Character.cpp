@@ -107,6 +107,7 @@ namespace fl
 		{
 			topCollidedCount++;
 		}
+		ActionEntity::onCollision(collided, side);
 	}
 	
 	void Character::onCollisionFinish(fl::Collidable* collided, CollisionSide side)
@@ -115,6 +116,7 @@ namespace fl
 		{
 			topCollidedCount--;
 		}
+		ActionEntity::onCollisionFinish(collided, side);
 	}
 	
 	void Character::onFinishCollisionUpdates()
@@ -123,5 +125,6 @@ namespace fl
 		{
 			updateMoveAnimation();
 		}
+		ActionEntity::onFinishCollisionUpdates();
 	}
 }

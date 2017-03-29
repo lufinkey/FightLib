@@ -20,11 +20,11 @@ namespace fl
 
 	void ActionEntity::update(const fgl::ApplicationData& appData)
 	{
+		Entity::update(appData);
 		for(auto actionPair : actions)
 		{
 			actionPair.second->onUpdate(appData);
 		}
-		Entity::update(appData);
 	}
 	
 	void ActionEntity::onActionEnd(Action* action)
@@ -53,7 +53,11 @@ namespace fl
 
 	void ActionEntity::addAction(const fgl::String& name, Action* action)
 	{
-		if(action->entity != nullptr)
+		if(action==nullptr)
+		{
+			throw fgl::IllegalArgumentException("action", "cannot be null");
+		}
+		else if(action->entity != nullptr)
 		{
 			throw fgl::IllegalArgumentException("action", "cannot be added to multiple entities at the same time");
 		}
