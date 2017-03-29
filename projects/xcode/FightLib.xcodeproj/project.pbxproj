@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
+		F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */; };
 		F17BBBE91E64965800A7F8F4 /* BoxCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */; };
 		F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */; };
 		F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE81E64965800A7F8F4 /* PixelCollisionRect.cpp */; };
@@ -32,6 +33,8 @@
 		F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
 		F15A1F901E549F5E008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15A1FAF1E549FAE008D83E5 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		F164D2C51E8C09AB00B11F7F /* ActionEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionEvent.hpp; sourceTree = "<group>"; };
+		F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEvent.cpp; sourceTree = "<group>"; };
 		F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollisionRect.cpp; sourceTree = "<group>"; };
 		F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRect.cpp; sourceTree = "<group>"; };
 		F17BBBE81E64965800A7F8F4 /* PixelCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PixelCollisionRect.cpp; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F17D96CB1E6DB50B003F4D85 /* Action.hpp */,
+				F164D2C51E8C09AB00B11F7F /* ActionEvent.hpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -199,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				F17D96D11E6DB531003F4D85 /* Action.cpp */,
+				F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
 				F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */,
 				F17BBBEE1E64965E00A7F8F4 /* CollisionManager.cpp in Sources */,
+				F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */,
 				F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */,
 				F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
