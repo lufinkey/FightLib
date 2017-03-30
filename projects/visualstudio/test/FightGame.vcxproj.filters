@@ -15,12 +15,24 @@
     <ClCompile Include="..\..\..\test\src\Player.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\test\src\TestStage.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\test\src\JumpAction.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\test\src\Player.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\TestStage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\JumpAction.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

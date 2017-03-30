@@ -21,10 +21,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\action\ActionEvent.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\action\ActionInterruptEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRectManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
@@ -37,21 +40,28 @@
     <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
+    <ClInclude Include="..\..\include\fightlib\game\Stage.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
+    <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp" />
+    <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp" />
     <ClCompile Include="..\..\src\entity\Character.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp" />
     <ClCompile Include="..\..\src\entity\draw\Sprite.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
+    <ClCompile Include="..\..\src\entity\Platform.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
+    <ClCompile Include="..\..\src\game\Stage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{865CCF04-F0E6-42A1-8694-98E95821E8CE}</ProjectGuid>

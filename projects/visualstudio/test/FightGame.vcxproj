@@ -20,12 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\test\src\FightGame.cpp" />
+    <ClCompile Include="..\..\..\test\src\JumpAction.cpp" />
     <ClCompile Include="..\..\..\test\src\main.cpp" />
     <ClCompile Include="..\..\..\test\src\Player.cpp" />
+    <ClCompile Include="..\..\..\test\src\TestStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp" />
+    <ClInclude Include="..\..\..\test\src\JumpAction.hpp" />
     <ClInclude Include="..\..\..\test\src\Player.hpp" />
+    <ClInclude Include="..\..\..\test\src\TestStage.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0C45C5B1-6B84-4A1A-B806-771ADB5DBCC0}</ProjectGuid>

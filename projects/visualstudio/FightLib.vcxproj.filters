@@ -102,6 +102,18 @@
     <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp">
       <Filter>include\fightlib\entity\collision</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\action\ActionEvent.hpp">
+      <Filter>include\fightlib\entity\action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\action\ActionInterruptEvent.hpp">
+      <Filter>include\fightlib\entity\action</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRectManager.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\game\Stage.hpp">
+      <Filter>include\fightlib\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -142,6 +154,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp">
       <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp">
+      <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp">
+      <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp">
+      <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\Platform.cpp">
+      <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\Stage.cpp">
+      <Filter>src\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
