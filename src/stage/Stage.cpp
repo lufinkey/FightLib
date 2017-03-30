@@ -13,14 +13,16 @@ namespace fl
 		//
 	}
 	
-	void Stage::update(const fgl::ApplicationData& appData)
+	void Stage::update(fgl::ApplicationData appData)
 	{
+		appData.additionalData["stage"] = this;
 		drawManager.update(appData);
 		collisionManager.update(appData);
 	}
 	
-	void Stage::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	void Stage::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
+		appData.additionalData["stage"] = this;
 		drawManager.draw(appData, graphics);
 	}
 	

@@ -14,8 +14,8 @@ namespace fl
 		Stage();
 		virtual ~Stage();
 		
-		void update(const fgl::ApplicationData& appData);
-		void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;
+		void update(fgl::ApplicationData appData);
+		void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 		
 	protected:
 		void addPlatform(Platform* platform);
