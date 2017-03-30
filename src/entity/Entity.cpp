@@ -34,7 +34,7 @@ namespace fl
 		{
 			*rotation = 0;
 		}
-		return fgl::Vector2d(0, 0);
+		return offset;
 	}
 	
 	float Entity::getDrawScale() const
@@ -44,9 +44,10 @@ namespace fl
 
 	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
+		fgl::Graphics childGraphics = graphics;
 		if(parentEntity==nullptr)
 		{
-			graphics.translate(offset.x, offset.y);
+			childGraphics.translate(offset.x, offset.y);
 		}
 		else
 		{
@@ -59,11 +60,11 @@ namespace fl
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
 			{
-				graphics.translate(-offset.x, offset.y);
+				childGraphics.translate(-offset.x, offset.y);
 			}
 			else
 			{
-				graphics.translate(offset.x, offset.y);
+				childGraphics.translate(offset.x, offset.y);
 			}
 		}
 		
@@ -89,7 +90,7 @@ namespace fl
 			{
 				if(anchorData.behind)
 				{
-					fgl::Graphics entityGraphics = graphics;
+					fgl::Graphics entityGraphics = childGraphics;
 					entityGraphics.translate(anchorData.offset);
 					if(anchorData.rotation!=0)
 					{
@@ -109,7 +110,7 @@ namespace fl
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
 		{
 			const AnchorDrawData& anchorData = frontAnchorDatas[i];
-			fgl::Graphics entityGraphics = graphics;
+			fgl::Graphics entityGraphics = childGraphics;
 			entityGraphics.translate(anchorData.offset);
 			if(anchorData.rotation!=0)
 			{
