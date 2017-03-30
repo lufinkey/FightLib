@@ -14,4 +14,4 @@
 
 #include "entity/collision/CollisionManager.hpp"
 
-#include "game/Stage.hpp"
+#include "stage/Stage.hpp"

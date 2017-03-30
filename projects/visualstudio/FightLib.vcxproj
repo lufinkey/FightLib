@@ -40,7 +40,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
-    <ClInclude Include="..\..\include\fightlib\game\Stage.hpp" />
+    <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
@@ -61,7 +61,7 @@
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\entity\Platform.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
-    <ClCompile Include="..\..\src\game\Stage.cpp" />
+    <ClCompile Include="..\..\src\stage\Stage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{865CCF04-F0E6-42A1-8694-98E95821E8CE}</ProjectGuid>

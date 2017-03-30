@@ -25,7 +25,7 @@ namespace fl
 
 	double Character::getMoveSpeed(double amount) const
 	{
-		return 60;
+		return 200;
 	}
 
 	void Character::updateMovement(const fgl::ApplicationData& appData)

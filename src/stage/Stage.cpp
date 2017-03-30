@@ -1,5 +1,5 @@
 
-#include <fightlib/game/Stage.hpp>
+#include <fightlib/stage/Stage.hpp>
 
 namespace fl
 {
