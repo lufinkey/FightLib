@@ -67,9 +67,13 @@ void JumpAction::onEvent(fl::ActionEventPtr event)
 	{
 		if(event->getEventType()==fl::ACTIONEVENT_INTERRUPT)
 		{
-			if(!doubleJumped)
+			auto interruptEvent = std::static_pointer_cast<fl::ActionInterruptEvent>(event);
+			if(interruptEvent->getInterruptingAction()==this)
 			{
-				end();
+				if(!doubleJumped)
+				{
+					end();
+				}
 			}
 		}
 	}
