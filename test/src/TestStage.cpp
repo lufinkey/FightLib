@@ -25,7 +25,7 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	block3->loadAnimation("assets/animations/block.plist", assetManager);
 	block3->changeAnimation("block");
 	
-	block4 = new fl::Platform(fgl::Vector2d(200, 250));
+	block4 = new fl::Platform(fgl::Vector2d(200, 220));
 	block4->loadAnimation("assets/animations/block.plist", assetManager);
 	block4->changeAnimation("block");
 	
