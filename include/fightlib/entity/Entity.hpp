@@ -46,10 +46,11 @@ namespace fl
 
 		virtual AnimationOrientation getAnimationOrientation() const override;
 
-	private:
 		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
 		virtual float getDrawScale() const override;
+		virtual bool shouldUseParentMetaPointRotation() const;
 
+	private:
 		fgl::Vector2d offset;
 		fgl::Vector2d velocity;
 

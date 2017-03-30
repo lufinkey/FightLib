@@ -41,6 +41,11 @@ namespace fl
 	{
 		return scale;
 	}
+	
+	bool Entity::shouldUseParentMetaPointRotation() const
+	{
+		return true;
+	}
 
 	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
@@ -300,6 +305,11 @@ namespace fl
 			AnimationMetaPoint childMetaPoint = childMetaPoints[anchor.childPointIndex];
 			float parentRotation = parentMetaPoint.rotation;
 			float childRotation = childMetaPoint.rotation;
+			
+			if(!shouldUseParentMetaPointRotation())
+			{
+				parentRotation = 0;
+			}
 
 			fgl::Vector2d parentSize = parentEntity->getSize();
 			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-(parentSize.x/2), ((double)parentMetaPoint.y*parentEntity->scale)-(parentSize.y/2));
