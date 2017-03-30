@@ -34,6 +34,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationAssetManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\DrawManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />

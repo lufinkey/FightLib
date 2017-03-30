@@ -3,33 +3,82 @@
 
 namespace fl
 {
-	void DrawManager::addDrawable(Drawable* drawable)
+	void DrawManager::addDrawable(Drawable* drawable, float zLayer)
 	{
-		drawables.add(drawable);
+		DrawableData drawableData;
+		drawableData.drawable = drawable;
+		drawableData.zLayer = zLayer;
+
+		for(size_t drawables_size=drawables.size(), i=0; i<drawables_size; i++)
+		{
+			auto& cmp = drawables[i];
+			if(zLayer < cmp.zLayer)
+			{
+				drawables.add(i, drawableData);
+				return;
+			}
+		}
+		
+		drawables.add(drawableData);
 	}
 	
 	void DrawManager::removeDrawable(Drawable* drawable)
 	{
-		size_t drawableIndex = drawables.indexOf(drawable);
-		if(drawableIndex!=-1)
+		size_t index = drawables.indexWhere([&](const DrawableData& cmp)->bool {
+			if(cmp.drawable==drawable)
+			{
+				return true;
+			}
+			return false;
+		});
+		if(index!=-1)
 		{
-			drawables.remove(drawableIndex);
+			drawables.remove(index);
 		}
+	}
+
+	float DrawManager::getDrawableZLayer(Drawable* drawable) const
+	{
+		for(auto& drawableData : drawables)
+		{
+			if(drawableData.drawable == drawable)
+			{
+				return drawableData.zLayer;
+			}
+		}
+		throw fgl::IllegalArgumentException("drawable", "does not exist in this DrawManager");
+	}
+
+	void DrawManager::setDrawableZLayer(Drawable* drawable, float zLayer)
+	{
+		size_t index = drawables.indexWhere([&](const DrawableData& cmp)->bool {
+			if(cmp.drawable==drawable)
+			{
+				return true;
+			}
+			return false;
+		});
+		if(index==-1)
+		{
+			throw fgl::IllegalArgumentException("drawable", "does not exist in this DrawManager");
+		}
+		drawables.remove(index);
+		addDrawable(drawable, zLayer);
 	}
 	
 	void DrawManager::update(const fgl::ApplicationData& appData)
 	{
-		for(auto drawable : drawables)
+		for(auto& drawableData : drawables)
 		{
-			drawable->update(appData);
+			drawableData.drawable->update(appData);
 		}
 	}
 	
 	void DrawManager::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
-		for(auto drawable : drawables)
+		for(auto& drawableData : drawables)
 		{
-			drawable->draw(appData, graphics);
+			drawableData.drawable->draw(appData, graphics);
 		}
 	}
 }

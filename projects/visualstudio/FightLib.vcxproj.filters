@@ -120,6 +120,9 @@
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp">
       <Filter>include\fightlib\stage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\DrawManager.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
