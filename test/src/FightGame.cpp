@@ -3,6 +3,8 @@
 
 void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
+	setFPS(60);
+	
 	animationAssetManager = new fl::AnimationAssetManager(assetManager);
 
 	testStage = new TestStage(animationAssetManager);

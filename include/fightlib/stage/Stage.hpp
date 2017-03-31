@@ -14,8 +14,10 @@ namespace fl
 		Stage();
 		virtual ~Stage();
 		
-		void update(fgl::ApplicationData appData);
-		void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+		virtual void update(fgl::ApplicationData appData);
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+		
+		virtual double getGravity(Entity* entity) const;
 		
 	protected:
 		void addPlatform(Platform* platform);
@@ -25,6 +27,8 @@ namespace fl
 		void removeEntity(Entity* entity);
 		
 	private:
+		fgl::ArrayList<Entity*> entities;
+		fgl::ArrayList<Platform*> platforms;
 		CollisionManager collisionManager;
 		DrawManager drawManager;
 	};

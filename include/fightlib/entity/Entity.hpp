@@ -37,6 +37,7 @@ namespace fl
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
+		Entity* getParentEntity() const;
 		
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;

@@ -34,10 +34,7 @@ void Player::update(const fgl::ApplicationData& appData)
 		direction.x = 0;
 	}
 	setDirection(direction);
-
-	fgl::Vector2d velocity = getVelocity();
-	velocity.y += (1800*appData.getFrameSpeedMultiplier());
-	setVelocity(velocity);
+	
 	if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::UPARROW) && !fgl::Keyboard::wasKeyPressed(fgl::Keyboard::UPARROW))
 	{
 		performAction("jump");

@@ -235,6 +235,11 @@ namespace fl
 			}
 		}
 	}
+	
+	Entity* Entity::getParentEntity() const
+	{
+		return parentEntity;
+	}
 
 	void Entity::shift(const fgl::Vector2d& shiftOffset)
 	{
