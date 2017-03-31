@@ -182,5 +182,8 @@
     <ClCompile Include="..\..\src\stage\Stage.cpp">
       <Filter>src\stage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\Collidable.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -49,6 +49,7 @@
     <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp" />
     <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp" />
     <ClCompile Include="..\..\src\entity\Character.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\Collidable.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp" />
