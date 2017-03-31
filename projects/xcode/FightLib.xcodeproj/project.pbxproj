@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
+		F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F24F21E8E9550005EE4F1 /* Stage.cpp */; };
 		F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */; };
 		F164D2DB1E8C164F00B11F7F /* ActionInterruptEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */; };
 		F17BBBE91E64965800A7F8F4 /* BoxCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */; };
@@ -23,7 +24,6 @@
 		F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */; };
 		F18196321E8AC507009BD55F /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196311E8AC507009BD55F /* Platform.cpp */; };
 		F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196371E8ADADC009BD55F /* DrawManager.cpp */; };
-		F181963B1E8ADD09009BD55F /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F181963A1E8ADD09009BD55F /* Stage.cpp */; };
 		F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */; };
 		F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF491E893E2F00472DB2 /* AnimationData.cpp */; };
 		F1A7DF4D1E893E2F00472DB2 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF4A1E893E2F00472DB2 /* Sprite.cpp */; };
@@ -34,6 +34,8 @@
 		F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
 		F15A1F901E549F5E008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15A1FAF1E549FAE008D83E5 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		F15F24F01E8E9541005EE4F1 /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
+		F15F24F21E8E9550005EE4F1 /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
 		F164D2C51E8C09AB00B11F7F /* ActionEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionEvent.hpp; sourceTree = "<group>"; };
 		F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEvent.cpp; sourceTree = "<group>"; };
 		F164D2D91E8C163D00B11F7F /* ActionInterruptEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionInterruptEvent.hpp; sourceTree = "<group>"; };
@@ -64,8 +66,6 @@
 		F18196311E8AC507009BD55F /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		F18196361E8ADAC9009BD55F /* DrawManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawManager.hpp; sourceTree = "<group>"; };
 		F18196371E8ADADC009BD55F /* DrawManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawManager.cpp; sourceTree = "<group>"; };
-		F18196391E8ADCFC009BD55F /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
-		F181963A1E8ADD09009BD55F /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
 		F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
 		F1A7DF491E893E2F00472DB2 /* AnimationData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
 		F1A7DF4A1E893E2F00472DB2 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
@@ -91,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				F1209DF81E68AF5A00E1BF4F /* Fight.hpp */,
-				F18196391E8ADCFC009BD55F /* Stage.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -100,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */,
-				F181963A1E8ADD09009BD55F /* Stage.cpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -137,6 +135,7 @@
 			children = (
 				F15A1F991E549FA7008D83E5 /* entity */,
 				F1209DF71E68AF5A00E1BF4F /* game */,
+				F15F24EF1E8E9541005EE4F1 /* stage */,
 				F17BBBF01E64967800A7F8F4 /* fightlib.hpp */,
 			);
 			path = fightlib;
@@ -184,6 +183,7 @@
 			children = (
 				F15A1FA81E549FAE008D83E5 /* entity */,
 				F1209DF91E68AF8E00E1BF4F /* game */,
+				F15F24F11E8E9550005EE4F1 /* stage */,
 			);
 			name = src;
 			path = ../../src;
@@ -222,6 +222,22 @@
 				F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */,
 			);
 			path = collision;
+			sourceTree = "<group>";
+		};
+		F15F24EF1E8E9541005EE4F1 /* stage */ = {
+			isa = PBXGroup;
+			children = (
+				F15F24F01E8E9541005EE4F1 /* Stage.hpp */,
+			);
+			path = stage;
+			sourceTree = "<group>";
+		};
+		F15F24F11E8E9550005EE4F1 /* stage */ = {
+			isa = PBXGroup;
+			children = (
+				F15F24F21E8E9550005EE4F1 /* Stage.cpp */,
+			);
+			path = stage;
 			sourceTree = "<group>";
 		};
 		F17BBBE51E64965800A7F8F4 /* rects */ = {
@@ -352,6 +368,7 @@
 				F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */,
 				F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */,
 				F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */,
+				F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */,
 				F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */,
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
 				F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */,
@@ -360,7 +377,6 @@
 				F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */,
 				F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
-				F181963B1E8ADD09009BD55F /* Stage.cpp in Sources */,
 				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
