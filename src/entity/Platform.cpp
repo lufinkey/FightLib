@@ -4,7 +4,8 @@
 namespace fl
 {
 	Platform::Platform(const fgl::Vector2d& position)
-		: position(position),
+		: Collidable(position),
+		position(position),
 		scale(1.0f)
 	{
 		setCollisionMethod(COLLISIONMETHOD_PIXEL);
@@ -14,7 +15,7 @@ namespace fl
 	{
 		Collidable::update(appData);
 		
-		collisionRectManager.update(appData, this, fgl::Vector2d(0,0));
+		collisionRectManager.update(appData, this);
 	}
 	
 	fgl::Vector2d Platform::getPosition(float* rotation) const

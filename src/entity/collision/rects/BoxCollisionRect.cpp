@@ -3,10 +3,10 @@
 
 namespace fl
 {
-	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, const fgl::Vector2d& resolution)
 		: CollisionRect(tag),
 		rect(rect),
-		velocity(velocity),
+		lastCenter(lastCenter),
 		boundingRect(rect),
 		resolution(resolution),
 		usesTransform(false)
@@ -14,9 +14,10 @@ namespace fl
 		//
 	}
 
-	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
 		: CollisionRect(tag),
 		rect(rect),
+		lastCenter(lastCenter),
 		resolution(resolution),
 		usesTransform(true)
 	{
@@ -58,7 +59,7 @@ namespace fl
 
 	fgl::Vector2d BoxCollisionRect::getVelocity() const
 	{
-		return velocity;
+		return getCenter()-lastCenter;
 	}
 
 	fgl::Vector2d BoxCollisionRect::getPreferredIncrement() const

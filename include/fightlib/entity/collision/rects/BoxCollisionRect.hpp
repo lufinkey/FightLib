@@ -8,8 +8,8 @@ namespace fl
 	class BoxCollisionRect : public CollisionRect
 	{
 	public:
-		BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
-		BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& velocity, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
+		BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
+		BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution=fgl::Vector2d(1.0, 1.0));
 
 		virtual fgl::RectangleD getRect() const override;
 		virtual bool isFilled() const override;
@@ -23,7 +23,7 @@ namespace fl
 
 	private:
 		fgl::RectangleD rect;
-		fgl::Vector2d velocity;
+		fgl::Vector2d lastCenter;
 		fgl::RectangleD boundingRect;
 		fgl::TransformD srcTransform;
 		fgl::Vector2d resolution;

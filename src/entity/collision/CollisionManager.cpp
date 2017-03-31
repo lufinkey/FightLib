@@ -70,7 +70,7 @@ namespace fl
 		
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
-		fgl::ArrayList<Collidable*> updatedCollidables;
+		//fgl::ArrayList<Collidable*> updatedCollidables;
 
 		//handle collisions
 		for(auto& pair : pairs)
@@ -133,14 +133,14 @@ namespace fl
 						}
 						
 						//add collidables to the list of updated collidables
-						if(!updatedCollidables.contains(collidable1))
+						/*if(!updatedCollidables.contains(collidable1))
 						{
 							updatedCollidables.add(collidable1);
 						}
 						if(!updatedCollidables.contains(collidable2))
 						{
 							updatedCollidables.add(collidable2);
-						}
+						}*/
 					}
 				}
 				
@@ -222,14 +222,14 @@ namespace fl
 					}
 					
 					//add collidables to the list of updated collidables
-					if(!updatedCollidables.contains(collidable1))
+					/*if(!updatedCollidables.contains(collidable1))
 					{
 						updatedCollidables.add(collidable1);
 					}
 					if(!updatedCollidables.contains(collidable2))
 					{
 						updatedCollidables.add(collidable2);
-					}
+					}*/
 				}
 			}
 		}
@@ -247,7 +247,7 @@ namespace fl
 		}
 		
 		//tell updated collidables that their collision updates have finished
-		for(auto collidable : updatedCollidables)
+		for(auto collidable : collidables) //updatedCollidables)
 		{
 			collidable->onFinishCollisionUpdates();
 		}

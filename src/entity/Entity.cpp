@@ -8,7 +8,8 @@ namespace fl
 #define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
 	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
-		: offset(position),
+		: Collidable(position),
+		offset(position),
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
@@ -24,7 +25,7 @@ namespace fl
 		//offset for velocity
 		offset += (velocity*appData.getFrameSpeedMultiplier());
 
-		collisionRectManager.update(appData, this, velocity*appData.getFrameSpeedMultiplier());
+		collisionRectManager.update(appData, this);
 	}
 
 	fgl::Vector2d Entity::getDrawPosition(float* rotation) const

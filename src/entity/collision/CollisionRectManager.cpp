@@ -34,17 +34,17 @@ namespace fl
 		return collisionRects;
 	}
 	
-	void CollisionRectManager::update(const fgl::ApplicationData& appData, fl::Collidable* collidable, const fgl::Vector2d& velocity)
+	void CollisionRectManager::update(const fgl::ApplicationData& appData, fl::Collidable* collidable)
 	{
 		auto previousRects = collisionRects;
-		collisionRects = createCollisionRects(appData, collidable, velocity);
+		collisionRects = createCollisionRects(appData, collidable);
 		for(auto collisionRect : previousRects)
 		{
 			delete collisionRect;
 		}
 	}
 	
-	fgl::ArrayList<CollisionRect*> CollisionRectManager::createCollisionRects(const fgl::ApplicationData& appData, fl::Collidable* collidable, const fgl::Vector2d& velocity) const
+	fgl::ArrayList<CollisionRect*> CollisionRectManager::createCollisionRects(const fgl::ApplicationData& appData, fl::Collidable* collidable) const
 	{
 		switch(collisionMethod)
 		{
@@ -55,10 +55,11 @@ namespace fl
 			{
 				fgl::Vector2d size = collidable->getSize();
 				float rotation = 0;
+				fgl::Vector2d previousPosition = collidable->getPreviousPosition();
 				fgl::Vector2d position = collidable->getPosition(&rotation);
 				double scale = (double)collidable->getDrawScale();
 				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity;
+				fgl::Vector2d lastCenter = rect.getCenter() - (position - previousPosition);
 				size_t matchingRectIndex = collisionRects.indexWhere([](CollisionRect* const & rect) -> bool {
 					if(rect->getTag()=="all")
 					{
@@ -68,19 +69,20 @@ namespace fl
 				});
 				if(matchingRectIndex!=-1)
 				{
-					diff += (rect.getCenter() - collisionRects[matchingRectIndex]->getCenter()) * 2.0;
+					lastCenter = collisionRects[matchingRectIndex]->getCenter();
 				}
 				if(rotation!=0.0)
 				{
-					return {new BoxCollisionRect("all", rect, diff, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale))};
+					return {new BoxCollisionRect("all", rect, lastCenter, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale))};
 				}
-				return {new BoxCollisionRect("all", rect, diff, fgl::Vector2d((double)scale, (double)scale))};
+				return {new BoxCollisionRect("all", rect, lastCenter, fgl::Vector2d((double)scale, (double)scale))};
 			}
 				
 			case COLLISIONMETHOD_BOUNDS:
 			{
 				fgl::Vector2d size = collidable->getSize();
 				float rotation = 0;
+				fgl::Vector2d previousPosition = collidable->getPreviousPosition();
 				fgl::Vector2d position = collidable->getPosition(&rotation);
 				double scale = (double)collidable->getDrawScale();
 				AnimationData* animData = collidable->getCurrentAnimationData();
@@ -112,7 +114,7 @@ namespace fl
 					{
 						tag = (fgl::String)"bounds:index"+i;
 					}
-					fgl::Vector2d diff = velocity;
+					fgl::Vector2d lastCenter = rect.getCenter() - (position - previousPosition);
 					size_t matchingRectIndex = collisionRects.indexWhere([&](CollisionRect* const & rect) -> bool {
 						if(rect->getTag()==tag)
 						{
@@ -122,13 +124,13 @@ namespace fl
 					});
 					if(matchingRectIndex!=-1)
 					{
-						diff += (rect.getCenter() - collisionRects[matchingRectIndex]->getCenter()) * 2.0;
+						lastCenter = collisionRects[matchingRectIndex]->getCenter();
 					}
 					if(rotation!=0.0)
 					{
-						collisionRects.add(new BoxCollisionRect(tag, rect, diff, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
+						collisionRects.add(new BoxCollisionRect(tag, rect, lastCenter, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
 					}
-					collisionRects.add(new BoxCollisionRect(tag, rect, diff, fgl::Vector2d((double)scale, (double)scale)));
+					collisionRects.add(new BoxCollisionRect(tag, rect, lastCenter, fgl::Vector2d((double)scale, (double)scale)));
 				}
 				return collisionRects;
 			}
@@ -137,6 +139,7 @@ namespace fl
 			{
 				fgl::Vector2d size = collidable->getSize();
 				float rotation = 0;
+				fgl::Vector2d previousPosition = collidable->getPreviousPosition();
 				fgl::Vector2d position = collidable->getPosition(&rotation);
 				AnimationData* animData = collidable->getCurrentAnimationData();
 				if(animData==nullptr)
@@ -153,7 +156,7 @@ namespace fl
 				fgl::RectangleU srcRect = animation->getImageSourceRect(frameIndex);
 				bool mirroredHorizontal = animData->isMirrored(collidable->getAnimationOrientation());
 				auto rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
-				fgl::Vector2d diff = velocity;
+				fgl::Vector2d lastCenter = rect.getCenter() - (position - previousPosition);
 				size_t matchingRectIndex = collisionRects.indexWhere([](CollisionRect* const & rect) -> bool {
 					if(rect->getTag()=="all")
 					{
@@ -163,13 +166,13 @@ namespace fl
 				});
 				if(matchingRectIndex!=-1)
 				{
-					diff += (rect.getCenter() - collisionRects[matchingRectIndex]->getCenter()) * 2.0;
+					lastCenter = collisionRects[matchingRectIndex]->getCenter();
 				}
 				if(rotation!=0.0)
 				{
-					return {new PixelCollisionRect("all", rect, diff, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false)};
+					return {new PixelCollisionRect("all", rect, lastCenter, srcRect, rotation, fgl::Vector2d(size.x/2, size.y/2), img, mirroredHorizontal, false)};
 				}
-				return {new PixelCollisionRect("all", rect, diff, srcRect, img, mirroredHorizontal, false)};
+				return {new PixelCollisionRect("all", rect, lastCenter, srcRect, img, mirroredHorizontal, false)};
 			}
 		}
 		throw fgl::IllegalStateException("invalid collisionMethod enum value");

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F1209E081E68BDB900E1BF4F /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1209E071E68BDB900E1BF4F /* Fight.cpp */; };
 		F15F24FC1E8E9AE8005EE4F1 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F24FB1E8E9AE8005EE4F1 /* Stage.cpp */; };
+		F15F25081E8EAC15005EE4F1 /* Collidable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F25071E8EAC15005EE4F1 /* Collidable.cpp */; };
 		F164D2CE1E8C0ABC00B11F7F /* ActionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2CD1E8C0ABC00B11F7F /* ActionEvent.cpp */; };
 		F164D2E21E8C1D3900B11F7F /* ActionInterruptEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2E11E8C1D3900B11F7F /* ActionInterruptEvent.cpp */; };
 		F17BBC071E64978E00A7F8F4 /* CollisionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBC051E64978E00A7F8F4 /* CollisionManager.cpp */; };
@@ -45,6 +46,7 @@
 		F1209E071E68BDB900E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
 		F15F24F91E8E9ADA005EE4F1 /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
 		F15F24FB1E8E9AE8005EE4F1 /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
+		F15F25071E8EAC15005EE4F1 /* Collidable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collidable.cpp; sourceTree = "<group>"; };
 		F164D2CC1E8C0AAD00B11F7F /* ActionEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionEvent.hpp; sourceTree = "<group>"; };
 		F164D2CD1E8C0ABC00B11F7F /* ActionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEvent.cpp; sourceTree = "<group>"; };
 		F164D2E01E8C1D2B00B11F7F /* ActionInterruptEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionInterruptEvent.hpp; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				F17BBC091E64979700A7F8F4 /* rects */,
+				F15F25071E8EAC15005EE4F1 /* Collidable.cpp */,
 				F17BBC051E64978E00A7F8F4 /* CollisionManager.cpp */,
 				F17BBC061E64978E00A7F8F4 /* CollisionPair.cpp */,
 				F181962B1E8AC053009BD55F /* CollisionRectManager.cpp */,
@@ -361,6 +364,7 @@
 			files = (
 				F17BBC071E64978E00A7F8F4 /* CollisionManager.cpp in Sources */,
 				F17D96F21E6DB5E8003F4D85 /* ActionEntity.cpp in Sources */,
+				F15F25081E8EAC15005EE4F1 /* Collidable.cpp in Sources */,
 				F19AB0A31E52471A00855347 /* Entity.cpp in Sources */,
 				F17D96F31E6DB5E8003F4D85 /* Character.cpp in Sources */,
 				F18196431E8AE5EC009BD55F /* Platform.cpp in Sources */,

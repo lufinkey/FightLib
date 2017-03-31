@@ -8,8 +8,8 @@ namespace fl
 	class PixelCollisionRect : public CollisionRect
 	{
 	public:
-		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
-		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& velocity, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
+		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& lastCenter, const fgl::RectangleU srcRect, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
+		PixelCollisionRect(const fgl::String& tag, const fgl::RectangleD& dstRect, const fgl::Vector2d& lastPosition, const fgl::RectangleU srcRect, double rotation, const fgl::Vector2d& origin, fgl::TextureImage* image, bool mirroredHorizontal, bool mirroredVertical);
 
 		virtual fgl::RectangleD getRect() const override;
 		virtual bool isFilled() const override;
@@ -23,7 +23,7 @@ namespace fl
 
 	private:
 		fgl::RectangleD dstRect;
-		fgl::Vector2d velocity;
+		fgl::Vector2d lastCenter;
 		fgl::RectangleU srcRect;
 		fgl::RectangleD boundingRect;
 		fgl::TransformD srcTransform;

@@ -24,10 +24,10 @@ namespace fl
 		
 		const fgl::ArrayList<CollisionRect*>& getCollisionRects() const;
 		
-		void update(const fgl::ApplicationData& appData, Collidable* collidable, const fgl::Vector2d& velocity);
+		void update(const fgl::ApplicationData& appData, Collidable* collidable);
 		
 	private:
-		fgl::ArrayList<CollisionRect*> createCollisionRects(const fgl::ApplicationData& appData, Collidable* collidable, const fgl::Vector2d& velocity) const;
+		fgl::ArrayList<CollisionRect*> createCollisionRects(const fgl::ApplicationData& appData, Collidable* collidable) const;
 		
 		fgl::ArrayList<CollisionRect*> collisionRects;
 		CollisionMethod collisionMethod;
