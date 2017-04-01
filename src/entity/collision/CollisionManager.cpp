@@ -70,7 +70,6 @@ namespace fl
 		
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
-		//fgl::ArrayList<Collidable*> updatedCollidables;
 
 		//handle collisions
 		for(auto& pair : pairs)
