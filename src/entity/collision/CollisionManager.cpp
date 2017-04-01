@@ -255,7 +255,7 @@ namespace fl
 		}
 		
 		//tell updated collidables that their collision updates have finished
-		for(auto collidable : collidables) //updatedCollidables)
+		for(auto collidable : collidables)
 		{
 			collidable->onFinishCollisionUpdates();
 		}
