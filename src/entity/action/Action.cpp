@@ -6,10 +6,21 @@ namespace fl
 {
 	const fgl::String ACTIONFLAG_ALLOWMOVEMENT = "AllowMovement";
 	const fgl::String ACTIONFLAG_ALLOWORIENTATIONCHANGE = "AllowOrientationChange";
+
+	ActionParams::ActionParams(const fgl::BasicDictionary<fgl::String, bool>& flags)
+		: flags(flags)
+	{
+		//
+	}
 	
 	ActionParams::~ActionParams()
 	{
 		//
+	}
+
+	bool ActionParams::getFlag(const fgl::String& flag) const
+	{
+		return flags.get(flag, false);
 	}
 	
 	Action::Action()

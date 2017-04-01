@@ -10,7 +10,13 @@ namespace fl
 	class ActionParams
 	{
 	public:
+		ActionParams(const fgl::BasicDictionary<fgl::String, bool>& flags = {});
 		virtual ~ActionParams();
+
+		virtual bool getFlag(const fgl::String& flag) const;
+
+	private:
+		fgl::BasicDictionary<fgl::String, bool> flags;
 	};
 	
 	typedef std::shared_ptr<ActionParams> ActionParamsPtr;
@@ -28,7 +34,7 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const;
 
 	protected:
-		virtual void onPerform(ActionParamsPtr params = nullptr);
+		virtual void onPerform(ActionParamsPtr params = std::shared_ptr<ActionParams>(new ActionParams()));
 		virtual void onUpdate(const fgl::ApplicationData& appData);
 		virtual void onEnd();
 		virtual void onEvent(ActionEventPtr event);
