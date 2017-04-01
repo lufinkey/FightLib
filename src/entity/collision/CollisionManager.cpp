@@ -72,6 +72,8 @@ namespace fl
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
 
 		//handle collisions
+		//for(size_t i=0; i<2; i++){
+		//TODO apparently checking all of the collisions twice fixes the collision jerking issue
 		for(auto& pair : pairs)
 		{
 			Collidable* collidable1 = pair.collidable1;
@@ -98,7 +100,10 @@ namespace fl
 						if(pair.shouldIgnoreCollision(rectPair.first, rectPair.second))
 						{
 							//since the collision was previously ignored, ignore it again
-							newPair.ignoredCollisions.add(rectTagPair);
+							if(!newPair.ignoredCollisions.contains(rectTagPair))
+							{
+								newPair.ignoredCollisions.add(rectTagPair);
+							}
 						}
 						else
 						{
@@ -145,7 +150,10 @@ namespace fl
 							}
 
 							//add the rect pair to the priority rects, so that it will be checked first on the next frame
-							newPair.priorityRects.add(rectTagPair);
+							if(!newPair.priorityRects.contains(rectTagPair))
+							{
+								newPair.priorityRects.add(rectTagPair);
+							}
 						}
 					}
 				}
@@ -232,6 +240,7 @@ namespace fl
 				}
 			}
 		}
+		//}
 		
 		//call finished collisions
 		for(auto& onCollisionFinish : onCollisionFinishCalls)
