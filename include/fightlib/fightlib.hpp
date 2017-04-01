@@ -6,6 +6,7 @@
 #include "entity/Entity.hpp"
 #include "entity/ActionEntity.hpp"
 #include "entity/Character.hpp"
+#include "entity/Item.hpp"
 #include "entity/Platform.hpp"
 
 #include "entity/action/Action.hpp"

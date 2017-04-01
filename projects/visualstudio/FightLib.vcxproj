@@ -44,6 +44,7 @@
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\FightLib\src\entity\Item.cpp" />
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
     <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp" />

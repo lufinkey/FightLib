@@ -9,7 +9,7 @@ public:
 	
 private:
 	fl::Character* character;
-	fl::Entity* sword;
+	fl::Item* sword;
 	
 	fl::Platform* block1;
 	fl::Platform* block2;
