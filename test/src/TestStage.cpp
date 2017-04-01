@@ -6,12 +6,12 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 {
 	character = new Player(assetManager, fgl::Vector2d(300, 200), fl::ORIENTATION_LEFT);
 	
-	sword = new fl::Item(fgl::Vector2d(0, 0), fl::ORIENTATION_LEFT);
+	sword = new fl::Item(fgl::Vector2d(218, 0), fl::ORIENTATION_LEFT);
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->setScale(2.0);
 	sword->changeAnimation("sword");
 	
-	character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
+	//character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
 	
 	block1 = new fl::Platform(fgl::Vector2d(300, 300));
 	block1->loadAnimation("assets/animations/block.plist", assetManager);
