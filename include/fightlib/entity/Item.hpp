@@ -10,9 +10,9 @@ namespace fl
 	public:
 		using Entity::Entity;
 
-	protected:
-		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
+		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
+	protected:
 		virtual void onCollision(Collidable* collided, CollisionSide side) override;
 		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side) override;
 	};
