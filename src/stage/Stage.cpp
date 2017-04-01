@@ -41,11 +41,11 @@ namespace fl
 		return 1800;
 	}
 	
-	void Stage::addPlatform(Platform* platform)
+	void Stage::addPlatform(Platform* platform, double zLayer)
 	{
 		platforms.add(platform);
 		collisionManager.addCollidable(platform);
-		drawManager.addDrawable(platform);
+		drawManager.addDrawable(platform, zLayer);
 	}
 	
 	void Stage::removePlatform(Platform* platform)
@@ -59,11 +59,11 @@ namespace fl
 		drawManager.removeDrawable(platform);
 	}
 	
-	void Stage::addEntity(Entity* entity)
+	void Stage::addEntity(Entity* entity, double zLayer)
 	{
 		entities.add(entity);
 		collisionManager.addCollidable(entity);
-		drawManager.addDrawable(entity);
+		drawManager.addDrawable(entity, zLayer);
 	}
 	
 	void Stage::removeEntity(Entity* entity)

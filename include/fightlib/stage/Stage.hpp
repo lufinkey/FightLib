@@ -20,10 +20,10 @@ namespace fl
 		virtual double getGravity(Entity* entity) const;
 		
 	protected:
-		void addPlatform(Platform* platform);
+		void addPlatform(Platform* platform, double zLayer=0.5);
 		void removePlatform(Platform* platform);
 		
-		void addEntity(Entity* entity);
+		void addEntity(Entity* entity, double zLayer=0.5);
 		void removeEntity(Entity* entity);
 		
 	private:
