@@ -23,8 +23,10 @@ namespace fl
 		long long currentTimeMillis = appData.getTime().getMilliseconds();
 
 		//handle animation
+		bool frameChanged = false;
 		do
 		{
+			frameChanged = false;
 			if(animationChanged)
 			{
 				currentAnimationLastFrameTime = currentTimeMillis;
@@ -39,11 +41,12 @@ namespace fl
 				{
 					frameTime = 1;
 				}
-				long long timeDiff = currentTimeMillis - currentAnimationLastFrameTime;
-				if(timeDiff>=frameTime)
+				long long nextFrameTime = currentAnimationLastFrameTime + frameTime;
+				if(nextFrameTime<=currentTimeMillis)
 				{
+					frameChanged = true;
 					currentAnimationFrame++;
-					currentAnimationLastFrameTime = currentTimeMillis;
+					currentAnimationLastFrameTime = nextFrameTime;
 					if(currentAnimationFrame>=animation->getTotalFrames())
 					{
 						currentAnimationFrame = 0;
@@ -65,7 +68,7 @@ namespace fl
 					}
 				}
 			}
-		} while(animationChanged);
+		} while(animationChanged || frameChanged);
 	}
 	
 	float Sprite::getDrawScale() const
