@@ -100,8 +100,7 @@ namespace fl
 						}
 						else
 						{
-							//check if we should ignore this collision
-							bool ignore = false;
+							//TODO check if we should ignore this collision
 
 							//decide how to shift the collidables
 							if(collidable1->isStaticCollisionBody())
@@ -132,7 +131,7 @@ namespace fl
 							}
 
 							//add the rect pair to the priority rects, so that it will be checked first on the next frame
-							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							CollisionRectTagPair priorityRect = CollisionRectTagPair(rectPair.first->getTag(), rectPair.second->getTag());
 							newPair.priorityRects.add(priorityRect);
 						}
 					}

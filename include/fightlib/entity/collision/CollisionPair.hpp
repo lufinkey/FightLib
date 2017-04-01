@@ -9,23 +9,19 @@ namespace fl
 	class Collidable;
 
 	typedef std::pair<CollisionRect*, CollisionRect*> CollisionRectPair;
+	typedef std::pair<fgl::String, fgl::String> CollisionRectTagPair;
 
 	class CollisionPair
 	{
 	public:
 		Collidable* collidable1;
 		Collidable* collidable2;
-		struct RectTagPair
-		{
-			fgl::String rectTag1;
-			fgl::String rectTag2;
-		};
 		//! the rect pairs that had a collision in the previous frame
-		fgl::ArrayList<RectTagPair> priorityRects;
+		fgl::ArrayList<CollisionRectTagPair> priorityRects;
 		//! the sides of collidable1 that were collided on
 		fgl::ArrayList<CollisionSide> previousCollisionSides;
 		//! the rect pairs that should be ignored in the next frame if they have a collision
-		fgl::ArrayList<RectTagPair> ignoredCollisions;
+		fgl::ArrayList<CollisionRectTagPair> ignoredCollisions;
 
 		CollisionPair(Collidable* collidable1, Collidable* collidable2);
 

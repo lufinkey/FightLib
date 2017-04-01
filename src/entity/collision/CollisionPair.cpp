@@ -27,7 +27,7 @@ namespace fl
 	{
 		for(auto& tagPair : ignoredCollisions)
 		{
-			if(tagPair.rectTag1==rect1->getTag() && tagPair.rectTag2==rect2->getTag())
+			if(tagPair.first==rect1->getTag() && tagPair.second==rect2->getTag())
 			{
 				return true;
 			}
@@ -43,14 +43,14 @@ namespace fl
 		for(auto& priorityRect : priorityRects)
 		{
 			size_t rectIndex1 = rects1.indexWhere([&priorityRect](CollisionRect* const & rect) -> bool {
-				if(rect->getTag()==priorityRect.rectTag1)
+				if(rect->getTag()==priorityRect.first)
 				{
 					return true;
 				}
 				return false;
 			});
 			size_t rectIndex2 = rects2.indexWhere([&priorityRect](CollisionRect* const & rect) -> bool {
-				if(rect->getTag()==priorityRect.rectTag2)
+				if(rect->getTag()==priorityRect.second)
 				{
 					return true;
 				}
