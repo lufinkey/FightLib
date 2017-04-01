@@ -8,10 +8,10 @@ namespace fl
 	class Fight
 	{
 	public:
-		virtual void update(GameLibrary::ApplicationData appData);
-		virtual void draw(GameLibrary::ApplicationData appData, GameLibrary::Graphics graphics) const;
+		virtual void update(fgl::ApplicationData appData);
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 
 	private:
-		GameLibrary::RectangleD frame;
+		fgl::RectangleD frame;
 	};
 }
