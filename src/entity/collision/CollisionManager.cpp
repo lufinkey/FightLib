@@ -81,6 +81,7 @@ namespace fl
 			
 			if((collidable1->isStaticCollisionBody() && !collidable2->isStaticCollisionBody())
 				|| (!collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
+				//TODO allow two non-static collision bodies to collide
 			{
 				fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
 				fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
@@ -93,10 +94,12 @@ namespace fl
 					if(!(shiftAmount.x==0 && shiftAmount.y==0))
 					{
 						CollisionSide collisionSide1 = getCollisionSide(shiftAmount);
+						CollisionRectTagPair rectTagPair = CollisionRectTagPair(rectPair.first->getTag(), rectPair.second->getTag());
 						//make sure that this collision wasn't previously ignored
 						if(pair.shouldIgnoreCollision(rectPair.first, rectPair.second))
 						{
-							//
+							//since the collision was previously ignored, ignore it again
+							newPair.ignoredCollisions.add(rectTagPair);
 						}
 						else
 						{
@@ -131,11 +134,12 @@ namespace fl
 							}
 
 							//add the rect pair to the priority rects, so that it will be checked first on the next frame
-							CollisionRectTagPair priorityRect = CollisionRectTagPair(rectPair.first->getTag(), rectPair.second->getTag());
-							newPair.priorityRects.add(priorityRect);
+							newPair.priorityRects.add(rectTagPair);
 						}
 					}
 				}
+
+				//TODO don't make collision calls if the collision on that side was ignored
 				
 				//check for new/updated collision calls
 				for(auto collisionSide : newPair.previousCollisionSides)
@@ -192,6 +196,8 @@ namespace fl
 					previousCollisions.add(newPair);
 				}
 			}
+
+			//TODO don't make collision calls if the collision on that side was ignored
 			
 			//check for finished collision calls
 			for(auto prevCollisionSide : pair.previousCollisionSides)
