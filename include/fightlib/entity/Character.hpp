@@ -33,6 +33,6 @@ namespace fl
 
 	private:
 		fgl::Vector2f direction;
-		size_t topCollidedCount;
+		size_t groundCollidedCount;
 	};
 }

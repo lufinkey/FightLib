@@ -29,6 +29,8 @@ namespace fl
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) = 0;
 
+		bool respondsToCollision(Collidable* collided, CollisionSide side) const;
+
 		virtual void onCollision(Collidable* collided, CollisionSide side);
 		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side);
 		virtual void onCollisionFinish(Collidable* collided, CollisionSide side);

@@ -92,63 +92,58 @@ namespace fl
 					fgl::Vector2d shiftAmount = CollisionRect::checkCollision(rectPair.first, rectPair.second);
 					if(!(shiftAmount.x==0 && shiftAmount.y==0))
 					{
-						if(collidable1->isStaticCollisionBody())
+						CollisionSide collisionSide1 = getCollisionSide(shiftAmount);
+						//make sure that this collision wasn't previously ignored
+						if(pair.shouldIgnoreCollision(rectPair.first, rectPair.second))
 						{
-							collidable2->shift(shiftAmount);
-							for(auto& rect : rects2)
-							{
-								rect->shift(shiftAmount);
-							}
-							
-							CollisionSide collisionSide = getCollisionSide(-shiftAmount);
-							if(!newPair.previousCollisionSides.contains(collisionSide))
-							{
-								newPair.previousCollisionSides.add(collisionSide);
-							}
-
-							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
-							newPair.priorityRects.add(priorityRect);
-						}
-						else if(collidable2->isStaticCollisionBody())
-						{
-							shiftAmount = -shiftAmount;
-							collidable1->shift(shiftAmount);
-							for(auto& rect : rects1)
-							{
-								rect->shift(shiftAmount);
-							}
-							
-							CollisionSide collisionSide = getCollisionSide(shiftAmount);
-							if(!newPair.previousCollisionSides.contains(collisionSide))
-							{
-								newPair.previousCollisionSides.add(collisionSide);
-							}
-
-							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
-							newPair.priorityRects.add(priorityRect);
+							//
 						}
 						else
 						{
-							//TODO make a case here for two non-static bodies colliding
+							//check if we should ignore this collision
+							bool ignore = false;
+
+							//decide how to shift the collidables
+							if(collidable1->isStaticCollisionBody())
+							{
+								collidable2->shift(shiftAmount);
+								for(auto& rect : rects2)
+								{
+									rect->shift(shiftAmount);
+								}
+							}
+							else if(collidable2->isStaticCollisionBody())
+							{
+								collidable1->shift(-shiftAmount);
+								for(auto& rect : rects1)
+								{
+									rect->shift(-shiftAmount);
+								}
+							}
+							else
+							{
+								//TODO make a case here for two non-static bodies colliding
+							}
+
+							//add collision side to previous collision sides if not already added
+							if(!newPair.previousCollisionSides.contains(collisionSide1))
+							{
+								newPair.previousCollisionSides.add(collisionSide1);
+							}
+
+							//add the rect pair to the priority rects, so that it will be checked first on the next frame
+							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							newPair.priorityRects.add(priorityRect);
 						}
-						
-						//add collidables to the list of updated collidables
-						/*if(!updatedCollidables.contains(collidable1))
-						{
-							updatedCollidables.add(collidable1);
-						}
-						if(!updatedCollidables.contains(collidable2))
-						{
-							updatedCollidables.add(collidable2);
-						}*/
 					}
 				}
 				
-				//add to collision calls
+				//check for new/updated collision calls
 				for(auto collisionSide : newPair.previousCollisionSides)
 				{
 					if(!pair.previousCollisionSides.contains(collisionSide))
 					{
+						//the previous collision pair doesn't have this collision side, so it is a new collision
 						if(collidable1->isStaticCollisionBody())
 						{
 							onCollisionCalls.add([=]{
@@ -170,6 +165,7 @@ namespace fl
 					}
 					else
 					{
+						//the previous collision pair has this collision side, so it's an updated collision
 						if(collidable1->isStaticCollisionBody())
 						{
 							onCollisionCalls.add([=]{
@@ -191,13 +187,14 @@ namespace fl
 					}
 				}
 
+				//add new collision pair to previous collisions
 				if(newPair.priorityRects.size() > 0)
 				{
 					previousCollisions.add(newPair);
 				}
 			}
 			
-			//add to finished collision calls
+			//check for finished collision calls
 			for(auto prevCollisionSide : pair.previousCollisionSides)
 			{
 				if(!newPair.previousCollisionSides.contains(prevCollisionSide))
@@ -220,16 +217,6 @@ namespace fl
 					{
 						//TODO make a case here for two non-static bodies colliding
 					}
-					
-					//add collidables to the list of updated collidables
-					/*if(!updatedCollidables.contains(collidable1))
-					{
-						updatedCollidables.add(collidable1);
-					}
-					if(!updatedCollidables.contains(collidable2))
-					{
-						updatedCollidables.add(collidable2);
-					}*/
 				}
 			}
 		}

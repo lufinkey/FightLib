@@ -23,6 +23,18 @@ namespace fl
 		return !operator==(pair);
 	}
 
+	bool CollisionPair::shouldIgnoreCollision(CollisionRect* rect1, CollisionRect* rect2) const
+	{
+		for(auto& tagPair : ignoredCollisions)
+		{
+			if(tagPair.rectTag1==rect1->getTag() && tagPair.rectTag2==rect2->getTag())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	fgl::ArrayList<CollisionRectPair> CollisionPair::getCollisionRectPairs(const fgl::ArrayList<CollisionRect*>& rects1, const fgl::ArrayList<CollisionRect*>& rects2) const
 	{
 		size_t pair_count = rects1.size()*rects2.size();

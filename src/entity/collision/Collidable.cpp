@@ -13,6 +13,11 @@ namespace fl
 	{
 		return previousPosition;
 	}
+
+	bool Collidable::respondsToCollision(Collidable* collided, CollisionSide side) const
+	{
+		return true;
+	}
 	
 	void Collidable::onCollision(Collidable* collided, CollisionSide side)
 	{

@@ -5,7 +5,7 @@ namespace fl
 {
 	Character::Character(const fgl::Vector2d& position, Orientation orientation)
 		: ActionEntity(position, orientation),
-		topCollidedCount(0)
+		groundCollidedCount(0)
 	{
 		//
 	}
@@ -86,7 +86,7 @@ namespace fl
 	
 	bool Character::isOnGround() const
 	{
-		if(topCollidedCount > 0)
+		if(groundCollidedCount > 0)
 		{
 			return true;
 		}
@@ -103,18 +103,18 @@ namespace fl
 	
 	void Character::onCollision(fl::Collidable* collided, CollisionSide side)
 	{
-		if(side==COLLISIONSIDE_TOP)
+		if(side==COLLISIONSIDE_BOTTOM)
 		{
-			topCollidedCount++;
+			groundCollidedCount++;
 		}
 		ActionEntity::onCollision(collided, side);
 	}
 	
 	void Character::onCollisionFinish(fl::Collidable* collided, CollisionSide side)
 	{
-		if(side==COLLISIONSIDE_TOP)
+		if(side==COLLISIONSIDE_BOTTOM)
 		{
-			topCollidedCount--;
+			groundCollidedCount--;
 		}
 		ActionEntity::onCollisionFinish(collided, side);
 	}
