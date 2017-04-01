@@ -67,8 +67,11 @@ void Player::onCollision(fl::Collidable* collided, fl::CollisionSide side)
 	if(side==fl::COLLISIONSIDE_TOP)
 	{
 		fgl::Vector2d velocity = getVelocity();
-		velocity.y = 0;
-		setVelocity(velocity);
+		if(velocity.y > 0)
+		{
+			velocity.y = 0;
+			setVelocity(velocity);
+		}
 	}
 }
 
@@ -78,7 +81,10 @@ void Player::onCollisionUpdate(fl::Collidable* collided, fl::CollisionSide side)
 	if(side==fl::COLLISIONSIDE_TOP)
 	{
 		fgl::Vector2d velocity = getVelocity();
-		velocity.y = 0;
-		setVelocity(velocity);
+		if(velocity.y > 0)
+		{
+			velocity.y = 0;
+			setVelocity(velocity);
+		}
 	}
 }
