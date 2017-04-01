@@ -107,7 +107,30 @@ namespace fl
 		{
 			groundCollidedCount++;
 		}
+		if(side==fl::COLLISIONSIDE_BOTTOM)
+		{
+			fgl::Vector2d velocity = getVelocity();
+			if(velocity.y > 0)
+			{
+				velocity.y = 0;
+				setVelocity(velocity);
+			}
+		}
 		ActionEntity::onCollision(collided, side);
+	}
+
+	void Character::onCollisionUpdate(fl::Collidable* collided, CollisionSide side)
+	{
+		if(side==fl::COLLISIONSIDE_BOTTOM)
+		{
+			fgl::Vector2d velocity = getVelocity();
+			if(velocity.y > 0)
+			{
+				velocity.y = 0;
+				setVelocity(velocity);
+			}
+		}
+		ActionEntity::onCollisionUpdate(collided, side);
 	}
 	
 	void Character::onCollisionFinish(fl::Collidable* collided, CollisionSide side)

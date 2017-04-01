@@ -12,8 +12,4 @@ public:
 
 	virtual fgl::String getIdleAnimationName() const override;
 	virtual fgl::String getMoveAnimationName(double amount) const override;
-
-protected:
-	virtual void onCollision(fl::Collidable* collided, fl::CollisionSide side) override;
-	virtual void onCollisionUpdate(fl::Collidable* collided, fl::CollisionSide side) override;
 };
