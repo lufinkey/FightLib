@@ -106,7 +106,7 @@ namespace fl
 								newPair.previousCollisionSides.add(collisionSide);
 							}
 
-							CollisionPair::PriorityRect priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
 							newPair.priorityRects.add(priorityRect);
 						}
 						else if(collidable2->isStaticCollisionBody())
@@ -124,7 +124,7 @@ namespace fl
 								newPair.previousCollisionSides.add(collisionSide);
 							}
 
-							CollisionPair::PriorityRect priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
+							CollisionPair::RectTagPair priorityRect = { .rectTag1=rectPair.first->getTag(), .rectTag2=rectPair.second->getTag() };
 							newPair.priorityRects.add(priorityRect);
 						}
 						else

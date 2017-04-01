@@ -15,12 +15,12 @@ namespace fl
 	public:
 		Collidable* collidable1;
 		Collidable* collidable2;
-		struct PriorityRect
+		struct RectTagPair
 		{
 			fgl::String rectTag1;
 			fgl::String rectTag2;
 		};
-		fgl::ArrayList<PriorityRect> priorityRects;
+		fgl::ArrayList<RectTagPair> priorityRects;
 		fgl::ArrayList<CollisionSide> previousCollisionSides;
 
 		CollisionPair(Collidable* collidable1, Collidable* collidable2);
