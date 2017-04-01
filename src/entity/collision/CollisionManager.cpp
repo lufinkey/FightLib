@@ -104,11 +104,11 @@ namespace fl
 						{
 							//check if we should ignore this collision
 							bool ignore = false;
-							if(collidable1->respondsToCollision(collidable2, collisionSide1))
+							if(!collidable1->respondsToCollision(collidable2, collisionSide1))
 							{
 								ignore = true;
 							}
-							else if(collidable2->respondsToCollision(collidable1, getOppositeCollisionSide(collisionSide1)))
+							else if(!collidable2->respondsToCollision(collidable1, getOppositeCollisionSide(collisionSide1)))
 							{
 								ignore = true;
 							}
