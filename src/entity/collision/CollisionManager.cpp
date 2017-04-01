@@ -102,34 +102,46 @@ namespace fl
 						}
 						else
 						{
-							//TODO check if we should ignore this collision
-
-							//decide how to shift the collidables
-							if(collidable1->isStaticCollisionBody())
+							//check if we should ignore this collision
+							bool ignore = false;
+							if(collidable1->respondsToCollision(collidable2, collisionSide1))
 							{
-								collidable2->shift(shiftAmount);
-								for(auto& rect : rects2)
-								{
-									rect->shift(shiftAmount);
-								}
+								ignore = true;
 							}
-							else if(collidable2->isStaticCollisionBody())
+							else if(collidable2->respondsToCollision(collidable1, getOppositeCollisionSide(collisionSide1)))
 							{
-								collidable1->shift(-shiftAmount);
-								for(auto& rect : rects1)
-								{
-									rect->shift(-shiftAmount);
-								}
-							}
-							else
-							{
-								//TODO make a case here for two non-static bodies colliding
+								ignore = true;
 							}
 
-							//add collision side to previous collision sides if not already added
-							if(!newPair.previousCollisionSides.contains(collisionSide1))
+							if(!ignore)
 							{
-								newPair.previousCollisionSides.add(collisionSide1);
+								//decide how to shift the collidables
+								if(collidable1->isStaticCollisionBody())
+								{
+									collidable2->shift(shiftAmount);
+									for(auto& rect : rects2)
+									{
+										rect->shift(shiftAmount);
+									}
+								}
+								else if(collidable2->isStaticCollisionBody())
+								{
+									collidable1->shift(-shiftAmount);
+									for(auto& rect : rects1)
+									{
+										rect->shift(-shiftAmount);
+									}
+								}
+								else
+								{
+									//TODO make a case here for two non-static bodies colliding
+								}
+
+								//add collision side to previous collision sides if not already added
+								if(!newPair.previousCollisionSides.contains(collisionSide1))
+								{
+									newPair.previousCollisionSides.add(collisionSide1);
+								}
 							}
 
 							//add the rect pair to the priority rects, so that it will be checked first on the next frame
@@ -137,8 +149,6 @@ namespace fl
 						}
 					}
 				}
-
-				//TODO don't make collision calls if the collision on that side was ignored
 				
 				//check for new/updated collision calls
 				for(auto collisionSide : newPair.previousCollisionSides)
@@ -195,8 +205,6 @@ namespace fl
 					previousCollisions.add(newPair);
 				}
 			}
-
-			//TODO don't make collision calls if the collision on that side was ignored
 			
 			//check for finished collision calls
 			for(auto prevCollisionSide : pair.previousCollisionSides)
