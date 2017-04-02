@@ -106,9 +106,7 @@ namespace fl
 		if(side==COLLISIONSIDE_BOTTOM)
 		{
 			groundCollidedCount++;
-		}
-		if(side==fl::COLLISIONSIDE_BOTTOM)
-		{
+
 			fgl::Vector2d velocity = getVelocity();
 			if(velocity.y > 0)
 			{
