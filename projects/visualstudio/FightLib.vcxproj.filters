@@ -52,6 +52,12 @@
     <Filter Include="include\fightlib\stage">
       <UniqueIdentifier>{46208e12-147f-42d0-ae36-f3f08f99dd4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\controls">
+      <UniqueIdentifier>{27ca04a9-57cd-4204-be03-323b41ac4c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\controls">
+      <UniqueIdentifier>{80204d0e-8e97-4c94-a3be-a268e748bc60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
@@ -123,6 +129,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\DrawManager.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\controls\CharacterController.hpp">
+      <Filter>include\fightlib\controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -187,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\Item.cpp">
       <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\controls\CharacterController.cpp">
+      <Filter>src\controls</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
