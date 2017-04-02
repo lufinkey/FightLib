@@ -1,12 +1,13 @@
 
 #include "TestStage.hpp"
 #include "Player.hpp"
+#include "Sword.hpp"
 
 TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 {
 	character = new Player(assetManager, fgl::Vector2d(300, 200), fl::ORIENTATION_LEFT);
 	
-	sword = new fl::Item(fgl::Vector2d(218, 0), fl::ORIENTATION_LEFT);
+	sword = new Sword(fgl::Vector2d(218, 0), fl::ORIENTATION_LEFT);
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->setScale(2.0);
 	sword->changeAnimation("sword");

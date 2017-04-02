@@ -185,7 +185,7 @@
     <ClCompile Include="..\..\src\entity\collision\Collidable.cpp">
       <Filter>src\entity\collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\FightLib\src\entity\Item.cpp">
+    <ClCompile Include="..\..\src\entity\Item.cpp">
       <Filter>src\entity</Filter>
     </ClCompile>
   </ItemGroup>

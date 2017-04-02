@@ -23,12 +23,14 @@
     <ClCompile Include="..\..\..\test\src\JumpAction.cpp" />
     <ClCompile Include="..\..\..\test\src\main.cpp" />
     <ClCompile Include="..\..\..\test\src\Player.cpp" />
+    <ClCompile Include="..\..\..\test\src\Sword.cpp" />
     <ClCompile Include="..\..\..\test\src\TestStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp" />
     <ClInclude Include="..\..\..\test\src\JumpAction.hpp" />
     <ClInclude Include="..\..\..\test\src\Player.hpp" />
+    <ClInclude Include="..\..\..\test\src\Sword.hpp" />
     <ClInclude Include="..\..\..\test\src\TestStage.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
