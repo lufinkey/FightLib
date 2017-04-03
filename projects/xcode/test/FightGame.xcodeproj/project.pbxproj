@@ -32,6 +32,7 @@
 		F16F11111E67232F009A465C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11101E67232F009A465C /* Foundation.framework */; };
 		F181964E1E8AE8C7009BD55F /* TestStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F181964C1E8AE8C7009BD55F /* TestStage.cpp */; };
 		F1A7DF671E89854700472DB2 /* JumpAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF651E89854700472DB2 /* JumpAction.cpp */; };
+		F1BA75D11E9284D600647E41 /* Sword.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75CF1E9284D600647E41 /* Sword.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +81,8 @@
 		F181964D1E8AE8C7009BD55F /* TestStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestStage.hpp; sourceTree = "<group>"; };
 		F1A7DF651E89854700472DB2 /* JumpAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpAction.cpp; sourceTree = "<group>"; };
 		F1A7DF661E89854700472DB2 /* JumpAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JumpAction.hpp; sourceTree = "<group>"; };
+		F1BA75CF1E9284D600647E41 /* Sword.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sword.cpp; sourceTree = "<group>"; };
+		F1BA75D01E9284D600647E41 /* Sword.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sword.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,8 @@
 				F14464E21E672E050088EAA3 /* Player.hpp */,
 				F1A7DF651E89854700472DB2 /* JumpAction.cpp */,
 				F1A7DF661E89854700472DB2 /* JumpAction.hpp */,
+				F1BA75CF1E9284D600647E41 /* Sword.cpp */,
+				F1BA75D01E9284D600647E41 /* Sword.hpp */,
 				F181964C1E8AE8C7009BD55F /* TestStage.cpp */,
 				F181964D1E8AE8C7009BD55F /* TestStage.hpp */,
 			);
@@ -254,6 +259,7 @@
 				F15A20E31E54B07F008D83E5 /* FightGame.cpp in Sources */,
 				F14464E31E672E050088EAA3 /* Player.cpp in Sources */,
 				F181964E1E8AE8C7009BD55F /* TestStage.cpp in Sources */,
+				F1BA75D11E9284D600647E41 /* Sword.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

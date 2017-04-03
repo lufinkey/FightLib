@@ -27,6 +27,9 @@
 		F1A7DF3D1E893D9300472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF3A1E893D9300472DB2 /* AnimationAssetManager.cpp */; };
 		F1A7DF3E1E893D9300472DB2 /* AnimationData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF3B1E893D9300472DB2 /* AnimationData.cpp */; };
 		F1A7DF3F1E893D9300472DB2 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF3C1E893D9300472DB2 /* Sprite.cpp */; };
+		F1BA75DB1E92852A00647E41 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75DA1E92852A00647E41 /* Item.cpp */; };
+		F1BA75DE1E92853600647E41 /* CharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75DD1E92853600647E41 /* CharacterController.cpp */; };
+		F1BA75E01E92854200647E41 /* FightParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75DF1E92854200647E41 /* FightParams.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +90,10 @@
 		F1A7DF3A1E893D9300472DB2 /* AnimationAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationAssetManager.cpp; sourceTree = "<group>"; };
 		F1A7DF3B1E893D9300472DB2 /* AnimationData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationData.cpp; sourceTree = "<group>"; };
 		F1A7DF3C1E893D9300472DB2 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		F1BA75D91E92851200647E41 /* FightParams.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightParams.hpp; sourceTree = "<group>"; };
+		F1BA75DA1E92852A00647E41 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		F1BA75DD1E92853600647E41 /* CharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterController.cpp; sourceTree = "<group>"; };
+		F1BA75DF1E92854200647E41 /* FightParams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FightParams.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				F1209E071E68BDB900E1BF4F /* Fight.cpp */,
+				F1BA75DF1E92854200647E41 /* FightParams.cpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -173,6 +181,7 @@
 		F19AB0981E52470600855347 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				F1BA75DC1E92853600647E41 /* controls */,
 				F19AB0991E52470600855347 /* entity */,
 				F1209E061E68BDB900E1BF4F /* game */,
 				F15F24FA1E8E9AE8005EE4F1 /* stage */,
@@ -190,6 +199,7 @@
 				F17D96F01E6DB5E8003F4D85 /* ActionEntity.cpp */,
 				F17D96F11E6DB5E8003F4D85 /* Character.cpp */,
 				F19AB0A01E52470600855347 /* Entity.cpp */,
+				F1BA75DA1E92852A00647E41 /* Item.cpp */,
 				F18196421E8AE5EC009BD55F /* Platform.cpp */,
 			);
 			path = entity;
@@ -278,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				F1209E051E68BDA600E1BF4F /* Fight.hpp */,
+				F1BA75D91E92851200647E41 /* FightParams.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -303,6 +314,14 @@
 				F1A7DF3C1E893D9300472DB2 /* Sprite.cpp */,
 			);
 			path = draw;
+			sourceTree = "<group>";
+		};
+		F1BA75DC1E92853600647E41 /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				F1BA75DD1E92853600647E41 /* CharacterController.cpp */,
+			);
+			path = controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,12 +387,15 @@
 				F19AB0A31E52471A00855347 /* Entity.cpp in Sources */,
 				F17D96F31E6DB5E8003F4D85 /* Character.cpp in Sources */,
 				F18196431E8AE5EC009BD55F /* Platform.cpp in Sources */,
+				F1BA75DB1E92852A00647E41 /* Item.cpp in Sources */,
 				F1A7DF3F1E893D9300472DB2 /* Sprite.cpp in Sources */,
 				F17BBC0F1E64979700A7F8F4 /* PixelCollisionRect.cpp in Sources */,
 				F1209E081E68BDB900E1BF4F /* Fight.cpp in Sources */,
 				F17BBC081E64978E00A7F8F4 /* CollisionPair.cpp in Sources */,
+				F1BA75DE1E92853600647E41 /* CharacterController.cpp in Sources */,
 				F164D2E21E8C1D3900B11F7F /* ActionInterruptEvent.cpp in Sources */,
 				F18196451E8AE5FE009BD55F /* DrawManager.cpp in Sources */,
+				F1BA75E01E92854200647E41 /* FightParams.cpp in Sources */,
 				F164D2CE1E8C0ABC00B11F7F /* ActionEvent.cpp in Sources */,
 				F17BBC0E1E64979700A7F8F4 /* CollisionRect.cpp in Sources */,
 				F1A7DF3E1E893D9300472DB2 /* AnimationData.cpp in Sources */,

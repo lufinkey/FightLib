@@ -28,6 +28,7 @@
 		F19AB10A1E524CC600855347 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB1091E524CC600855347 /* MobileCoreServices.framework */; };
 		F19AB10C1E524CCE00855347 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F19AB10B1E524CCE00855347 /* CoreMotion.framework */; };
 		F1A7DF721E898AE700472DB2 /* JumpAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF701E898AE700472DB2 /* JumpAction.cpp */; };
+		F1BA75D81E9284F600647E41 /* Sword.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75D61E9284F600647E41 /* Sword.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		F19AB10D1E524CF200855347 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../external/GameLibrary/projects/xcode-iOS/build/Debug-iphoneos/libGameLibrary.a"; sourceTree = "<group>"; };
 		F1A7DF701E898AE700472DB2 /* JumpAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpAction.cpp; sourceTree = "<group>"; };
 		F1A7DF711E898AE700472DB2 /* JumpAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JumpAction.hpp; sourceTree = "<group>"; };
+		F1BA75D61E9284F600647E41 /* Sword.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sword.cpp; sourceTree = "<group>"; };
+		F1BA75D71E9284F600647E41 /* Sword.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sword.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				F1A7DF711E898AE700472DB2 /* JumpAction.hpp */,
 				F14464FB1E6737AB0088EAA3 /* Player.cpp */,
 				F14464FC1E6737AB0088EAA3 /* Player.hpp */,
+				F1BA75D61E9284F600647E41 /* Sword.cpp */,
+				F1BA75D71E9284F600647E41 /* Sword.hpp */,
 				F164D2CF1E8C0AD900B11F7F /* TestStage.cpp */,
 				F164D2D01E8C0AD900B11F7F /* TestStage.hpp */,
 			);
@@ -228,6 +233,7 @@
 				F19AB0EE1E524AF100855347 /* FightGame.cpp in Sources */,
 				F14464FD1E6737AB0088EAA3 /* Player.cpp in Sources */,
 				F164D2D11E8C0AD900B11F7F /* TestStage.cpp in Sources */,
+				F1BA75D81E9284F600647E41 /* Sword.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
