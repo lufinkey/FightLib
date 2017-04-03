@@ -32,6 +32,7 @@ namespace fl
 		void setCollisionMethod(CollisionMethod method);
 
 		virtual bool isStaticCollisionBody() const override;
+		virtual bool respondsToGravity() const;
 
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 

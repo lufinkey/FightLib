@@ -18,7 +18,7 @@ namespace fl
 		appData.additionalData["stage"] = this;
 		for(auto entity : entities)
 		{
-			if(entity->getParentEntity()==nullptr)
+			if(entity->getParentEntity()==nullptr && entity->respondsToGravity())
 			{
 				double gravity = getGravity(entity);
 				auto velocity = entity->getVelocity();

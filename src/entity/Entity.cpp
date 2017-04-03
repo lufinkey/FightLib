@@ -194,6 +194,11 @@ namespace fl
 	{
 		return false;
 	}
+	
+	bool Entity::respondsToGravity() const
+	{
+		return true;
+	}
 
 	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
 	{
