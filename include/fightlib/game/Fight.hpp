@@ -16,6 +16,8 @@ namespace fl
 	private:
 		fgl::RectangleD frame;
 		
-		FightParams params;
+		Stage* stage;
+		fgl::ArrayList<Character*> characters;
+		fgl::ArrayList<CharacterController*> characterControllers;
 	};
 }
