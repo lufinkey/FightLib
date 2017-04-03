@@ -40,10 +40,5 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 
 TestStage::~TestStage()
 {
-	delete block1;
-	delete block2;
-	delete block3;
-	delete block4;
-	delete character;
-	delete sword;
+	//
 }
