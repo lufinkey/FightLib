@@ -132,6 +132,9 @@
     <ClInclude Include="..\..\include\fightlib\controls\CharacterController.hpp">
       <Filter>include\fightlib\controls</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\game\FightParams.hpp">
+      <Filter>include\fightlib\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\controls\CharacterController.cpp">
       <Filter>src\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\FightParams.cpp">
+      <Filter>src\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
