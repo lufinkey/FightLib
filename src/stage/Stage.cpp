@@ -10,7 +10,14 @@ namespace fl
 	
 	Stage::~Stage()
 	{
-		//
+		for(auto entity : entities)
+		{
+			delete entity;
+		}
+		for(auto platform : platforms)
+		{
+			delete platform;
+		}
 	}
 	
 	void Stage::update(fgl::ApplicationData appData)

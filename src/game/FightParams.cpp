@@ -4,20 +4,9 @@
 namespace fl
 {
 	FightParams::FightParams()
-		: stage(nullptr),
-		memoryCleanupEnabled(false)
+		: stage(nullptr)
 	{
 		//
-	}
-	
-	void FightParams::setMemoryCleanupEnabled(bool enabled)
-	{
-		memoryCleanupEnabled = enabled;
-	}
-	
-	bool FightParams::isMemoryCleanupEnabled() const
-	{
-		return memoryCleanupEnabled;
 	}
 	
 	void FightParams::setStage(Stage* stage_arg)

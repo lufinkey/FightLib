@@ -12,9 +12,6 @@ namespace fl
 	public:
 		FightParams();
 		
-		void setMemoryCleanupEnabled(bool enabled);
-		bool isMemoryCleanupEnabled() const;
-
 		void setStage(Stage* stage);
 		Stage* getStage() const;
 
@@ -30,7 +27,5 @@ namespace fl
 		Stage* stage;
 		fgl::ArrayList<Character*> characters;
 		fgl::ArrayList<CharacterController*> characterControllers;
-		
-		bool memoryCleanupEnabled;
 	};
 }
