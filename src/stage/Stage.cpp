@@ -76,33 +76,4 @@ namespace fl
 		collisionManager.removeCollidable(entity);
 		drawManager.removeDrawable(entity);
 	}
-
-	void Stage::addItem(Item* item, double zLayer)
-	{
-		items.add(item);
-		entities.add(item);
-		collisionManager.addCollidable(item);
-		drawManager.addDrawable(item, zLayer);
-	}
-
-	void Stage::removeItem(Item* item)
-	{
-		size_t itemIndex = items.indexOf(item);
-		if(itemIndex!=-1)
-		{
-			items.remove(itemIndex);
-		}
-		size_t entityIndex = entities.indexOf(item);
-		if(entityIndex!=-1)
-		{
-			entities.remove(entityIndex);
-		}
-		collisionManager.removeCollidable(item);
-		drawManager.removeDrawable(item);
-	}
-
-	const fgl::ArrayList<Item*>& Stage::getItems() const
-	{
-		return items;
-	}
 }
