@@ -11,6 +11,11 @@ namespace fl
 		}
 		return {};
 	}
+	
+	bool Item::isPickedUpByTouching() const
+	{
+		return false;
+	}
 
 	void Item::onCollision(Collidable* collided, CollisionSide side)
 	{

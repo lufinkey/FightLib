@@ -13,6 +13,7 @@ namespace fl
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
 		virtual fgl::ArrayList<AnimationMetaPoint::Type> getAnchorPoints() const = 0;
+		virtual bool isPickedUpByTouching() const;
 
 	protected:
 		virtual void onCollision(Collidable* collided, CollisionSide side) override;

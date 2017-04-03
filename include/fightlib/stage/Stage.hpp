@@ -36,6 +36,7 @@ namespace fl
 		fgl::ArrayList<Entity*> entities;
 		fgl::ArrayList<Platform*> platforms;
 		fgl::ArrayList<Item*> items;
+		
 		CollisionManager collisionManager;
 		DrawManager drawManager;
 	};
