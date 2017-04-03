@@ -12,15 +12,14 @@ namespace fl
 	public:
 		FightParams();
 		
-		void setPostFightCleanupEnabled(bool enabled);
-		bool isPostFightCleanupEnabled() const;
+		void setMemoryCleanupEnabled(bool enabled);
+		bool isMemoryCleanupEnabled() const;
 
 		void setStage(Stage* stage);
 		Stage* getStage() const;
 
 		void addCharacter(Character* character);
-		void addCharacter(Character* character, const fgl::Vector2d& spawnPosition);
-		void setCharacters(const fgl::ArrayList<Character*>& characters, const fgl::ArrayList<fgl::Vector2d>& spawnPositions={});
+		void setCharacters(const fgl::ArrayList<Character*>& characters);
 		const fgl::ArrayList<Character*>& getCharacters() const;
 		
 		void addCharacterController(CharacterController* controller);
@@ -30,10 +29,8 @@ namespace fl
 	private:
 		Stage* stage;
 		fgl::ArrayList<Character*> characters;
-		fgl::BasicDictionary<Character*, fgl::Vector2d> characterSpawnPositions;
-		
 		fgl::ArrayList<CharacterController*> characterControllers;
 		
-		bool postFightCleanupEnabled;
+		bool memoryCleanupEnabled;
 	};
 }

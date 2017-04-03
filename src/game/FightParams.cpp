@@ -5,19 +5,19 @@ namespace fl
 {
 	FightParams::FightParams()
 		: stage(nullptr),
-		postFightCleanupEnabled(false)
+		memoryCleanupEnabled(false)
 	{
 		//
 	}
 	
-	void FightParams::setPostFightCleanupEnabled(bool enabled)
+	void FightParams::setMemoryCleanupEnabled(bool enabled)
 	{
-		postFightCleanupEnabled = enabled;
+		memoryCleanupEnabled = enabled;
 	}
 	
-	bool FightParams::isPostFightCleanupEnabled() const
+	bool FightParams::isMemoryCleanupEnabled() const
 	{
-		return postFightCleanupEnabled;
+		return memoryCleanupEnabled;
 	}
 	
 	void FightParams::setStage(Stage* stage_arg)
@@ -35,20 +35,9 @@ namespace fl
 		characters.add(character);
 	}
 	
-	void FightParams::addCharacter(fl::Character* character, const fgl::Vector2d& spawnPosition)
-	{
-		characters.add(character);
-		characterSpawnPositions[character] = spawnPosition;
-	}
-	
-	void FightParams::setCharacters(const fgl::ArrayList<Character*>& characters_arg, const fgl::ArrayList<fgl::Vector2d>& spawnPositions)
+	void FightParams::setCharacters(const fgl::ArrayList<Character*>& characters_arg)
 	{
 		characters = characters_arg;
-		characterSpawnPositions.clear();
-		for(size_t i=0; i<spawnPositions.size() && i<characters.size(); i++)
-		{
-			characterSpawnPositions[characters[i]] = spawnPositions[i];
-		}
 	}
 	
 	const fgl::ArrayList<Character*>& FightParams::getCharacters() const
