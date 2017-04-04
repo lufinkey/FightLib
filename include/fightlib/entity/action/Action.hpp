@@ -34,7 +34,7 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const;
 
 	protected:
-		virtual void onPerform(ActionParamsPtr params = std::shared_ptr<ActionParams>(new ActionParams()));
+		virtual void onPerform(ActionParamsPtr params = ActionParamsPtr(new ActionParams()));
 		virtual void onUpdate(const fgl::ApplicationData& appData);
 		virtual void onEnd();
 		virtual void onEvent(ActionEventPtr event);

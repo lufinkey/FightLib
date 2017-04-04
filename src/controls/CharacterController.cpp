@@ -8,6 +8,11 @@ namespace fl
 	{
 		//
 	}
+	
+	CharacterController::~CharacterController()
+	{
+		//
+	}
 
 	Character* CharacterController::getCharacter() const
 	{

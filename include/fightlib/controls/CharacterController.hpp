@@ -9,8 +9,9 @@ namespace fl
 	{
 	public:
 		CharacterController(Character* character);
+		virtual ~CharacterController();
 
-		virtual void update(const fgl::ApplicationData& appData) = 0;
+		virtual void update(fgl::ApplicationData appData) = 0;
 
 		Character* getCharacter() const;
 
