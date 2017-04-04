@@ -15,7 +15,27 @@ namespace fl
 	
 	void CharacterKeyboardController::update(fgl::ApplicationData appData)
 	{
-		//TODO update da keys
+		auto character = getCharacter();
+		
+		fgl::Vector2f direction;
+		if(fgl::Keyboard::isKeyPressed(upKey))
+		{
+			direction.y -= 1.0f;
+		}
+		if(fgl::Keyboard::isKeyPressed(downKey))
+		{
+			direction.y += 1.0f;
+		}
+		if(fgl::Keyboard::isKeyPressed(leftKey))
+		{
+			direction.x -= 1.0f;
+		}
+		if(fgl::Keyboard::isKeyPressed(rightKey))
+		{
+			direction.x += 1.0f;
+		}
+		
+		character->setDirection(direction);
 	}
 	
 	void CharacterKeyboardController::setUpKey(fgl::Keyboard::Key key)
