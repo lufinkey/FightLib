@@ -12,6 +12,27 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("params", "stage cannot be null");
 		}
+
+		for(auto character : characters)
+		{
+			stage->addEntity(character);
+		}
+	}
+
+	Fight::~Fight()
+	{
+		for(auto character : characters)
+		{
+			stage->removeEntity(character);
+			delete character;
+		}
+
+		delete stage;
+
+		for(auto characterController : characterControllers)
+		{
+			delete characterController;
+		}
 	}
 
 	void Fight::update(fgl::ApplicationData appData)

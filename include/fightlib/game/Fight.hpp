@@ -9,6 +9,7 @@ namespace fl
 	{
 	public:
 		Fight(const FightParams& params);
+		virtual ~Fight();
 		
 		virtual void update(fgl::ApplicationData appData);
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
