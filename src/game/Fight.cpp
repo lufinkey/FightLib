@@ -21,12 +21,12 @@ namespace fl
 
 	Fight::~Fight()
 	{
-		delete stage;
-
 		for(auto characterController : characterControllers)
 		{
 			delete characterController;
 		}
+
+		delete stage;
 	}
 
 	void Fight::update(fgl::ApplicationData appData)
