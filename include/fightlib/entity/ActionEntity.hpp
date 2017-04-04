@@ -15,7 +15,7 @@ namespace fl
 
 		virtual void update(const fgl::ApplicationData& appData) override;
 
-		bool performAction(const fgl::String& name, ActionParamsPtr params = nullptr);
+		bool performAction(const fgl::String& name, ActionParamsPtr params = std::shared_ptr<ActionParams>(new ActionParams()));
 
 	protected:
 		void addAction(const fgl::String& name, Action* action);
