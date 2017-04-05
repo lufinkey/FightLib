@@ -36,6 +36,6 @@ namespace fl
 	
 	void Collidable::onFinishCollisionUpdates()
 	{
-		previousPosition = getPosition();
+		//
 	}
 }

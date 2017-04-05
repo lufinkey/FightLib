@@ -274,6 +274,12 @@ namespace fl
 			onCollision();
 		}
 		
+		//set the previous positions of the collidables
+		for(auto collidable : collidables)
+		{
+			collidable->previousPosition = collidable->getPosition();
+		}
+		
 		//tell updated collidables that their collision updates have finished
 		for(auto collidable : collidables)
 		{
