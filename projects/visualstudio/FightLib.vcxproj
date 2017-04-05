@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\controls\CharacterController.hpp" />
+    <ClInclude Include="..\..\include\fightlib\controls\CharacterKeyboardController.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\ActionEvent.hpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\controls\CharacterController.cpp" />
+    <ClCompile Include="..\..\src\controls\CharacterKeyboardController.cpp" />
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
     <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp" />
