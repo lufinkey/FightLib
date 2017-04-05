@@ -5,6 +5,7 @@ namespace fl
 {
 	Character::Character(const fgl::Vector2d& position, Orientation orientation)
 		: ActionEntity(position, orientation),
+		fight(nullptr),
 		groundCollidedCount(0)
 	{
 		//
@@ -92,6 +93,11 @@ namespace fl
 			return true;
 		}
 		return false;
+	}
+	
+	Fight* Character::getFight() const
+	{
+		return fight;
 	}
 	
 	void Character::onActionEnd(Action* action)

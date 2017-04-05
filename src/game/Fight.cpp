@@ -15,12 +15,26 @@ namespace fl
 
 		for(auto character : characters)
 		{
+			if(character->fight != nullptr)
+			{
+				throw fgl::IllegalArgumentException("params", "characters cannot be added to multiple Fight objects");
+			}
+		}
+		
+		for(auto character : characters)
+		{
+			character->fight = this;
 			stage->addEntity(character);
 		}
 	}
 
 	Fight::~Fight()
 	{
+		for(auto character : characters)
+		{
+			character->fight = nullptr;
+		}
+		
 		for(auto characterController : characterControllers)
 		{
 			delete characterController;
