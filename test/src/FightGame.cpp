@@ -21,6 +21,12 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	fight = new fl::Fight(params);
 }
 
+void FightGame::unloadContent(fgl::AssetManager* assetManager)
+{
+	delete fight;
+	delete animationAssetManager;
+}
+
 void FightGame::update(fgl::ApplicationData appData)
 {
 	fight->update(appData);
