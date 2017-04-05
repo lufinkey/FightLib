@@ -31,6 +31,8 @@ namespace fl
 
 	void Fight::update(fgl::ApplicationData appData)
 	{
+		appData.additionalData["fight"] = this;
+		
 		for(auto controller : characterControllers)
 		{
 			controller->update(appData);
