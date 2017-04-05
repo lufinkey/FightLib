@@ -30,14 +30,14 @@ namespace fl
 
 	Fight::~Fight()
 	{
-		for(auto character : characters)
-		{
-			character->fight = nullptr;
-		}
-		
 		for(auto characterController : characterControllers)
 		{
 			delete characterController;
+		}
+		
+		for(auto character : characters)
+		{
+			character->fight = nullptr;
 		}
 
 		delete stage;
