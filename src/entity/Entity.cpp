@@ -256,6 +256,7 @@ namespace fl
 		offset.x += shiftOffset.x;
 		offset.y += shiftOffset.y;
 
+		//TODO I may not need this anymore, but I should do some thorough tests before removing it
 		offset.y = fgl::Math::round(offset.y, 12);
 		offset.x = fgl::Math::round(offset.x, 12);
 	}
