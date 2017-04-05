@@ -36,6 +36,22 @@ namespace fl
 		}
 		
 		character->setDirection(direction);
+		
+		for(auto& keyActionPair : keyUpActions)
+		{
+			if(!fgl::Keyboard::isKeyPressed(keyActionPair.first) && fgl::Keyboard::wasKeyPressed(keyActionPair.first))
+			{
+				character->performAction(keyActionPair.second.name, keyActionPair.second.params);
+			}
+		}
+		
+		for(auto& keyActionPair : keyDownActions)
+		{
+			if(fgl::Keyboard::isKeyPressed(keyActionPair.first) && !fgl::Keyboard::wasKeyPressed(keyActionPair.first))
+			{
+				character->performAction(keyActionPair.second.name, keyActionPair.second.params);
+			}
+		}
 	}
 	
 	void CharacterKeyboardController::setUpKey(fgl::Keyboard::Key key)
