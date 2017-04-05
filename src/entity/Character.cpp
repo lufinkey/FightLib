@@ -20,6 +20,7 @@ namespace fl
 		{
 			updateMoveAnimation();
 		}
+		//TODO if the character is standing on a moving platform, shift it by the platform's velocity
 		ActionEntity::update(appData);
 	}
 
