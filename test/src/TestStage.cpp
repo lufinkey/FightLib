@@ -5,8 +5,6 @@
 
 TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 {
-	character = new Player(assetManager, fgl::Vector2d(300, 200), fl::ORIENTATION_LEFT);
-	
 	sword = new Sword(fgl::Vector2d(218, 0), fl::ORIENTATION_LEFT);
 	sword->loadAnimation("assets/animations/sword.plist", assetManager);
 	sword->setScale(2.0);
@@ -35,7 +33,6 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	addPlatform(block3);
 	addPlatform(block4);
 	addEntity(sword);
-	addEntity(character);
 }
 
 TestStage::~TestStage()

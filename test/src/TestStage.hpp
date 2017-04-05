@@ -8,7 +8,6 @@ public:
 	virtual ~TestStage();
 	
 private:
-	fl::Character* character;
 	fl::Item* sword;
 	
 	fl::Platform* block1;

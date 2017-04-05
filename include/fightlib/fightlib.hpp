@@ -16,3 +16,9 @@
 #include "entity/collision/CollisionManager.hpp"
 
 #include "stage/Stage.hpp"
+
+#include "controls/CharacterController.hpp"
+#include "controls/CharacterKeyboardController.hpp"
+
+#include "game/Fight.hpp"
+#include "game/FightParams.hpp"

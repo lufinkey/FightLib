@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "TestStage.hpp"
+#include <fightlib/fightlib.hpp>
 
 class FightGame : public fgl::Application
 {
@@ -13,5 +13,5 @@ public:
 private:
 	fl::AnimationAssetManager* animationAssetManager;
 
-	TestStage* testStage;
+	fl::Fight* fight;
 };

@@ -20,26 +20,6 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 
 void Player::update(const fgl::ApplicationData& appData)
 {
-	fgl::Vector2f direction = getDirection();
-	if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::LEFTARROW))
-	{
-		direction.x = -1;
-	}
-	else if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::RIGHTARROW))
-	{
-		direction.x = 1;
-	}
-	else
-	{
-		direction.x = 0;
-	}
-	setDirection(direction);
-	
-	if(fgl::Keyboard::isKeyPressed(fgl::Keyboard::UPARROW) && !fgl::Keyboard::wasKeyPressed(fgl::Keyboard::UPARROW))
-	{
-		performAction("jump");
-	}
-
 	Character::update(appData);
 }
 
