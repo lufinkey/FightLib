@@ -68,6 +68,10 @@ namespace fl
 	
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{
+		if(entity->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("entity", "cannot be added to multiple Stage objects");
+		}
 		entities.add(entity);
 		collisionManager.addCollidable(entity);
 		drawManager.addDrawable(entity, zLayer);
@@ -75,6 +79,11 @@ namespace fl
 	
 	void Stage::removeEntity(Entity* entity)
 	{
+		if(entity->stage!=nullptr && entity->stage!=this)
+		{
+			throw fgl::IllegalArgumentException("entity", "belongs to a different Stage");
+		}
+		entity->stage = nullptr;
 		size_t index = entities.indexOf(entity);
 		if(index!=-1)
 		{

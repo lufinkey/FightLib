@@ -21,8 +21,10 @@ namespace fl
 	private:
 		fgl::RectangleD frame;
 		
+		fgl::ArrayList<CharacterController*> characterControllers;
+		
 		Stage* stage;
 		fgl::ArrayList<Character*> characters;
-		fgl::ArrayList<CharacterController*> characterControllers;
+		fgl::ArrayList<Item*> items;
 	};
 }

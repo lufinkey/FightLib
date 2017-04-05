@@ -13,7 +13,8 @@ namespace fl
 		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
-		parentEntity(nullptr)
+		parentEntity(nullptr),
+		stage(nullptr)
 	{
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
@@ -371,5 +372,10 @@ namespace fl
 			return ANIMATIONORIENTATION_RIGHT;
 		}
 		throw fgl::IllegalStateException("Entity::orientation has an invalid value");
+	}
+	
+	Stage* Entity::getStage() const
+	{
+		return stage;
 	}
 }

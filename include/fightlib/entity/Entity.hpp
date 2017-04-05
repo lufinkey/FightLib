@@ -6,6 +6,8 @@
 
 namespace fl
 {
+	class Stage;
+	
 	typedef enum : fgl::Uint8
 	{
 		ORIENTATION_LEFT,
@@ -14,6 +16,7 @@ namespace fl
 
 	class Entity : public Collidable
 	{
+		friend class Stage;
 	public:
 		Entity(const fgl::Vector2d& position, Orientation orientation);
 
@@ -52,6 +55,8 @@ namespace fl
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
+		
+		Stage* getStage() const;
 
 	private:
 		fgl::Vector2d offset;
@@ -73,6 +78,8 @@ namespace fl
 
 		fgl::ArrayList<Anchor> anchoredEntities;
 		Entity* parentEntity;
+		
+		Stage* stage;
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
