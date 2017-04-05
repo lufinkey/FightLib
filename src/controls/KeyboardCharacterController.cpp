@@ -1,9 +1,9 @@
 
-#include <fightlib/controls/CharacterKeyboardController.hpp>
+#include <fightlib/controls/KeyboardCharacterController.hpp>
 
 namespace fl
 {
-	CharacterKeyboardController::CharacterKeyboardController(Character* character)
+	KeyboardCharacterController::KeyboardCharacterController(Character* character)
 		: CharacterController(character),
 		upKey(fgl::Keyboard::UPARROW),
 		downKey(fgl::Keyboard::DOWNARROW),
@@ -13,7 +13,7 @@ namespace fl
 		//
 	}
 	
-	void CharacterKeyboardController::update(fgl::ApplicationData appData)
+	void KeyboardCharacterController::update(fgl::ApplicationData appData)
 	{
 		auto character = getCharacter();
 		
@@ -54,47 +54,47 @@ namespace fl
 		}
 	}
 	
-	void CharacterKeyboardController::setUpKey(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::setUpKey(fgl::Keyboard::Key key)
 	{
 		upKey = key;
 	}
 	
-	fgl::Keyboard::Key CharacterKeyboardController::getUpKey() const
+	fgl::Keyboard::Key KeyboardCharacterController::getUpKey() const
 	{
 		return upKey;
 	}
 	
-	void CharacterKeyboardController::setDownKey(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::setDownKey(fgl::Keyboard::Key key)
 	{
 		downKey = key;
 	}
 	
-	fgl::Keyboard::Key CharacterKeyboardController::getDownKey() const
+	fgl::Keyboard::Key KeyboardCharacterController::getDownKey() const
 	{
 		return downKey;
 	}
 	
-	void CharacterKeyboardController::setLeftKey(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::setLeftKey(fgl::Keyboard::Key key)
 	{
 		leftKey = key;
 	}
 	
-	fgl::Keyboard::Key CharacterKeyboardController::getLeftKey() const
+	fgl::Keyboard::Key KeyboardCharacterController::getLeftKey() const
 	{
 		return leftKey;
 	}
 	
-	void CharacterKeyboardController::setRightKey(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::setRightKey(fgl::Keyboard::Key key)
 	{
 		rightKey = key;
 	}
 	
-	fgl::Keyboard::Key CharacterKeyboardController::getRightKey() const
+	fgl::Keyboard::Key KeyboardCharacterController::getRightKey() const
 	{
 		return rightKey;
 	}
 	
-	void CharacterKeyboardController::setKeyDownAction(fgl::Keyboard::Key key, const fgl::String& actionName, ActionParamsPtr params)
+	void KeyboardCharacterController::setKeyDownAction(fgl::Keyboard::Key key, const fgl::String& actionName, ActionParamsPtr params)
 	{
 		KeyAction action;
 		action.name = actionName;
@@ -102,7 +102,7 @@ namespace fl
 		keyDownActions[key] = action;
 	}
 	
-	fgl::String CharacterKeyboardController::getKeyDownActionName(fgl::Keyboard::Key key) const
+	fgl::String KeyboardCharacterController::getKeyDownActionName(fgl::Keyboard::Key key) const
 	{
 		try
 		{
@@ -114,7 +114,7 @@ namespace fl
 		}
 	}
 	
-	ActionParamsPtr CharacterKeyboardController::getKeyDownActionParams(fgl::Keyboard::Key key) const
+	ActionParamsPtr KeyboardCharacterController::getKeyDownActionParams(fgl::Keyboard::Key key) const
 	{
 		try
 		{
@@ -126,12 +126,12 @@ namespace fl
 		}
 	}
 	
-	void CharacterKeyboardController::removeKeyDownAction(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::removeKeyDownAction(fgl::Keyboard::Key key)
 	{
 		keyDownActions.remove(key);
 	}
 	
-	void CharacterKeyboardController::setKeyUpAction(fgl::Keyboard::Key key, const fgl::String& actionName, ActionParamsPtr params)
+	void KeyboardCharacterController::setKeyUpAction(fgl::Keyboard::Key key, const fgl::String& actionName, ActionParamsPtr params)
 	{
 		KeyAction action;
 		action.name = actionName;
@@ -139,7 +139,7 @@ namespace fl
 		keyUpActions[key] = action;
 	}
 	
-	fgl::String CharacterKeyboardController::getKeyUpActionName(fgl::Keyboard::Key key) const
+	fgl::String KeyboardCharacterController::getKeyUpActionName(fgl::Keyboard::Key key) const
 	{
 		try
 		{
@@ -151,7 +151,7 @@ namespace fl
 		}
 	}
 	
-	ActionParamsPtr CharacterKeyboardController::getKeyUpActionParams(fgl::Keyboard::Key key) const
+	ActionParamsPtr KeyboardCharacterController::getKeyUpActionParams(fgl::Keyboard::Key key) const
 	{
 		try
 		{
@@ -163,7 +163,7 @@ namespace fl
 		}
 	}
 	
-	void CharacterKeyboardController::removeKeyUpAction(fgl::Keyboard::Key key)
+	void KeyboardCharacterController::removeKeyUpAction(fgl::Keyboard::Key key)
 	{
 		keyUpActions.remove(key);
 	}

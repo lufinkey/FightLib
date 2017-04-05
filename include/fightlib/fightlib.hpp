@@ -18,7 +18,7 @@
 #include "stage/Stage.hpp"
 
 #include "controls/CharacterController.hpp"
-#include "controls/CharacterKeyboardController.hpp"
+#include "controls/KeyboardCharacterController.hpp"
 
 #include "game/Fight.hpp"
 #include "game/FightParams.hpp"

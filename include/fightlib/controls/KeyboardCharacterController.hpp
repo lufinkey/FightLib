@@ -5,10 +5,10 @@
 
 namespace fl
 {
-	class CharacterKeyboardController : public CharacterController
+	class KeyboardCharacterController : public CharacterController
 	{
 	public:
-		CharacterKeyboardController(Character* character);
+		KeyboardCharacterController(Character* character);
 		
 		virtual void update(fgl::ApplicationData appData) override;
 		

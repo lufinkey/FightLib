@@ -13,7 +13,7 @@
 		F15F25021E8EA8A7005EE4F1 /* Collidable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F25011E8EA8A7005EE4F1 /* Collidable.cpp */; };
 		F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */; };
 		F164D2DB1E8C164F00B11F7F /* ActionInterruptEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */; };
-		F16539AA1E94069700F11ACB /* CharacterKeyboardController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16539A91E94069700F11ACB /* CharacterKeyboardController.cpp */; };
+		F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16539A91E94069700F11ACB /* KeyboardCharacterController.cpp */; };
 		F17BBBE91E64965800A7F8F4 /* BoxCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */; };
 		F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */; };
 		F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17BBBE81E64965800A7F8F4 /* PixelCollisionRect.cpp */; };
@@ -47,8 +47,8 @@
 		F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEvent.cpp; sourceTree = "<group>"; };
 		F164D2D91E8C163D00B11F7F /* ActionInterruptEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionInterruptEvent.hpp; sourceTree = "<group>"; };
 		F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionInterruptEvent.cpp; sourceTree = "<group>"; };
-		F16539A81E94068400F11ACB /* CharacterKeyboardController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CharacterKeyboardController.hpp; sourceTree = "<group>"; };
-		F16539A91E94069700F11ACB /* CharacterKeyboardController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterKeyboardController.cpp; sourceTree = "<group>"; };
+		F16539A81E94068400F11ACB /* KeyboardCharacterController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KeyboardCharacterController.hpp; sourceTree = "<group>"; };
+		F16539A91E94069700F11ACB /* KeyboardCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardCharacterController.cpp; sourceTree = "<group>"; };
 		F17BBBE61E64965800A7F8F4 /* BoxCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollisionRect.cpp; sourceTree = "<group>"; };
 		F17BBBE71E64965800A7F8F4 /* CollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRect.cpp; sourceTree = "<group>"; };
 		F17BBBE81E64965800A7F8F4 /* PixelCollisionRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PixelCollisionRect.cpp; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				F1BA75C61E92845700647E41 /* CharacterController.cpp */,
-				F16539A91E94069700F11ACB /* CharacterKeyboardController.cpp */,
+				F16539A91E94069700F11ACB /* KeyboardCharacterController.cpp */,
 			);
 			path = controls;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				F1BA75CD1E92848D00647E41 /* CharacterController.hpp */,
-				F16539A81E94068400F11ACB /* CharacterKeyboardController.hpp */,
+				F16539A81E94068400F11ACB /* KeyboardCharacterController.hpp */,
 			);
 			path = controls;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */,
 				F1BA75C91E92846400647E41 /* FightParams.cpp in Sources */,
 				F1BA75C71E92845700647E41 /* CharacterController.cpp in Sources */,
-				F16539AA1E94069700F11ACB /* CharacterKeyboardController.cpp in Sources */,
+				F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
 				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
 			);
