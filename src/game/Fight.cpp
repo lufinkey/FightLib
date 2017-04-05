@@ -44,4 +44,19 @@ namespace fl
 	{
 		stage->draw(appData, graphics);
 	}
+	
+	Stage* Fight::getStage() const
+	{
+		return stage;
+	}
+	
+	const fgl::ArrayList<Character*>& Fight::getCharacters() const
+	{
+		return characters;
+	}
+	
+	const fgl::ArrayList<CharacterController*>& Fight::getCharacterControllers() const
+	{
+		return characterControllers;
+	}
 }
