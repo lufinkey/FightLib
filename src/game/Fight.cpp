@@ -5,8 +5,8 @@ namespace fl
 {
 	Fight::Fight(const FightParams& params)
 		: stage(params.getStage()),
-		characters(params.getCharacters()),
-		characterControllers(params.getCharacterControllers())
+		characterControllers(params.getCharacterControllers()),
+		characters(params.getCharacters())
 	{
 		if(stage==nullptr)
 		{
