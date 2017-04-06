@@ -21,6 +21,12 @@ namespace fl
 	void Entity::update(const fgl::ApplicationData& appData)
 	{
 		Collidable::update(appData);
+		
+		if(movesWithGround() && groundCollidables.size() > 0)
+		{
+			auto ground = groundCollidables[0];
+			shift(ground->getVelocity()*appData.getFrameSpeedMultiplier());
+		}
 
 		collisionRectManager.update(appData, this);
 	}
@@ -193,6 +199,11 @@ namespace fl
 	}
 	
 	bool Entity::respondsToGravity() const
+	{
+		return true;
+	}
+	
+	bool Entity::movesWithGround() const
 	{
 		return true;
 	}

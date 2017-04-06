@@ -36,6 +36,7 @@ namespace fl
 
 		virtual bool isStaticCollisionBody() const override;
 		virtual bool respondsToGravity() const;
+		virtual bool movesWithGround() const;
 
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
