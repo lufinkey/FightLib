@@ -3,7 +3,7 @@
 
 namespace fl
 {
-	Stage::Stage()
+	Stage::Stage() : fight(nullptr)
 	{
 		//
 	}
@@ -46,6 +46,11 @@ namespace fl
 	double Stage::getGravity(Entity* entity) const
 	{
 		return 1800;
+	}
+	
+	Fight* Stage::getFight() const
+	{
+		return fight;
 	}
 	
 	void Stage::addPlatform(Platform* platform, double zLayer)

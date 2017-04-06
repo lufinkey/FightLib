@@ -11,6 +11,12 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("params", "stage cannot be null");
 		}
+		else if(stage->fight != nullptr)
+		{
+			throw fgl::IllegalArgumentException("params", "stage cannot be added to multiple Fight objects");
+		}
+		
+		stage->fight = this;
 
 		for(auto character : params.getCharacters())
 		{
@@ -24,7 +30,8 @@ namespace fl
 		{
 			delete characterController;
 		}
-
+		
+		stage->fight = nullptr;
 		delete stage;
 	}
 

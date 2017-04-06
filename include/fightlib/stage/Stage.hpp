@@ -10,8 +10,11 @@
 
 namespace fl
 {
+	class Fight;
+	
 	class Stage
 	{
+		friend class Fight;
 	public:
 		Stage();
 		virtual ~Stage();
@@ -20,7 +23,8 @@ namespace fl
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 		
 		virtual double getGravity(Entity* entity) const;
-
+		
+		Fight* getFight() const;
 		
 		const fgl::ArrayList<Entity*>& getEntities() const;
 		const fgl::ArrayList<Item*>& getItems() const;
@@ -41,6 +45,8 @@ namespace fl
 		void removePlatform(Platform* platform);
 		
 	private:
+		Fight* fight;
+		
 		fgl::ArrayList<Entity*> entities;
 		fgl::ArrayList<Platform*> platforms;
 
