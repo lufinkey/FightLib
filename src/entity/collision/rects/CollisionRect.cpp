@@ -814,4 +814,99 @@ namespace fl
 		//TODO implement pixel on pixel collisions
 		return fgl::Vector2d(0, 0);
 	}
+	
+	
+	
+	
+	bool CollisionRect::checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	{
+		fgl::RectangleD rect1 = collisionRect1->getRect();
+		fgl::RectangleD rect2 = collisionRect2->getRect();
+		if(rect1.intersects(rect2))
+		{
+			bool filled1 = collisionRect1->isFilled();
+			bool filled2 = collisionRect2->isFilled();
+			if(filled1 && filled2)
+			{
+				return checkFilledCollision(collisionRect1, collisionRect2);
+			}
+			else if(filled1 || filled2)
+			{
+				CollisionRect* filledRect = nullptr;
+				CollisionRect* pixelRect = nullptr;
+				if(filled1)
+				{
+					filledRect = collisionRect1;
+					pixelRect = collisionRect2;
+				}
+				else //if(filled2)
+				{
+					filledRect = collisionRect2;
+					pixelRect = collisionRect1;
+				}
+				return checkPixelOnFilledCollision(pixelRect, filledRect);
+			}
+			else
+			{
+				return checkPixelCollision(collisionRect1, collisionRect2);
+			}
+		}
+		return false;
+	}
+	
+	bool CollisionRect::checkFilledCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	{
+		if(collisionRect1->getRect().intersects(collisionRect2->getRect()))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	bool CollisionRect::checkPixelOnFilledCollision(CollisionRect* pixelRect, CollisionRect* filledRect)
+	{
+		auto rect1 = pixelRect->getRect();
+		auto rect2 = filledRect->getRect();
+		auto intersect = rect1.getIntersect(rect2);
+		if(intersect.width==0 || intersect.height==0)
+		{
+			return false;
+		}
+		fgl::Vector2d increment1 = pixelRect->getPreferredIncrement();
+		fgl::Vector2d increment2 = filledRect->getPreferredIncrement();
+		fgl::Vector2d increment = fgl::Vector2d(fgl::Math::min(increment1.x, increment2.x), fgl::Math::min(increment1.x, increment2.x));
+		fgl::PixelIterator pixelIter1 = pixelRect->createPixelIterator(intersect, increment);
+		while(pixelIter1.nextPixelIndex())
+		{
+			if(pixelRect->check(pixelIter1))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	bool CollisionRect::checkPixelCollision(fl::CollisionRect* collisionRect1, fl::CollisionRect* collisionRect2)
+	{
+		auto rect1 = collisionRect1->getRect();
+		auto rect2 = collisionRect2->getRect();
+		auto intersect = rect1.getIntersect(rect2);
+		if(intersect.width==0 || intersect.height==0)
+		{
+			return false;
+		}
+		fgl::Vector2d increment1 = collisionRect1->getPreferredIncrement();
+		fgl::Vector2d increment2 = collisionRect2->getPreferredIncrement();
+		fgl::Vector2d increment = fgl::Vector2d(fgl::Math::min(increment1.x, increment2.x), fgl::Math::min(increment1.x, increment2.x));
+		fgl::PixelIterator pixelIter1 = collisionRect1->createPixelIterator(intersect, increment);
+		fgl::PixelIterator pixelIter2 = collisionRect2->createPixelIterator(intersect, increment);
+		while(pixelIter1.nextPixelIndex() && pixelIter2.nextPixelIndex())
+		{
+			if(collisionRect1->check(pixelIter1) && collisionRect2->check(pixelIter2))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
