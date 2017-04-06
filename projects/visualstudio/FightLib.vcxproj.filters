@@ -135,7 +135,7 @@
     <ClInclude Include="..\..\include\fightlib\game\FightParams.hpp">
       <Filter>include\fightlib\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\controls\CharacterKeyboardController.hpp">
+    <ClInclude Include="..\..\include\fightlib\controls\KeyboardCharacterController.hpp">
       <Filter>include\fightlib\controls</Filter>
     </ClInclude>
   </ItemGroup>
@@ -209,7 +209,7 @@
     <ClCompile Include="..\..\src\game\FightParams.cpp">
       <Filter>src\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\controls\CharacterKeyboardController.cpp">
+    <ClCompile Include="..\..\src\controls\KeyboardCharacterController.cpp">
       <Filter>src\controls</Filter>
     </ClCompile>
   </ItemGroup>

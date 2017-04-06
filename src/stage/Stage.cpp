@@ -65,6 +65,11 @@ namespace fl
 		collisionManager.removeCollidable(platform);
 		drawManager.removeDrawable(platform);
 	}
+
+	const fgl::ArrayList<Platform*>& Stage::getPlatforms() const
+	{
+		return platforms;
+	}
 	
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{
@@ -91,5 +96,48 @@ namespace fl
 		}
 		collisionManager.removeCollidable(entity);
 		drawManager.removeDrawable(entity);
+	}
+
+	const fgl::ArrayList<Entity*>& Stage::getEntities() const
+	{
+		return entities;
+	}
+
+	void Stage::addItem(Item* item, double zLayer)
+	{
+		if(item->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("entity", "cannot be added to multiple Stage objects");
+		}
+		entities.add(item);
+		items.add(item);
+		collisionManager.addCollidable(item);
+		drawManager.addDrawable(item, zLayer);
+	}
+
+	void Stage::removeItem(Item* item)
+	{
+		if(item->stage!=nullptr && item->stage!=this)
+		{
+			throw fgl::IllegalArgumentException("item", "belongs to a different Stage");
+		}
+		item->stage = nullptr;
+		size_t entityIndex = entities.indexOf(item);
+		if(entityIndex!=-1)
+		{
+			entities.remove(entityIndex);
+		}
+		size_t itemIndex = items.indexOf(item);
+		if(itemIndex!=-1)
+		{
+			items.remove(itemIndex);
+		}
+		collisionManager.removeCollidable(item);
+		drawManager.removeDrawable(item);
+	}
+
+	const fgl::ArrayList<Item*>& Stage::getItems() const
+	{
+		return items;
 	}
 }
