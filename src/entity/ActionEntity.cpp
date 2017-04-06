@@ -64,7 +64,7 @@ namespace fl
 		}
 		else if(action->entity != nullptr)
 		{
-			throw fgl::IllegalArgumentException("action", "cannot be added to multiple entities at the same time");
+			throw fgl::IllegalArgumentException("action", "cannot be added to multiple entities");
 		}
 		action->entity = this;
 		actions.add(std::pair<fgl::String, Action*>(name, action));
