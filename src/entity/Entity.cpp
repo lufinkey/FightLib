@@ -284,6 +284,11 @@ namespace fl
 			}
 		}
 	}
+
+	const fgl::ArrayList<Entity::Anchor>& Entity::getAnchoredEntities() const
+	{
+		return anchoredEntities;
+	}
 	
 	Entity* Entity::getParentEntity() const
 	{

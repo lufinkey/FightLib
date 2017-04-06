@@ -57,18 +57,7 @@ namespace fl
 		virtual void onCollision(Collidable* collided, CollisionSide side) override;
 		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) override;
 
-		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
-		void removeAnchoredEntity(Entity* child);
-
 		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
-
-	private:
-		fgl::Vector2d offset;
-
-		float scale;
-
-		Orientation orientation;
-		CollisionRectManager collisionRectManager;
 
 		struct Anchor
 		{
@@ -78,6 +67,18 @@ namespace fl
 			AnimationMetaPoint::Type childPoint;
 			size_t childPointIndex;
 		};
+
+		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
+		void removeAnchoredEntity(Entity* child);
+		const fgl::ArrayList<Anchor>& getAnchoredEntities() const;
+
+	private:
+		fgl::Vector2d offset;
+
+		float scale;
+
+		Orientation orientation;
+		CollisionRectManager collisionRectManager;
 
 		fgl::ArrayList<Anchor> anchoredEntities;
 		Entity* parentEntity;
