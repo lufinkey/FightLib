@@ -37,6 +37,23 @@ namespace fl
 		return true;
 	}
 	
+	bool Collidable::checkCollision(Collidable* collidable) const
+	{
+		auto collisionRects1 = getCollisionRects();
+		auto collisionRects2 = collidable->getCollisionRects();
+		for(size_t i=0; i<collisionRects1.size(); i++)
+		{
+			for(size_t j=0; j<collisionRects2.size(); j++)
+			{
+				if(CollisionRect::checkCollision(collisionRects1[i], collisionRects2[j]))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	void Collidable::onCollision(Collidable* collided, CollisionSide side)
 	{
 		//
