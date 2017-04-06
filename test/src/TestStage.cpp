@@ -32,7 +32,7 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	addPlatform(block2);
 	addPlatform(block3);
 	addPlatform(block4);
-	//addEntity(sword);
+	addEntity(sword);
 }
 
 TestStage::~TestStage()
