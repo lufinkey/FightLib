@@ -36,7 +36,7 @@ namespace fl
 		return getRect().getCenter() - getPreviousRect().getCenter();
 	}
 
-	fgl::Vector2d CollisionRect::checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	fgl::Vector2d CollisionRect::getCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
 		fgl::RectangleD rect1 = collisionRect1->getRect();
 		fgl::RectangleD rect2 = collisionRect2->getRect();
@@ -46,7 +46,7 @@ namespace fl
 			bool filled2 = collisionRect2->isFilled();
 			if(filled1 && filled2)
 			{
-				return checkFilledCollision(collisionRect1, collisionRect2);
+				return getFilledCollisionOffset(collisionRect1, collisionRect2);
 			}
 			else if(filled1 || filled2)
 			{
@@ -62,7 +62,7 @@ namespace fl
 					filledRect = collisionRect2;
 					pixelRect = collisionRect1;
 				}
-				fgl::Vector2d offset = checkPixelOnFilledCollision(pixelRect, filledRect);
+				fgl::Vector2d offset = getPixelOnFilledCollisionOffset(pixelRect, filledRect);
 				if(filled1)
 				{
 					offset.x = -offset.x;
@@ -72,7 +72,7 @@ namespace fl
 			}
 			else
 			{
-				return checkPixelCollision(collisionRect1, collisionRect2);
+				return getPixelCollisionOffset(collisionRect1, collisionRect2);
 			}
 		}
 		return fgl::Vector2d(0, 0);
@@ -743,12 +743,12 @@ namespace fl
 	
 	
 
-	fgl::Vector2d CollisionRect::checkFilledCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	fgl::Vector2d CollisionRect::getFilledCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
 		return CollisionRect_getRectCollisionOffset(collisionRect1->getRect(), collisionRect1->getPreviousRect(), collisionRect2->getRect(), collisionRect2->getPreviousRect());
 	}
 
-	fgl::Vector2d CollisionRect::checkPixelOnFilledCollision(CollisionRect* pixelRect, CollisionRect* filledRect)
+	fgl::Vector2d CollisionRect::getPixelOnFilledCollisionOffset(CollisionRect* pixelRect, CollisionRect* filledRect)
 	{
 		fgl::RectangleD rect1 = pixelRect->getRect();
 		fgl::RectangleD rect2 = filledRect->getRect();
@@ -809,7 +809,7 @@ namespace fl
 		return CollisionRect_getRectCollisionOffset(overlapRect.toRectangle(), pixelRect->getTotalVelocity(), rect2, filledRect->getTotalVelocity());
 	}
 
-	fgl::Vector2d CollisionRect::checkPixelCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
+	fgl::Vector2d CollisionRect::getPixelCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
 	{
 		//TODO implement pixel on pixel collisions
 		return fgl::Vector2d(0, 0);

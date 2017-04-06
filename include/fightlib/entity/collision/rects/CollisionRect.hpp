@@ -26,12 +26,12 @@ namespace fl
 		virtual void shift(const fgl::Vector2d& shiftAmount) = 0;
 
 		//offset is rect2's offset to avoid rect1
-		static fgl::Vector2d checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+		static fgl::Vector2d getCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
 
 	private:
-		static fgl::Vector2d checkFilledCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
-		static fgl::Vector2d checkPixelOnFilledCollision(CollisionRect* pixelRect, CollisionRect* filledRect);
-		static fgl::Vector2d checkPixelCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+		static fgl::Vector2d getFilledCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+		static fgl::Vector2d getPixelOnFilledCollisionOffset(CollisionRect* pixelRect, CollisionRect* filledRect);
+		static fgl::Vector2d getPixelCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
 
 		fgl::String tag;
 	};

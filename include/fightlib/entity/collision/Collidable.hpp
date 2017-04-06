@@ -30,6 +30,8 @@ namespace fl
 		
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;
+		
+		bool checkCollision(Collidable* collidable) const;
 
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) = 0;

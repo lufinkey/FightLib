@@ -101,7 +101,7 @@ namespace fl
 					//check each CollisionRect for a collision
 					for(auto& rectPair : rectPairs)
 					{
-						fgl::Vector2d shiftAmount = CollisionRect::checkCollision(rectPair.first, rectPair.second);
+						fgl::Vector2d shiftAmount = CollisionRect::getCollisionOffset(rectPair.first, rectPair.second);
 						if(!(shiftAmount.x==0 && shiftAmount.y==0))
 						{
 							CollisionSide collisionSide1 = getCollisionSide(shiftAmount);
