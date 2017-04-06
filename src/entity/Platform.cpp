@@ -8,7 +8,7 @@ namespace fl
 		position(position),
 		scale(1.0f)
 	{
-		setCollisionMethod(COLLISIONMETHOD_FRAME);
+		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
 	
 	void Platform::update(const fgl::ApplicationData& appData)

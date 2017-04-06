@@ -1,22 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>name</key>
-	<string>block</string>
-	<key>orientation</key>
-	<string>NEUTRAL</string>
-	<key>fps</key>
-	<real>1</real>
-	<key>files</key>
-	<array>
-		<dict>
-			<key>filename</key>
-			<string>block.png</string>
-		</dict>
-	</array>
-	<key>framedata</key>
-	<array>
-	</array>
-</dict>
+	<dict>
+		<key>name</key>
+		<string>block</string>
+		<key>orientation</key>
+		<string>NEUTRAL</string>
+		<key>fps</key>
+		<real>1</real>
+		<key>files</key>
+		<array>
+			<dict>
+				<key>filename</key>
+				<string>block.png</string>
+				<key>rows</key>
+				<integer>1</integer>
+				<key>columns</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>framedata</key>
+		<array>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>0</real>
+						<key>y</key>
+						<real>0</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>50</real>
+						<key>y</key>
+						<real>50</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
 </plist>
