@@ -40,6 +40,7 @@ namespace fl
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
 		Entity* getParentEntity() const;
+		Stage* getStage() const;
 		
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;
@@ -55,8 +56,6 @@ namespace fl
 
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
-		
-		Stage* getStage() const;
 
 	private:
 		fgl::Vector2d offset;
