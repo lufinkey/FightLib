@@ -22,7 +22,7 @@ namespace fl
 		virtual void update(fgl::ApplicationData appData);
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 		
-		virtual double getGravity(Entity* entity) const;
+		virtual fgl::Vector2d getGravity(Entity* entity) const;
 		
 		Fight* getFight() const;
 		
