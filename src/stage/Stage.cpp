@@ -22,6 +22,8 @@ namespace fl
 	
 	void Stage::update(fgl::ApplicationData appData)
 	{
+		//TODO should I auto-pickup items here or in Fight?
+		
 		appData.additionalData["stage"] = this;
 		for(auto entity : entities)
 		{
