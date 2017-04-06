@@ -45,6 +45,8 @@ namespace fl
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;
 
+		bool isOnGround() const;
+
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) override;
 
@@ -54,8 +56,13 @@ namespace fl
 		virtual float getDrawScale() const override;
 		virtual bool shouldUseParentMetaPointRotation() const;
 
+		virtual void onCollision(Collidable* collided, CollisionSide side) override;
+		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) override;
+
 		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
+
+		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
 
 	private:
 		fgl::Vector2d offset;
@@ -79,6 +86,8 @@ namespace fl
 		Entity* parentEntity;
 		
 		Stage* stage;
+
+		fgl::ArrayList<Collidable*> groundCollidables;
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;

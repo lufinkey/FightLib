@@ -201,6 +201,42 @@ namespace fl
 		return true;
 	}
 
+	void Entity::onCollision(Collidable* collided, CollisionSide side)
+	{
+		if(side==COLLISIONSIDE_BOTTOM)
+		{
+			groundCollidables.add(collided);
+		}
+		Collidable::onCollision(collided, side);
+	}
+
+	void Entity::onCollisionFinish(Collidable* collided, CollisionSide side)
+	{
+		if(side==COLLISIONSIDE_BOTTOM)
+		{
+			size_t collidableIndex = groundCollidables.indexOf(collided);
+			if(collidableIndex!=-1)
+			{
+				groundCollidables.remove(collidableIndex);
+			}
+		}
+		Collidable::onCollisionFinish(collided, side);
+	}
+
+	bool Entity::isOnGround() const
+	{
+		if(groundCollidables.size() > 0)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	const fgl::ArrayList<Collidable*>& Entity::getGroundCollidables() const
+	{
+		return groundCollidables;
+	}
+
 	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
 	{
 		return collisionRectManager.getCollisionRects();

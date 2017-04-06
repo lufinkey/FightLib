@@ -18,8 +18,6 @@ namespace fl
 
 		void setDirection(const fgl::Vector2f& direction);
 		const fgl::Vector2f& getDirection() const;
-		
-		bool isOnGround() const;
 
 	protected:
 		virtual void updateMovement(const fgl::ApplicationData& appData);
@@ -34,6 +32,5 @@ namespace fl
 
 	private:
 		fgl::Vector2f direction;
-		size_t groundCollidedCount;
 	};
 }
