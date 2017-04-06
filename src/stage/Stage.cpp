@@ -36,7 +36,20 @@ namespace fl
 		drawManager.update(appData);
 		collisionManager.update(appData);
 		
-		//TODO find characters collided with items
+		//update the list of items that characters are able to pick up
+		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> accessibleItems;
+		for(auto character : characters)
+		{
+			for(auto item : items)
+			{
+				if(character->checkCollision(item))
+				{
+					fgl::ArrayList<Item*>& itemList = accessibleItems[character];
+					itemList.add(item);
+				}
+			}
+		}
+		characterAccessibleItems = accessibleItems;
 	}
 	
 	void Stage::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
@@ -53,6 +66,11 @@ namespace fl
 	Fight* Stage::getFight() const
 	{
 		return fight;
+	}
+	
+	fgl::ArrayList<Item*> Stage::getAccessibleItems(fl::Character* character) const
+	{
+		return characterAccessibleItems.get(character, {});
 	}
 	
 	void Stage::addPlatform(Platform* platform, double zLayer)

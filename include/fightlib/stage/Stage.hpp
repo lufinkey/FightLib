@@ -26,6 +26,8 @@ namespace fl
 		
 		Fight* getFight() const;
 		
+		fgl::ArrayList<Item*> getAccessibleItems(Character* character) const;
+		
 		const fgl::ArrayList<Entity*>& getEntities() const;
 		const fgl::ArrayList<Item*>& getItems() const;
 		const fgl::ArrayList<Character*>& getCharacters() const;
@@ -52,6 +54,8 @@ namespace fl
 
 		fgl::ArrayList<Item*> items;
 		fgl::ArrayList<Character*> characters;
+		
+		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		
 		CollisionManager collisionManager;
 		DrawManager drawManager;
