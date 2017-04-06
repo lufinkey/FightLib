@@ -4,16 +4,15 @@
 namespace fl
 {
 	Fight::Fight(const FightParams& params)
-		: characterControllers(params.getCharacterControllers()),
-		stage(params.getStage()),
-		characters(params.getCharacters())
+		: stage(params.getStage()),
+		characterControllers(params.getCharacterControllers())
 	{
 		if(stage==nullptr)
 		{
 			throw fgl::IllegalArgumentException("params", "stage cannot be null");
 		}
 
-		for(auto character : characters)
+		for(auto character : params.getCharacters())
 		{
 			stage->addEntity(character);
 		}
@@ -48,11 +47,6 @@ namespace fl
 	Stage* Fight::getStage() const
 	{
 		return stage;
-	}
-	
-	const fgl::ArrayList<Character*>& Fight::getCharacters() const
-	{
-		return characters;
 	}
 	
 	const fgl::ArrayList<CharacterController*>& Fight::getCharacterControllers() const

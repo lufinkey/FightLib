@@ -107,12 +107,10 @@ namespace fl
 	{
 		if(item->stage!=nullptr)
 		{
-			throw fgl::IllegalArgumentException("entity", "cannot be added to multiple Stage objects");
+			throw fgl::IllegalArgumentException("item", "cannot be added to multiple Stage objects");
 		}
-		entities.add(item);
+		addEntity(item, zLayer);
 		items.add(item);
-		collisionManager.addCollidable(item);
-		drawManager.addDrawable(item, zLayer);
 	}
 
 	void Stage::removeItem(Item* item)
@@ -121,23 +119,45 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("item", "belongs to a different Stage");
 		}
-		item->stage = nullptr;
-		size_t entityIndex = entities.indexOf(item);
-		if(entityIndex!=-1)
-		{
-			entities.remove(entityIndex);
-		}
+		removeEntity(item);
 		size_t itemIndex = items.indexOf(item);
 		if(itemIndex!=-1)
 		{
 			items.remove(itemIndex);
 		}
-		collisionManager.removeCollidable(item);
-		drawManager.removeDrawable(item);
 	}
 
 	const fgl::ArrayList<Item*>& Stage::getItems() const
 	{
 		return items;
+	}
+
+	void Stage::addCharacter(Character* character, double zLayer)
+	{
+		if(character->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("item", "cannot be added to multiple Stage objects");
+		}
+		addEntity(character, zLayer);
+		characters.add(character);
+	}
+
+	void Stage::removeCharacter(Character* character)
+	{
+		if(character->stage!=nullptr && character->stage!=this)
+		{
+			throw fgl::IllegalArgumentException("character", "belongs to a different Stage");
+		}
+		removeEntity(character);
+		size_t characterIndex = characters.indexOf(character);
+		if(characterIndex!=-1)
+		{
+			characters.remove(characterIndex);
+		}
+	}
+
+	const fgl::ArrayList<Character*>& Stage::getCharacters() const
+	{
+		return characters;
 	}
 }
