@@ -24,6 +24,9 @@ namespace fl
 		void setCollisionMethod(CollisionMethod collisionMethod);
 		CollisionMethod getCollisionMethod() const;
 		
+		void setVelocity(const fgl::Vector2d& velocity);
+		const fgl::Vector2d& getVelocity() const;
+		
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) override;
 		
@@ -32,6 +35,7 @@ namespace fl
 		virtual float getDrawScale() const override;
 		
 		fgl::Vector2d position;
+		fgl::Vector2d velocity;
 		float scale;
 		CollisionRectManager collisionRectManager;
 	};

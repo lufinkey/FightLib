@@ -200,6 +200,12 @@ namespace fl
 			double rect1_bottom = rect1.y + rect1.height;
 
 			fgl::RectangleD pastRect2 = prevRect2;
+			pastRect2.x += velocityRight1;
+			pastRect2.width -= velocityRight1;
+			pastRect2.width += velocityLeft;
+			pastRect2.y += velocityBottom1;
+			pastRect2.height -= velocityBottom1;
+			pastRect2.height += velocityTop1;
 			double pastRect2_right = pastRect2.x+pastRect2.width;
 			double pastRect2_bottom = pastRect2.y+pastRect2.height;
 

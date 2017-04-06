@@ -35,6 +35,8 @@ namespace fl
 		}
 		drawManager.update(appData);
 		collisionManager.update(appData);
+		
+		//TODO find characters collided with items
 	}
 	
 	void Stage::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const

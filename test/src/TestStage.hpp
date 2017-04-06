@@ -7,11 +7,10 @@ public:
 	TestStage(fl::AnimationAssetManager* assetManager);
 	virtual ~TestStage();
 	
+	virtual void update(fgl::ApplicationData appData) override;
+	
 private:
 	fl::Item* sword;
 	
-	fl::Platform* block1;
-	fl::Platform* block2;
-	fl::Platform* block3;
-	fl::Platform* block4;
+	fl::Platform* movingBlock;
 };
