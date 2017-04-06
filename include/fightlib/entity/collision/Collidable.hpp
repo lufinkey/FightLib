@@ -21,10 +21,15 @@ namespace fl
 	public:
 		Collidable(const fgl::Vector2d& position);
 		
+		virtual void update(const fgl::ApplicationData& appData) override;
+		
 		virtual bool isStaticCollisionBody() const = 0;
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;
 		
 		const fgl::Vector2d& getPreviousPosition() const;
+		
+		void setVelocity(const fgl::Vector2d& velocity);
+		const fgl::Vector2d& getVelocity() const;
 
 	protected:
 		virtual void shift(const fgl::Vector2d& offset) = 0;
@@ -38,5 +43,6 @@ namespace fl
 		
 	private:
 		fgl::Vector2d previousPosition;
+		fgl::Vector2d velocity;
 	};
 }

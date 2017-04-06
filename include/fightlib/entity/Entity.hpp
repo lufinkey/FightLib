@@ -41,9 +41,6 @@ namespace fl
 
 		Entity* getParentEntity() const;
 		Stage* getStage() const;
-		
-		void setVelocity(const fgl::Vector2d& velocity);
-		const fgl::Vector2d& getVelocity() const;
 
 		bool isOnGround() const;
 
@@ -66,7 +63,6 @@ namespace fl
 
 	private:
 		fgl::Vector2d offset;
-		fgl::Vector2d velocity;
 
 		float scale;
 

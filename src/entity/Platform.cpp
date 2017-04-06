@@ -15,9 +15,6 @@ namespace fl
 	{
 		Collidable::update(appData);
 		
-		//offset for velocity
-		position += (velocity*appData.getFrameSpeedMultiplier());
-		
 		collisionRectManager.update(appData, this);
 	}
 	
@@ -38,16 +35,6 @@ namespace fl
 	void Platform::setScale(float scale_arg)
 	{
 		scale = scale_arg;
-	}
-	
-	const fgl::Vector2d& Platform::getVelocity() const
-	{
-		return velocity;
-	}
-	
-	void Platform::setVelocity(const fgl::Vector2d& velocity_arg)
-	{
-		velocity = velocity_arg;
 	}
 
 	fgl::Vector2d Platform::getDrawPosition(float* rotation) const

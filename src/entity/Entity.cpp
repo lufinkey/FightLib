@@ -10,7 +10,6 @@ namespace fl
 	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
 		: Collidable(position),
 		offset(position),
-		velocity(0, 0),
 		scale(1.0f),
 		orientation(orientation),
 		parentEntity(nullptr),
@@ -22,9 +21,6 @@ namespace fl
 	void Entity::update(const fgl::ApplicationData& appData)
 	{
 		Collidable::update(appData);
-
-		//offset for velocity
-		offset += (velocity*appData.getFrameSpeedMultiplier());
 
 		collisionRectManager.update(appData, this);
 	}
@@ -296,16 +292,6 @@ namespace fl
 		//TODO I may not need this anymore, but I should do some thorough tests before removing it
 		offset.y = fgl::Math::round(offset.y, 12);
 		offset.x = fgl::Math::round(offset.x, 12);
-	}
-
-	void Entity::setVelocity(const fgl::Vector2d& velocity_arg)
-	{
-		velocity = velocity_arg;
-	}
-
-	const fgl::Vector2d& Entity::getVelocity() const
-	{
-		return velocity;
 	}
 
 	Entity::Anchor Entity::getAnchor(const Entity* entity) const
