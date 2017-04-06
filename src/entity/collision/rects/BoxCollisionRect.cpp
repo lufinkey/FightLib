@@ -3,10 +3,10 @@
 
 namespace fl
 {
-	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::RectangleD& lastRect, const fgl::Vector2d& resolution)
 		: CollisionRect(tag),
 		rect(rect),
-		lastCenter(lastCenter),
+		lastRect(lastRect),
 		boundingRect(rect),
 		resolution(resolution),
 		usesTransform(false)
@@ -14,10 +14,10 @@ namespace fl
 		//
 	}
 
-	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::Vector2d& lastCenter, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
+	BoxCollisionRect::BoxCollisionRect(const fgl::String& tag, const fgl::RectangleD& rect, const fgl::RectangleD& lastRect, double rotation, const fgl::Vector2d& origin, const fgl::Vector2d& resolution)
 		: CollisionRect(tag),
 		rect(rect),
-		lastCenter(lastCenter),
+		lastRect(lastRect),
 		resolution(resolution),
 		usesTransform(true)
 	{
@@ -29,6 +29,11 @@ namespace fl
 	fgl::RectangleD BoxCollisionRect::getRect() const
 	{
 		return boundingRect;
+	}
+	
+	fgl::RectangleD BoxCollisionRect::getPreviousRect() const
+	{
+		return lastRect;
 	}
 
 	bool BoxCollisionRect::isFilled() const
@@ -55,11 +60,6 @@ namespace fl
 	bool BoxCollisionRect::check(const fgl::PixelIterator& iterator) const
 	{
 		return (iterator.getCurrentPixelIndex()>=0);
-	}
-
-	fgl::Vector2d BoxCollisionRect::getVelocity() const
-	{
-		return getCenter()-lastCenter;
 	}
 
 	fgl::Vector2d BoxCollisionRect::getPreferredIncrement() const
