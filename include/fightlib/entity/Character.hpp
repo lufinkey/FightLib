@@ -15,6 +15,9 @@ namespace fl
 		virtual fgl::String getIdleAnimationName() const = 0;
 		virtual fgl::String getMoveAnimationName(double amount) const = 0;
 		virtual double getMoveSpeed(double amount) const;
+		
+		virtual fgl::ArrayList<MetaPointType> getItemAnchorPoints() const = 0;
+		fgl::ArrayList<MetaPointType> getAvailableItemAnchorPoints() const;
 
 		void setDirection(const fgl::Vector2f& direction);
 		const fgl::Vector2f& getDirection() const;

@@ -74,6 +74,30 @@ namespace fl
 		}
 	}
 	
+	fgl::ArrayList<MetaPointType> Character::getAvailableItemAnchorPoints() const
+	{
+		auto itemAnchorPoints = getItemAnchorPoints();
+		auto availablePoints = itemAnchorPoints;
+		auto anchoredEntities = getAnchoredEntities();
+		for(size_t i=(itemAnchorPoints.size()-1); i!=-1; i--)
+		{
+			auto& metaPoint = itemAnchorPoints[i];
+			size_t usedIndex = anchoredEntities.indexWhere([&](const Anchor& anchor) -> bool {
+				if(anchor.parentPoint==metaPoint /* and if the anchored entity is an item? */)
+				{
+					return true;
+				}
+				return false;
+			});
+			if(usedIndex!=-1)
+			{
+				anchoredEntities.remove(usedIndex);
+				availablePoints.remove(i);
+			}
+		}
+		return availablePoints;
+	}
+	
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
 	{
 		direction = direction_arg;

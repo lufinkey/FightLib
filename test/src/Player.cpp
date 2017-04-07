@@ -40,3 +40,8 @@ fgl::String Player::getMoveAnimationName(double amount) const
 	}
 	return "fall";
 }
+
+fgl::ArrayList<fl::MetaPointType> Player::getItemAnchorPoints() const
+{
+	return {fl::METAPOINT_LEFTHAND, fl::METAPOINT_RIGHTHAND, fl::METAPOINT_HEAD};
+}

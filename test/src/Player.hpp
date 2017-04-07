@@ -12,4 +12,6 @@ public:
 
 	virtual fgl::String getIdleAnimationName() const override;
 	virtual fgl::String getMoveAnimationName(double amount) const override;
+	
+	virtual fgl::ArrayList<fl::MetaPointType> getItemAnchorPoints() const override;
 };
