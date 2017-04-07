@@ -193,4 +193,57 @@ namespace fl
 		}
 		return nullptr;
 	}
+	
+	fgl::ArrayList<TaggedBox> Sprite::getMetaPointBoxes(MetaPointType metaPointType) const
+	{
+		if(currentAnimationData==nullptr || currentAnimationData->getAnimation()->getTotalFrames()==0)
+		{
+			return {};
+		}
+		else
+		{
+			auto metaPoints = currentAnimationData->getMetaPoints(currentAnimationFrame, metaPointType);
+			if(metaPoints.size()==0)
+			{
+				return {};
+			}
+			
+			float rotation = 0;
+			fgl::Vector2d position = getPosition(&rotation);
+			fgl::Vector2d size = getSize();
+			fgl::Vector2d topLeft = position - (size/2.0);
+			
+			fgl::Vector2d animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
+			fgl::Vector2d sizeScale = size/animSize;
+			bool mirrored = currentAnimationData->isMirrored(getAnimationOrientation());
+			
+			fgl::TransformD transform;
+			if(rotation!=0)
+			{
+				transform.rotate((double)rotation, position);
+			}
+			
+			fgl::ArrayList<TaggedBox> boxes;
+			boxes.reserve(metaPoints.size());
+			for(auto& metaPoint : metaPoints)
+			{
+				fgl::Vector2d metaPointCenter = fgl::Vector2d((double)metaPoint.x, (double)metaPoint.y);
+				if(mirrored)
+				{
+					metaPointCenter.x = animSize.x - metaPointCenter.x;
+				}
+				metaPointCenter = topLeft + (metaPointCenter*sizeScale);
+				if(rotation!=0)
+				{
+					metaPointCenter = transform.transform(metaPointCenter);
+				}
+				fgl::Vector2d metaPointSize = fgl::Vector2d(metaPoint.radius*2, metaPoint.radius*2) * sizeScale;
+				TaggedBox box;
+				box.tag = metaPoint.tag;
+				box.rect = fgl::RectangleD(metaPointCenter.x-(metaPointSize.x/2), metaPointCenter.y-(metaPointSize.y/2), metaPointSize.x, metaPointSize.y);
+				boxes.add(box);
+			}
+			return boxes;
+		}
+	}
 }

@@ -33,6 +33,8 @@ namespace fl
 		fgl::Animation* getCurrentAnimation() const;
 		fgl::String getCurrentAnimationName() const;
 		size_t getCurrentAnimationFrameIndex() const;
+		
+		fgl::ArrayList<TaggedBox> getMetaPointBoxes(MetaPointType metaPointType) const;
 
 	protected:
 		virtual AnimationOrientation getAnimationOrientation() const;

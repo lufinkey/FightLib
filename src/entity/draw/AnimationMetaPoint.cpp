@@ -41,14 +41,6 @@ namespace fl
 		return "";
 	}
 	
-	/*const MetaPointType METAPOINT_HITBOX;
-	const MetaPointType METAPOINT_HEAD;
-	const MetaPointType METAPOINT_LEFTHAND;
-	const MetaPointType METAPOINT_RIGHTHAND;
-	const MetaPointType METAPOINT_BOUNDS_TOPLEFT;
-	const MetaPointType METAPOINT_BOUNDS_BOTTOMRIGHT;
-	const MetaPointType METAPOINT_HANDLE;*/
-	
 	AnimationMetaPoint::AnimationMetaPoint()
 		: tag(-1),
 		x(0),
