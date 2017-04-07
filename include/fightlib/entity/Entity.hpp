@@ -62,13 +62,13 @@ namespace fl
 		struct Anchor
 		{
 			Entity* entity;
-			AnimationMetaPoint::Type parentPoint;
+			MetaPointType parentPoint;
 			size_t parentPointIndex;
-			AnimationMetaPoint::Type childPoint;
+			MetaPointType childPoint;
 			size_t childPointIndex;
 		};
 
-		void anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
+		void anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
 		const fgl::ArrayList<Anchor>& getAnchoredEntities() const;
 

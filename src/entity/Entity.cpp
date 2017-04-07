@@ -249,7 +249,7 @@ namespace fl
 		return collisionRectManager.getCollisionRects();
 	}
 	
-	void Entity::anchorChildEntity(Entity* child, AnimationMetaPoint::Type childPoint, size_t childPointIndex, AnimationMetaPoint::Type parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
+	void Entity::anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
 	{
 		if(child->parentEntity!=nullptr)
 		{

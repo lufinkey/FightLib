@@ -10,7 +10,7 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	sword->setScale(2.0);
 	sword->changeAnimation("sword");
 	
-	//character->anchorChildEntity(sword, fl::AnimationMetaPoint::POINTTYPE_HANDLE, 0, fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, 0);
+	//character->anchorChildEntity(sword, fl::METAPOINT_HANDLE, 0, fl::METAPOINT_LEFTHAND, 0);
 	
 	auto block1 = new fl::Platform(fgl::Vector2d(200, 220));
 	block1->loadAnimation("assets/animations/block.plist", assetManager);

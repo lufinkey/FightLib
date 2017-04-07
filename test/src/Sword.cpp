@@ -7,7 +7,7 @@ Sword::Sword(const fgl::Vector2d& position, fl::Orientation orientation)
 	//
 }
 
-fgl::ArrayList<fl::AnimationMetaPoint::Type> Sword::getAnchorPoints() const
+fgl::ArrayList<fl::MetaPointType> Sword::getAnchorPoints() const
 {
-	return {fl::AnimationMetaPoint::POINTTYPE_LEFTHAND, fl::AnimationMetaPoint::POINTTYPE_RIGHTHAND};
+	return {fl::METAPOINT_LEFTHAND, fl::METAPOINT_RIGHTHAND};
 }

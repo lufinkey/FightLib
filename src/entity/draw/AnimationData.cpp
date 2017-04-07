@@ -5,325 +5,6 @@ namespace fl
 {
 	#define return_error(err) if(error!=nullptr) {*error = err;} return false;
 
-	bool AnimationOrientation_fromString(const fgl::String& string, AnimationOrientation* orientation)
-	{
-		if(string=="NEUTRAL")
-		{
-			*orientation = ANIMATIONORIENTATION_NEUTRAL;
-			return true;
-		}
-		else if(string=="LEFT")
-		{
-			*orientation = ANIMATIONORIENTATION_LEFT;
-			return true;
-		}
-		else if(string=="RIGHT")
-		{
-			*orientation = ANIMATIONORIENTATION_RIGHT;
-			return true;
-		}
-		return false;
-	}
-
-	fgl::String AnimationOrientation_toString(AnimationOrientation orientation)
-	{
-		switch(orientation)
-		{
-			case ANIMATIONORIENTATION_NEUTRAL:
-			return "NEUTRAL";
-
-			case ANIMATIONORIENTATION_LEFT:
-			return "LEFT";
-
-			case ANIMATIONORIENTATION_RIGHT:
-			return "RIGHT";
-		}
-		return "";
-	}
-	
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HITBOX;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HEAD;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_LEFTHAND;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_RIGHTHAND;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT;
-	const AnimationMetaPoint::Type AnimationMetaPoint::POINTTYPE_HANDLE;
-
-	AnimationMetaPoint::AnimationMetaPoint() :
-		tag(-1),
-		x(0),
-		y(0),
-		radius(0),
-		rotation(0),
-		type(POINTTYPE_HITBOX),
-		orientation(ANIMATIONORIENTATION_NEUTRAL),
-		behind(false),
-		visible(true)
-	{
-		//
-	}
-	
-	bool AnimationMetaPoint::operator==(const fl::AnimationMetaPoint& metaPoint) const
-	{
-		if(tag==metaPoint.tag && x==metaPoint.x && y==metaPoint.y && radius==metaPoint.radius
-		   && rotation==metaPoint.rotation && type==metaPoint.type && orientation==metaPoint.orientation
-		   && behind==metaPoint.behind && visible==metaPoint.visible)
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	bool AnimationMetaPoint::operator!=(const fl::AnimationMetaPoint& metaPoint) const
-	{
-		return !operator==(metaPoint);
-	}
-
-	bool AnimationMetaPointType_fromString(const fgl::String& string, AnimationMetaPoint::Type* type)
-	{
-		if(string=="HITBOX")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_HITBOX;
-			return true;
-		}
-		if(string=="HEAD")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_HEAD;
-			return true;
-		}
-		else if(string=="LEFT_HAND")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_LEFTHAND;
-			return true;
-		}
-		else if(string=="RIGHT_HAND")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_RIGHTHAND;
-			return true;
-		}
-		else if(string=="BOUNDS_TOPLEFT")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT;
-			return true;
-		}
-		else if(string=="BOUNDS_BOTTOMRIGHT")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT;
-			return true;
-		}
-		else if(string=="HANDLE")
-		{
-			*type = AnimationMetaPoint::POINTTYPE_HANDLE;
-			return true;
-		}
-		return false;
-	}
-
-	fgl::Any AnimationMetaPointType_toAny(AnimationMetaPoint::Type type)
-	{
-		switch(type)
-		{
-			case AnimationMetaPoint::POINTTYPE_HITBOX:
-			return fgl::String("HITBOX");
-
-			case AnimationMetaPoint::POINTTYPE_HEAD:
-			return fgl::String("HEAD");
-
-			case AnimationMetaPoint::POINTTYPE_LEFTHAND:
-			return fgl::String("LEFT_HAND");
-
-			case AnimationMetaPoint::POINTTYPE_RIGHTHAND:
-			return fgl::String("RIGHT_HAND");
-
-			case AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT:
-			return fgl::String("BOUNDS_TOPLEFT");
-
-			case AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT:
-			return fgl::String("BOUNDS_BOTTOMRIGHT");
-
-			case AnimationMetaPoint::POINTTYPE_HANDLE:
-			return fgl::String("HANDLE");
-		}
-		return fgl::Number(type);
-	}
-
-	bool AnimationMetaPoint::loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error)
-	{
-		if(dictionary.has("type") && dictionary.has("x") && dictionary.has("y"))
-		{
-			fgl::Any typeAny = dictionary.get("type", fgl::Any());
-			Type typeValue = -1;
-			if(typeAny.isEmpty())
-			{
-				return_error("missing required field");
-			}
-			else if(typeAny.is<fgl::String>())
-			{
-				fgl::String typeStr = typeAny.as<fgl::String>();
-				if(!AnimationMetaPointType_fromString(typeStr, &typeValue))
-				{
-					return_error("invalid \"type\" value: \""+typeStr+"\"");
-				}
-			}
-			else if(typeAny.is<fgl::Number>())
-			{
-				long long typeNum = typeAny.as<fgl::Number>().toArithmeticValue<long long>();
-				if(typeNum >= 255 || typeNum < 0)
-				{
-					return_error((fgl::String)"invalid \"type\" value outside of allowed range: \""+typeNum+"\"");
-				}
-				typeValue = (Type)typeNum;
-			}
-			else
-			{
-				return_error("invalid \"type\" datatype");
-			}
-
-			size_t tagValue = fgl::extract<fgl::Number>(dictionary, "tag", -1).toArithmeticValue<size_t>();
-
-			float xValue = fgl::extract<fgl::Number>(dictionary, "x").toArithmeticValue<float>();
-			float yValue = fgl::extract<fgl::Number>(dictionary, "y").toArithmeticValue<float>();
-			float radiusValue = fgl::extract<fgl::Number>(dictionary, "radius", 0).toArithmeticValue<float>();
-			if(radiusValue < 0)
-			{
-				return_error("invalid radius value");
-			}
-			fgl::String orientationStr = fgl::extract<fgl::String>(dictionary, "orientation", "NEUTRAL");
-			AnimationOrientation orientationValue;
-			if(!AnimationOrientation_fromString(orientationStr, &orientationValue))
-			{
-				return_error("invalid \"orientation\" value: \""+orientationStr+"\"");
-			}
-			float rotationValue = fgl::extract<fgl::Number>(dictionary, "rotation", 0).toArithmeticValue<float>();
-
-			tag = tagValue;
-			x = xValue;
-			y = yValue;
-			radius = radiusValue;
-			type = typeValue;
-			orientation = orientationValue;
-			rotation = rotationValue;
-			if(dictionary.has("behind"))
-			{
-				behind = fgl::extract<fgl::Number>(dictionary, "behind").toArithmeticValue<bool>();
-			}
-			if(dictionary.has("visible"))
-			{
-				visible = fgl::extract<fgl::Number>(dictionary, "visible").toArithmeticValue<bool>();
-			}
-			return true;
-		}
-		else
-		{
-			return_error("missing required field")
-		}
-	}
-
-	bool AnimationMetaPoint::saveToDictionary(fgl::Dictionary* dictionary, fgl::String* error) const
-	{
-		fgl::Dictionary dst;
-		dst["type"] = AnimationMetaPointType_toAny(type);
-		if(orientation!=ANIMATIONORIENTATION_NEUTRAL)
-		{
-			fgl::String orientationStr = AnimationOrientation_toString(orientation);
-			if(orientationStr.length()==0)
-			{
-				return_error("invalid orientation value");
-			}
-			dst["orientation"] = orientationStr;
-		}
-		dst["x"] = fgl::Number(x);
-		dst["y"] = fgl::Number(y);
-		if(radius < 0)
-		{
-			return_error("invalid radius value");
-		}
-		if(radius!=0)
-		{
-			dst["radius"] = fgl::Number(radius);
-		}
-		if(rotation!=0)
-		{
-			dst["rotation"] = fgl::Number(rotation);
-		}
-		if(tag!=-1)
-		{
-			dst["tag"] = fgl::Number(tag);
-		}
-		dst["visible"] = fgl::Number(visible);
-		dst["behind"] = fgl::Number(behind);
-		*dictionary = dst;
-		return true;
-	}
-
-	void AnimationMetaPoint::draw(fgl::Graphics graphics) const
-	{
-		if(behind)
-		{
-			graphics.compositeAlpha(0.7);
-		}
-		if(!visible)
-		{
-			graphics.compositeAlpha(0.3);
-		}
-
-		graphics.rotate((double)rotation, (double)x, (double)y);
-		switch(type)
-		{
-			case POINTTYPE_HITBOX:
-			graphics.setColor(fgl::Color::GREEN);
-			break;
-				
-			case POINTTYPE_HEAD:
-			graphics.setColor(fgl::Color::RED);
-			break;
-
-			case POINTTYPE_LEFTHAND:
-			graphics.setColor(fgl::Color::PINK);
-			break;
-
-			case POINTTYPE_RIGHTHAND:
-			graphics.setColor(fgl::Color::VIOLET);
-			break;
-
-			case POINTTYPE_BOUNDS_TOPLEFT:
-			graphics.setColor(fgl::Color::BLUE);
-			break;
-
-			case POINTTYPE_BOUNDS_BOTTOMRIGHT:
-			graphics.setColor(fgl::Color::SKYBLUE);
-			break;
-
-			case POINTTYPE_HANDLE:
-			graphics.setColor(fgl::Color::ORANGE);
-			break;
-		}
-		fgl::RectangleD frame = getRect();
-		graphics.drawRect(frame);
-		graphics.fillRect(x-0.5, y-0.5, 1.0, 1.0);
-
-		graphics.setColor(graphics.getColor().negative());
-		switch(orientation)
-		{
-			case ANIMATIONORIENTATION_NEUTRAL:
-			graphics.fillRect(frame.x+(frame.width/2)-0.5, frame.y, 1.0, frame.height);
-			break;
-
-			case ANIMATIONORIENTATION_LEFT:
-			graphics.fillRect(frame.x, frame.y, 1, frame.height);
-			break;
-
-			case ANIMATIONORIENTATION_RIGHT:
-			graphics.fillRect(frame.x+frame.width-1, frame.y, 1, frame.height);
-			break;
-		}
-	}
-
-	fgl::RectangleD AnimationMetaPoint::getRect() const
-	{
-		return fgl::RectangleD(x-radius, y-radius, radius*2, radius*2);
-	}
-
 	AnimationData::AnimationData()
 		: animation(new fgl::Animation(1.0)),
 		orientation(ANIMATIONORIENTATION_NEUTRAL)
@@ -821,7 +502,7 @@ namespace fl
 		}
 	}
 	
-	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation, AnimationMetaPoint::Type metaPointType) const
+	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation, MetaPointType metaPointType) const
 	{
 		if(animation!=nullptr && animation->getTotalFrames() > 0)
 		{
@@ -842,18 +523,18 @@ namespace fl
 				}
 			}
 			
-			if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT || metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
+			if(metaPointType==METAPOINT_BOUNDS_TOPLEFT || metaPointType==METAPOINT_BOUNDS_BOTTOMRIGHT)
 			{
 				fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
 				graphics.setColor(fgl::Color::SKYBLUE);
 				for(auto& metaBounds : bounds)
 				{
-					if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT)
+					if(metaPointType==METAPOINT_BOUNDS_TOPLEFT)
 					{
 						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y, metaBounds.rect.width, 1.0);
 						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y, 1.0, metaBounds.rect.height);
 					}
-					else if(metaPointType==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
+					else if(metaPointType==METAPOINT_BOUNDS_BOTTOMRIGHT)
 					{
 						graphics.fillRect(metaBounds.rect.x+metaBounds.rect.width-1.0, metaBounds.rect.y, 1.0, metaBounds.rect.height);
 						graphics.fillRect(metaBounds.rect.x, metaBounds.rect.y+metaBounds.rect.height-1.0, metaBounds.rect.width, 1.0);
@@ -920,7 +601,7 @@ namespace fl
 		frameDatas[frameIndex].metapoints = metaPoints;
 	}
 
-	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, AnimationMetaPoint::Type pointType) const
+	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex, MetaPointType pointType) const
 	{
 		if(frameIndex >= frameDatas.size())
 		{
@@ -976,11 +657,11 @@ namespace fl
 		fgl::ArrayList<AnimationMetaPoint> bottomRights;
 		for(size_t metapoints_size=frame.metapoints.size(), i=0; i<metapoints_size; i++)
 		{
-			if(frame.metapoints[i].type==AnimationMetaPoint::POINTTYPE_BOUNDS_TOPLEFT)
+			if(frame.metapoints[i].type==METAPOINT_BOUNDS_TOPLEFT)
 			{
 				topLefts.add(frame.metapoints[i]);
 			}
-			else if(frame.metapoints[i].type==AnimationMetaPoint::POINTTYPE_BOUNDS_BOTTOMRIGHT)
+			else if(frame.metapoints[i].type==METAPOINT_BOUNDS_BOTTOMRIGHT)
 			{
 				bottomRights.add(frame.metapoints[i]);
 			}
