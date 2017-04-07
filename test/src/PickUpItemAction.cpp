@@ -10,12 +10,7 @@ void PickUpItemAction::onPerform(fl::ActionParamsPtr params)
 		auto availableItems = stage->getAccessibleItems(character);
 		if(availableItems.size() > 0)
 		{
-			fgl::Console::writeLine("picking up item");
 			character->pickUpItem(availableItems[0]);
-		}
-		else
-		{
-			fgl::Console::writeErrorLine("no items available");
 		}
 	}
 	
