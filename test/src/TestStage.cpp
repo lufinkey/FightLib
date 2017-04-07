@@ -48,7 +48,7 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	addPlatform(block5);
 	addPlatform(block6);
 	addPlatform(movingBlock);
-	addEntity(sword);
+	addItem(sword);
 }
 
 TestStage::~TestStage()
