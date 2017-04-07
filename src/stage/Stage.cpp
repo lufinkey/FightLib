@@ -44,7 +44,7 @@ namespace fl
 		{
 			for(auto item : items)
 			{
-				if(item->getParentEntity()==nullptr && character->checkCollision(item))
+				if(item->getParentCharacter()==nullptr && character->checkCollision(item))
 				{
 					fgl::ArrayList<Item*>& itemList = accessibleItems[character];
 					itemList.add(item);
