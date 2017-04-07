@@ -39,10 +39,25 @@ namespace fl
 	{
 		appData.additionalData["fight"] = this;
 		
+		//automatically pick up items that can be picked up by touching
+		for(auto character : stage->getCharacters())
+		{
+			for(auto item : stage->getAccessibleItems(character))
+			{
+				if(item->isPickedUpByTouching())
+				{
+					character->pickUpItem(item);
+				}
+			}
+		}
+		
+		//update controllers
 		for(auto controller : characterControllers)
 		{
 			controller->update(appData);
 		}
+		
+		//update stage
 		stage->update(appData);
 	}
 
