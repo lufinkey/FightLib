@@ -4,7 +4,7 @@
 namespace fl
 {
 	Item::Item(const fgl::Vector2d& position, Orientation orientation)
-		: Entity(position, orientation),
+		: ActionEntity(position, orientation),
 		parentCharacter(nullptr)
 	{
 		//
@@ -14,7 +14,7 @@ namespace fl
 	{
 		if(getParentEntity()==nullptr)
 		{
-			return Entity::getCollisionRects();
+			return ActionEntity::getCollisionRects();
 		}
 		return {};
 	}
@@ -45,7 +45,7 @@ namespace fl
 				setVelocity(velocity);
 			}
 		}
-		Entity::onCollision(collided, side);
+		ActionEntity::onCollision(collided, side);
 	}
 
 	void Item::onCollisionUpdate(Collidable* collided, CollisionSide side)
@@ -59,7 +59,7 @@ namespace fl
 				setVelocity(velocity);
 			}
 		}
-		Entity::onCollisionUpdate(collided, side);
+		ActionEntity::onCollisionUpdate(collided, side);
 	}
 	
 	void Item::onPickUp(Character* character)

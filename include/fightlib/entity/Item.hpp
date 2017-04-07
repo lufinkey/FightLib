@@ -1,13 +1,13 @@
 
 #pragma once
 
-#include "Entity.hpp"
+#include "ActionEntity.hpp"
 
 namespace fl
 {
 	class Character;
 	
-	class Item : public Entity
+	class Item : public ActionEntity
 	{
 		friend class Character;
 	public:
