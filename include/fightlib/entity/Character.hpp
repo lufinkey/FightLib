@@ -23,6 +23,7 @@ namespace fl
 		bool pickUpItem(Item* item);
 		void discardItem(Item* item);
 		bool isHoldingItem(Item* item) const;
+		fgl::ArrayList<Item*> getHeldItems() const;
 
 		void setDirection(const fgl::Vector2f& direction);
 		const fgl::Vector2f& getDirection() const;
@@ -52,5 +53,6 @@ namespace fl
 			size_t anchorPointIndex;
 		};
 		fgl::ArrayList<HeldItem> heldItems;
+		fgl::ArrayList<Item*> heldPowerups;
 	};
 }

@@ -24,6 +24,11 @@ namespace fl
 		return false;
 	}
 	
+	bool Item::isPowerUp() const
+	{
+		return false;
+	}
+	
 	Character* Item::getParentCharacter() const
 	{
 		return parentCharacter;

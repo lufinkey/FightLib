@@ -17,6 +17,7 @@ namespace fl
 
 		virtual fgl::ArrayList<MetaPointType> getAnchorPoints() const = 0;
 		virtual bool isPickedUpByTouching() const;
+		virtual bool isPowerUp() const;
 		
 		Character* getParentCharacter() const;
 

@@ -96,71 +96,99 @@ namespace fl
 			throw fgl::IllegalArgumentException("item", "already being held by a character");
 		}
 		
-		auto anchorPoints = item->getAnchorPoints();
-		auto availableAnchorPoints = getAvailableItemAnchorPoints();
-		fgl::ArrayList<MetaPointType> matchingAnchorPoints;
-		//find points shared between the item's supported points and the parent's available points
-		for(auto& anchorPoint : anchorPoints)
+		if(item->isPowerUp())
 		{
-			for(auto& availablePoint : availableAnchorPoints)
+			//powerup items don't get anchored to the character entity
+			
+			if(shouldPickUpItem(item))
 			{
-				if(anchorPoint == availablePoint)
+				//make sure no other characters can see the item as accessible
+				auto stage = getStage();
+				if(stage!=nullptr)
 				{
-					matchingAnchorPoints.add(anchorPoint);
-					break;
+					stage->removeAccessibleItem(item);
 				}
+				
+				heldPowerups.add(item);
+				item->parentCharacter = this;
+				
+				item->onPickUp(this);
+				onPickUpItem(item);
+				
+				return true;
 			}
 		}
-		
-		if(matchingAnchorPoints.size()==0)
+		else
 		{
-			//no available anchor points for the item
-			return false;
-		}
-		
-		MetaPointType chosenPoint = matchingAnchorPoints[0];
-		size_t chosenIndex = 0;
-		
-		//look for an available anchor point index
-		bool chosenIndexTaken = false;
-		do
-		{
-			chosenIndexTaken = false;
-			for(auto& heldItem : heldItems)
+			//non-powerup items must get anchored to the character entity
+			
+			auto anchorPoints = item->getAnchorPoints();
+			auto availableAnchorPoints = getAvailableItemAnchorPoints();
+			fgl::ArrayList<MetaPointType> matchingAnchorPoints;
+			//find points shared between the item's supported points and the parent's available points
+			for(auto& anchorPoint : anchorPoints)
 			{
-				if(heldItem.anchorPoint==chosenPoint && heldItem.anchorPointIndex==chosenIndex)
+				for(auto& availablePoint : availableAnchorPoints)
 				{
-					chosenIndexTaken = true;
-					chosenIndex++;
-					break;
+					if(anchorPoint == availablePoint)
+					{
+						matchingAnchorPoints.add(anchorPoint);
+						break;
+					}
 				}
 			}
-		} while(chosenIndexTaken);
-		
-		if(shouldPickUpItem(item))
-		{
-			auto stage = getStage();
-			if(stage!=nullptr)
+			
+			if(matchingAnchorPoints.size()==0)
 			{
-				stage->removeAccessibleItem(item);
+				//no available anchor points for the item
+				return false;
 			}
 			
-			//add to held items
-			HeldItem heldItem;
-			heldItem.item = item;
-			heldItem.anchorPoint = chosenPoint;
-			heldItem.anchorPointIndex = chosenIndex;
-			heldItems.add(heldItem);
+			MetaPointType chosenPoint = matchingAnchorPoints[0];
+			size_t chosenIndex = 0;
 			
-			//anchor the item
-			anchorChildEntity(item, METAPOINT_HANDLE, 0, chosenPoint, chosenIndex);
+			//look for an available anchor point index
+			bool chosenIndexTaken = false;
+			do
+			{
+				chosenIndexTaken = false;
+				for(auto& heldItem : heldItems)
+				{
+					if(heldItem.anchorPoint==chosenPoint && heldItem.anchorPointIndex==chosenIndex)
+					{
+						chosenIndexTaken = true;
+						chosenIndex++;
+						break;
+					}
+				}
+			} while(chosenIndexTaken);
 			
-			item->parentCharacter = this;
-			
-			item->onPickUp(this);
-			onPickUpItem(item);
-			
-			return true;
+			if(shouldPickUpItem(item))
+			{
+				//make sure no other characters can see the item as accessible
+				auto stage = getStage();
+				if(stage!=nullptr)
+				{
+					stage->removeAccessibleItem(item);
+				}
+				
+				//add to held items
+				HeldItem heldItem;
+				heldItem.item = item;
+				heldItem.anchorPoint = chosenPoint;
+				heldItem.anchorPointIndex = chosenIndex;
+				heldItems.add(heldItem);
+				
+				//anchor the item
+				anchorChildEntity(item, METAPOINT_HANDLE, 0, chosenPoint, chosenIndex);
+				
+				item->parentCharacter = this;
+				
+				item->onPickUp(this);
+				onPickUpItem(item);
+				
+				return true;
+			}
 		}
 		return false;
 	}
@@ -182,6 +210,19 @@ namespace fl
 				return;
 			}
 		}
+		for(size_t i=0; i<heldPowerups.size(); i++)
+		{
+			auto powerupItem = heldPowerups[i];
+			if(powerupItem==item)
+			{
+				heldPowerups.remove(i);
+				item->parentCharacter = nullptr;
+				
+				item->onDiscard(this);
+				onDiscardItem(item);
+				return;
+			}
+		}
 	}
 	
 	bool Character::isHoldingItem(Item* item) const
@@ -192,6 +233,10 @@ namespace fl
 			{
 				return true;
 			}
+		}
+		if(heldPowerups.contains(item))
+		{
+			return true;
 		}
 		return false;
 	}
