@@ -96,7 +96,7 @@ namespace fl
 				}
 				size_t frameIndex = collidable->getCurrentAnimationFrameIndex();
 				AnimationOrientation animationOrientation = collidable->getAnimationOrientation();
-				fgl::ArrayList<AnimationData::MetaBounds> boundsList = animData->getBounds(frameIndex, animationOrientation);
+				fgl::ArrayList<TaggedBox> boundsList = animData->getBounds(frameIndex, animationOrientation);
 				if(boundsList.size()==0)
 				{
 					return {};

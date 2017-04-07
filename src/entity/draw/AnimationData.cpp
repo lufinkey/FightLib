@@ -493,7 +493,7 @@ namespace fl
 				}
 			}
 
-			fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
+			fgl::ArrayList<TaggedBox> bounds = getBounds(frameIndex);
 			graphics.setColor(fgl::Color::SKYBLUE);
 			for(size_t i=0; i<bounds.size(); i++)
 			{
@@ -525,7 +525,7 @@ namespace fl
 			
 			if(metaPointType==METAPOINT_BOUNDS_TOPLEFT || metaPointType==METAPOINT_BOUNDS_BOTTOMRIGHT)
 			{
-				fgl::ArrayList<MetaBounds> bounds = getBounds(frameIndex);
+				fgl::ArrayList<TaggedBox> bounds = getBounds(frameIndex);
 				graphics.setColor(fgl::Color::SKYBLUE);
 				for(auto& metaBounds : bounds)
 				{
@@ -645,7 +645,7 @@ namespace fl
 		frameDatas[frameIndex].metapoints.remove(metaPointIndex);
 	}
 
-	fgl::ArrayList<AnimationData::MetaBounds> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
+	fgl::ArrayList<TaggedBox> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const
 	{
 		if(frameIndex >= frameDatas.size())
 		{
@@ -667,7 +667,7 @@ namespace fl
 			}
 		}
 		fgl::Vector2u size = getSize(frameIndex);
-		fgl::ArrayList<MetaBounds> bounds;
+		fgl::ArrayList<TaggedBox> bounds;
 		while(topLefts.size()>0)
 		{
 			const AnimationMetaPoint& topLeft = topLefts[0];
@@ -681,7 +681,7 @@ namespace fl
 					{
 						rect.x = (double)size.x - (rect.x + rect.width);
 					}
-					MetaBounds metaBounds = { .tag=topLeft.tag, .rect=rect };
+					TaggedBox metaBounds = { .tag=topLeft.tag, .rect=rect };
 					bounds.add(metaBounds);
 					bottomRights.remove(i);
 					break;

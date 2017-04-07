@@ -5,15 +5,15 @@
 
 namespace fl
 {
+	struct TaggedBox
+	{
+		size_t tag;
+		fgl::RectangleD rect;
+	};
+	
 	class AnimationData
 	{
 	public:
-		struct MetaBounds
-		{
-			size_t tag;
-			fgl::RectangleD rect;
-		};
-
 		AnimationData();
 		AnimationData(const AnimationData&);
 		AnimationData(AnimationData&&);
@@ -49,7 +49,7 @@ namespace fl
 		size_t addMetaPoint(size_t frameIndex, const AnimationMetaPoint& metaPoint);
 		void removeMetaPoint(size_t frameIndex, size_t metaPointIndex);
 
-		fgl::ArrayList<MetaBounds> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
+		fgl::ArrayList<TaggedBox> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 		
 		bool isMirrored(AnimationOrientation drawnOrientation) const;
 
