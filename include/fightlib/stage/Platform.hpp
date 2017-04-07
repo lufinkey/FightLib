@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "collision/Collidable.hpp"
-#include "collision/CollisionRectManager.hpp"
+#include <fightlib/entity/collision/Collidable.hpp>
+#include <fightlib/entity/collision/CollisionRectManager.hpp>
 
 namespace fl
 {

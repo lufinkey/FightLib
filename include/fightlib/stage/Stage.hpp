@@ -6,7 +6,7 @@
 #include <fightlib/entity/Character.hpp>
 #include <fightlib/entity/Entity.hpp>
 #include <fightlib/entity/Item.hpp>
-#include <fightlib/entity/Platform.hpp>
+#include "Platform.hpp"
 
 namespace fl
 {

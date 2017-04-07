@@ -7,7 +7,6 @@
 #include "entity/ActionEntity.hpp"
 #include "entity/Character.hpp"
 #include "entity/Item.hpp"
-#include "entity/Platform.hpp"
 
 #include "entity/action/Action.hpp"
 #include "entity/action/ActionEvent.hpp"
@@ -15,6 +14,7 @@
 
 #include "entity/collision/CollisionManager.hpp"
 
+#include "stage/Platform.hpp"
 #include "stage/Stage.hpp"
 
 #include "controls/CharacterController.hpp"

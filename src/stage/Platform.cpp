@@ -1,5 +1,5 @@
 
-#include <fightlib/entity/Platform.hpp>
+#include <fightlib/stage/Platform.hpp>
 
 namespace fl
 {
