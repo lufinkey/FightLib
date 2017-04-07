@@ -1,6 +1,7 @@
 
 #include "Player.hpp"
 #include "JumpAction.hpp"
+#include "PickUpItemAction.hpp"
 
 Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& position, fl::Orientation orientation)
 	: Character(position, orientation)
@@ -16,6 +17,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	changeAnimation("idle");
 	
 	addAction("jump", new JumpAction());
+	addAction("pickUp", new PickUpItemAction());
 }
 
 void Player::update(const fgl::ApplicationData& appData)
@@ -43,5 +45,5 @@ fgl::String Player::getMoveAnimationName(double amount) const
 
 fgl::ArrayList<fl::MetaPointType> Player::getItemAnchorPoints() const
 {
-	return {fl::METAPOINT_LEFTHAND, fl::METAPOINT_RIGHTHAND, fl::METAPOINT_HEAD};
+	return {fl::METAPOINT_RIGHTHAND, fl::METAPOINT_HEAD};
 }

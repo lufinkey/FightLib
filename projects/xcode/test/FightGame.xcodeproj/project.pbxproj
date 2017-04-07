@@ -30,6 +30,7 @@
 		F16F110D1E67231F009A465C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110C1E67231F009A465C /* CoreFoundation.framework */; };
 		F16F110F1E672326009A465C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F110E1E672326009A465C /* AppKit.framework */; };
 		F16F11111E67232F009A465C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11101E67232F009A465C /* Foundation.framework */; };
+		F17A3A8C1E97FAAA00D07EBE /* PickUpItemAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17A3A8A1E97FAAA00D07EBE /* PickUpItemAction.cpp */; };
 		F181964E1E8AE8C7009BD55F /* TestStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F181964C1E8AE8C7009BD55F /* TestStage.cpp */; };
 		F1A7DF671E89854700472DB2 /* JumpAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF651E89854700472DB2 /* JumpAction.cpp */; };
 		F1BA75D11E9284D600647E41 /* Sword.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1BA75CF1E9284D600647E41 /* Sword.cpp */; };
@@ -76,6 +77,8 @@
 		F16F110E1E672326009A465C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F16F11101E67232F009A465C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F16F114A1E6724F9009A465C /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/FightLib-avrgvqsgtiqwqtgjfspxcfhjrkjm/Build/Products/Debug/libGameLibrary.a"; sourceTree = "<group>"; };
+		F17A3A8A1E97FAAA00D07EBE /* PickUpItemAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PickUpItemAction.cpp; sourceTree = "<group>"; };
+		F17A3A8B1E97FAAA00D07EBE /* PickUpItemAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PickUpItemAction.hpp; sourceTree = "<group>"; };
 		F17BBBE41E64963F00A7F8F4 /* FightGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FightGame.hpp; sourceTree = "<group>"; };
 		F181964C1E8AE8C7009BD55F /* TestStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestStage.cpp; sourceTree = "<group>"; };
 		F181964D1E8AE8C7009BD55F /* TestStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestStage.hpp; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				F14464E21E672E050088EAA3 /* Player.hpp */,
 				F1A7DF651E89854700472DB2 /* JumpAction.cpp */,
 				F1A7DF661E89854700472DB2 /* JumpAction.hpp */,
+				F17A3A8A1E97FAAA00D07EBE /* PickUpItemAction.cpp */,
+				F17A3A8B1E97FAAA00D07EBE /* PickUpItemAction.hpp */,
 				F1BA75CF1E9284D600647E41 /* Sword.cpp */,
 				F1BA75D01E9284D600647E41 /* Sword.hpp */,
 				F181964C1E8AE8C7009BD55F /* TestStage.cpp */,
@@ -260,6 +265,7 @@
 				F14464E31E672E050088EAA3 /* Player.cpp in Sources */,
 				F181964E1E8AE8C7009BD55F /* TestStage.cpp in Sources */,
 				F1BA75D11E9284D600647E41 /* Sword.cpp in Sources */,
+				F17A3A8C1E97FAAA00D07EBE /* PickUpItemAction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
