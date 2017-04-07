@@ -104,6 +104,7 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("entity", "cannot be added to multiple Stage objects");
 		}
+		entity->stage = this;
 		entities.add(entity);
 		collisionManager.addCollidable(entity);
 		drawManager.addDrawable(entity, zLayer);
