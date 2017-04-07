@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <fightlib/fightlib.hpp>
 
 class TestStage : public fl::Stage

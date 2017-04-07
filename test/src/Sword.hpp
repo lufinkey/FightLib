@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <fightlib/fightlib.hpp>
 
 class Sword : public fl::Item
