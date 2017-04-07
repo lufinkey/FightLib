@@ -44,7 +44,7 @@ namespace fl
 		{
 			for(auto item : items)
 			{
-				if(character->checkCollision(item))
+				if(item->getParentEntity()==nullptr && character->checkCollision(item))
 				{
 					fgl::ArrayList<Item*>& itemList = accessibleItems[character];
 					itemList.add(item);
@@ -186,5 +186,17 @@ namespace fl
 	const fgl::ArrayList<Character*>& Stage::getCharacters() const
 	{
 		return characters;
+	}
+	
+	void Stage::removeAccessibleItem(Item* item)
+	{
+		for(auto& listPair : characterAccessibleItems)
+		{
+			size_t itemIndex = listPair.second.indexOf(item);
+			if(itemIndex!=-1)
+			{
+				listPair.second.remove(itemIndex);
+			}
+		}
 	}
 }

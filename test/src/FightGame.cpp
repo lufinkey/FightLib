@@ -13,8 +13,10 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	auto controller = new fl::KeyboardCharacterController(player);
 	controller->setKeyDownAction(fgl::Keyboard::UPARROW, "jump");
 	
+	auto stage = new TestStage(animationAssetManager);
+	
 	fl::FightParams params;
-	params.setStage(new TestStage(animationAssetManager));
+	params.setStage(stage);
 	params.addCharacter(player);
 	params.addCharacterController(controller);
 	

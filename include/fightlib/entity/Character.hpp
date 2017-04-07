@@ -2,6 +2,7 @@
 #pragma once
 
 #include "ActionEntity.hpp"
+#include "Item.hpp"
 
 namespace fl
 {
@@ -18,6 +19,10 @@ namespace fl
 		
 		virtual fgl::ArrayList<MetaPointType> getItemAnchorPoints() const = 0;
 		fgl::ArrayList<MetaPointType> getAvailableItemAnchorPoints() const;
+		
+		bool pickUpItem(Item* item);
+		void discardItem(Item* item);
+		bool isHoldingItem(Item* item) const;
 
 		void setDirection(const fgl::Vector2f& direction);
 		const fgl::Vector2f& getDirection() const;
@@ -32,8 +37,20 @@ namespace fl
 		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side) override;
 		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) override;
 		virtual void onFinishCollisionUpdates() override;
+		
+		virtual bool shouldPickUpItem(Item* item);
+		virtual void onPickUpItem(Item* item);
+		virtual void onDiscardItem(Item* item);
 
 	private:
 		fgl::Vector2f direction;
+		
+		struct HeldItem
+		{
+			Item* item;
+			MetaPointType anchorPoint;
+			size_t anchorPointIndex;
+		};
+		fgl::ArrayList<HeldItem> heldItems;
 	};
 }

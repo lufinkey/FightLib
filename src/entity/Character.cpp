@@ -1,5 +1,6 @@
 
 #include <fightlib/entity/Character.hpp>
+#include <fightlib/stage/Stage.hpp>
 
 namespace fl
 {
@@ -76,26 +77,123 @@ namespace fl
 	
 	fgl::ArrayList<MetaPointType> Character::getAvailableItemAnchorPoints() const
 	{
-		auto itemAnchorPoints = getItemAnchorPoints();
-		auto availablePoints = itemAnchorPoints;
-		auto anchoredEntities = getAnchoredEntities();
-		for(size_t i=(itemAnchorPoints.size()-1); i!=-1; i--)
+		auto availablePoints = getItemAnchorPoints();
+		for(auto& heldItem : heldItems)
 		{
-			auto& metaPoint = itemAnchorPoints[i];
-			size_t usedIndex = anchoredEntities.indexWhere([&](const Anchor& anchor) -> bool {
-				if(anchor.parentPoint==metaPoint /* and if the anchored entity is an item? */)
-				{
-					return true;
-				}
-				return false;
-			});
-			if(usedIndex!=-1)
+			size_t anchorPointIndex = availablePoints.indexOf(heldItem.anchorPoint);
+			if(anchorPointIndex!=-1)
 			{
-				anchoredEntities.remove(usedIndex);
-				availablePoints.remove(i);
+				availablePoints.remove(anchorPointIndex);
 			}
 		}
 		return availablePoints;
+	}
+	
+	bool Character::pickUpItem(Item* item)
+	{
+		if(item->parentCharacter != nullptr)
+		{
+			throw fgl::IllegalArgumentException("item", "already being held by a character");
+		}
+		
+		auto anchorPoints = item->getAnchorPoints();
+		auto availableAnchorPoints = getAvailableItemAnchorPoints();
+		fgl::ArrayList<MetaPointType> matchingAnchorPoints;
+		//find points shared between the item's supported points and the parent's available points
+		for(auto& anchorPoint : anchorPoints)
+		{
+			for(auto& availablePoint : availableAnchorPoints)
+			{
+				if(anchorPoint == availablePoint)
+				{
+					matchingAnchorPoints.add(anchorPoint);
+					break;
+				}
+			}
+		}
+		
+		if(matchingAnchorPoints.size()==0)
+		{
+			//no available anchor points for the item
+			return false;
+		}
+		
+		MetaPointType chosenPoint = matchingAnchorPoints[0];
+		size_t chosenIndex = 0;
+		
+		//look for an available anchor point index
+		bool chosenIndexTaken = false;
+		do
+		{
+			chosenIndexTaken = false;
+			for(auto& heldItem : heldItems)
+			{
+				if(heldItem.anchorPoint==chosenPoint && heldItem.anchorPointIndex==chosenIndex)
+				{
+					chosenIndexTaken = true;
+					chosenIndex++;
+					break;
+				}
+			}
+		} while(chosenIndexTaken);
+		
+		if(shouldPickUpItem(item))
+		{
+			auto stage = getStage();
+			if(stage!=nullptr)
+			{
+				stage->removeAccessibleItem(item);
+			}
+			
+			//add to held items
+			HeldItem heldItem;
+			heldItem.item = item;
+			heldItem.anchorPoint = chosenPoint;
+			heldItem.anchorPointIndex = chosenIndex;
+			heldItems.add(heldItem);
+			
+			//anchor the item
+			anchorChildEntity(item, METAPOINT_HANDLE, 0, chosenPoint, chosenIndex);
+			
+			item->parentCharacter = this;
+			
+			item->onPickUp(this);
+			onPickUpItem(item);
+			
+			return true;
+		}
+		return false;
+	}
+	
+	void Character::discardItem(Item* item)
+	{
+		for(size_t i=0; i<heldItems.size(); i++)
+		{
+			auto& heldItem = heldItems[i];
+			if(heldItem.item==item)
+			{
+				heldItems.remove(i);
+				removeAnchoredEntity(item);
+				item->parentCharacter = nullptr;
+				
+				item->onDiscard(this);
+				onDiscardItem(item);
+				
+				return;
+			}
+		}
+	}
+	
+	bool Character::isHoldingItem(Item* item) const
+	{
+		for(auto& heldItem : heldItems)
+		{
+			if(heldItem.item==item)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
@@ -156,5 +254,20 @@ namespace fl
 			updateMoveAnimation();
 		}
 		ActionEntity::onFinishCollisionUpdates();
+	}
+	
+	bool Character::shouldPickUpItem(Item* item)
+	{
+		return true;
+	}
+	
+	void Character::onPickUpItem(Item* item)
+	{
+		//
+	}
+	
+	void Character::onDiscardItem(Item* item)
+	{
+		//
 	}
 }

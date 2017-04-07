@@ -3,6 +3,13 @@
 
 namespace fl
 {
+	Item::Item(const fgl::Vector2d& position, Orientation orientation)
+		: Entity(position, orientation),
+		parentCharacter(nullptr)
+	{
+		//
+	}
+	
 	fgl::ArrayList<CollisionRect*> Item::getCollisionRects() const
 	{
 		if(getParentEntity()==nullptr)
@@ -15,6 +22,11 @@ namespace fl
 	bool Item::isPickedUpByTouching() const
 	{
 		return false;
+	}
+	
+	Character* Item::getParentCharacter() const
+	{
+		return parentCharacter;
 	}
 
 	void Item::onCollision(Collidable* collided, CollisionSide side)
@@ -43,5 +55,15 @@ namespace fl
 			}
 		}
 		Entity::onCollisionUpdate(collided, side);
+	}
+	
+	void Item::onPickUp(Character* character)
+	{
+		//
+	}
+	
+	void Item::onDiscard(Character* character)
+	{
+		//
 	}
 }

@@ -15,6 +15,7 @@ namespace fl
 	class Stage
 	{
 		friend class Fight;
+		friend class Character;
 	public:
 		Stage();
 		virtual ~Stage();
@@ -59,5 +60,7 @@ namespace fl
 		
 		CollisionManager collisionManager;
 		DrawManager drawManager;
+		
+		void removeAccessibleItem(Item* item);
 	};
 }
