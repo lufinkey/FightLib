@@ -20,7 +20,7 @@ namespace fl
 
 		for(auto character : params.getCharacters())
 		{
-			stage->addEntity(character);
+			stage->addCharacter(character);
 		}
 	}
 
