@@ -241,6 +241,23 @@ namespace fl
 		return false;
 	}
 	
+	fgl::ArrayList<Item*> Character::getHeldItems() const
+	{
+		fgl::ArrayList<Item*> items;
+		items.reserve(heldItems.size() + heldPowerups.size());
+		
+		for(auto& heldItem : heldItems)
+		{
+			items.add(heldItem.item);
+		}
+		for(auto& item : heldPowerups)
+		{
+			items.add(item);
+		}
+		
+		return items;
+	}
+	
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
 	{
 		direction = direction_arg;
