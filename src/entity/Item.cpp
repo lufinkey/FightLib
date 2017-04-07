@@ -1,5 +1,6 @@
 
 #include <fightlib/entity/Item.hpp>
+#include <fightlib/entity/Character.hpp>
 
 namespace fl
 {
@@ -8,6 +9,33 @@ namespace fl
 		parentCharacter(nullptr)
 	{
 		//
+	}
+	
+	void Item::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	{
+		//don't draw if the item is being held as a powerup and is not anchored to anything
+		if(!(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp()))
+		{
+			ActionEntity::draw(appData, graphics);
+		}
+	}
+	
+	fgl::Vector2d Item::getDrawPosition(float* rotation) const
+	{
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp())
+		{
+			return getParentCharacter()->getPosition(rotation);
+		}
+		return ActionEntity::getDrawPosition(rotation);
+	}
+	
+	fgl::Vector2d Item::getPosition(float* rotation) const
+	{
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp())
+		{
+			return getParentCharacter()->getPosition(rotation);
+		}
+		return ActionEntity::getPosition(rotation);
 	}
 	
 	fgl::ArrayList<CollisionRect*> Item::getCollisionRects() const

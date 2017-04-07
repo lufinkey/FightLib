@@ -12,6 +12,9 @@ namespace fl
 		friend class Character;
 	public:
 		Item(const fgl::Vector2d& position, Orientation orientation);
+		
+		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
+		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
@@ -22,6 +25,8 @@ namespace fl
 		Character* getParentCharacter() const;
 
 	protected:
+		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
+		
 		virtual void onCollision(Collidable* collided, CollisionSide side) override;
 		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side) override;
 		
