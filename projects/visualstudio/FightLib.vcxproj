@@ -35,15 +35,16 @@
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationAssetManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationMetaPoint.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\DrawManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\FightParams.hpp" />
+    <ClInclude Include="..\..\include\fightlib\stage\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -63,13 +64,14 @@
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\AnimationMetaPoint.cpp" />
     <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp" />
     <ClCompile Include="..\..\src\entity\draw\Sprite.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\entity\Item.cpp" />
-    <ClCompile Include="..\..\src\entity\Platform.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
     <ClCompile Include="..\..\src\game\FightParams.cpp" />
+    <ClCompile Include="..\..\src\stage\Platform.cpp" />
     <ClCompile Include="..\..\src\stage\Stage.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

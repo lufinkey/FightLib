@@ -78,9 +78,6 @@
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\Platform.hpp">
-      <Filter>include\fightlib\entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp">
       <Filter>include\fightlib\game</Filter>
     </ClInclude>
@@ -138,6 +135,12 @@
     <ClInclude Include="..\..\include\fightlib\controls\KeyboardCharacterController.hpp">
       <Filter>include\fightlib\controls</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\stage\Platform.hpp">
+      <Filter>include\fightlib\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationMetaPoint.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -191,9 +194,6 @@
     <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp">
       <Filter>src\entity\draw</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\entity\Platform.cpp">
-      <Filter>src\entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\stage\Stage.cpp">
       <Filter>src\stage</Filter>
     </ClCompile>
@@ -211,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\controls\KeyboardCharacterController.cpp">
       <Filter>src\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stage\Platform.cpp">
+      <Filter>src\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\AnimationMetaPoint.cpp">
+      <Filter>src\entity\draw</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
