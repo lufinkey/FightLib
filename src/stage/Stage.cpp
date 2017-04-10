@@ -22,9 +22,9 @@ namespace fl
 	
 	void Stage::update(fgl::ApplicationData appData)
 	{
-		//TODO should I auto-pickup items here or in Fight?
-		
 		appData.additionalData["stage"] = this;
+		
+		//update gravity
 		for(auto entity : entities)
 		{
 			if(entity->getParentEntity()==nullptr && entity->respondsToGravity())
@@ -35,6 +35,7 @@ namespace fl
 				entity->setVelocity(velocity);
 			}
 		}
+		
 		drawManager.update(appData);
 		collisionManager.update(appData);
 		
