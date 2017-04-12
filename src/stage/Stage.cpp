@@ -40,12 +40,12 @@ namespace fl
 		
 		if(fight != nullptr)
 		{
-			//update character hitboxes
-			for(size_t i=0; i<characters.size(); i++)
+			//update entity hitboxes
+			for(size_t i=0; i<entities.size(); i++)
 			{
-				auto character1 = characters[i];
-				auto hitboxes1 = character1->getMetaPointBoxes(METAPOINT_HITBOX);
-				auto collisionRects1 = character1->getCollisionRects();
+				auto entity1 = entities[i];
+				auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX);
+				auto collisionRects1 = entity1->getCollisionRects();
 				hitboxes1 = hitboxes1.filter([](const TaggedBox& box){
 					if(box.tag==-1)
 					{
@@ -54,11 +54,11 @@ namespace fl
 					return true;
 				});
 				
-				for(size_t j=(i+1); j<characters.size(); j++)
+				for(size_t j=(i+1); j<entities.size(); j++)
 				{
-					auto character2 = characters[j];
-					auto hitboxes2 = character2->getMetaPointBoxes(METAPOINT_HITBOX);
-					auto collisionRects2 = character2->getCollisionRects();
+					auto entity2 = entities[j];
+					auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX);
+					auto collisionRects2 = entity2->getCollisionRects();
 					
 					hitboxes2 = hitboxes2.filter([](const TaggedBox& box){
 						if(box.tag==-1)
