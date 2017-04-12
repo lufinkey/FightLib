@@ -82,6 +82,7 @@ namespace fl
 						}
 					}
 					
+					//TODO have separate virtual functions for when hitbox hits hitbox and when hitbox hits hurtbox
 					if(collidedHitboxes.size() > 0)
 					{
 						//TODO figure out which hitbox has a higher priority and do hurt thing
