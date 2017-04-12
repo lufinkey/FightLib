@@ -429,7 +429,7 @@ namespace fl
 	
 	CollisionRectDirection CollisionRect_getPointDirection(const fgl::Vector2d& point1, const fgl::Vector2d& point2)
 	{
-		double dir = fgl::Math::normalizeDegrees(fgl::Math::radtodeg(fgl::Math::atan2(point2.x-point1.x, point2.y-point1.y))-90);
+		double dir = fgl::Math::normalizeDegrees(fgl::Math::radtodeg(fgl::Math::atan2(-(point2.y-point1.y), point2.x-point1.x)));
 		if(dir <= 45 || dir >= 315)
 		{
 			return DIR_RIGHT;
