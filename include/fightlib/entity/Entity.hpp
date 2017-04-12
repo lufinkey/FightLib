@@ -3,6 +3,7 @@
 
 #include "collision/Collidable.hpp"
 #include "collision/CollisionRectManager.hpp"
+#include "hitbox/HitboxInfo.hpp"
 
 namespace fl
 {
@@ -24,6 +25,8 @@ namespace fl
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
+		
+		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 
 		float getScale() const;
 		void setScale(float scale);

@@ -162,6 +162,11 @@ namespace fl
 		setOptionalArg(rotation, anchorRotation)
 			return fullOffset;
 	}
+	
+	HitboxInfo Entity::getHitboxInfo(size_t tag) const
+	{
+		return NULL_HITBOX_INFO;
+	}
 
 	float Entity::getScale() const
 	{

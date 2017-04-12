@@ -38,27 +38,15 @@ namespace fl
 		
 		drawManager.update(appData);
 		
-		//update character hitboxes
-		for(size_t i=0; i<characters.size(); i++)
+		if(fight != nullptr)
 		{
-			auto character1 = characters[i];
-			auto hitboxes1 = character1->getMetaPointBoxes(METAPOINT_HITBOX);
-			auto collisionRects1 = character1->getCollisionRects();
-			hitboxes1 = hitboxes1.filter([](const TaggedBox& box){
-				if(box.tag==-1)
-				{
-					return false;
-				}
-				return true;
-			});
-			
-			for(size_t j=(i+1); j<characters.size(); j++)
+			//update character hitboxes
+			for(size_t i=0; i<characters.size(); i++)
 			{
-				auto character2 = characters[j];
-				auto hitboxes2 = character2->getMetaPointBoxes(METAPOINT_HITBOX);
-				auto collisionRects2 = character2->getCollisionRects();
-				
-				hitboxes2 = hitboxes2.filter([](const TaggedBox& box){
+				auto character1 = characters[i];
+				auto hitboxes1 = character1->getMetaPointBoxes(METAPOINT_HITBOX);
+				auto collisionRects1 = character1->getCollisionRects();
+				hitboxes1 = hitboxes1.filter([](const TaggedBox& box){
 					if(box.tag==-1)
 					{
 						return false;
@@ -66,7 +54,43 @@ namespace fl
 					return true;
 				});
 				
-				//TODO something goes here...
+				for(size_t j=(i+1); j<characters.size(); j++)
+				{
+					auto character2 = characters[j];
+					auto hitboxes2 = character2->getMetaPointBoxes(METAPOINT_HITBOX);
+					auto collisionRects2 = character2->getCollisionRects();
+					
+					hitboxes2 = hitboxes2.filter([](const TaggedBox& box){
+						if(box.tag==-1)
+						{
+							return false;
+						}
+						return true;
+					});
+					
+					//check for hitboxes hitting each other
+					typedef std::pair<size_t, size_t> TagPair;
+					fgl::ArrayList<TagPair> collidedHitboxes;
+					for(auto& hitbox1 : hitboxes1)
+					{
+						for(auto& hitbox2 : hitboxes2)
+						{
+							if(hitbox1.rect.intersects(hitbox2.rect))
+							{
+								collidedHitboxes.add(TagPair(hitbox1.tag, hitbox2.tag));
+							}
+						}
+					}
+					
+					if(collidedHitboxes.size() > 0)
+					{
+						//TODO figure out which hitbox has a higher priority and do hurt thing
+					}
+					else
+					{
+						//See if any hitboxes hit any hurtboxes
+					}
+				}
 			}
 		}
 		
