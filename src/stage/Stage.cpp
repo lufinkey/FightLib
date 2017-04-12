@@ -44,29 +44,26 @@ namespace fl
 			for(size_t i=0; i<entities.size(); i++)
 			{
 				auto entity1 = entities[i];
-				auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX);
-				auto collisionRects1 = entity1->getCollisionRects();
-				hitboxes1 = hitboxes1.filter([](const TaggedBox& box){
+				auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
 					if(box.tag==-1)
 					{
 						return false;
 					}
 					return true;
 				});
+				auto collisionRects1 = entity1->getCollisionRects();
 				
 				for(size_t j=(i+1); j<entities.size(); j++)
 				{
 					auto entity2 = entities[j];
-					auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX);
-					auto collisionRects2 = entity2->getCollisionRects();
-					
-					hitboxes2 = hitboxes2.filter([](const TaggedBox& box){
+					auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
 						if(box.tag==-1)
 						{
 							return false;
 						}
 						return true;
 					});
+					auto collisionRects2 = entity2->getCollisionRects();
 					
 					//check for hitboxes hitting each other
 					struct HitboxTagPair
