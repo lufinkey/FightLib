@@ -58,6 +58,12 @@
     <Filter Include="src\controls">
       <UniqueIdentifier>{80204d0e-8e97-4c94-a3be-a268e748bc60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\entity\hitbox">
+      <UniqueIdentifier>{15f88019-d13d-40ad-8fbd-310581047f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\fightlib\entity\hitbox">
+      <UniqueIdentifier>{ca730a57-13ff-46f3-91c2-0b0fd3d0df98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
@@ -141,6 +147,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationMetaPoint.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -217,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\draw\AnimationMetaPoint.cpp">
       <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp">
+      <Filter>src\entity\hitbox</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
