@@ -69,15 +69,29 @@ namespace fl
 					});
 					
 					//check for hitboxes hitting each other
-					typedef std::pair<size_t, size_t> TagPair;
-					fgl::ArrayList<TagPair> collidedHitboxes;
+					struct HitboxTagPair
+					{
+						size_t tag1;
+						size_t tag2;
+						float angle;
+					};
+					fgl::ArrayList<HitboxTagPair> collidedHitboxes;
 					for(auto& hitbox1 : hitboxes1)
 					{
 						for(auto& hitbox2 : hitboxes2)
 						{
 							if(hitbox1.rect.intersects(hitbox2.rect))
 							{
-								collidedHitboxes.add(TagPair(hitbox1.tag, hitbox2.tag));
+								fgl::Vector2d boxDiff = hitbox2.rect.getCenter() - hitbox1.rect.getCenter();
+								float angle = fgl::Math::radtodeg(fgl::Math::atan2(-boxDiff.y, boxDiff.x));
+								
+								//TODO use hitbox info to check the angle
+								
+								HitboxTagPair tagPair;
+								tagPair.tag1 = hitbox1.tag;
+								tagPair.tag2 = hitbox2.tag;
+								tagPair.angle = angle;
+								collidedHitboxes.add(tagPair);
 							}
 						}
 					}
