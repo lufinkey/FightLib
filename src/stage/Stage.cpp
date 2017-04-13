@@ -94,6 +94,7 @@ namespace fl
 								double topPriority = fgl::Math::max(info1.getPriority(), info2.getPriority());
 								if(!foundHitboxCollision || priorityDiff > topPriorityDiff || (priorityDiff==topPriorityDiff && topPriority > lastTopPriority))
 								{
+									//set the new top priority hitbox collision
 									topIndex1 = hitboxIndex1;
 									topIndex2 = hitboxIndex2;
 									topPriorityDiff = priorityDiff;
@@ -146,7 +147,9 @@ namespace fl
 				}
 				else
 				{
-					//check if any hitboxes hit any bounds boxes
+					//check if any hitboxes hit any collision rects
+					//TODO should I use hurtboxes instead of the collision rects?
+					
 				}
 			}
 		}
