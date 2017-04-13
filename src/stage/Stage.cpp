@@ -36,6 +36,7 @@ namespace fl
 			}
 		}
 		
+		//update all these damn managers
 		drawManager.update(appData);
 		hitboxCollisionManager.update(appData);
 		collisionManager.update(appData);
