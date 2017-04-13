@@ -38,70 +38,83 @@ namespace fl
 		
 		drawManager.update(appData);
 		
-		if(fight != nullptr)
+		//update entity hitboxes
+		for(size_t i=0; i<entities.size(); i++)
 		{
-			//update entity hitboxes
-			for(size_t i=0; i<entities.size(); i++)
+			auto entity1 = entities[i];
+			auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
+				//filter out untagged hitboxes
+				if(box.tag==-1)
+				{
+					return false;
+				}
+				return true;
+			});
+			auto collisionRects1 = entity1->getCollisionRects();
+				
+			for(size_t j=(i+1); j<entities.size(); j++)
 			{
-				auto entity1 = entities[i];
-				auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
+				auto entity2 = entities[j];
+				auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
+					//filter out untagged hitboxes
 					if(box.tag==-1)
 					{
 						return false;
 					}
 					return true;
 				});
-				auto collisionRects1 = entity1->getCollisionRects();
-				
-				for(size_t j=(i+1); j<entities.size(); j++)
-				{
-					auto entity2 = entities[j];
-					auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
-						if(box.tag==-1)
-						{
-							return false;
-						}
-						return true;
-					});
-					auto collisionRects2 = entity2->getCollisionRects();
+				auto collisionRects2 = entity2->getCollisionRects();
 					
-					//check for hitboxes hitting each other
-					struct HitboxTagPair
+				//check for hitboxes hitting each other
+				//find the highest priority hitting hitboxes
+				size_t topIndex1 = -1;
+				size_t topIndex2 = -1;
+				float topPriorityDiff = 0;
+				float lastTopPriority = 0;
+				bool foundHitboxCollision = false;
+				size_t hitboxIndex1 = 0;
+				for(auto& hitbox1 : hitboxes1)
+				{
+					size_t hitboxIndex2 = 0;
+					for(auto& hitbox2 : hitboxes2)
 					{
-						size_t tag1;
-						size_t tag2;
-						float angle;
-					};
-					fgl::ArrayList<HitboxTagPair> collidedHitboxes;
-					for(auto& hitbox1 : hitboxes1)
-					{
-						for(auto& hitbox2 : hitboxes2)
+						if(hitbox1.rect.intersects(hitbox2.rect))
 						{
-							if(hitbox1.rect.intersects(hitbox2.rect))
+							fgl::Vector2d boxDiff = hitbox2.rect.getCenter() - hitbox1.rect.getCenter();
+							float angle1 = fgl::Math::radtodeg(fgl::Math::atan2(-boxDiff.y, boxDiff.x));
+							float angle2 = fgl::Math::normalizeDegrees(angle1+180);
+
+							auto info1 = entity1->getHitboxInfo(hitbox1.tag);
+							auto info2 = entity2->getHitboxInfo(hitbox2.tag);
+
+							//make sure the angle they're hitting at is within their ranges
+							if(info1.getEffectiveAngleRange().contains(angle1) && info2.getEffectiveAngleRange().contains(angle2))
 							{
-								fgl::Vector2d boxDiff = hitbox2.rect.getCenter() - hitbox1.rect.getCenter();
-								float angle = fgl::Math::radtodeg(fgl::Math::atan2(-boxDiff.y, boxDiff.x));
-								
-								//TODO use hitbox info to check the angle
-								
-								HitboxTagPair tagPair;
-								tagPair.tag1 = hitbox1.tag;
-								tagPair.tag2 = hitbox2.tag;
-								tagPair.angle = angle;
-								collidedHitboxes.add(tagPair);
+								float priorityDiff = fgl::Math::abs(info1.getPriority()-info2.getPriority());
+								double topPriority = fgl::Math::max(info1.getPriority(), info2.getPriority());
+								if(!foundHitboxCollision || priorityDiff > topPriorityDiff || (priorityDiff==topPriorityDiff && topPriority > lastTopPriority))
+								{
+									topIndex1 = hitboxIndex1;
+									topIndex2 = hitboxIndex2;
+									topPriorityDiff = priorityDiff;
+									lastTopPriority = topPriority;
+									foundHitboxCollision = true;
+								}
 							}
 						}
+						hitboxIndex2++;
 					}
+					hitboxIndex1++;
+				}
 					
-					//TODO have separate virtual functions for when hitbox hits hitbox and when hitbox hits hurtbox
-					if(collidedHitboxes.size() > 0)
-					{
-						//TODO figure out which hitbox has a higher priority and do hurt thing
-					}
-					else
-					{
-						//See if any hitboxes hit any hurtboxes
-					}
+				//TODO have separate virtual functions for when hitbox hits hitbox and when hitbox hits hurtbox
+				if(foundHitboxCollision)
+				{
+					//do the thing
+				}
+				else
+				{
+					//See if any hitboxes hit any hurtboxes
 				}
 			}
 		}
