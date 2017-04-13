@@ -213,26 +213,26 @@ namespace fl
 		return true;
 	}
 
-	void Entity::onCollision(Collidable* collided, CollisionSide side)
+	void Entity::onCollision(const CollisionEvent& collisionEvent)
 	{
-		if(side==COLLISIONSIDE_BOTTOM)
+		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
 		{
-			groundCollidables.add(collided);
+			groundCollidables.add(collisionEvent.getCollided());
 		}
-		Collidable::onCollision(collided, side);
+		Collidable::onCollision(collisionEvent);
 	}
 
-	void Entity::onCollisionFinish(Collidable* collided, CollisionSide side)
+	void Entity::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
-		if(side==COLLISIONSIDE_BOTTOM)
+		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
 		{
-			size_t collidableIndex = groundCollidables.indexOf(collided);
+			size_t collidableIndex = groundCollidables.indexOf(collisionEvent.getCollided());
 			if(collidableIndex!=-1)
 			{
 				groundCollidables.remove(collidableIndex);
 			}
 		}
-		Collidable::onCollisionFinish(collided, side);
+		Collidable::onCollisionFinish(collisionEvent);
 	}
 	
 	void Entity::onHitboxClash(const HitboxClashEvent& clashEvent)

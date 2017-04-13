@@ -58,8 +58,8 @@ namespace fl
 		virtual float getDrawScale() const override;
 		virtual bool shouldUseParentMetaPointRotation() const;
 
-		virtual void onCollision(Collidable* collided, CollisionSide side) override;
-		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) override;
+		virtual void onCollision(const CollisionEvent& collisionEvent) override;
+		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
 		
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxCollision(TaggedBox hitbox, Entity* collided, TaggedBox collidedBounds);

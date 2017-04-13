@@ -187,21 +187,23 @@ namespace fl
 					//check for new/updated collision calls
 					for(auto collisionSide : newPair.previousCollisionSides)
 					{
+						auto collisionEvent1 = CollisionEvent(collidable2, collisionSide);
+						auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide));
 						if(!pair.previousCollisionSides.contains(collisionSide))
 						{
 							//the previous collision pair doesn't have this collision side, so it is a new collision
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
-									collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
-									collidable1->onCollision(collidable2, collisionSide);
+									collidable2->onCollision(collisionEvent2);
+									collidable1->onCollision(collisionEvent1);
 								});
 							}
 							else if(collidable2->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
-									collidable1->onCollision(collidable2, collisionSide);
-									collidable2->onCollision(collidable1, getOppositeCollisionSide(collisionSide));
+									collidable1->onCollision(collisionEvent1);
+									collidable2->onCollision(collisionEvent2);
 								});
 							}
 							else
@@ -215,15 +217,15 @@ namespace fl
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
-									collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
-									collidable1->onCollisionUpdate(collidable2, collisionSide);
+									collidable2->onCollisionUpdate(collisionEvent2);
+									collidable1->onCollisionUpdate(collisionEvent1);
 								});
 							}
 							else if(collidable2->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
-									collidable1->onCollisionUpdate(collidable2, collisionSide);
-									collidable2->onCollisionUpdate(collidable1, getOppositeCollisionSide(collisionSide));
+									collidable1->onCollisionUpdate(collisionEvent1);
+									collidable2->onCollisionUpdate(collisionEvent2);
 								});
 							}
 							else
@@ -238,18 +240,20 @@ namespace fl
 					{
 						if(!newPair.previousCollisionSides.contains(prevCollisionSide))
 						{
+							auto collisionEvent1 = CollisionEvent(collidable2, prevCollisionSide);
+							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(prevCollisionSide));
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionFinishCalls.add([=]{
-									collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
-									collidable1->onCollisionFinish(collidable2, prevCollisionSide);
+									collidable2->onCollisionFinish(collisionEvent2);
+									collidable1->onCollisionFinish(collisionEvent1);
 								});
 							}
 							else if(collidable2->isStaticCollisionBody())
 							{
 								onCollisionFinishCalls.add([=]{
-									collidable1->onCollisionFinish(collidable2, prevCollisionSide);
-									collidable2->onCollisionFinish(collidable1, getOppositeCollisionSide(prevCollisionSide));
+									collidable1->onCollisionFinish(collisionEvent1);
+									collidable2->onCollisionFinish(collisionEvent2);
 								});
 							}
 							else

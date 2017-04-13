@@ -276,9 +276,9 @@ namespace fl
 		}
 	}
 	
-	void Character::onCollision(fl::Collidable* collided, CollisionSide side)
+	void Character::onCollision(const CollisionEvent& collisionEvent)
 	{
-		if(side==COLLISIONSIDE_BOTTOM)
+		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
 		{
 			fgl::Vector2d velocity = getVelocity();
 			if(velocity.y > 0)
@@ -287,12 +287,12 @@ namespace fl
 				setVelocity(velocity);
 			}
 		}
-		ActionEntity::onCollision(collided, side);
+		ActionEntity::onCollision(collisionEvent);
 	}
 
-	void Character::onCollisionUpdate(fl::Collidable* collided, CollisionSide side)
+	void Character::onCollisionUpdate(const CollisionEvent& collisionEvent)
 	{
-		if(side==fl::COLLISIONSIDE_BOTTOM)
+		if(collisionEvent.getCollisionSide()==fl::COLLISIONSIDE_BOTTOM)
 		{
 			fgl::Vector2d velocity = getVelocity();
 			if(velocity.y > 0)
@@ -301,12 +301,12 @@ namespace fl
 				setVelocity(velocity);
 			}
 		}
-		ActionEntity::onCollisionUpdate(collided, side);
+		ActionEntity::onCollisionUpdate(collisionEvent);
 	}
 	
-	void Character::onCollisionFinish(fl::Collidable* collided, CollisionSide side)
+	void Character::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
-		ActionEntity::onCollisionFinish(collided, side);
+		ActionEntity::onCollisionFinish(collisionEvent);
 	}
 	
 	void Character::onFinishCollisionUpdates()

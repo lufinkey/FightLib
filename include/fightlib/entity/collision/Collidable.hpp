@@ -3,17 +3,10 @@
 
 #include <fightlib/entity/draw/Sprite.hpp>
 #include "rects/CollisionRect.hpp"
+#include "CollisionEvent.hpp"
 
 namespace fl
 {
-	typedef enum
-	{
-		COLLISIONSIDE_TOP,
-		COLLISIONSIDE_BOTTOM,
-		COLLISIONSIDE_LEFT,
-		COLLISIONSIDE_RIGHT
-	} CollisionSide;
-
 	class Collidable : public Sprite
 	{
 		friend class CollisionManager;
@@ -38,9 +31,9 @@ namespace fl
 
 		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
 
-		virtual void onCollision(Collidable* collided, CollisionSide side);
-		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side);
-		virtual void onCollisionFinish(Collidable* collided, CollisionSide side);
+		virtual void onCollision(const CollisionEvent& collisionEvent);
+		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent);
+		virtual void onCollisionFinish(const CollisionEvent& collisionEvent);
 		virtual void onFinishCollisionUpdates();
 		
 	private:

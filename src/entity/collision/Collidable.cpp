@@ -54,17 +54,17 @@ namespace fl
 		return false;
 	}
 	
-	void Collidable::onCollision(Collidable* collided, CollisionSide side)
+	void Collidable::onCollision(const CollisionEvent& collisionEvent)
 	{
 		//
 	}
 	
-	void Collidable::onCollisionUpdate(Collidable* collided, CollisionSide side)
+	void Collidable::onCollisionUpdate(const CollisionEvent& collisionEvent)
 	{
 		//
 	}
 	
-	void Collidable::onCollisionFinish(Collidable* collided, CollisionSide side)
+	void Collidable::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
 		//
 	}

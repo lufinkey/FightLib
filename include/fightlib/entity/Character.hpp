@@ -34,9 +34,9 @@ namespace fl
 		
 		virtual void onActionEnd(Action* action) override;
 		
-		virtual void onCollision(Collidable* collided, CollisionSide side) override;
-		virtual void onCollisionUpdate(Collidable* collided, CollisionSide side) override;
-		virtual void onCollisionFinish(Collidable* collided, CollisionSide side) override;
+		virtual void onCollision(const CollisionEvent& collisionEvent) override;
+		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
+		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
 		virtual void onFinishCollisionUpdates() override;
 		
 		virtual bool shouldPickUpItem(Item* item);
