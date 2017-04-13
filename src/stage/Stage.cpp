@@ -116,20 +116,20 @@ namespace fl
 					auto info1 = entity1->getHitboxInfo(hitbox1.tag);
 					auto info2 = entity2->getHitboxInfo(hitbox2.tag);
 					
+					auto clashEvent1 = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
+					auto clashEvent2 = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
 					if(info1.getPriority() > info2.getPriority())
 					{
-						auto clashEvent = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
-						entity1->onHitboxClash(clashEvent);
+						entity1->onHitboxClash(clashEvent1);
+						entity2->onHitboxClash(clashEvent2);
 					}
 					else if(info2.getPriority() > info1.getPriority())
 					{
-						auto clashEvent = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
-						entity2->onHitboxClash(clashEvent);
+						entity2->onHitboxClash(clashEvent2);
+						entity1->onHitboxClash(clashEvent1);
 					}
 					else
 					{
-						auto clashEvent1 = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
-						auto clashEvent2 = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
 						//randomly choose which entity gets the event first
 						double randomFirst = fgl::Math::random();
 						if(randomFirst < 0.5)
