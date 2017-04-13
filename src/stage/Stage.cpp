@@ -51,7 +51,7 @@ namespace fl
 				return true;
 			});
 			auto collisionRects1 = entity1->getCollisionRects();
-				
+			
 			for(size_t j=(i+1); j<entities.size(); j++)
 			{
 				auto entity2 = entities[j];
@@ -64,7 +64,7 @@ namespace fl
 					return true;
 				});
 				auto collisionRects2 = entity2->getCollisionRects();
-					
+				
 				//check for hitboxes hitting each other
 				//find the highest priority hitting hitboxes
 				size_t topIndex1 = -1;
@@ -106,11 +106,39 @@ namespace fl
 					}
 					hitboxIndex1++;
 				}
-					
-				//TODO have separate virtual functions for when hitbox hits hitbox and when hitbox hits hurtbox
+				
 				if(foundHitboxCollision)
 				{
-					//do the thing
+					//handle two hitboxes colliding
+					auto& hitbox1 = hitboxes1[topIndex1];
+					auto& hitbox2 = hitboxes2[topIndex2];
+					
+					auto info1 = entity1->getHitboxInfo(hitbox1.tag);
+					auto info2 = entity2->getHitboxInfo(hitbox2.tag);
+					
+					if(info1.getPriority() > info2.getPriority())
+					{
+						entity1->onHitboxClash(hitbox1, entity2, hitbox2);
+					}
+					else if(info2.getPriority() > info1.getPriority())
+					{
+						entity2->onHitboxClash(hitbox2, entity1, hitbox1);
+					}
+					else
+					{
+						//randomly choose which entity gets the event first
+						double randomFirst = fgl::Math::random();
+						if(randomFirst < 0.5)
+						{
+							entity1->onHitboxClash(hitbox1, entity2, hitbox2);
+							entity2->onHitboxClash(hitbox2, entity1, hitbox1);
+						}
+						else
+						{
+							entity2->onHitboxClash(hitbox2, entity1, hitbox1);
+							entity1->onHitboxClash(hitbox1, entity2, hitbox2);
+						}
+					}
 				}
 				else
 				{

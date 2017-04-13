@@ -234,6 +234,16 @@ namespace fl
 		}
 		Collidable::onCollisionFinish(collided, side);
 	}
+	
+	void Entity::onHitboxClash(TaggedBox hitbox, Entity* clashed, TaggedBox clashedHitbox)
+	{
+		//
+	}
+	
+	void Entity::onHitboxCollision(TaggedBox hitbox, Entity* collided, TaggedBox collidedBounds)
+	{
+		//
+	}
 
 	bool Entity::isOnGround() const
 	{
