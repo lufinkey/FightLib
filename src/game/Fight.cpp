@@ -63,6 +63,7 @@ namespace fl
 
 	void Fight::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
+		appData.additionalData["fight"] = this;
 		stage->draw(appData, graphics);
 	}
 	
