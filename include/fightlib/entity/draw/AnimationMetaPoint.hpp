@@ -5,6 +5,13 @@
 
 namespace fl
 {
+	struct TaggedBox
+	{
+		size_t tag;
+		fgl::RectangleD rect;
+	};
+	
+	
 	typedef enum : fgl::Uint8
 	{
 		ANIMATIONORIENTATION_NEUTRAL,

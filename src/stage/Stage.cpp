@@ -118,31 +118,35 @@ namespace fl
 					
 					if(info1.getPriority() > info2.getPriority())
 					{
-						entity1->onHitboxClash(hitbox1, entity2, hitbox2);
+						auto clashEvent = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
+						entity1->onHitboxClash(clashEvent);
 					}
 					else if(info2.getPriority() > info1.getPriority())
 					{
-						entity2->onHitboxClash(hitbox2, entity1, hitbox1);
+						auto clashEvent = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
+						entity2->onHitboxClash(clashEvent);
 					}
 					else
 					{
+						auto clashEvent1 = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
+						auto clashEvent2 = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
 						//randomly choose which entity gets the event first
 						double randomFirst = fgl::Math::random();
 						if(randomFirst < 0.5)
 						{
-							entity1->onHitboxClash(hitbox1, entity2, hitbox2);
-							entity2->onHitboxClash(hitbox2, entity1, hitbox1);
+							entity1->onHitboxClash(clashEvent1);
+							entity2->onHitboxClash(clashEvent2);
 						}
 						else
 						{
-							entity2->onHitboxClash(hitbox2, entity1, hitbox1);
-							entity1->onHitboxClash(hitbox1, entity2, hitbox2);
+							entity2->onHitboxClash(clashEvent2);
+							entity1->onHitboxClash(clashEvent1);
 						}
 					}
 				}
 				else
 				{
-					//See if any hitboxes hit any hurtboxes
+					//check if any hitboxes hit any bounds boxes
 				}
 			}
 		}

@@ -5,12 +5,6 @@
 
 namespace fl
 {
-	struct TaggedBox
-	{
-		size_t tag;
-		fgl::RectangleD rect;
-	};
-	
 	class AnimationData
 	{
 	public:
