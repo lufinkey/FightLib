@@ -150,6 +150,18 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionEvent.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashEvent.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionEvent.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionManager.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -228,6 +240,18 @@
       <Filter>src\entity\draw</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionEvent.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxClashEvent.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionEvent.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionManager.cpp">
       <Filter>src\entity\hitbox</Filter>
     </ClCompile>
   </ItemGroup>
