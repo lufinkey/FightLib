@@ -240,7 +240,7 @@ namespace fl
 		//
 	}
 	
-	void Entity::onHitboxCollision(TaggedBox hitbox, Entity* collided, TaggedBox collidedBounds)
+	void Entity::onHitboxCollision(const HitboxCollisionEvent& collisionEvent)
 	{
 		//
 	}

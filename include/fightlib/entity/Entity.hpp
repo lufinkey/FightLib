@@ -5,6 +5,7 @@
 #include "collision/CollisionRectManager.hpp"
 #include "hitbox/HitboxInfo.hpp"
 #include "hitbox/HitboxClashEvent.hpp"
+#include "hitbox/HitboxCollisionEvent.hpp"
 
 namespace fl
 {
@@ -62,7 +63,7 @@ namespace fl
 		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
 		
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
-		virtual void onHitboxCollision(TaggedBox hitbox, Entity* collided, TaggedBox collidedBounds);
+		virtual void onHitboxCollision(const HitboxCollisionEvent& collisionEvent);
 
 		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
 
