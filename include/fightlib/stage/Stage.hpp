@@ -2,6 +2,7 @@
 #pragma once
 
 #include <fightlib/entity/collision/CollisionManager.hpp>
+#include <fightlib/entity/hitbox/HitboxCollisionManager.hpp>
 #include <fightlib/entity/draw/DrawManager.hpp>
 #include <fightlib/entity/Character.hpp>
 #include <fightlib/entity/Entity.hpp>
@@ -59,6 +60,7 @@ namespace fl
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		
 		CollisionManager collisionManager;
+		HitboxCollisionManager hitboxCollisionManager;
 		DrawManager drawManager;
 		
 		void removeAccessibleItem(Item* item);

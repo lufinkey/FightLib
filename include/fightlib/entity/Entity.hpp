@@ -20,6 +20,7 @@ namespace fl
 	class Entity : public Collidable
 	{
 		friend class Stage;
+		friend class HitboxCollisionManager;
 	public:
 		Entity(const fgl::Vector2d& position, Orientation orientation);
 
