@@ -3,11 +3,11 @@
 
 namespace fl
 {
-	HitboxCollisionEvent::HitboxCollisionEvent(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, Entity* collidedEntity, const TaggedBox& collidedBounds)
+	HitboxCollisionEvent::HitboxCollisionEvent(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, Entity* collidedEntity, CollisionRect* collidedRect)
 		: hitbox(hitbox),
 		hitboxInfo(hitboxInfo),
 		collidedEntity(collidedEntity),
-		collidedBounds(collidedBounds)
+		collidedRect(collidedRect)
 	{
 		//
 	}
@@ -27,8 +27,8 @@ namespace fl
 		return collidedEntity;
 	}
 	
-	const TaggedBox& HitboxCollisionEvent::getCollidedBounds() const
+	CollisionRect* HitboxCollisionEvent::getCollidedRect() const
 	{
-		return collidedBounds;
+		return collidedRect;
 	}
 }
