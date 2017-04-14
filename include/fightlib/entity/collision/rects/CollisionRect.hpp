@@ -28,6 +28,7 @@ namespace fl
 		//offset is rect2's offset to avoid rect1
 		static fgl::Vector2d getCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
 		static bool checkCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2);
+		static bool checkCollision(CollisionRect* collisionRect, const fgl::RectangleD& filledRect);
 
 	private:
 		static fgl::Vector2d getFilledCollisionOffset(CollisionRect* collisionRect1, CollisionRect* collisionRect2);

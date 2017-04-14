@@ -1,5 +1,6 @@
 
 #include <fightlib/entity/collision/rects/CollisionRect.hpp>
+#include <fightlib/entity/collision/rects/BoxCollisionRect.hpp>
 
 namespace fl
 {
@@ -666,6 +667,12 @@ namespace fl
 			}
 		}
 		return false;
+	}
+
+	bool CollisionRect::checkCollision(CollisionRect* collisionRect, const fgl::RectangleD& filledRect)
+	{
+		BoxCollisionRect filledBoxRect("", filledRect, filledRect);
+		return checkCollision(collisionRect, &filledBoxRect);
 	}
 	
 	bool CollisionRect::checkFilledCollision(CollisionRect* collisionRect1, CollisionRect* collisionRect2)
