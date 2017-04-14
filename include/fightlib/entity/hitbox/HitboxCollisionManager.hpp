@@ -20,5 +20,15 @@ namespace fl
 		fgl::ArrayList<Entity*> entities;
 		
 		fgl::ArrayList<HitboxClashPair> previousClashPairs;
+		
+		struct EntityPair
+		{
+			Entity* entity1;
+			fgl::ArrayList<TaggedBox> hitboxes1;
+			
+			Entity* entity2;
+			fgl::ArrayList<TaggedBox> hitboxes2;
+		};
+		fgl::ArrayList<EntityPair> getEntityPairs() const;
 	};
 }
