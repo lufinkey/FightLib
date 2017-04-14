@@ -43,6 +43,7 @@ namespace fl
 		virtual bool isStaticCollisionBody() const override;
 		virtual bool respondsToGravity() const;
 		virtual bool movesWithGround() const;
+		virtual bool usesHitboxes() const;
 
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
@@ -62,6 +63,9 @@ namespace fl
 
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;
 		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
+		
+		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
+		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
 		
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent);

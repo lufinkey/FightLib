@@ -42,23 +42,26 @@ namespace fl
 			
 			//check for hitboxes hitting each other
 			fgl::ArrayList<HitboxPair> hitboxPairs;
-			for(auto& hitbox1 : hitboxes1)
+			if(entity1->respondsToHitboxClash(entity2) && entity2->respondsToHitboxClash(entity1))
 			{
-				for(auto& hitbox2 : hitboxes2)
+				for(auto& hitbox1 : hitboxes1)
 				{
-					if(hitbox1.rect.intersects(hitbox2.rect))
+					for(auto& hitbox2 : hitboxes2)
 					{
-						fgl::Vector2d boxDiff = hitbox2.rect.getCenter() - hitbox1.rect.getCenter();
-						float angle1 = fgl::Math::radtodeg(fgl::Math::atan2(-boxDiff.y, boxDiff.x));
-						float angle2 = fgl::Math::normalizeDegrees(angle1+180);
-						
-						auto info1 = entity1->getHitboxInfo(hitbox1.tag);
-						auto info2 = entity2->getHitboxInfo(hitbox2.tag);
-						
-						//make sure the angle they're hitting at is within their ranges
-						if(info1.getEffectiveAngleRange().contains(angle1) && info2.getEffectiveAngleRange().contains(angle2))
+						if(hitbox1.rect.intersects(hitbox2.rect))
 						{
-							hitboxPairs.add(HitboxPair(hitbox1, info1, hitbox2, info2));
+							fgl::Vector2d boxDiff = hitbox2.rect.getCenter() - hitbox1.rect.getCenter();
+							float angle1 = fgl::Math::radtodeg(fgl::Math::atan2(-boxDiff.y, boxDiff.x));
+							float angle2 = fgl::Math::normalizeDegrees(angle1+180);
+							
+							auto info1 = entity1->getHitboxInfo(hitbox1.tag);
+							auto info2 = entity2->getHitboxInfo(hitbox2.tag);
+							
+							//make sure the angle they're hitting at is within their ranges
+							if(info1.getEffectiveAngleRange().contains(angle1) && info2.getEffectiveAngleRange().contains(angle2))
+							{
+								hitboxPairs.add(HitboxPair(hitbox1, info1, hitbox2, info2));
+							}
 						}
 					}
 				}
@@ -230,19 +233,10 @@ namespace fl
 		for(size_t i=0; i<entities.size(); i++)
 		{
 			auto entity1 = entities[i];
-			auto hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
-				//filter out untagged hitboxes
-				if(box.tag==-1)
-				{
-					return false;
-				}
-				return true;
-			});
-			
-			for(size_t j=(i+1); j<entities.size(); j++)
+			fgl::ArrayList<TaggedBox> hitboxes1;
+			if(entity1->usesHitboxes())
 			{
-				auto entity2 = entities[j];
-				auto hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
+				hitboxes1 = entity1->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
 					//filter out untagged hitboxes
 					if(box.tag==-1)
 					{
@@ -250,6 +244,23 @@ namespace fl
 					}
 					return true;
 				});
+			}
+			
+			for(size_t j=(i+1); j<entities.size(); j++)
+			{
+				auto entity2 = entities[j];
+				fgl::ArrayList<TaggedBox> hitboxes2;
+				if(entity2->usesHitboxes())
+				{
+					hitboxes2 = entity2->getMetaPointBoxes(METAPOINT_HITBOX).filter([](const TaggedBox& box){
+						//filter out untagged hitboxes
+						if(box.tag==-1)
+						{
+							return false;
+						}
+						return true;
+					});
+				}
 				
 				EntityPair pair;
 				pair.entity1 = entity1;

@@ -212,6 +212,11 @@ namespace fl
 	{
 		return true;
 	}
+	
+	bool Entity::usesHitboxes() const
+	{
+		return true;
+	}
 
 	void Entity::onCollision(const CollisionEvent& collisionEvent)
 	{
@@ -235,6 +240,16 @@ namespace fl
 		Collidable::onCollisionFinish(collisionEvent);
 	}
 	
+	bool Entity::respondsToHitboxClash(Entity* clashedEntity) const
+	{
+		return false;
+	}
+	
+	bool Entity::canCollideWithEntityHitbox(Entity* collidedEntity) const
+	{
+		return false;
+	}
+
 	void Entity::onHitboxClash(const HitboxClashEvent& clashEvent)
 	{
 		//
