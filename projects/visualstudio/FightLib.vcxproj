@@ -47,6 +47,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\Fight.hpp" />
@@ -82,6 +83,7 @@
     <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp" />
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxPair.cpp" />
     <ClCompile Include="..\..\src\entity\Item.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
     <ClCompile Include="..\..\src\game\FightParams.cpp" />

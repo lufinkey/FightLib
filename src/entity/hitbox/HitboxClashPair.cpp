@@ -16,7 +16,6 @@ namespace fl
 		
 		double topPriorityDiff = 0;
 		double lastTopPriority = 0;
-		bool secondIsHighest = false;
 		for(size_t k=0; k<hitboxPairs.size(); k++)
 		{
 			auto& pair = hitboxPairs[k];
