@@ -34,6 +34,7 @@
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
 		F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */; };
 		F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */; };
+		F17F94911EA114A100D9CACB /* HitboxPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F94901EA114A100D9CACB /* HitboxPair.cpp */; };
 		F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */; };
 		F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196371E8ADADC009BD55F /* DrawManager.cpp */; };
 		F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */; };
@@ -96,6 +97,8 @@
 		F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxCollisionPair.hpp; sourceTree = "<group>"; };
 		F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxClashPair.cpp; sourceTree = "<group>"; };
 		F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxCollisionPair.cpp; sourceTree = "<group>"; };
+		F17F948F1EA1148E00D9CACB /* HitboxPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxPair.hpp; sourceTree = "<group>"; };
+		F17F94901EA114A100D9CACB /* HitboxPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxPair.cpp; sourceTree = "<group>"; };
 		F18196231E8AB995009BD55F /* CollisionRectManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionRectManager.hpp; sourceTree = "<group>"; };
 		F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRectManager.cpp; sourceTree = "<group>"; };
 		F18196361E8ADAC9009BD55F /* DrawManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawManager.hpp; sourceTree = "<group>"; };
@@ -298,6 +301,7 @@
 				F16D60831E9FF8FA007E7740 /* HitboxCollisionManager.hpp */,
 				F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */,
 				F16CDDA61E9E99F200E4DB26 /* HitboxInfo.hpp */,
+				F17F948F1EA1148E00D9CACB /* HitboxPair.hpp */,
 			);
 			path = hitbox;
 			sourceTree = "<group>";
@@ -311,6 +315,7 @@
 				F16D60841E9FF91C007E7740 /* HitboxCollisionManager.cpp */,
 				F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */,
 				F16CDDA71E9E9A1500E4DB26 /* HitboxInfo.cpp */,
+				F17F94901EA114A100D9CACB /* HitboxPair.cpp */,
 			);
 			path = hitbox;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				F16D60851E9FF91C007E7740 /* HitboxCollisionManager.cpp in Sources */,
 				F16D60521E9FCF61007E7740 /* HitboxClashEvent.cpp in Sources */,
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
+				F17F94911EA114A100D9CACB /* HitboxPair.cpp in Sources */,
 				F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */,
 				F17BBBEE1E64965E00A7F8F4 /* CollisionManager.cpp in Sources */,
 				F1BA75CB1E92847300647E41 /* Item.cpp in Sources */,
