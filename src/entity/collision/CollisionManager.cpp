@@ -303,10 +303,10 @@ namespace fl
 	fgl::ArrayList<CollisionPair> CollisionManager::getCollisionPairs() const
 	{
 		size_t pair_count = 0;
-		size_t entities_size=collidables.size();
-		for(size_t i=0; i<entities_size; i++)
+		size_t collidables_size=collidables.size();
+		for(size_t i=0; i<collidables_size; i++)
 		{
-			for(size_t j=(i+1); j<entities_size; j++)
+			for(size_t j=(i+1); j<collidables_size; j++)
 			{
 				pair_count++;
 			}
@@ -314,9 +314,9 @@ namespace fl
 		fgl::ArrayList<CollisionPair> pairs;
 		pairs.reserve(pair_count);
 		pairs.addAll(previousCollisions);
-		for(size_t i=0; i<entities_size; i++)
+		for(size_t i=0; i<collidables_size; i++)
 		{
-			for(size_t j=(i+1); j<entities_size; j++)
+			for(size_t j=(i+1); j<collidables_size; j++)
 			{
 				CollisionPair pair(collidables[i], collidables[j]);
 				if(previousCollisions.indexOf(pair)==(size_t)-1)
