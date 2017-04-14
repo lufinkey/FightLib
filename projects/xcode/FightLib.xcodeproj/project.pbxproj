@@ -32,6 +32,8 @@
 		F17D96D31E6DB531003F4D85 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D11E6DB531003F4D85 /* Action.cpp */; };
 		F17D96D71E6DB53B003F4D85 /* ActionEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */; };
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
+		F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */; };
+		F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */; };
 		F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */; };
 		F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196371E8ADADC009BD55F /* DrawManager.cpp */; };
 		F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */; };
@@ -90,6 +92,10 @@
 		F17D96D51E6DB53B003F4D85 /* ActionEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEntity.cpp; sourceTree = "<group>"; };
 		F17D96D61E6DB53B003F4D85 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		F17D97C91E6DCDAB003F4D85 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = ../../external/GameLibrary/projects/xcode/build/Debug/libGameLibrary.a; sourceTree = "<group>"; };
+		F17F947B1EA1133000D9CACB /* HitboxClashPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxClashPair.hpp; sourceTree = "<group>"; };
+		F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxCollisionPair.hpp; sourceTree = "<group>"; };
+		F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxClashPair.cpp; sourceTree = "<group>"; };
+		F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxCollisionPair.cpp; sourceTree = "<group>"; };
 		F18196231E8AB995009BD55F /* CollisionRectManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionRectManager.hpp; sourceTree = "<group>"; };
 		F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRectManager.cpp; sourceTree = "<group>"; };
 		F18196361E8ADAC9009BD55F /* DrawManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawManager.hpp; sourceTree = "<group>"; };
@@ -287,8 +293,10 @@
 			isa = PBXGroup;
 			children = (
 				F16D60501E9FCF4D007E7740 /* HitboxClashEvent.hpp */,
+				F17F947B1EA1133000D9CACB /* HitboxClashPair.hpp */,
 				F16D606D1E9FE891007E7740 /* HitboxCollisionEvent.hpp */,
 				F16D60831E9FF8FA007E7740 /* HitboxCollisionManager.hpp */,
+				F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */,
 				F16CDDA61E9E99F200E4DB26 /* HitboxInfo.hpp */,
 			);
 			path = hitbox;
@@ -298,8 +306,10 @@
 			isa = PBXGroup;
 			children = (
 				F16D60511E9FCF61007E7740 /* HitboxClashEvent.cpp */,
+				F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */,
 				F16D606E1E9FE8A3007E7740 /* HitboxCollisionEvent.cpp */,
 				F16D60841E9FF91C007E7740 /* HitboxCollisionManager.cpp */,
+				F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */,
 				F16CDDA71E9E9A1500E4DB26 /* HitboxInfo.cpp */,
 			);
 			path = hitbox;
@@ -460,6 +470,7 @@
 				F17A3A711E97C43A00D07EBE /* AnimationMetaPoint.cpp in Sources */,
 				F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */,
 				F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */,
+				F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */,
 				F16D60851E9FF91C007E7740 /* HitboxCollisionManager.cpp in Sources */,
 				F16D60521E9FCF61007E7740 /* HitboxClashEvent.cpp in Sources */,
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
@@ -474,6 +485,7 @@
 				F1BA75C91E92846400647E41 /* FightParams.cpp in Sources */,
 				F1BA75C71E92845700647E41 /* CharacterController.cpp in Sources */,
 				F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */,
+				F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
 				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
 			);
