@@ -115,7 +115,7 @@ namespace fl
 						entity2->onHitboxClash(clashEvent2);
 						entity1->onHitboxClash(clashEvent1);
 					}
-					else
+					else //if(info1.getPriority() == info2.getPriority())
 					{
 						//randomly choose which entity gets the event first
 						double randomFirst = fgl::Math::random();

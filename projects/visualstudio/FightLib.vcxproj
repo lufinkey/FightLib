@@ -42,8 +42,10 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashEvent.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionManager.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
@@ -75,8 +77,10 @@
     <ClCompile Include="..\..\src\entity\draw\Sprite.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxClashEvent.cpp" />
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxClashPair.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionEvent.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionManager.cpp" />
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp" />
     <ClCompile Include="..\..\src\entity\Item.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />

@@ -162,6 +162,12 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionManager.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashPair.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollisionPair.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -252,6 +258,12 @@
       <Filter>src\entity\hitbox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionManager.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxClashPair.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxCollisionPair.cpp">
       <Filter>src\entity\hitbox</Filter>
     </ClCompile>
   </ItemGroup>
