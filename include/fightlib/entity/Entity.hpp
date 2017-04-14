@@ -70,6 +70,8 @@ namespace fl
 		virtual void onHitboxCollision(const HitboxCollisionEvent& collisionEvent);
 		virtual void onHitboxCollisionUpdate(const HitboxCollisionEvent& collisionEvent);
 		virtual void onHitboxCollisionFinish(const HitboxCollisionEvent& collisionEvent);
+		
+		virtual void onFinishHitboxUpdates();
 
 		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
 

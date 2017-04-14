@@ -41,7 +41,6 @@ namespace fl
 			auto collisionRects2 = entity2->getCollisionRects();
 			
 			//check for hitboxes hitting each other
-			//find the highest priority hitting hitboxes
 			fgl::ArrayList<HitboxPair> hitboxPairs;
 			for(auto& hitbox1 : hitboxes1)
 			{
@@ -206,6 +205,12 @@ namespace fl
 		for(auto& onHitboxClash : onHitboxClashCalls)
 		{
 			onHitboxClash();
+		}
+		
+		//tell entities that hitbox updates have finished
+		for(auto entity : entities)
+		{
+			entity->onFinishHitboxUpdates();
 		}
 	}
 	

@@ -264,6 +264,11 @@ namespace fl
 	{
 		//
 	}
+	
+	void Entity::onFinishHitboxUpdates()
+	{
+		//
+	}
 
 	bool Entity::isOnGround() const
 	{
