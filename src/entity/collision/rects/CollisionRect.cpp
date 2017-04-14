@@ -449,6 +449,98 @@ namespace fl
 		return DIR_NONE;
 	}
 
+	CollisionRectDirection CollisionRect_getRectDirection(const fgl::RectangleD& r1, const fgl::RectangleD& r2)
+	{
+		float rx2 = (float)((float)r2.x + (float)r2.width/2) - (float)((float)r1.x + (float)r1.width/2);
+		float ry2 = (float)((float)r2.y + (float)r2.height/2) - (float)((float)r1.y + (float)r1.height/2);
+
+		if(ry2<0) //r2 is above r1
+		{
+			if(rx2 == 0)
+			{
+				return DIR_UP;
+			}
+			else
+			{
+				float ratLeft = (float)(-((float)r1.height/2))/(float)(-((float)r1.width/2));
+				float ratRight = (float)(-((float)r1.height/2))/(float)(((float)r1.width/2));
+
+				float difRat =  ry2/rx2;
+
+				if(difRat==ratRight)
+				{
+					return DIR_UP;
+				}
+				else if(difRat==ratLeft)
+				{
+					return DIR_UP;
+				}
+				else if((difRat>ratRight)&&(difRat<0))
+				{
+					return DIR_RIGHT;
+				}
+				else if((difRat<ratLeft)&&(difRat>0))
+				{
+					return DIR_LEFT;
+				}
+				else
+				{
+					return DIR_UP;
+				}
+			}
+		}
+		else if(ry2>0)//r2 is below r1
+		{
+			if(rx2 == 0)
+			{
+				return DIR_DOWN;
+			}
+			else
+			{
+				float ratLeft = (float)(((float)r1.height/2))/(float)(-((float)r1.width/2));
+				float ratRight = (float)(((float)r1.height/2))/(float)(((float)r1.width/2));
+
+				float difRat =  ry2/rx2;
+
+				if(difRat==ratRight)
+				{
+					return DIR_DOWN;// RIGHT;
+				}
+				else if(difRat==ratLeft)
+				{
+					return DIR_DOWN;// LEFT;
+				}
+				else if((difRat<ratRight)&&(difRat>0))
+				{
+					return DIR_RIGHT;
+				}
+				else if((difRat>ratLeft)&&(difRat<0))
+				{
+					return DIR_LEFT;
+				}
+				else
+				{
+					return DIR_DOWN;
+				}
+			}
+		}
+		else
+		{
+			if(rx2<0)
+			{
+				return DIR_LEFT;
+			}
+			else if(rx2>0)
+			{
+				return DIR_RIGHT;
+			}
+			else
+			{
+				return DIR_UP;
+			}
+		}
+	}
+
 	fgl::Vector2d CollisionRect::getPixelOnFilledCollisionOffset(CollisionRect* pixelRect, CollisionRect* filledRect)
 	{
 		auto rect1 = pixelRect->getRect();
@@ -508,23 +600,23 @@ namespace fl
 		if(colliding)
 		{
 			auto pixelOverlap = pixelArea.toRectangle();
-			CollisionRectDirection dir = CollisionRect_getPointDirection(pixelOverlap.getCenter(), rect2.getCenter());
+			CollisionRectDirection dir = CollisionRect_getRectDirection(rect2, pixelOverlap);
 			
 			switch(dir)
 			{
 				case DIR_NONE:
 					return fgl::Vector2d(0, 0);
 					
-				case DIR_UP:
+				case DIR_DOWN:
 					return fgl::Vector2d(0, pixelOverlap.y-(rect2.y+rect2.height));
 					
-				case DIR_DOWN:
+				case DIR_UP:
 					return fgl::Vector2d(0, (pixelOverlap.y+pixelOverlap.height)-rect2.y);
 					
-				case DIR_LEFT:
+				case DIR_RIGHT:
 					return fgl::Vector2d(pixelOverlap.x-(rect2.x+rect2.width), 0);
 					
-				case DIR_RIGHT:
+				case DIR_LEFT:
 					return fgl::Vector2d((pixelOverlap.x+pixelOverlap.width)-rect2.x, 0);
 			}
 		}
