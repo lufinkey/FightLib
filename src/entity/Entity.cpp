@@ -240,7 +240,27 @@ namespace fl
 		//
 	}
 	
+	void Entity::onHitboxClashUpdate(const fl::HitboxClashEvent& clashEvent)
+	{
+		//
+	}
+	
+	void Entity::onHitboxClashFinish(const fl::HitboxClashEvent& clashEvent)
+	{
+		//
+	}
+	
 	void Entity::onHitboxCollision(const HitboxCollisionEvent& collisionEvent)
+	{
+		//
+	}
+	
+	void Entity::onHitboxCollisionUpdate(const fl::HitboxCollisionEvent& collisionEvent)
+	{
+		//
+	}
+	
+	void Entity::onHitboxCollisionFinish(const fl::HitboxCollisionEvent& collisionEvent)
 	{
 		//
 	}

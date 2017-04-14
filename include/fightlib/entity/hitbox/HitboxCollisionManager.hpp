@@ -2,6 +2,7 @@
 #pragma once
 
 #include <fightlib/entity/Entity.hpp>
+#include "HitboxClashPair.hpp"
 
 namespace fl
 {
@@ -17,5 +18,7 @@ namespace fl
 		
 	private:
 		fgl::ArrayList<Entity*> entities;
+		
+		fgl::ArrayList<HitboxClashPair> previousClashPairs;
 	};
 }

@@ -24,6 +24,11 @@ namespace fl
 	
 	void HitboxCollisionManager::update(const fgl::ApplicationData& appData)
 	{
+		fgl::ArrayList<HitboxClashPair> clashPairs;
+		
+		fgl::ArrayList<std::function<void()>> onHitboxClashCalls;
+		fgl::ArrayList<std::function<void()>> onHitboxClashFinishCalls;
+		
 		//update entity hitboxes
 		for(size_t i=0; i<entities.size(); i++)
 		{
@@ -51,17 +56,13 @@ namespace fl
 				});
 				auto collisionRects2 = entity2->getCollisionRects();
 				
+				//>>>>>WE STARTIN' THE MAIN CODE OF THIS LOOP, BOI<<<<<
+				
 				//check for hitboxes hitting each other
 				//find the highest priority hitting hitboxes
-				size_t topIndex1 = -1;
-				size_t topIndex2 = -1;
-				float topPriorityDiff = 0;
-				float lastTopPriority = 0;
-				bool foundHitboxCollision = false;
-				size_t hitboxIndex1 = 0;
+				fgl::ArrayList<HitboxPair> hitboxPairs;
 				for(auto& hitbox1 : hitboxes1)
 				{
-					size_t hitboxIndex2 = 0;
 					for(auto& hitbox2 : hitboxes2)
 					{
 						if(hitbox1.rect.intersects(hitbox2.rect))
@@ -76,68 +77,156 @@ namespace fl
 							//make sure the angle they're hitting at is within their ranges
 							if(info1.getEffectiveAngleRange().contains(angle1) && info2.getEffectiveAngleRange().contains(angle2))
 							{
-								float priorityDiff = fgl::Math::abs(info1.getPriority()-info2.getPriority());
-								double topPriority = fgl::Math::max(info1.getPriority(), info2.getPriority());
-								if(!foundHitboxCollision || priorityDiff > topPriorityDiff || (priorityDiff==topPriorityDiff && topPriority > lastTopPriority))
-								{
-									//set the new top priority hitbox collision
-									topIndex1 = hitboxIndex1;
-									topIndex2 = hitboxIndex2;
-									topPriorityDiff = priorityDiff;
-									lastTopPriority = topPriority;
-									foundHitboxCollision = true;
-								}
+								hitboxPairs.add(HitboxPair(hitbox1, info1, hitbox2, info2));
 							}
 						}
-						hitboxIndex2++;
 					}
-					hitboxIndex1++;
 				}
 				
-				if(foundHitboxCollision)
+				//find previous clashed hitbox pairs
+				fgl::ArrayList<HitboxPair> prevHitboxPairs1;
+				fgl::ArrayList<HitboxPair> prevHitboxPairs2;
+				for(auto& prevClashPair : previousClashPairs)
 				{
-					//handle two hitboxes colliding
-					auto& hitbox1 = hitboxes1[topIndex1];
-					auto& hitbox2 = hitboxes2[topIndex2];
-					
-					auto info1 = entity1->getHitboxInfo(hitbox1.tag);
-					auto info2 = entity2->getHitboxInfo(hitbox2.tag);
-					
-					auto clashEvent1 = HitboxClashEvent(hitbox1, info1, entity2, hitbox2, info2);
-					auto clashEvent2 = HitboxClashEvent(hitbox2, info2, entity1, hitbox1, info1);
-					if(info1.getPriority() > info2.getPriority())
+					if(prevClashPair.getFirstEntity()==entity1 && prevClashPair.getSecondEntity()==entity2)
 					{
-						entity1->onHitboxClash(clashEvent1);
-						entity2->onHitboxClash(clashEvent2);
+						prevHitboxPairs1 = prevClashPair.getHitboxPairs();
+						prevHitboxPairs2 = prevClashPair.getFlippedHitboxPairs();
+						break;
 					}
-					else if(info2.getPriority() > info1.getPriority())
+					else if(prevClashPair.getFirstEntity()==entity2 && prevClashPair.getSecondEntity()==entity1)
 					{
-						entity2->onHitboxClash(clashEvent2);
-						entity1->onHitboxClash(clashEvent1);
+						prevHitboxPairs1 = prevClashPair.getFlippedHitboxPairs();
+						prevHitboxPairs2 = prevClashPair.getHitboxPairs();
+						break;
 					}
-					else //if(info1.getPriority() == info2.getPriority())
+				}
+				
+				if(hitboxPairs.size() > 0)
+				{
+					//handle hitboxes clashing
+					auto clashPair = HitboxClashPair(entity1, entity2, hitboxPairs);
+					auto& priorityPair = clashPair.getPriorityHitboxPair();
+					
+					//send hitbox clash events
+					auto clashEvent1 = HitboxClashEvent(entity2, clashPair.getHitboxPairs(), prevHitboxPairs1);
+					auto clashEvent2 = HitboxClashEvent(entity1, clashPair.getFlippedHitboxPairs(), prevHitboxPairs2);
+					if(priorityPair.hitboxInfo1.getPriority() > priorityPair.hitboxInfo2.getPriority())
+					{
+						//entity1 gets the event first, since it has the higher priority
+						if(prevHitboxPairs1.size() > 0)
+						{
+							onHitboxClashCalls.add([=]{
+								entity1->onHitboxClashUpdate(clashEvent1);
+								entity2->onHitboxClashUpdate(clashEvent2);
+							});
+						}
+						else
+						{
+							onHitboxClashCalls.add([=]{
+								entity1->onHitboxClash(clashEvent1);
+								entity2->onHitboxClash(clashEvent2);
+							});
+						}
+					}
+					else if(priorityPair.hitboxInfo2.getPriority() > priorityPair.hitboxInfo1.getPriority())
+					{
+						//entity2 gets the event first, since it has the higher priority
+						if(prevHitboxPairs1.size() > 0)
+						{
+							onHitboxClashCalls.add([=]{
+								entity2->onHitboxClashUpdate(clashEvent2);
+								entity1->onHitboxClashUpdate(clashEvent1);
+							});
+						}
+						else
+						{
+							onHitboxClashCalls.add([=]{
+								entity2->onHitboxClash(clashEvent2);
+								entity1->onHitboxClash(clashEvent1);
+							});
+						}
+					}
+					else //if(priorityPair.hitboxInfo1.getPriority() == priorityPair.hitboxInfo2.getPriority())
 					{
 						//randomly choose which entity gets the event first
 						double randomFirst = fgl::Math::random();
 						if(randomFirst < 0.5)
 						{
-							entity1->onHitboxClash(clashEvent1);
-							entity2->onHitboxClash(clashEvent2);
+							//entity1 gets the event first
+							if(prevHitboxPairs1.size() > 0)
+							{
+								onHitboxClashCalls.add([=]{
+									entity1->onHitboxClashUpdate(clashEvent1);
+									entity2->onHitboxClashUpdate(clashEvent2);
+								});
+							}
+							else
+							{
+								onHitboxClashCalls.add([=]{
+									entity1->onHitboxClash(clashEvent1);
+									entity2->onHitboxClash(clashEvent2);
+								});
+							}
 						}
 						else
 						{
-							entity2->onHitboxClash(clashEvent2);
-							entity1->onHitboxClash(clashEvent1);
+							//entity2 gets the event first
+							if(prevHitboxPairs1.size() > 0)
+							{
+								onHitboxClashCalls.add([=]{
+									entity2->onHitboxClashUpdate(clashEvent2);
+									entity1->onHitboxClashUpdate(clashEvent1);
+								});
+							}
+							else
+							{
+								onHitboxClashCalls.add([=]{
+									entity2->onHitboxClash(clashEvent2);
+									entity1->onHitboxClash(clashEvent1);
+								});
+							}
 						}
 					}
+					
+					clashPairs.add(clashPair);
 				}
 				else
 				{
+					//add finish events if hitboxes were clashing in the last frame, since they aren't clashing anymore
+					if(prevHitboxPairs1.size() > 0)
+					{
+						//fuck the order who fucking cares I'll just call them in the order that they are
+						//It's a finish event anyway so I don't give a shit about the order
+						auto clashEvent1 = HitboxClashEvent(entity2, {}, prevHitboxPairs1);
+						auto clashEvent2 = HitboxClashEvent(entity1, {}, prevHitboxPairs2);
+						
+						onHitboxClashFinishCalls.add([=]{
+							entity1->onHitboxClashFinish(clashEvent1);
+							entity2->onHitboxClashFinish(clashEvent2);
+						});
+					}
+					
 					//check if any hitboxes hit any collision rects
 					//TODO should I use hurtboxes instead of the collision rects?
-					
 				}
+				
+				//>>>>>WE ENDIN' THE MAIN CODE OF THIS LOOP, BOI<<<<<
 			}
+		}
+		
+		previousClashPairs = clashPairs;
+		
+		//call onHitboxClashFinish events
+		for(auto& onHitboxClashFinish : onHitboxClashFinishCalls)
+		{
+			onHitboxClashFinish();
+		}
+		
+		//call onHitboxClash events
+		for(auto& onHitboxClash : onHitboxClashCalls)
+		{
+			onHitboxClash();
 		}
 	}
 }

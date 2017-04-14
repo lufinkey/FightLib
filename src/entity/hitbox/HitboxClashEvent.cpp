@@ -3,24 +3,12 @@
 
 namespace fl
 {
-	HitboxClashEvent::HitboxClashEvent(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, Entity* clashedEntity, const TaggedBox& clashedHitbox, const HitboxInfo& clashedHitboxInfo)
-		: hitbox(hitbox),
-		hitboxInfo(hitboxInfo),
-		clashedEntity(clashedEntity),
-		clashedHitbox(clashedHitbox),
-		clashedHitboxInfo(clashedHitboxInfo)
+	HitboxClashEvent::HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxPair>& clashedPairs, const fgl::ArrayList<HitboxPair>& previousClashedPairs)
+		: clashedEntity(clashedEntity),
+		clashedPairs(clashedPairs),
+		previousClashedPairs(previousClashedPairs)
 	{
 		//
-	}
-	
-	const TaggedBox& HitboxClashEvent::getHitbox() const
-	{
-		return hitbox;
-	}
-	
-	const HitboxInfo& HitboxClashEvent::getHitboxInfo() const
-	{
-		return hitboxInfo;
 	}
 	
 	Entity* HitboxClashEvent::getClashedEntity() const
@@ -28,13 +16,13 @@ namespace fl
 		return clashedEntity;
 	}
 	
-	const TaggedBox& HitboxClashEvent::getClashedHitbox() const
+	const fgl::ArrayList<HitboxPair>& HitboxClashEvent::getClashedHitboxPairs() const
 	{
-		return clashedHitbox;
+		return clashedPairs;
 	}
 	
-	const HitboxInfo& HitboxClashEvent::getClashedHitboxInfo() const
+	const fgl::ArrayList<HitboxPair>& HitboxClashEvent::getPreviousClashedHitboxPairs() const
 	{
-		return clashedHitboxInfo;
+		return previousClashedPairs;
 	}
 }

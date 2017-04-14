@@ -64,7 +64,12 @@ namespace fl
 		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
 		
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
+		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent);
+		virtual void onHitboxClashFinish(const HitboxClashEvent& clashEvent);
+		
 		virtual void onHitboxCollision(const HitboxCollisionEvent& collisionEvent);
+		virtual void onHitboxCollisionUpdate(const HitboxCollisionEvent& collisionEvent);
+		virtual void onHitboxCollisionFinish(const HitboxCollisionEvent& collisionEvent);
 
 		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
 

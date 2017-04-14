@@ -73,6 +73,7 @@ namespace fl
 		//handle collisions
 		for(size_t i=0; i<2; i++)
 		//checking all of the collisions twice fixes collision jerking
+		//TODO figure out if I even need to do this anymore...
 		{
 			for(auto& pair : pairs)
 			{
