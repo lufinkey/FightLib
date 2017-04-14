@@ -71,24 +71,27 @@ namespace fl
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
 
 		//handle collisions
+		#ifdef DOUBLECHECK_COLLISIONS
 		for(size_t i=0; i<2; i++)
-		//checking all of the collisions twice fixes collision jerking
-		//TODO figure out if I even need to do this anymore...
+		#endif
+		//checking all of the collisions twice fixed collision jerking
 		{
 			for(auto& pair : pairs)
 			{
 				Collidable* collidable1 = pair.collidable1;
 				Collidable* collidable2 = pair.collidable2;
 				CollisionPair newPair(collidable1, collidable2);
-				size_t pairReplaceIndex = -1;
-				if(i==1)
-				{
-					pairReplaceIndex = previousCollisions.indexOf(newPair);
-					if(pairReplaceIndex!=-1)
+				#ifdef DOUBLECHECK_COLLISIONS
+					size_t pairReplaceIndex = -1;
+					if(i==1)
 					{
-						newPair = previousCollisions[pairReplaceIndex];
+						pairReplaceIndex = previousCollisions.indexOf(newPair);
+						if(pairReplaceIndex!=-1)
+						{
+							newPair = previousCollisions[pairReplaceIndex];
+						}
 					}
-				}
+				#endif
 			
 				if((collidable1->isStaticCollisionBody() && !collidable2->isStaticCollisionBody())
 					|| (!collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
@@ -169,20 +172,26 @@ namespace fl
 					}
 
 					//add new collision pair to previous collisions
+					#ifdef DOUBLECHECK_COLLISIONS
 					if(pairReplaceIndex==-1)
 					{
+					#endif
 						if(newPair.priorityRects.size() > 0)
 						{
 							previousCollisions.add(newPair);
 						}
+					#ifdef DOUBLECHECK_COLLISIONS
 					}
 					else
 					{
 						previousCollisions[pairReplaceIndex] = newPair;
 					}
+					#endif
 				}
 			
+				#ifdef DOUBLECHECK_COLLISIONS
 				if(i==1)
+				#endif
 				{
 					//check for new/updated collision calls
 					for(auto collisionSide : newPair.previousCollisionSides)
