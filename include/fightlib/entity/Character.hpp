@@ -34,8 +34,8 @@ namespace fl
 		
 		virtual void onActionEnd(Action* action) override;
 
-		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
-		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
+		virtual bool respondsToHitboxClash(Entity* clashedEntity) const override;
+		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const override;
 		
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;
 		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
