@@ -65,7 +65,7 @@ namespace fl
 		//Open for implementation
 	}
 
-	void Action::onEvent(ActionEventPtr event)
+	void Action::onEvent(EventPtr event)
 	{
 		//Open for implementation
 	}

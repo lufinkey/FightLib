@@ -64,6 +64,12 @@
     <Filter Include="include\fightlib\entity\hitbox">
       <UniqueIdentifier>{ca730a57-13ff-46f3-91c2-0b0fd3d0df98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\base">
+      <UniqueIdentifier>{33538de2-736b-49ba-97ab-6ff84b4ec726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\fightlib\base">
+      <UniqueIdentifier>{c32a21ce-aa83-459d-9efa-3eb05517cc3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
@@ -116,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp">
       <Filter>include\fightlib\entity\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\action\ActionEvent.hpp">
-      <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\action\ActionInterruptEvent.hpp">
       <Filter>include\fightlib\entity\action</Filter>
@@ -174,6 +177,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClash.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\base\Event.hpp">
+      <Filter>include\fightlib\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -214,9 +220,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp">
       <Filter>src\entity\draw</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp">
-      <Filter>src\entity\action</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp">
       <Filter>src\entity\action</Filter>
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxClash.cpp">
       <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\Event.cpp">
+      <Filter>src\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <fightlib/entity/action/ActionEvent.hpp>
+#include <fightlib/base/Event.hpp>
 
 namespace fl
 {
@@ -13,16 +13,16 @@ namespace fl
 		COLLISIONSIDE_RIGHT
 	} CollisionSide;
 
-	extern const ActionEventType ACTIONEVENT_COLLISION;
+	extern const EventType EVENT_COLLISION;
 	
 	class Collidable;
 	
-	class CollisionEvent : public ActionEvent
+	class CollisionEvent : public Event
 	{
 	public:
 		CollisionEvent(Collidable* collided, CollisionSide side);
 
-		virtual ActionEventType getEventType() const override;
+		virtual EventType getEventType() const override;
 		
 		Collidable* getCollided() const;
 		CollisionSide getCollisionSide() const;

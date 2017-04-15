@@ -3,7 +3,7 @@
 
 namespace fl
 {
-	const ActionEventType ACTIONEVENT_COLLISION = registerActionEventType();
+	const EventType EVENT_COLLISION = registerEventType();
 
 	CollisionEvent::CollisionEvent(Collidable* collided, CollisionSide side)
 		: collided(collided),
@@ -12,9 +12,9 @@ namespace fl
 		//
 	}
 
-	ActionEventType CollisionEvent::getEventType() const
+	EventType CollisionEvent::getEventType() const
 	{
-		return ACTIONEVENT_COLLISION;
+		return EVENT_COLLISION;
 	}
 	
 	Collidable* CollisionEvent::getCollided() const

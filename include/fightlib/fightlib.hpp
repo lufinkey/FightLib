@@ -3,13 +3,14 @@
 
 #include <GameLibrary/GameLibrary.hpp>
 
+#include "base/Event.hpp"
+
 #include "entity/Entity.hpp"
 #include "entity/ActionEntity.hpp"
 #include "entity/Character.hpp"
 #include "entity/Item.hpp"
 
 #include "entity/action/Action.hpp"
-#include "entity/action/ActionEvent.hpp"
 #include "entity/action/ActionInterruptEvent.hpp"
 
 #include "entity/collision/CollisionManager.hpp"

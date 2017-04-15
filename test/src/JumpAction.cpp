@@ -61,11 +61,11 @@ void JumpAction::onUpdate(const fgl::ApplicationData& appData)
 	}
 }
 
-void JumpAction::onEvent(fl::ActionEventPtr event)
+void JumpAction::onEvent(fl::EventPtr event)
 {
 	if(isPerforming())
 	{
-		if(event->getEventType()==fl::ACTIONEVENT_INTERRUPT)
+		if(event->getEventType()==fl::EVENT_ACTIONINTERRUPT)
 		{
 			auto interruptEvent = std::static_pointer_cast<fl::ActionInterruptEvent>(event);
 			if(interruptEvent->getInterruptingAction()==this)

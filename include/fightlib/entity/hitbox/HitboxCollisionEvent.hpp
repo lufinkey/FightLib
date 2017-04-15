@@ -1,21 +1,21 @@
 
 #pragma once
 
-#include <fightlib/entity/action/ActionEvent.hpp>
+#include <fightlib/base/Event.hpp>
 #include "HitboxCollision.hpp"
 
 namespace fl
 {
-	extern const ActionEventType ACTIONEVENT_HITBOXCOLLISION;
+	extern const EventType EVENT_HITBOXCOLLISION;
 
 	class Entity;
 	
-	class HitboxCollisionEvent : public ActionEvent
+	class HitboxCollisionEvent : public Event
 	{
 	public:
 		HitboxCollisionEvent(Entity* hitEntity, const fgl::ArrayList<HitboxCollision>& hitboxCollisions, const fgl::ArrayList<HitboxCollision>& previousHitboxCollisions);
 
-		virtual ActionEventType getEventType() const override;
+		virtual EventType getEventType() const override;
 		
 		Entity* getHitEntity() const;
 		const fgl::ArrayList<HitboxCollision>& getHitboxCollisions() const;

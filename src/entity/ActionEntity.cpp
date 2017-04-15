@@ -43,7 +43,7 @@ namespace fl
 		if(currentAction!=nullptr)
 		{
 			//send an ActionInterruptEvent to give the current action a chance to end itself
-			currentAction->onEvent(std::shared_ptr<ActionEvent>(new ActionInterruptEvent(action)));
+			currentAction->onEvent(EventPtr(new ActionInterruptEvent(action)));
 			if(currentAction!=nullptr)
 			{
 				//the current action did not end itself
@@ -86,7 +86,7 @@ namespace fl
 		onActionEnd(action);
 	}
 	
-	void ActionEntity::sendActionEvent(ActionEventPtr event, bool allActions)
+	void ActionEntity::sendActionEvent(EventPtr event, bool allActions)
 	{
 		if(allActions)
 		{

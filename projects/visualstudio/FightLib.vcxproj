@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\fightlib\base\Event.hpp" />
     <ClInclude Include="..\..\include\fightlib\controls\CharacterController.hpp" />
     <ClInclude Include="..\..\include\fightlib\controls\KeyboardCharacterController.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\action\ActionEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\action\ActionInterruptEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp" />
@@ -57,11 +57,11 @@
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\base\Event.cpp" />
     <ClCompile Include="..\..\src\controls\CharacterController.cpp" />
     <ClCompile Include="..\..\src\controls\KeyboardCharacterController.cpp" />
     <ClCompile Include="..\..\src\entity\ActionEntity.cpp" />
     <ClCompile Include="..\..\src\entity\action\Action.cpp" />
-    <ClCompile Include="..\..\src\entity\action\ActionEvent.cpp" />
     <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp" />
     <ClCompile Include="..\..\src\entity\Character.cpp" />
     <ClCompile Include="..\..\src\entity\collision\Collidable.cpp" />

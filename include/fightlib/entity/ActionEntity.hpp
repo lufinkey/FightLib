@@ -22,7 +22,7 @@ namespace fl
 		Action* getAction(const fgl::String& name) const;
 		const fgl::String& getActionName(Action* action) const;
 		Action* getCurrentAction() const;
-		void sendActionEvent(ActionEventPtr event, bool allActions = false);
+		void sendActionEvent(EventPtr event, bool allActions = false);
 		
 		virtual void onActionEnd(Action* action);
 
