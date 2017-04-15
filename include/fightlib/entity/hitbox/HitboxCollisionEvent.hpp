@@ -1,9 +1,7 @@
 
 #pragma once
 
-#include <fightlib/entity/draw/AnimationMetaPoint.hpp>
-#include <fightlib/entity/collision/rects/CollisionRect.hpp>
-#include "HitboxInfo.hpp"
+#include "HitboxCollision.hpp"
 
 namespace fl
 {
@@ -12,19 +10,15 @@ namespace fl
 	class HitboxCollisionEvent
 	{
 	public:
-		HitboxCollisionEvent(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, Entity* collidedEntity, CollisionRect* collidedRect);
+		HitboxCollisionEvent(Entity* hitEntity, const fgl::ArrayList<HitboxCollision>& hitboxCollisions, const fgl::ArrayList<HitboxCollision>& previousHitboxCollisions);
 		
-		const TaggedBox& getHitbox() const;
-		const HitboxInfo& getHitboxInfo() const;
-		
-		Entity* getCollidedEntity() const;
-		CollisionRect* getCollidedRect() const;
+		Entity* getHitEntity() const;
+		const fgl::ArrayList<HitboxCollision>& getHitboxCollisions() const;
+		const fgl::ArrayList<HitboxCollision>& getPreviousHitboxCollisions() const;
 		
 	private:
-		TaggedBox hitbox;
-		HitboxInfo hitboxInfo;
-		
-		Entity* collidedEntity;
-		CollisionRect* collidedRect;
+		Entity* hitEntity;
+		fgl::ArrayList<HitboxCollision> hitboxCollisions;
+		fgl::ArrayList<HitboxCollision> previousHitboxCollisions;
 	};
 }

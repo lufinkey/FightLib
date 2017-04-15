@@ -1,5 +1,6 @@
 
 #include <fightlib/entity/hitbox/HitboxCollisionManager.hpp>
+#include <fightlib/entity/hitbox/HitboxCollisionPair.hpp>
 
 namespace fl
 {
@@ -21,13 +22,47 @@ namespace fl
 			entities.remove(index);
 		}
 	}
+
+	void HitboxCollisionManager::addHitboxCollisionEvents(Entity* hittingEntity,
+		Entity* hitEntity,
+		const fgl::ArrayList<HitboxCollision>& hitboxCollisions,
+		const fgl::ArrayList<HitboxCollision>& previousHitboxCollisions,
+		fgl::ArrayList<std::function<void()>>* onHitboxCollisionCalls,
+		fgl::ArrayList<std::function<void()>>* onHitboxCollisionFinishCalls)
+	{
+		auto collisionEvent = HitboxCollisionEvent(hitEntity, hitboxCollisions, previousHitboxCollisions);
+		if(hitboxCollisions.size() > 0)
+		{
+			if(previousHitboxCollisions.size() > 0)
+			{
+				onHitboxCollisionCalls->add([=]{
+					hittingEntity->onHitboxCollisionUpdate(collisionEvent);
+				});
+			}
+			else
+			{
+				onHitboxCollisionCalls->add([=] {
+					hittingEntity->onHitboxCollision(collisionEvent);
+				});
+			}
+		}
+		else if(previousHitboxCollisions.size() > 0)
+		{
+			onHitboxCollisionFinishCalls->add([=] {
+				hittingEntity->onHitboxCollisionFinish(collisionEvent);
+			});
+		}
+	}
 	
 	void HitboxCollisionManager::update(const fgl::ApplicationData& appData)
 	{
 		fgl::ArrayList<HitboxClashPair> clashPairs;
+		fgl::ArrayList<HitboxCollisionPair> collisionPairs;
 		
 		fgl::ArrayList<std::function<void()>> onHitboxClashCalls;
 		fgl::ArrayList<std::function<void()>> onHitboxClashFinishCalls;
+		fgl::ArrayList<std::function<void()>> onHitboxCollisionCalls;
+		fgl::ArrayList<std::function<void()>> onHitboxCollisionFinishCalls;
 		
 		//update entity hitboxes
 		for(auto& entityPair : getEntityPairs())
@@ -193,21 +228,137 @@ namespace fl
 				
 				//check if any hitboxes hit any collision rects
 				//TODO should I use hurtboxes instead of the collision rects?
+
+				//find collisions of entity1's hitboxes with entity2
+				fgl::ArrayList<HitboxCollision> hitboxCollisions1;
+				double priority1 = 0;
+				if(entity2->canCollideWithEntityHitbox(entity1))
+				{
+					for(auto& hitbox1 : hitboxes1)
+					{
+						for(auto collisionRect : collisionRects2)
+						{
+							if(CollisionRect::checkCollision(collisionRect, hitbox1.rect))
+							{
+								auto info = entity1->getHitboxInfo(hitbox1.tag);
+								priority1 += info.getPriority();
+								hitboxCollisions1.add(HitboxCollision(hitbox1, info, collisionRect->getTag()));
+							}
+						}
+					}
+				}
+				//find collisions of entity2's hitboxes with entity1
+				fgl::ArrayList<HitboxCollision> hitboxCollisions2;
+				double priority2 = 0;
+				if(entity1->canCollideWithEntityHitbox(entity2))
+				{
+					for(auto& hitbox2 : hitboxes2)
+					{
+						for(auto collisionRect : collisionRects1)
+						{
+							if(CollisionRect::checkCollision(collisionRect, hitbox2.rect))
+							{
+								auto info = entity2->getHitboxInfo(hitbox2.tag);
+								priority2 += info.getPriority();
+								hitboxCollisions2.add(HitboxCollision(hitbox2, info, collisionRect->getTag()));
+							}
+						}
+					}
+				}
+
+				//find previous collisions of entity1's hitboxes with entity2
+				fgl::ArrayList<HitboxCollision> prevHitboxCollisions1;
+				for(auto& prevCollisionPair : previousCollisionPairs)
+				{
+					if(prevCollisionPair.getHittingEntity()==entity1 && prevCollisionPair.getHitEntity()==entity2)
+					{
+						prevHitboxCollisions1 = prevCollisionPair.getHitboxCollisions();
+						break;
+					}
+				}
+				//find previous collisions of entity2's hitboxes with entity1
+				fgl::ArrayList<HitboxCollision> prevHitboxCollisions2;
+				for(auto& prevCollisionPair : previousCollisionPairs)
+				{
+					if(prevCollisionPair.getHittingEntity()==entity2 && prevCollisionPair.getHitEntity()==entity1)
+					{
+						prevHitboxCollisions2 = prevCollisionPair.getHitboxCollisions();
+						break;
+					}
+				}
+
+				//add priorities of previous collisions to entity1's priority
+				for(auto& prevHitboxCollision : prevHitboxCollisions1)
+				{
+					priority1 += prevHitboxCollision.hitboxInfo.getPriority();
+				}
+				//add priorities of previous collisions to entity2's priority
+				for(auto& prevHitboxCollision : prevHitboxCollisions2)
+				{
+					priority2 += prevHitboxCollision.hitboxInfo.getPriority();
+				}
+
+				if(priority1 > priority2)
+				{
+					addHitboxCollisionEvents(entity1, entity2, hitboxCollisions1, prevHitboxCollisions1, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+					addHitboxCollisionEvents(entity2, entity1, hitboxCollisions2, prevHitboxCollisions2, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+				}
+				else if(priority2 > priority1)
+				{
+					addHitboxCollisionEvents(entity2, entity1, hitboxCollisions2, prevHitboxCollisions2, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+					addHitboxCollisionEvents(entity1, entity2, hitboxCollisions1, prevHitboxCollisions1, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+				}
+				else
+				{
+					double randomFirst = fgl::Math::random();
+					if(randomFirst < 0.5)
+					{
+						addHitboxCollisionEvents(entity1, entity2, hitboxCollisions1, prevHitboxCollisions1, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+						addHitboxCollisionEvents(entity2, entity1, hitboxCollisions2, prevHitboxCollisions2, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+					}
+					else
+					{
+						addHitboxCollisionEvents(entity2, entity1, hitboxCollisions2, prevHitboxCollisions2, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+						addHitboxCollisionEvents(entity1, entity2, hitboxCollisions1, prevHitboxCollisions1, &onHitboxCollisionCalls, &onHitboxCollisionFinishCalls);
+					}
+				}
+
+				if(hitboxCollisions1.size() > 0)
+				{
+					collisionPairs.add(HitboxCollisionPair(entity1, entity2, hitboxCollisions1));
+				}
+				if(hitboxCollisions2.size() > 0)
+				{
+					collisionPairs.add(HitboxCollisionPair(entity2, entity1, hitboxCollisions2));
+				}
 			}
 		}
 		
 		previousClashPairs = clashPairs;
+		previousCollisionPairs = collisionPairs;
 		
 		//call onHitboxClashFinish events
 		for(auto& onHitboxClashFinish : onHitboxClashFinishCalls)
 		{
 			onHitboxClashFinish();
 		}
+
+		//call onHitboxCollisionFinish events
+		for(auto& onHitboxCollisionFinish : onHitboxCollisionFinishCalls)
+		{
+			onHitboxCollisionFinish();
+		}
 		
 		//call onHitboxClash events
 		for(auto& onHitboxClash : onHitboxClashCalls)
 		{
 			onHitboxClash();
+		}
+
+		//call onHitboxCollision events
+		for(auto& onHitboxCollision : onHitboxCollisionCalls)
+		{
+			onHitboxCollision();
 		}
 		
 		//tell entities that hitbox updates have finished

@@ -3,32 +3,26 @@
 
 namespace fl
 {
-	HitboxCollisionEvent::HitboxCollisionEvent(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, Entity* collidedEntity, CollisionRect* collidedRect)
-		: hitbox(hitbox),
-		hitboxInfo(hitboxInfo),
-		collidedEntity(collidedEntity),
-		collidedRect(collidedRect)
+	HitboxCollisionEvent::HitboxCollisionEvent(Entity* hitEntity, const fgl::ArrayList<HitboxCollision>& hitboxCollisions, const fgl::ArrayList<HitboxCollision>& previousHitboxCollisions)
+		: hitEntity(hitEntity),
+		hitboxCollisions(hitboxCollisions),
+		previousHitboxCollisions(previousHitboxCollisions)
 	{
 		//
 	}
 	
-	const TaggedBox& HitboxCollisionEvent::getHitbox() const
+	Entity* HitboxCollisionEvent::getHitEntity() const
 	{
-		return hitbox;
+		return hitEntity;
 	}
 	
-	const HitboxInfo& HitboxCollisionEvent::getHitboxInfo() const
+	const fgl::ArrayList<HitboxCollision>& HitboxCollisionEvent::getHitboxCollisions() const
 	{
-		return hitboxInfo;
+		return hitboxCollisions;
 	}
-	
-	Entity* HitboxCollisionEvent::getCollidedEntity() const
+
+	const fgl::ArrayList<HitboxCollision>& HitboxCollisionEvent::getPreviousHitboxCollisions() const
 	{
-		return collidedEntity;
-	}
-	
-	CollisionRect* HitboxCollisionEvent::getCollidedRect() const
-	{
-		return collidedRect;
+		return previousHitboxCollisions;
 	}
 }

@@ -171,6 +171,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxPair.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxCollision.hpp">
+      <Filter>include\fightlib\entity\hitbox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -270,6 +273,9 @@
       <Filter>src\entity\hitbox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxPair.cpp">
+      <Filter>src\entity\hitbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\hitbox\HitboxCollision.cpp">
       <Filter>src\entity\hitbox</Filter>
     </ClCompile>
   </ItemGroup>
