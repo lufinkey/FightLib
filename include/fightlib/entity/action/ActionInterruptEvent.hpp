@@ -12,6 +12,8 @@ namespace fl
 	{
 	public:
 		ActionInterruptEvent(Action* interruptingAction);
+
+		virtual ActionEventType getEventType() const override;
 		
 		Action* getInterruptingAction() const;
 		

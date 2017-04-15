@@ -13,11 +13,7 @@ namespace fl
 	{
 	public:
 		virtual ~ActionEvent();
-		ActionEventType getEventType() const;
-	protected:
-		ActionEvent(ActionEventType eventType);
-	private:
-		ActionEventType eventType;
+		virtual ActionEventType getEventType() const = 0;
 	};
 	
 	typedef std::shared_ptr<ActionEvent> ActionEventPtr;

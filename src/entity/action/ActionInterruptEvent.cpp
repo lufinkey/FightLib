@@ -6,10 +6,14 @@ namespace fl
 	const ActionEventType ACTIONEVENT_INTERRUPT = registerActionEventType();
 	
 	ActionInterruptEvent::ActionInterruptEvent(Action* interruptingAction)
-		: ActionEvent(ACTIONEVENT_INTERRUPT),
-		interruptingAction(interruptingAction)
+		: interruptingAction(interruptingAction)
 	{
 		//
+	}
+
+	ActionEventType ActionInterruptEvent::getEventType() const
+	{
+		return ACTIONEVENT_INTERRUPT;
 	}
 	
 	Action* ActionInterruptEvent::getInterruptingAction() const
