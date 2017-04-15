@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <fightlib/entity/action/ActionEvent.hpp>
+
 namespace fl
 {
 	typedef enum
@@ -10,13 +12,17 @@ namespace fl
 		COLLISIONSIDE_LEFT,
 		COLLISIONSIDE_RIGHT
 	} CollisionSide;
+
+	extern const ActionEventType ACTIONEVENT_COLLISION;
 	
 	class Collidable;
 	
-	class CollisionEvent
+	class CollisionEvent : public ActionEvent
 	{
 	public:
 		CollisionEvent(Collidable* collided, CollisionSide side);
+
+		virtual ActionEventType getEventType() const override;
 		
 		Collidable* getCollided() const;
 		CollisionSide getCollisionSide() const;
