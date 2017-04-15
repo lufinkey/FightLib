@@ -2,7 +2,7 @@
 #pragma once
 
 #include <fightlib/entity/draw/AnimationMetaPoint.hpp>
-#include "HitboxPair.hpp"
+#include "HitboxClash.hpp"
 
 namespace fl
 {
@@ -11,16 +11,16 @@ namespace fl
 	class HitboxClashEvent
 	{
 	public:
-		HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxPair>& clashedPairs, const fgl::ArrayList<HitboxPair>& previousClashedPairs);
+		HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxClash>& hitboxClashes, const fgl::ArrayList<HitboxClash>& previousHitboxClashes);
 		
 		Entity* getClashedEntity() const;
 		
-		const fgl::ArrayList<HitboxPair>& getClashedHitboxPairs() const;
-		const fgl::ArrayList<HitboxPair>& getPreviousClashedHitboxPairs() const;
+		const fgl::ArrayList<HitboxClash>& getHitboxClashes() const;
+		const fgl::ArrayList<HitboxClash>& getPreviousHitboxClashes() const;
 		
 	private:
 		Entity* clashedEntity;
-		fgl::ArrayList<HitboxPair> clashedPairs;
-		fgl::ArrayList<HitboxPair> previousClashedPairs;
+		fgl::ArrayList<HitboxClash> hitboxClashes;
+		fgl::ArrayList<HitboxClash> previousHitboxClashes;
 	};
 }

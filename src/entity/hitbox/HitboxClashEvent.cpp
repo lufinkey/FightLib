@@ -3,10 +3,10 @@
 
 namespace fl
 {
-	HitboxClashEvent::HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxPair>& clashedPairs, const fgl::ArrayList<HitboxPair>& previousClashedPairs)
+	HitboxClashEvent::HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxClash>& hitboxClashes, const fgl::ArrayList<HitboxClash>& previousHitboxClashes)
 		: clashedEntity(clashedEntity),
-		clashedPairs(clashedPairs),
-		previousClashedPairs(previousClashedPairs)
+		hitboxClashes(hitboxClashes),
+		previousHitboxClashes(previousHitboxClashes)
 	{
 		//
 	}
@@ -16,13 +16,13 @@ namespace fl
 		return clashedEntity;
 	}
 	
-	const fgl::ArrayList<HitboxPair>& HitboxClashEvent::getClashedHitboxPairs() const
+	const fgl::ArrayList<HitboxClash>& HitboxClashEvent::getHitboxClashes() const
 	{
-		return clashedPairs;
+		return hitboxClashes;
 	}
 	
-	const fgl::ArrayList<HitboxPair>& HitboxClashEvent::getPreviousClashedHitboxPairs() const
+	const fgl::ArrayList<HitboxClash>& HitboxClashEvent::getPreviousHitboxClashes() const
 	{
-		return previousClashedPairs;
+		return previousHitboxClashes;
 	}
 }

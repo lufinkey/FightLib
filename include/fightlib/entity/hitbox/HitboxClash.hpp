@@ -6,12 +6,12 @@
 
 namespace fl
 {
-	class HitboxPair
+	class HitboxClash
 	{
 	public:
-		HitboxPair(const TaggedBox& hitbox1, const HitboxInfo& info1, const TaggedBox& hitbox2, const HitboxInfo& info2);
+		HitboxClash(const TaggedBox& hitbox1, const HitboxInfo& info1, const TaggedBox& hitbox2, const HitboxInfo& info2);
 		
-		HitboxPair flipped() const;
+		HitboxClash flipped() const;
 		
 		TaggedBox hitbox1;
 		HitboxInfo hitboxInfo1;

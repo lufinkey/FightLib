@@ -3,28 +3,28 @@
 
 namespace fl
 {
-	HitboxClashPair::HitboxClashPair(Entity* entity1, Entity* entity2, const fgl::ArrayList<HitboxPair>& hitboxPairs)
+	HitboxClashPair::HitboxClashPair(Entity* entity1, Entity* entity2, const fgl::ArrayList<HitboxClash>& hitboxClashes)
 		: entity1(entity1),
 		entity2(entity2),
-		hitboxPairs(hitboxPairs),
-		priorityPairIndex(-1)
+		hitboxClashes(hitboxClashes),
+		priorityClashIndex(-1)
 	{
-		if(hitboxPairs.size()==0)
+		if(hitboxClashes.size()==0)
 		{
-			throw fgl::IllegalArgumentException("hitboxPairs", "cannot be empty");
+			throw fgl::IllegalArgumentException("hitboxClashes", "cannot be empty");
 		}
 		
 		double topPriorityDiff = 0;
 		double lastTopPriority = 0;
-		for(size_t k=0; k<hitboxPairs.size(); k++)
+		for(size_t k=0; k<hitboxClashes.size(); k++)
 		{
-			auto& pair = hitboxPairs[k];
-			float priorityDiff = fgl::Math::abs(pair.hitboxInfo1.getPriority() - pair.hitboxInfo2.getPriority());
-			double topPriority = fgl::Math::max(pair.hitboxInfo1.getPriority(), pair.hitboxInfo2.getPriority());
-			if(priorityPairIndex==-1 || priorityDiff > topPriorityDiff || (priorityDiff==topPriorityDiff && topPriority > lastTopPriority))
+			auto& clash = hitboxClashes[k];
+			float priorityDiff = fgl::Math::abs(clash.hitboxInfo1.getPriority() - clash.hitboxInfo2.getPriority());
+			double topPriority = fgl::Math::max(clash.hitboxInfo1.getPriority(), clash.hitboxInfo2.getPriority());
+			if(priorityClashIndex==-1 || priorityDiff > topPriorityDiff || (priorityDiff==topPriorityDiff && topPriority > lastTopPriority))
 			{
 				//set the new top priority hitbox collision
-				priorityPairIndex = k;
+				priorityClashIndex = k;
 				topPriorityDiff = priorityDiff;
 				lastTopPriority = topPriority;
 			}
@@ -41,29 +41,29 @@ namespace fl
 		return entity2;
 	}
 	
-	const fgl::ArrayList<HitboxPair>& HitboxClashPair::getHitboxPairs() const
+	const fgl::ArrayList<HitboxClash>& HitboxClashPair::getHitboxClashes() const
 	{
-		return hitboxPairs;
+		return hitboxClashes;
 	}
 	
-	fgl::ArrayList<HitboxPair> HitboxClashPair::getFlippedHitboxPairs() const
+	fgl::ArrayList<HitboxClash> HitboxClashPair::getFlippedHitboxClashes() const
 	{
-		fgl::ArrayList<HitboxPair> flippedPairs;
-		flippedPairs.reserve(hitboxPairs.size());
-		for(auto& pair : hitboxPairs)
+		fgl::ArrayList<HitboxClash> flippedClashes;
+		flippedClashes.reserve(hitboxClashes.size());
+		for(auto& clash : hitboxClashes)
 		{
-			flippedPairs.add(pair.flipped());
+			flippedClashes.add(clash.flipped());
 		}
-		return flippedPairs;
+		return flippedClashes;
 	}
 	
-	size_t HitboxClashPair::getPriorityHitboxPairIndex() const
+	size_t HitboxClashPair::getPriorityHitboxClashIndex() const
 	{
-		return priorityPairIndex;
+		return priorityClashIndex;
 	}
 	
-	const HitboxPair& HitboxClashPair::getPriorityHitboxPair() const
+	const HitboxClash& HitboxClashPair::getPriorityHitboxClash() const
 	{
-		return hitboxPairs[priorityPairIndex];
+		return hitboxClashes[priorityClashIndex];
 	}
 }

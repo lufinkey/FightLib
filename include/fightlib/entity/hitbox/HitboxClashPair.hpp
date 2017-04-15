@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "HitboxPair.hpp"
+#include "HitboxClash.hpp"
 
 namespace fl
 {
@@ -10,20 +10,20 @@ namespace fl
 	class HitboxClashPair
 	{
 	public:
-		HitboxClashPair(Entity* entity1, Entity* entity2, const fgl::ArrayList<HitboxPair>& hitboxPairs);
+		HitboxClashPair(Entity* entity1, Entity* entity2, const fgl::ArrayList<HitboxClash>& hitboxClashes);
 		
 		Entity* getFirstEntity() const;
 		Entity* getSecondEntity() const;
 		
-		const fgl::ArrayList<HitboxPair>& getHitboxPairs() const;
-		fgl::ArrayList<HitboxPair> getFlippedHitboxPairs() const;
-		size_t getPriorityHitboxPairIndex() const;
-		const HitboxPair& getPriorityHitboxPair() const;
+		const fgl::ArrayList<HitboxClash>& getHitboxClashes() const;
+		fgl::ArrayList<HitboxClash> getFlippedHitboxClashes() const;
+		size_t getPriorityHitboxClashIndex() const;
+		const HitboxClash& getPriorityHitboxClash() const;
 		
 	private:
 		Entity* entity1;
 		Entity* entity2;
-		fgl::ArrayList<HitboxPair> hitboxPairs;
-		size_t priorityPairIndex;
+		fgl::ArrayList<HitboxClash> hitboxClashes;
+		size_t priorityClashIndex;
 	};
 }
