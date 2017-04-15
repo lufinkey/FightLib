@@ -275,6 +275,16 @@ namespace fl
 			updateMoveAnimation();
 		}
 	}
+
+	bool Character::respondsToHitboxClash(Entity* clashedEntity) const
+	{
+		return false;
+	}
+
+	bool Character::canCollideWithEntityHitbox(Entity* collidedEntity) const
+	{
+		return true;
+	}
 	
 	void Character::onCollision(const CollisionEvent& collisionEvent)
 	{

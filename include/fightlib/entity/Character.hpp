@@ -33,6 +33,9 @@ namespace fl
 		virtual void updateMoveAnimation();
 		
 		virtual void onActionEnd(Action* action) override;
+
+		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
+		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
 		
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;
 		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
