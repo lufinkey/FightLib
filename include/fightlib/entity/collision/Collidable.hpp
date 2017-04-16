@@ -15,7 +15,9 @@ namespace fl
 		Collidable(const fgl::Vector2d& position);
 		
 		virtual void update(const fgl::ApplicationData& appData) override;
-		
+
+		virtual double getCollisionResistance(Collidable* collided) const;
+		virtual double getMass() const;
 		virtual bool isStaticCollisionBody() const = 0;
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;
 		

@@ -16,6 +16,16 @@ namespace fl
 		//offset for velocity
 		shift(velocity*appData.getFrameSpeedMultiplier());
 	}
+
+	double Collidable::getCollisionResistance(Collidable* collided) const
+	{
+		return 1.0;
+	}
+
+	double Collidable::getMass() const
+	{
+		return 1.0;
+	}
 	
 	const fgl::Vector2d& Collidable::getPreviousPosition() const
 	{

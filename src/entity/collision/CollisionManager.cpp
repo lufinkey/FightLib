@@ -62,6 +62,8 @@ namespace fl
 		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
 	}
 
+#define DOUBLECHECK_COLLISIONS
+
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
 		fgl::ArrayList<CollisionPair> pairs = getCollisionPairs();
@@ -93,8 +95,7 @@ namespace fl
 					}
 				#endif
 			
-				if((collidable1->isStaticCollisionBody() && !collidable2->isStaticCollisionBody())
-					|| (!collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
+				if(!(collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
 					//TODO allow two non-static collision bodies to collide
 				{
 					fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
@@ -152,7 +153,64 @@ namespace fl
 									}
 									else
 									{
-										//TODO make a case here for two non-static bodies colliding
+										//TODO make a BETTER case here for two non-static bodies colliding
+										double mass1 = collidable1->getMass();
+										double mass2 = collidable2->getMass();
+										double resistance1 = collidable1->getCollisionResistance(collidable2);
+										double resistance2 = collidable2->getCollisionResistance(collidable1);
+										auto rect1 = rectPair.first->getRect();
+										auto prevRect1 = rectPair.first->getPreviousRect();
+										auto rect2 = rectPair.second->getRect();
+										auto prevRect2 = rectPair.second->getPreviousRect();
+
+										double velocity1 = 0;
+										double velocity2 = 0;
+										switch(collisionSide1)
+										{
+											case COLLISIONSIDE_LEFT:
+											velocity1 = rect1.x - prevRect1.x;
+											velocity2 = (rect2.x+rect2.width) - (prevRect2.x+prevRect2.width);
+											break;
+
+											case COLLISIONSIDE_RIGHT:
+											velocity1 = (rect1.x+rect1.width) - (prevRect1.x+prevRect1.width);
+											velocity2 = rect2.x - prevRect2.x;
+											break;
+
+											case COLLISIONSIDE_TOP:
+											velocity1 = rect1.y - prevRect1.y;
+											velocity2 = (rect2.y+rect2.height) - (prevRect2.y+prevRect2.height);
+											break;
+
+											case COLLISIONSIDE_BOTTOM:
+											velocity1 = (rect1.y+rect1.height) - (prevRect1.y+prevRect1.height);
+											velocity2 = rect2.y - prevRect2.y;
+											break;
+										}
+
+										double contribution1 = fgl::Math::abs(velocity2*mass2);
+										double contribution2 = fgl::Math::abs(velocity1*mass1);
+										double totalVel = contribution1 + contribution2;
+
+										auto moveAmount1 = -shiftAmount*((contribution1*resistance1)/totalVel);
+										auto moveAmount2 = shiftAmount*((contribution2*resistance2)/totalVel);
+
+										if(moveAmount1.x!=0 || moveAmount1.y!=0)
+										{
+											collidable1->shift(moveAmount1);
+											for(auto& rect : rects1)
+											{
+												rect->shift(moveAmount1);
+											}
+										}
+										if(moveAmount2.x!=0 || moveAmount2.y!=0)
+										{
+											collidable2->shift(moveAmount2);
+											for(auto& rect : rects2)
+											{
+												rect->shift(moveAmount2);
+											}
+										}
 									}
 
 									//add collision side to previous collision sides if not already added
@@ -217,7 +275,21 @@ namespace fl
 							}
 							else
 							{
-								//TODO make a case here for two non-static bodies colliding
+								double randomFirst = fgl::Math::random();
+								if(randomFirst < 0.5)
+								{
+									onCollisionCalls.add([=] {
+										collidable1->onCollision(collisionEvent1);
+										collidable2->onCollision(collisionEvent2);
+									});
+								}
+								else
+								{
+									onCollisionCalls.add([=] {
+										collidable2->onCollision(collisionEvent2);
+										collidable1->onCollision(collisionEvent1);
+									});
+								}
 							}
 						}
 						else
@@ -239,7 +311,21 @@ namespace fl
 							}
 							else
 							{
-								//TODO make a case here for two non-static bodies colliding
+								double randomFirst = fgl::Math::random();
+								if(randomFirst < 0.5)
+								{
+									onCollisionCalls.add([=] {
+										collidable1->onCollisionUpdate(collisionEvent1);
+										collidable2->onCollisionUpdate(collisionEvent2);
+									});
+								}
+								else
+								{
+									onCollisionCalls.add([=] {
+										collidable2->onCollisionUpdate(collisionEvent2);
+										collidable1->onCollisionUpdate(collisionEvent1);
+									});
+								}
 							}
 						}
 					}
@@ -267,7 +353,21 @@ namespace fl
 							}
 							else
 							{
-								//TODO make a case here for two non-static bodies colliding
+								double randomFirst = fgl::Math::random();
+								if(randomFirst < 0.5)
+								{
+									onCollisionCalls.add([=] {
+										collidable1->onCollisionFinish(collisionEvent1);
+										collidable2->onCollisionFinish(collisionEvent2);
+									});
+								}
+								else
+								{
+									onCollisionCalls.add([=] {
+										collidable2->onCollisionFinish(collisionEvent2);
+										collidable1->onCollisionFinish(collisionEvent1);
+									});
+								}
 							}
 						}
 					}
