@@ -188,12 +188,74 @@ namespace fl
 											break;
 										}
 
-										double contribution1 = fgl::Math::abs(velocity2*mass2);
-										double contribution2 = fgl::Math::abs(velocity1*mass1);
-										double totalVel = contribution1 + contribution2;
+										double force1 = velocity2*mass2;
+										double force2 = velocity1*mass1;
+										double negativeForce = 0;
+										double positiveForce = 0;
+										if(force1 < 0)
+										{
+											negativeForce += force1;
+										}
+										else
+										{
+											positiveForce += force1;
+										}
+										if(force2 < 0)
+										{
+											negativeForce += force2;
+										}
+										else
+										{
+											positiveForce += force1;
+										}
+										double netForce = force1 + force2;
 
-										auto moveAmount1 = -shiftAmount*((contribution1*resistance1)/totalVel);
-										auto moveAmount2 = shiftAmount*((contribution2*resistance2)/totalVel);
+										fgl::Vector2d moveAmount1;
+										fgl::Vector2d moveAmount2;
+										if(netForce < 0)
+										{
+											double portion = 0;
+											if(negativeForce!=0)
+											{
+												portion = netForce/negativeForce;
+											}
+											switch(collisionSide1)
+											{
+												case COLLISIONSIDE_LEFT:
+												case COLLISIONSIDE_TOP:
+												moveAmount2 = shiftAmount*portion;
+												moveAmount1 = -shiftAmount*(1.0-portion);
+												break;
+
+												case COLLISIONSIDE_RIGHT:
+												case COLLISIONSIDE_BOTTOM:
+												moveAmount1 = -shiftAmount*portion;
+												moveAmount2 = shiftAmount*(1.0-portion);
+												break;
+											}
+										}
+										else if(netForce!=0)
+										{
+											double portion1 = 0;
+											if(positiveForce!=0)
+											{
+												portion1 = netForce/positiveForce;
+											}
+											switch(collisionSide1)
+											{
+												case COLLISIONSIDE_LEFT:
+												case COLLISIONSIDE_TOP:
+												moveAmount1 = -shiftAmount*portion1;
+												moveAmount2 = shiftAmount*(1.0-portion1);
+												break;
+
+												case COLLISIONSIDE_RIGHT:
+												case COLLISIONSIDE_BOTTOM:
+												moveAmount2 = shiftAmount*portion1;
+												moveAmount1 = -shiftAmount*(1.0-portion1);
+												break;
+											}
+										}
 
 										if(moveAmount1.x!=0 || moveAmount1.y!=0)
 										{
