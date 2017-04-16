@@ -13,6 +13,7 @@ public:
 	
 private:
 	fl::Item* sword;
+	fl::Character* sandbag;
 	
 	fl::Platform* movingBlock;
 };

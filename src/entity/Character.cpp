@@ -74,6 +74,11 @@ namespace fl
 			changeAnimation(animName);
 		}
 	}
+
+	fgl::ArrayList<MetaPointType> Character::getItemAnchorPoints() const
+	{
+		return {};
+	}
 	
 	fgl::ArrayList<MetaPointType> Character::getAvailableItemAnchorPoints() const
 	{

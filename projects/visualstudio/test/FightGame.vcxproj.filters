@@ -27,6 +27,9 @@
     <ClCompile Include="..\..\..\test\src\PickUpItemAction.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\test\src\Sandbag.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp">
@@ -45,6 +48,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\test\src\PickUpItemAction.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\Sandbag.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

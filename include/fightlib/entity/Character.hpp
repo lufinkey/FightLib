@@ -17,7 +17,7 @@ namespace fl
 		virtual fgl::String getMoveAnimationName(double amount) const = 0;
 		virtual double getMoveSpeed(double amount) const;
 		
-		virtual fgl::ArrayList<MetaPointType> getItemAnchorPoints() const = 0;
+		virtual fgl::ArrayList<MetaPointType> getItemAnchorPoints() const;
 		fgl::ArrayList<MetaPointType> getAvailableItemAnchorPoints() const;
 		
 		bool pickUpItem(Item* item);
