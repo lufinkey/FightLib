@@ -8,12 +8,12 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 {
 	setScale(3.0);
 
-	loadAnimation("assets/animations/idle.plist", assetManager);
-	loadAnimation("assets/animations/walk.plist", assetManager);
-	loadAnimation("assets/animations/jump.plist", assetManager);
-	loadAnimation("assets/animations/jump2.plist", assetManager);
-	loadAnimation("assets/animations/fall.plist", assetManager);
-	loadAnimation("assets/animations/punch.plist", assetManager);
+	loadAnimation("assets/animations/player/idle.plist", assetManager);
+	loadAnimation("assets/animations/player/walk.plist", assetManager);
+	loadAnimation("assets/animations/player/jump.plist", assetManager);
+	loadAnimation("assets/animations/player/jump2.plist", assetManager);
+	loadAnimation("assets/animations/player/fall.plist", assetManager);
+	loadAnimation("assets/animations/player/punch.plist", assetManager);
 	changeAnimation("idle");
 	
 	addAction("jump", new JumpAction());
