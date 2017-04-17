@@ -29,6 +29,9 @@ void PunchAttack::onEvent(fl::EventPtr event)
 	if(event->getEventType()==fl::EVENT_HITBOXCOLLISION)
 	{
 		auto hitboxEvent = std::static_pointer_cast<fl::HitboxCollisionEvent>(event);
-		static_cast<fl::ActionEntity*>(hitboxEvent->getHitEntity())->performAction("hurt");
+		if(hitboxEvent->getPreviousHitboxCollisions().size()==0)
+		{
+			static_cast<fl::ActionEntity*>(hitboxEvent->getHitEntity())->performAction("hurt");
+		}
 	}
 }
