@@ -311,8 +311,8 @@ namespace fl
 
 										auto moveAmount1 = -shiftAmount*portion1;
 										auto moveAmount2 = shiftAmount*portion2;
-										double resistance1 = collidable1->getCollisionResistance(collidable2);
-										double resistance2 = collidable2->getCollisionResistance(collidable1);
+										double resistance1 = collidable1->getCollisionResistance(collidable2, collisionSide1);
+										double resistance2 = collidable2->getCollisionResistance(collidable1, collisionSide2);
 
 										if(moveAmount1.x!=0 || moveAmount1.y!=0)
 										{
