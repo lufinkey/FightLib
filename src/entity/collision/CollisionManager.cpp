@@ -62,7 +62,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
 	}
 
-#define DOUBLECHECK_COLLISIONS
+//#define DOUBLECHECK_COLLISIONS
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
@@ -337,12 +337,12 @@ namespace fl
 										newPair.previousCollisionSides.add(collisionSide1);
 									}
 								}
-
-								//add the rect pair to the priority rects, so that it will be checked first on the next frame
-								if(!newPair.priorityRects.contains(rectTagPair))
-								{
-									newPair.priorityRects.add(rectTagPair);
-								}
+							}
+							
+							//add the rect pair to the priority rects, so that it will be checked first on the next frame
+							if(!newPair.priorityRects.contains(rectTagPair))
+							{
+								newPair.priorityRects.add(rectTagPair);
 							}
 						}
 					}
