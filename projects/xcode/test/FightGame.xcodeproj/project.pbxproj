@@ -21,6 +21,7 @@
 		F15A20E61E54B08A008D83E5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F15A20E51E54B08A008D83E5 /* assets */; };
 		F15F59F61E71DFBB00FAFD86 /* libGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F15F59F51E71DFBB00FAFD86 /* libGameLibrary.a */; };
 		F16971D01EA4EF0E007E1893 /* Sandbag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16971CE1EA4EF0E007E1893 /* Sandbag.cpp */; };
+		F16971E91EA4F1BA007E1893 /* MovingPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16971E71EA4F1BA007E1893 /* MovingPlatform.cpp */; };
 		F16F10FF1E6722CF009A465C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F10FE1E6722CF009A465C /* ImageIO.framework */; };
 		F16F11011E6722DF009A465C /* ForceFeedback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11001E6722DF009A465C /* ForceFeedback.framework */; };
 		F16F11031E6722F4009A465C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F16F11021E6722F4009A465C /* IOKit.framework */; };
@@ -69,6 +70,8 @@
 		F15F59F51E71DFBB00FAFD86 /* libGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGameLibrary.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/FightLib-bxtoxjsgitasaubdottnphxzqntr/Build/Products/Debug/libGameLibrary.a"; sourceTree = "<group>"; };
 		F16971CE1EA4EF0E007E1893 /* Sandbag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sandbag.cpp; sourceTree = "<group>"; };
 		F16971CF1EA4EF0E007E1893 /* Sandbag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sandbag.hpp; sourceTree = "<group>"; };
+		F16971E71EA4F1BA007E1893 /* MovingPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovingPlatform.cpp; sourceTree = "<group>"; };
+		F16971E81EA4F1BA007E1893 /* MovingPlatform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MovingPlatform.hpp; sourceTree = "<group>"; };
 		F16F10FE1E6722CF009A465C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F16F11001E6722DF009A465C /* ForceFeedback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ForceFeedback.framework; path = System/Library/Frameworks/ForceFeedback.framework; sourceTree = SDKROOT; };
 		F16F11021E6722F4009A465C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -179,6 +182,8 @@
 				F14464E21E672E050088EAA3 /* Player.hpp */,
 				F1A7DF651E89854700472DB2 /* JumpAction.cpp */,
 				F1A7DF661E89854700472DB2 /* JumpAction.hpp */,
+				F16971E71EA4F1BA007E1893 /* MovingPlatform.cpp */,
+				F16971E81EA4F1BA007E1893 /* MovingPlatform.hpp */,
 				F17A3A8A1E97FAAA00D07EBE /* PickUpItemAction.cpp */,
 				F17A3A8B1E97FAAA00D07EBE /* PickUpItemAction.hpp */,
 				F16971CE1EA4EF0E007E1893 /* Sandbag.cpp */,
@@ -271,6 +276,7 @@
 				F16971D01EA4EF0E007E1893 /* Sandbag.cpp in Sources */,
 				F181964E1E8AE8C7009BD55F /* TestStage.cpp in Sources */,
 				F1BA75D11E9284D600647E41 /* Sword.cpp in Sources */,
+				F16971E91EA4F1BA007E1893 /* MovingPlatform.cpp in Sources */,
 				F17A3A8C1E97FAAA00D07EBE /* PickUpItemAction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

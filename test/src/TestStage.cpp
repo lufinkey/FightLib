@@ -1,5 +1,6 @@
 
 #include "TestStage.hpp"
+#include "MovingPlatform.hpp"
 #include "Player.hpp"
 #include "Sword.hpp"
 #include "Sandbag.hpp"
@@ -40,10 +41,7 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	block7->loadAnimation("assets/animations/platform/block.plist", assetManager);
 	block7->changeAnimation("block");
 	
-	movingBlock = new fl::Platform(fgl::Vector2d(400, 150));
-	movingBlock->loadAnimation("assets/animations/platform/block.plist", assetManager);
-	movingBlock->changeAnimation("block");
-	movingBlock->setVelocity(fgl::Vector2d(100, 0));
+	movingBlock = new MovingPlatform(assetManager, fgl::Vector2d(400, 150));
 	
 	addPlatform(block1);
 	addPlatform(block2);
@@ -64,14 +62,5 @@ TestStage::~TestStage()
 
 void TestStage::update(fgl::ApplicationData appData)
 {
-	fgl::Vector2d position = movingBlock->getPosition();
-	if(position.x >= 600)
-	{
-		movingBlock->setVelocity(fgl::Vector2d(-100, 0));
-	}
-	else if(position.x <= 0)
-	{
-		movingBlock->setVelocity(fgl::Vector2d(100, 0));
-	}
 	Stage::update(appData);
 }

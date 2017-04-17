@@ -135,6 +135,7 @@ namespace fl
 
 								if(ignore)
 								{
+									//ignore collision
 									if(!newPair.ignoredCollisions.contains(rectTagPair))
 									{
 										newPair.ignoredCollisions.add(rectTagPair);
