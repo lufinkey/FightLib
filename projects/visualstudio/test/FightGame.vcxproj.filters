@@ -30,6 +30,15 @@
     <ClCompile Include="..\..\..\test\src\Sandbag.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\test\src\HurtAction.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\test\src\MovingPlatform.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\test\src\PunchAttack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp">
@@ -51,6 +60,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\test\src\Sandbag.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\HurtAction.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\MovingPlatform.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\test\src\PunchAttack.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

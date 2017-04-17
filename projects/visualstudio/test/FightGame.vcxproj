@@ -20,19 +20,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\test\src\FightGame.cpp" />
+    <ClCompile Include="..\..\..\test\src\HurtAction.cpp" />
     <ClCompile Include="..\..\..\test\src\JumpAction.cpp" />
     <ClCompile Include="..\..\..\test\src\main.cpp" />
+    <ClCompile Include="..\..\..\test\src\MovingPlatform.cpp" />
     <ClCompile Include="..\..\..\test\src\PickUpItemAction.cpp" />
     <ClCompile Include="..\..\..\test\src\Player.cpp" />
+    <ClCompile Include="..\..\..\test\src\PunchAttack.cpp" />
     <ClCompile Include="..\..\..\test\src\Sandbag.cpp" />
     <ClCompile Include="..\..\..\test\src\Sword.cpp" />
     <ClCompile Include="..\..\..\test\src\TestStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\test\src\FightGame.hpp" />
+    <ClInclude Include="..\..\..\test\src\HurtAction.hpp" />
     <ClInclude Include="..\..\..\test\src\JumpAction.hpp" />
+    <ClInclude Include="..\..\..\test\src\MovingPlatform.hpp" />
     <ClInclude Include="..\..\..\test\src\PickUpItemAction.hpp" />
     <ClInclude Include="..\..\..\test\src\Player.hpp" />
+    <ClInclude Include="..\..\..\test\src\PunchAttack.hpp" />
     <ClInclude Include="..\..\..\test\src\Sandbag.hpp" />
     <ClInclude Include="..\..\..\test\src\Sword.hpp" />
     <ClInclude Include="..\..\..\test\src\TestStage.hpp" />

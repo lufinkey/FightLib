@@ -180,6 +180,9 @@
     <ClInclude Include="..\..\include\fightlib\base\Event.hpp">
       <Filter>include\fightlib\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\action\AttackAction.hpp">
+      <Filter>include\fightlib\entity\action</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\base\Event.cpp">
       <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\action\AttackAction.cpp">
+      <Filter>src\entity\action</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
