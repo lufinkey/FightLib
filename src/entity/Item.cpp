@@ -70,6 +70,15 @@ namespace fl
 	{
 		return parentCharacter;
 	}
+	
+	bool Item::respondsToCollision(Collidable* collided, CollisionSide side) const
+	{
+		if(collided->getFlag("Character"))
+		{
+			return false;
+		}
+		return true;
+	}
 
 	void Item::onCollision(const CollisionEvent& collisionEvent)
 	{

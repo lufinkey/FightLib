@@ -29,6 +29,8 @@ namespace fl
 	protected:
 		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
 		
+		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
+		
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;
 		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
 		
