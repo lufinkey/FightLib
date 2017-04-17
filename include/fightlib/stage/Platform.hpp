@@ -11,6 +11,8 @@ namespace fl
 	public:
 		Platform(const fgl::Vector2d& position);
 		
+		virtual bool getFlag(const fgl::String& flag) const override;
+		
 		virtual void update(const fgl::ApplicationData& appData) override;
 		
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;

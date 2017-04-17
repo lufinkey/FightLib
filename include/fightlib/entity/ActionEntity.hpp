@@ -12,6 +12,8 @@ namespace fl
 	public:
 		ActionEntity(const fgl::Vector2d& position, Orientation orientation);
 		virtual ~ActionEntity();
+		
+		virtual bool getFlag(const fgl::String& flag) const override;
 
 		virtual void update(const fgl::ApplicationData& appData) override;
 

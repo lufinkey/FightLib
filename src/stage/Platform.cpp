@@ -11,6 +11,15 @@ namespace fl
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
 	
+	bool Platform::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Platform")
+		{
+			return true;
+		}
+		return Collidable::getFlag(flag);
+	}
+	
 	void Platform::update(const fgl::ApplicationData& appData)
 	{
 		Collidable::update(appData);

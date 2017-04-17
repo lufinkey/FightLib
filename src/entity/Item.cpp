@@ -11,6 +11,15 @@ namespace fl
 		//
 	}
 	
+	bool Item::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Item")
+		{
+			return true;
+		}
+		return ActionEntity::getFlag(flag);
+	}
+	
 	void Item::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
 		//don't draw if the item is being held as a powerup and is not anchored to anything

@@ -17,6 +17,15 @@ namespace fl
 	{
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
+	
+	bool Entity::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Entity")
+		{
+			return true;
+		}
+		return Collidable::getFlag(flag);
+	}
 
 	void Entity::update(const fgl::ApplicationData& appData)
 	{

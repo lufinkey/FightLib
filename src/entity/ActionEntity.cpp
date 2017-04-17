@@ -18,6 +18,15 @@ namespace fl
 			delete actionPair.second;
 		}
 	}
+	
+	bool ActionEntity::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="ActionEntity")
+		{
+			return true;
+		}
+		return Entity::getFlag(flag);
+	}
 
 	void ActionEntity::update(const fgl::ApplicationData& appData)
 	{

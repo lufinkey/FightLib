@@ -9,6 +9,15 @@ namespace fl
 	{
 		//
 	}
+	
+	bool Character::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Character")
+		{
+			return true;
+		}
+		return ActionEntity::getFlag(flag);
+	}
 
 	void Character::update(const fgl::ApplicationData& appData)
 	{
