@@ -67,7 +67,7 @@ namespace fl
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
 		fgl::ArrayList<CollisionPair> pairs = getCollisionPairs();
-		previousCollisions.clear();
+		fgl::ArrayList<CollisionPair> collisions;
 		
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
@@ -87,16 +87,15 @@ namespace fl
 					size_t pairReplaceIndex = -1;
 					if(i==1)
 					{
-						pairReplaceIndex = previousCollisions.indexOf(newPair);
+						pairReplaceIndex = collisions.indexOf(newPair);
 						if(pairReplaceIndex!=-1)
 						{
-							newPair = previousCollisions[pairReplaceIndex];
+							newPair = collisions[pairReplaceIndex];
 						}
 					}
 				#endif
 			
 				if(!(collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
-					//TODO allow two non-static collision bodies to collide
 				{
 					fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
 					fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
@@ -164,28 +163,28 @@ namespace fl
 									{
 										//find out if rect1 has collided with a static collision body
 										bool staticOpposite1 = false;
-										for(auto& prevCollision : previousCollisions)
+										for(auto& collision : collisions)
 										{
-											if(prevCollision.collidable1==collidable1 && prevCollision.collidable2->isStaticCollisionBody() && prevCollision.previousCollisionSides.contains(collisionSide2))
+											if(collision.collidable1==collidable1 && collision.collidable2->isStaticCollisionBody() && collision.sides.contains(collisionSide2))
 											{
 												staticOpposite1 = true;
 												break;
 											}
-											else if(prevCollision.collidable2==collidable1 && prevCollision.collidable1->isStaticCollisionBody() && prevCollision.previousCollisionSides.contains(collisionSide1))
+											else if(collision.collidable2==collidable1 && collision.collidable1->isStaticCollisionBody() && collision.sides.contains(collisionSide1))
 											{
 												staticOpposite1 = true;
 												break;
 											}
 										}
 										bool staticOpposite2 = false;
-										for(auto& prevCollision : previousCollisions)
+										for(auto& collision : collisions)
 										{
-											if(prevCollision.collidable1==collidable2 && prevCollision.collidable2->isStaticCollisionBody() && prevCollision.previousCollisionSides.contains(collisionSide1))
+											if(collision.collidable1==collidable2 && collision.collidable2->isStaticCollisionBody() && collision.sides.contains(collisionSide1))
 											{
 												staticOpposite2 = true;
 												break;
 											}
-											else if(prevCollision.collidable2==collidable2 && prevCollision.collidable1->isStaticCollisionBody() && prevCollision.previousCollisionSides.contains(collisionSide2))
+											else if(collision.collidable2==collidable2 && collision.collidable1->isStaticCollisionBody() && collision.sides.contains(collisionSide2))
 											{
 												staticOpposite2 = true;
 												break;
@@ -331,9 +330,9 @@ namespace fl
 									}
 
 									//add collision side to previous collision sides if not already added
-									if(!newPair.previousCollisionSides.contains(collisionSide1))
+									if(!newPair.sides.contains(collisionSide1))
 									{
-										newPair.previousCollisionSides.add(collisionSide1);
+										newPair.sides.add(collisionSide1);
 									}
 								}
 							}
@@ -353,13 +352,13 @@ namespace fl
 					#endif
 						if(newPair.priorityRects.size() > 0)
 						{
-							previousCollisions.add(newPair);
+							collisions.add(newPair);
 						}
 					#ifdef DOUBLECHECK_COLLISIONS
 					}
 					else
 					{
-						previousCollisions[pairReplaceIndex] = newPair;
+						collisions[pairReplaceIndex] = newPair;
 					}
 					#endif
 				}
@@ -369,11 +368,11 @@ namespace fl
 				#endif
 				{
 					//check for new/updated collision calls
-					for(auto collisionSide : newPair.previousCollisionSides)
+					for(auto collisionSide : newPair.sides)
 					{
 						auto collisionEvent1 = CollisionEvent(collidable2, collisionSide);
 						auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide));
-						if(!pair.previousCollisionSides.contains(collisionSide))
+						if(!pair.sides.contains(collisionSide))
 						{
 							//the previous collision pair doesn't have this collision side, so it is a new collision
 							if(collidable1->isStaticCollisionBody())
@@ -448,9 +447,9 @@ namespace fl
 					}
 
 					//check for finished collision calls
-					for(auto prevCollisionSide : pair.previousCollisionSides)
+					for(auto prevCollisionSide : pair.sides)
 					{
-						if(!newPair.previousCollisionSides.contains(prevCollisionSide))
+						if(!newPair.sides.contains(prevCollisionSide))
 						{
 							auto collisionEvent1 = CollisionEvent(collidable2, prevCollisionSide);
 							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(prevCollisionSide));
@@ -491,6 +490,8 @@ namespace fl
 				}
 			}
 		}
+		
+		previousCollisions = collisions;
 		
 		//call finished collisions
 		for(auto& onCollisionFinish : onCollisionFinishCalls)

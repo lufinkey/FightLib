@@ -19,7 +19,7 @@ namespace fl
 		//! the rect pairs that had a collision in the previous frame
 		fgl::ArrayList<CollisionRectTagPair> priorityRects;
 		//! the sides of collidable1 that were collided on
-		fgl::ArrayList<CollisionSide> previousCollisionSides;
+		fgl::ArrayList<CollisionSide> sides;
 		//! the rect pairs that should be ignored in the next frame if they have a collision
 		fgl::ArrayList<CollisionRectTagPair> ignoredCollisions;
 
