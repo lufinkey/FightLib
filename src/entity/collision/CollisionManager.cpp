@@ -62,7 +62,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
 	}
 
-//#define DOUBLECHECK_COLLISIONS
+#define DOUBLECHECK_COLLISIONS
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
@@ -196,7 +196,6 @@ namespace fl
 										}
 
 										double portion1 = 0;
-										double portion2 = 0;
 										if((staticOpposite1 && staticOpposite2) || (!staticOpposite1 && !staticOpposite2))
 										{
 											//TODO make a BETTER case here for two non-static bodies colliding
