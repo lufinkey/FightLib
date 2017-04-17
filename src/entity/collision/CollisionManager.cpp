@@ -133,7 +133,14 @@ namespace fl
 									ignore = true;
 								}
 
-								if(!ignore)
+								if(ignore)
+								{
+									if(!newPair.ignoredCollisions.contains(rectTagPair))
+									{
+										newPair.ignoredCollisions.add(rectTagPair);
+									}
+								}
+								else
 								{
 									//decide how to shift the collidables
 									if(collidable1->isStaticCollisionBody())
