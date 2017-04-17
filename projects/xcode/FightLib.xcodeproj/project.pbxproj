@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F14EE0391EA51C260055AC89 /* AttackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14EE0381EA51C260055AC89 /* AttackAction.cpp */; };
 		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
 		F15BDFC11E9547E500B92754 /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */; };
 		F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F24F21E8E9550005EE4F1 /* Stage.cpp */; };
@@ -49,6 +50,8 @@
 /* Begin PBXFileReference section */
 		F1209DF81E68AF5A00E1BF4F /* Fight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fight.hpp; sourceTree = "<group>"; };
 		F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
+		F14EE0371EA51C130055AC89 /* AttackAction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AttackAction.hpp; sourceTree = "<group>"; };
+		F14EE0381EA51C260055AC89 /* AttackAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttackAction.cpp; sourceTree = "<group>"; };
 		F15A1F901E549F5E008D83E5 /* libFightLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFightLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15A1FAF1E549FAE008D83E5 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		F15F24F01E8E9541005EE4F1 /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 			children = (
 				F17D96CB1E6DB50B003F4D85 /* Action.hpp */,
 				F164D2D91E8C163D00B11F7F /* ActionInterruptEvent.hpp */,
+				F14EE0371EA51C130055AC89 /* AttackAction.hpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 			children = (
 				F17D96D11E6DB531003F4D85 /* Action.cpp */,
 				F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */,
+				F14EE0381EA51C260055AC89 /* AttackAction.cpp */,
 			);
 			path = action;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */,
 				F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */,
 				F17A3A891E97CD3500D07EBE /* Platform.cpp in Sources */,
+				F14EE0391EA51C260055AC89 /* AttackAction.cpp in Sources */,
 				F17A3A711E97C43A00D07EBE /* AnimationMetaPoint.cpp in Sources */,
 				F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */,
 				F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */,

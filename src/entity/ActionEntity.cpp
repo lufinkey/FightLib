@@ -1,6 +1,7 @@
 
 #include <fightlib/entity/ActionEntity.hpp>
 #include <fightlib/entity/action/ActionInterruptEvent.hpp>
+#include <fightlib/entity/action/AttackAction.hpp>
 
 namespace fl
 {
@@ -35,6 +36,15 @@ namespace fl
 		{
 			actionPair.second->onUpdate(appData);
 		}
+	}
+	
+	HitboxInfo ActionEntity::getHitboxInfo(size_t tag) const
+	{
+		if(currentAction!=nullptr && currentAction->getFlag("AttackAction"))
+		{
+			return static_cast<AttackAction*>(currentAction)->getHitboxInfo(tag);
+		}
+		return Entity::getHitboxInfo(tag);
 	}
 	
 	void ActionEntity::onActionEnd(Action* action)

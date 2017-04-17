@@ -14,8 +14,9 @@ namespace fl
 		virtual ~ActionEntity();
 		
 		virtual bool getFlag(const fgl::String& flag) const override;
-
 		virtual void update(const fgl::ApplicationData& appData) override;
+		
+		virtual HitboxInfo getHitboxInfo(size_t tag) const override;
 
 		bool performAction(const fgl::String& name, ActionParamsPtr params = ActionParamsPtr(new ActionParams()));
 

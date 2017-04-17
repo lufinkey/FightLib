@@ -5,6 +5,9 @@
 
 #include "base/Event.hpp"
 
+#include "controls/CharacterController.hpp"
+#include "controls/KeyboardCharacterController.hpp"
+
 #include "entity/Entity.hpp"
 #include "entity/ActionEntity.hpp"
 #include "entity/Character.hpp"
@@ -12,14 +15,16 @@
 
 #include "entity/action/Action.hpp"
 #include "entity/action/ActionInterruptEvent.hpp"
+#include "entity/action/AttackAction.hpp"
 
-#include "entity/collision/CollisionManager.hpp"
+#include "entity/collision/Collidable.hpp"
+#include "entity/collision/CollisionEvent.hpp"
+
+#include "entity/hitbox/HitboxClashEvent.hpp"
+#include "entity/hitbox/HitboxCollisionEvent.hpp"
 
 #include "stage/Platform.hpp"
 #include "stage/Stage.hpp"
-
-#include "controls/CharacterController.hpp"
-#include "controls/KeyboardCharacterController.hpp"
 
 #include "game/Fight.hpp"
 #include "game/FightParams.hpp"
