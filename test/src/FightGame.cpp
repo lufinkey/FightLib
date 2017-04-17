@@ -13,6 +13,7 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	auto controller = new fl::KeyboardCharacterController(player);
 	controller->setKeyDownAction(fgl::Keyboard::UPARROW, "jump");
 	controller->setKeyDownAction(fgl::Keyboard::P, "pickUp");
+	controller->setKeyDownAction(fgl::Keyboard::O, "punch");
 	
 	auto stage = new TestStage(animationAssetManager);
 	

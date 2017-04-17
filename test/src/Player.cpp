@@ -2,6 +2,7 @@
 #include "Player.hpp"
 #include "JumpAction.hpp"
 #include "PickUpItemAction.hpp"
+#include "PunchAttack.hpp"
 
 Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& position, fl::Orientation orientation)
 	: Character(position, orientation)
@@ -18,6 +19,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	
 	addAction("jump", new JumpAction());
 	addAction("pickUp", new PickUpItemAction());
+	addAction("punch", new PunchAttack());
 }
 
 void Player::update(const fgl::ApplicationData& appData)
