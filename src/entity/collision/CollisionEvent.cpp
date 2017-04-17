@@ -5,9 +5,10 @@ namespace fl
 {
 	const EventType EVENT_COLLISION = registerEventType();
 
-	CollisionEvent::CollisionEvent(Collidable* collided, CollisionSide side)
+	CollisionEvent::CollisionEvent(Collidable* collided, CollisionSide side, CollisionState state)
 		: collided(collided),
-		side(side)
+		side(side),
+		state(state)
 	{
 		//
 	}
@@ -25,5 +26,10 @@ namespace fl
 	CollisionSide CollisionEvent::getCollisionSide() const
 	{
 		return side;
+	}
+	
+	CollisionState CollisionEvent::getCollisionState() const
+	{
+		return state;
 	}
 }

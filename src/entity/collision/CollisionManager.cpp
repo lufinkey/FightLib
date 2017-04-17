@@ -370,11 +370,11 @@ namespace fl
 					//check for new/updated collision calls
 					for(auto collisionSide : newPair.sides)
 					{
-						auto collisionEvent1 = CollisionEvent(collidable2, collisionSide);
-						auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide));
 						if(!pair.sides.contains(collisionSide))
 						{
 							//the previous collision pair doesn't have this collision side, so it is a new collision
+							auto collisionEvent1 = CollisionEvent(collidable2, collisionSide, COLLISIONSTATE_NEW);
+							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide), COLLISIONSTATE_NEW);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
@@ -411,6 +411,8 @@ namespace fl
 						else
 						{
 							//the previous collision pair has this collision side, so it's an updated collision
+							auto collisionEvent1 = CollisionEvent(collidable2, collisionSide, COLLISIONSTATE_UPDATED);
+							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide), COLLISIONSTATE_UPDATED);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
@@ -451,8 +453,8 @@ namespace fl
 					{
 						if(!newPair.sides.contains(prevCollisionSide))
 						{
-							auto collisionEvent1 = CollisionEvent(collidable2, prevCollisionSide);
-							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(prevCollisionSide));
+							auto collisionEvent1 = CollisionEvent(collidable2, prevCollisionSide, COLLISIONSTATE_FINISHED);
+							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(prevCollisionSide), COLLISIONSTATE_FINISHED);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionFinishCalls.add([=]{
