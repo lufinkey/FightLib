@@ -62,7 +62,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
 	}
 
-#define DOUBLECHECK_COLLISIONS
+//#define DOUBLECHECK_COLLISIONS
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
@@ -162,8 +162,12 @@ namespace fl
 									else
 									{
 										//find out if rect1 has collided with a static collision body
+										fgl::ArrayList<CollisionPair> collisionsSoFar;
+										collisionsSoFar.reserve(previousCollisions.size()+collisions.size());
+										collisionsSoFar.addAll(previousCollisions);
+										collisionsSoFar.addAll(collisions);
 										bool staticOpposite1 = false;
-										for(auto& collision : collisions)
+										for(auto& collision : collisionsSoFar)
 										{
 											if(collision.collidable1==collidable1 && collision.collidable2->isStaticCollisionBody() && collision.sides.contains(collisionSide2))
 											{
@@ -177,7 +181,7 @@ namespace fl
 											}
 										}
 										bool staticOpposite2 = false;
-										for(auto& collision : collisions)
+										for(auto& collision : collisionsSoFar)
 										{
 											if(collision.collidable1==collidable2 && collision.collidable2->isStaticCollisionBody() && collision.sides.contains(collisionSide1))
 											{
@@ -263,14 +267,12 @@ namespace fl
 												{
 													case COLLISIONSIDE_LEFT:
 													case COLLISIONSIDE_TOP:
-													portion2 = portion;
 													portion1 = 1.0-portion;
 													break;
 
 													case COLLISIONSIDE_RIGHT:
 													case COLLISIONSIDE_BOTTOM:
 													portion1 = portion;
-													portion2 = 1.0-portion;
 													break;
 												}
 											}
@@ -286,12 +288,10 @@ namespace fl
 													case COLLISIONSIDE_LEFT:
 													case COLLISIONSIDE_TOP:
 													portion1 = portion;
-													portion2 = 1.0-portion;
 													break;
 
 													case COLLISIONSIDE_RIGHT:
 													case COLLISIONSIDE_BOTTOM:
-													portion2 = portion;
 													portion1 = 1.0-portion;
 													break;
 												}
@@ -300,16 +300,14 @@ namespace fl
 										else if(staticOpposite1)
 										{
 											portion1 = 0;
-											portion2 = 1.0;
 										}
 										else if(staticOpposite2)
 										{
 											portion1 = 1.0;
-											portion2 = 0;
 										}
 
 										auto moveAmount1 = -shiftAmount*portion1;
-										auto moveAmount2 = shiftAmount*portion2;
+										auto moveAmount2 = shiftAmount+moveAmount1;
 
 										if(moveAmount1.x!=0 || moveAmount1.y!=0)
 										{
