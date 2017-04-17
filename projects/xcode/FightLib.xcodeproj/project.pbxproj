@@ -11,9 +11,11 @@
 		F15BDFC11E9547E500B92754 /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */; };
 		F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F24F21E8E9550005EE4F1 /* Stage.cpp */; };
 		F15F25021E8EA8A7005EE4F1 /* Collidable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15F25011E8EA8A7005EE4F1 /* Collidable.cpp */; };
-		F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */; };
 		F164D2DB1E8C164F00B11F7F /* ActionInterruptEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */; };
 		F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16539A91E94069700F11ACB /* KeyboardCharacterController.cpp */; };
+		F16971C91EA4EEB6007E1893 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16971C81EA4EEB6007E1893 /* Event.cpp */; };
+		F16971CB1EA4EEC4007E1893 /* HitboxClash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16971CA1EA4EEC4007E1893 /* HitboxClash.cpp */; };
+		F16971CD1EA4EEC8007E1893 /* HitboxCollision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16971CC1EA4EEC8007E1893 /* HitboxCollision.cpp */; };
 		F16CDDA81E9E9A1500E4DB26 /* HitboxInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16CDDA71E9E9A1500E4DB26 /* HitboxInfo.cpp */; };
 		F16D60521E9FCF61007E7740 /* HitboxClashEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16D60511E9FCF61007E7740 /* HitboxClashEvent.cpp */; };
 		F16D60611E9FD5BF007E7740 /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F16D60601E9FD5BF007E7740 /* CollisionEvent.cpp */; };
@@ -34,7 +36,6 @@
 		F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17D96D61E6DB53B003F4D85 /* Character.cpp */; };
 		F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */; };
 		F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */; };
-		F17F94911EA114A100D9CACB /* HitboxPair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F17F94901EA114A100D9CACB /* HitboxPair.cpp */; };
 		F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */; };
 		F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F18196371E8ADADC009BD55F /* DrawManager.cpp */; };
 		F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1A7DF481E893E2F00472DB2 /* AnimationAssetManager.cpp */; };
@@ -53,12 +54,16 @@
 		F15F24F01E8E9541005EE4F1 /* Stage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stage.hpp; sourceTree = "<group>"; };
 		F15F24F21E8E9550005EE4F1 /* Stage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage.cpp; sourceTree = "<group>"; };
 		F15F25011E8EA8A7005EE4F1 /* Collidable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collidable.cpp; sourceTree = "<group>"; };
-		F164D2C51E8C09AB00B11F7F /* ActionEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionEvent.hpp; sourceTree = "<group>"; };
-		F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionEvent.cpp; sourceTree = "<group>"; };
 		F164D2D91E8C163D00B11F7F /* ActionInterruptEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ActionInterruptEvent.hpp; sourceTree = "<group>"; };
 		F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionInterruptEvent.cpp; sourceTree = "<group>"; };
 		F16539A81E94068400F11ACB /* KeyboardCharacterController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KeyboardCharacterController.hpp; sourceTree = "<group>"; };
 		F16539A91E94069700F11ACB /* KeyboardCharacterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardCharacterController.cpp; sourceTree = "<group>"; };
+		F16971C31EA4EE8C007E1893 /* HitboxCollision.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxCollision.hpp; sourceTree = "<group>"; };
+		F16971C41EA4EE95007E1893 /* HitboxClash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxClash.hpp; sourceTree = "<group>"; };
+		F16971C61EA4EEA1007E1893 /* Event.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Event.hpp; sourceTree = "<group>"; };
+		F16971C81EA4EEB6007E1893 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
+		F16971CA1EA4EEC4007E1893 /* HitboxClash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxClash.cpp; sourceTree = "<group>"; };
+		F16971CC1EA4EEC8007E1893 /* HitboxCollision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxCollision.cpp; sourceTree = "<group>"; };
 		F16CDDA61E9E99F200E4DB26 /* HitboxInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxInfo.hpp; sourceTree = "<group>"; };
 		F16CDDA71E9E9A1500E4DB26 /* HitboxInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxInfo.cpp; sourceTree = "<group>"; };
 		F16D60501E9FCF4D007E7740 /* HitboxClashEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxClashEvent.hpp; sourceTree = "<group>"; };
@@ -97,8 +102,6 @@
 		F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxCollisionPair.hpp; sourceTree = "<group>"; };
 		F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxClashPair.cpp; sourceTree = "<group>"; };
 		F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxCollisionPair.cpp; sourceTree = "<group>"; };
-		F17F948F1EA1148E00D9CACB /* HitboxPair.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HitboxPair.hpp; sourceTree = "<group>"; };
-		F17F94901EA114A100D9CACB /* HitboxPair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitboxPair.cpp; sourceTree = "<group>"; };
 		F18196231E8AB995009BD55F /* CollisionRectManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionRectManager.hpp; sourceTree = "<group>"; };
 		F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionRectManager.cpp; sourceTree = "<group>"; };
 		F18196361E8ADAC9009BD55F /* DrawManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DrawManager.hpp; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		F15A1F981E549FA7008D83E5 /* fightlib */ = {
 			isa = PBXGroup;
 			children = (
+				F16971C51EA4EEA1007E1893 /* base */,
 				F1BA75CC1E92848D00647E41 /* controls */,
 				F15A1F991E549FA7008D83E5 /* entity */,
 				F1209DF71E68AF5A00E1BF4F /* game */,
@@ -205,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				F17D96CB1E6DB50B003F4D85 /* Action.hpp */,
-				F164D2C51E8C09AB00B11F7F /* ActionEvent.hpp */,
 				F164D2D91E8C163D00B11F7F /* ActionInterruptEvent.hpp */,
 			);
 			path = action;
@@ -239,6 +242,7 @@
 		F15A1FA81E549FAE008D83E5 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				F16971C71EA4EEB6007E1893 /* base */,
 				F15A1FA91E549FAE008D83E5 /* action */,
 				F15A1FAB1E549FAE008D83E5 /* collision */,
 				F1A7DF471E893E2F00472DB2 /* draw */,
@@ -255,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				F17D96D11E6DB531003F4D85 /* Action.cpp */,
-				F164D2C61E8C09B800B11F7F /* ActionEvent.cpp */,
 				F164D2DA1E8C164F00B11F7F /* ActionInterruptEvent.cpp */,
 			);
 			path = action;
@@ -292,16 +295,34 @@
 			path = stage;
 			sourceTree = "<group>";
 		};
+		F16971C51EA4EEA1007E1893 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				F16971C61EA4EEA1007E1893 /* Event.hpp */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		F16971C71EA4EEB6007E1893 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				F16971C81EA4EEB6007E1893 /* Event.cpp */,
+			);
+			name = base;
+			path = ../base;
+			sourceTree = "<group>";
+		};
 		F16CDDA41E9E99B000E4DB26 /* hitbox */ = {
 			isa = PBXGroup;
 			children = (
+				F16971C41EA4EE95007E1893 /* HitboxClash.hpp */,
 				F16D60501E9FCF4D007E7740 /* HitboxClashEvent.hpp */,
 				F17F947B1EA1133000D9CACB /* HitboxClashPair.hpp */,
+				F16971C31EA4EE8C007E1893 /* HitboxCollision.hpp */,
 				F16D606D1E9FE891007E7740 /* HitboxCollisionEvent.hpp */,
 				F16D60831E9FF8FA007E7740 /* HitboxCollisionManager.hpp */,
 				F17F947C1EA1133A00D9CACB /* HitboxCollisionPair.hpp */,
 				F16CDDA61E9E99F200E4DB26 /* HitboxInfo.hpp */,
-				F17F948F1EA1148E00D9CACB /* HitboxPair.hpp */,
 			);
 			path = hitbox;
 			sourceTree = "<group>";
@@ -309,13 +330,14 @@
 		F16CDDA51E9E99DB00E4DB26 /* hitbox */ = {
 			isa = PBXGroup;
 			children = (
+				F16971CA1EA4EEC4007E1893 /* HitboxClash.cpp */,
 				F16D60511E9FCF61007E7740 /* HitboxClashEvent.cpp */,
 				F17F947D1EA1135600D9CACB /* HitboxClashPair.cpp */,
+				F16971CC1EA4EEC8007E1893 /* HitboxCollision.cpp */,
 				F16D606E1E9FE8A3007E7740 /* HitboxCollisionEvent.cpp */,
 				F16D60841E9FF91C007E7740 /* HitboxCollisionManager.cpp */,
 				F17F947F1EA1135B00D9CACB /* HitboxCollisionPair.cpp */,
 				F16CDDA71E9E9A1500E4DB26 /* HitboxInfo.cpp */,
-				F17F94901EA114A100D9CACB /* HitboxPair.cpp */,
 			);
 			path = hitbox;
 			sourceTree = "<group>";
@@ -478,12 +500,12 @@
 				F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */,
 				F16D60851E9FF91C007E7740 /* HitboxCollisionManager.cpp in Sources */,
 				F16D60521E9FCF61007E7740 /* HitboxClashEvent.cpp in Sources */,
+				F16971CB1EA4EEC4007E1893 /* HitboxClash.cpp in Sources */,
 				F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */,
-				F17F94911EA114A100D9CACB /* HitboxPair.cpp in Sources */,
 				F17BBBEA1E64965800A7F8F4 /* CollisionRect.cpp in Sources */,
 				F17BBBEE1E64965E00A7F8F4 /* CollisionManager.cpp in Sources */,
 				F1BA75CB1E92847300647E41 /* Item.cpp in Sources */,
-				F164D2C71E8C09B800B11F7F /* ActionEvent.cpp in Sources */,
+				F16971C91EA4EEB6007E1893 /* Event.cpp in Sources */,
 				F16D606F1E9FE8A3007E7740 /* HitboxCollisionEvent.cpp in Sources */,
 				F17BBBEB1E64965800A7F8F4 /* PixelCollisionRect.cpp in Sources */,
 				F16D60611E9FD5BF007E7740 /* CollisionEvent.cpp in Sources */,
@@ -493,6 +515,7 @@
 				F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */,
 				F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
+				F16971CD1EA4EEC8007E1893 /* HitboxCollision.cpp in Sources */,
 				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
