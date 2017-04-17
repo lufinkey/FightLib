@@ -17,11 +17,6 @@ namespace fl
 		shift(velocity*appData.getFrameSpeedMultiplier());
 	}
 
-	double Collidable::getCollisionResistance(Collidable* collided, CollisionSide side) const
-	{
-		return 1.0;
-	}
-
 	double Collidable::getMass() const
 	{
 		return 1.0;

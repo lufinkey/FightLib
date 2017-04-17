@@ -311,23 +311,21 @@ namespace fl
 
 										auto moveAmount1 = -shiftAmount*portion1;
 										auto moveAmount2 = shiftAmount*portion2;
-										double resistance1 = collidable1->getCollisionResistance(collidable2, collisionSide1);
-										double resistance2 = collidable2->getCollisionResistance(collidable1, collisionSide2);
 
 										if(moveAmount1.x!=0 || moveAmount1.y!=0)
 										{
-											collidable1->shift(moveAmount1*resistance1);
+											collidable1->shift(moveAmount1);
 											for(auto& rect : rects1)
 											{
-												rect->shift(moveAmount1*resistance1);
+												rect->shift(moveAmount1);
 											}
 										}
 										if(moveAmount2.x!=0 || moveAmount2.y!=0)
 										{
-											collidable2->shift(moveAmount2*resistance2);
+											collidable2->shift(moveAmount2);
 											for(auto& rect : rects2)
 											{
-												rect->shift(moveAmount2*resistance2);
+												rect->shift(moveAmount2);
 											}
 										}
 									}
