@@ -151,4 +151,61 @@ namespace fl
 	{
 		return currentAction;
 	}
+	
+	void ActionEntity::onCollision(const CollisionEvent& collisionEvent)
+	{
+		Entity::onCollision(collisionEvent);
+		if(currentAction!=nullptr)
+		{
+			currentAction->onEvent(EventPtr(new CollisionEvent(collisionEvent)));
+		}
+	}
+	
+	void ActionEntity::onCollisionUpdate(const CollisionEvent& collisionEvent)
+	{
+		Entity::onCollisionUpdate(collisionEvent);
+	}
+	
+	void ActionEntity::onCollisionFinish(const CollisionEvent& collisionEvent)
+	{
+		Entity::onCollisionFinish(collisionEvent);
+	}
+	
+	void ActionEntity::onHitboxClash(const HitboxClashEvent& clashEvent)
+	{
+		Entity::onHitboxClash(clashEvent);
+		if(currentAction!=nullptr)
+		{
+			currentAction->onEvent(EventPtr(new HitboxClashEvent(clashEvent)));
+		}
+	}
+	
+	void ActionEntity::onHitboxClashUpdate(const HitboxClashEvent& clashEvent)
+	{
+		Entity::onHitboxClashUpdate(clashEvent);
+	}
+	
+	void ActionEntity::onHitboxClashFinish(const HitboxClashEvent& clashEvent)
+	{
+		Entity::onHitboxClashFinish(clashEvent);
+	}
+	
+	void ActionEntity::onHitboxCollision(const HitboxCollisionEvent& collisionEvent)
+	{
+		Entity::onHitboxCollision(collisionEvent);
+		if(currentAction!=nullptr)
+		{
+			currentAction->onEvent(EventPtr(new HitboxCollisionEvent(collisionEvent)));
+		}
+	}
+	
+	void ActionEntity::onHitboxCollisionUpdate(const HitboxCollisionEvent& collisionEvent)
+	{
+		Entity::onHitboxCollisionUpdate(collisionEvent);
+	}
+	
+	void ActionEntity::onHitboxCollisionFinish(const HitboxCollisionEvent& collisionEvent)
+	{
+		Entity::onHitboxCollisionFinish(collisionEvent);
+	}
 }

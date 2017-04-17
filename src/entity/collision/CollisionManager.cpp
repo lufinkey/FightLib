@@ -62,7 +62,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
 	}
 
-//#define DOUBLECHECK_COLLISIONS
+#define DOUBLECHECK_COLLISIONS
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{

@@ -28,6 +28,18 @@ namespace fl
 		void sendActionEvent(EventPtr event, bool allActions = false);
 		
 		virtual void onActionEnd(Action* action);
+		
+		virtual void onCollision(const CollisionEvent& collisionEvent) override;
+		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
+		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
+		
+		virtual void onHitboxClash(const HitboxClashEvent& clashEvent) override;
+		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent) override;
+		virtual void onHitboxClashFinish(const HitboxClashEvent& clashEvent) override;
+		
+		virtual void onHitboxCollision(const HitboxCollisionEvent& collisionEvent) override;
+		virtual void onHitboxCollisionUpdate(const HitboxCollisionEvent& collisionEvent) override;
+		virtual void onHitboxCollisionFinish(const HitboxCollisionEvent& collisionEvent) override;
 
 	private:
 		void endAction(Action* action);
