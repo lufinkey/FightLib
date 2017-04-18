@@ -249,7 +249,7 @@ namespace fl
 											}
 											else
 											{
-												positiveForce += force1;
+												positiveForce += force2;
 											}
 											double netForce = force1 + force2;
 
