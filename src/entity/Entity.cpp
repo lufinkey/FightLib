@@ -53,28 +53,28 @@ namespace fl
 				velocity += platform->getFriction(this)*appData.getFrameSpeedMultiplier();
 			}
 		}
-		if(leftCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
+		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
 		{
 			if(velocity.x < 0)
 			{
 				velocity.x = 0;
 			}
 		}
-		if(topCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_TOP))
+		if(isStaticCollidableOnSide(COLLISIONSIDE_TOP))
 		{
 			if(velocity.y < 0)
 			{
 				velocity.y = 0;
 			}
 		}
-		if(rightCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_RIGHT))
+		if(isStaticCollidableOnSide(COLLISIONSIDE_RIGHT))
 		{
 			if(velocity.x > 0)
 			{
 				velocity.x = 0;
 			}
 		}
-		if(bottomCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_BOTTOM))
+		if(isStaticCollidableOnSide(COLLISIONSIDE_BOTTOM))
 		{
 			if(velocity.y > 0)
 			{
