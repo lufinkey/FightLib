@@ -1,5 +1,6 @@
 
 #include <fightlib/stage/Platform.hpp>
+#include <fightlib/entity/Entity.hpp>
 
 namespace fl
 {
@@ -34,6 +35,12 @@ namespace fl
 			*rotation = 0;
 		}
 		return position;
+	}
+
+	fgl::Vector2d Platform::getFriction(Entity* entity) const
+	{
+		auto velocity = entity->getVelocity();
+		return fgl::Vector2d(-velocity.x*12, 0);
 	}
 	
 	float Platform::getScale() const

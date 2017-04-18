@@ -78,7 +78,8 @@ namespace fl
 		
 		virtual void onFinishHitboxUpdates();
 
-		const fgl::ArrayList<Collidable*>& getGroundCollidables() const;
+		const fgl::ArrayList<Collidable*>& getCollided(CollisionSide side) const;
+		bool isStaticCollidableOnSide(CollisionSide side) const;
 
 		struct Anchor
 		{
@@ -106,7 +107,10 @@ namespace fl
 		
 		Stage* stage;
 
-		fgl::ArrayList<Collidable*> groundCollidables;
+		fgl::ArrayList<Collidable*> leftCollidables;
+		fgl::ArrayList<Collidable*> topCollidables;
+		fgl::ArrayList<Collidable*> rightCollidables;
+		fgl::ArrayList<Collidable*> bottomCollidables;
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;

@@ -79,34 +79,6 @@ namespace fl
 		}
 		return true;
 	}
-
-	void Item::onCollision(const CollisionEvent& collisionEvent)
-	{
-		if(collisionEvent.getCollisionSide()==fl::COLLISIONSIDE_BOTTOM)
-		{
-			fgl::Vector2d velocity = getVelocity();
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
-				setVelocity(velocity);
-			}
-		}
-		ActionEntity::onCollision(collisionEvent);
-	}
-
-	void Item::onCollisionUpdate(const CollisionEvent& collisionEvent)
-	{
-		if(collisionEvent.getCollisionSide()==fl::COLLISIONSIDE_BOTTOM)
-		{
-			fgl::Vector2d velocity = getVelocity();
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
-				setVelocity(velocity);
-			}
-		}
-		ActionEntity::onCollisionUpdate(collisionEvent);
-	}
 	
 	void Item::onPickUp(Character* character)
 	{

@@ -30,9 +30,6 @@ namespace fl
 		
 		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
 		
-		virtual void onCollision(const CollisionEvent& collisionEvent) override;
-		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
-		
 		virtual void onPickUp(Character* character);
 		virtual void onDiscard(Character* character);
 		

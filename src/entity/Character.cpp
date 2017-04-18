@@ -48,8 +48,12 @@ namespace fl
 		}
 		//TODO add gradual movement toward the move speed
 		fgl::Vector2d velocity = getVelocity();
-		velocity.x = (direction.x >= 0) ? moveSpeed : -moveSpeed;
-		setVelocity(velocity);
+		double realSpeed = (direction.x >= 0) ? moveSpeed : -moveSpeed;
+		if((realSpeed > 0 && realSpeed > velocity.x) || (realSpeed < 0 && realSpeed < velocity.x))
+		{
+			velocity.x = realSpeed;
+			setVelocity(velocity);
+		}
 
 		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWORIENTATIONCHANGE))
 		{
@@ -298,39 +302,6 @@ namespace fl
 	bool Character::canCollideWithEntityHitbox(Entity* collidedEntity) const
 	{
 		return true;
-	}
-	
-	void Character::onCollision(const CollisionEvent& collisionEvent)
-	{
-		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
-		{
-			fgl::Vector2d velocity = getVelocity();
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
-				setVelocity(velocity);
-			}
-		}
-		ActionEntity::onCollision(collisionEvent);
-	}
-
-	void Character::onCollisionUpdate(const CollisionEvent& collisionEvent)
-	{
-		if(collisionEvent.getCollisionSide()==fl::COLLISIONSIDE_BOTTOM)
-		{
-			fgl::Vector2d velocity = getVelocity();
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
-				setVelocity(velocity);
-			}
-		}
-		ActionEntity::onCollisionUpdate(collisionEvent);
-	}
-	
-	void Character::onCollisionFinish(const CollisionEvent& collisionEvent)
-	{
-		ActionEntity::onCollisionFinish(collisionEvent);
 	}
 	
 	void Character::onFinishCollisionUpdates()

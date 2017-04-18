@@ -3,7 +3,6 @@
 
 void PunchAttack::onPerform(fl::ActionParamsPtr params)
 {
-	getEntity()->setVelocity(fgl::Vector2d(0, getEntity()->getVelocity().y));
 	getEntity()->changeAnimation("punch", [=](fl::AnimationEventType animEvent){
 		if(animEvent==fl::ANIMATIONEVENT_FINISHED)
 		{

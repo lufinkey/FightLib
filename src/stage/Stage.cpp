@@ -29,9 +29,14 @@ namespace fl
 		{
 			if(entity->getParentEntity()==nullptr && entity->respondsToGravity())
 			{
-				auto gravity = getGravity(entity);
 				auto velocity = entity->getVelocity();
-				velocity += gravity*appData.getFrameSpeedMultiplier();
+
+				velocity += getGravity(entity)*appData.getFrameSpeedMultiplier();
+				if(!entity->isOnGround())
+				{
+					velocity += getAirResistance(entity)*appData.getFrameSpeedMultiplier();
+				}
+
 				entity->setVelocity(velocity);
 			}
 		}
@@ -66,6 +71,12 @@ namespace fl
 	fgl::Vector2d Stage::getGravity(Entity* entity) const
 	{
 		return fgl::Vector2d(0, 1800);
+	}
+
+	fgl::Vector2d Stage::getAirResistance(Entity* entity) const
+	{
+		auto velocity = entity->getVelocity();
+		return fgl::Vector2d(-velocity.x*4, 0);
 	}
 	
 	Fight* Stage::getFight() const

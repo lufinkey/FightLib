@@ -25,6 +25,7 @@ namespace fl
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 		
 		virtual fgl::Vector2d getGravity(Entity* entity) const;
+		virtual fgl::Vector2d getAirResistance(Entity* entity) const;
 		
 		Fight* getFight() const;
 		

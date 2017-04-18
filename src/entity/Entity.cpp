@@ -2,6 +2,7 @@
 #include <fightlib/entity/Entity.hpp>
 #include <fightlib/entity/collision/rects/BoxCollisionRect.hpp>
 #include <fightlib/entity/collision/rects/PixelCollisionRect.hpp>
+#include <fightlib/stage/Platform.hpp>
 
 namespace fl
 {
@@ -31,11 +32,56 @@ namespace fl
 	{
 		Collidable::update(appData);
 		
-		if(movesWithGround() && groundCollidables.size() > 0)
+		auto velocity = getVelocity();
+		if(bottomCollidables.size() > 0)
 		{
-			auto ground = groundCollidables[0];
-			shift(ground->getVelocity()*appData.getFrameSpeedMultiplier());
+			if(movesWithGround())
+			{
+				auto ground = bottomCollidables[0];
+				shift(ground->getVelocity()*appData.getFrameSpeedMultiplier());
+			}
+			auto platforms = bottomCollidables.filter([](fl::Collidable* const & collidable) -> bool {
+				if(collidable->getFlag("Platform"))
+				{
+					return true;
+				}
+				return false;
+			});
+			if(platforms.size() > 0)
+			{
+				auto platform = static_cast<Platform*>(platforms[0]);
+				velocity += platform->getFriction(this)*appData.getFrameSpeedMultiplier();
+			}
 		}
+		if(leftCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
+		{
+			if(velocity.x < 0)
+			{
+				velocity.x = 0;
+			}
+		}
+		if(topCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_TOP))
+		{
+			if(velocity.y < 0)
+			{
+				velocity.y = 0;
+			}
+		}
+		if(rightCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_RIGHT))
+		{
+			if(velocity.x > 0)
+			{
+				velocity.x = 0;
+			}
+		}
+		if(bottomCollidables.size() > 0 && isStaticCollidableOnSide(COLLISIONSIDE_BOTTOM))
+		{
+			if(velocity.y > 0)
+			{
+				velocity.y = 0;
+			}
+		}
+		setVelocity(velocity);
 
 		collisionRectManager.update(appData, this);
 	}
@@ -229,22 +275,70 @@ namespace fl
 
 	void Entity::onCollision(const CollisionEvent& collisionEvent)
 	{
-		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
+		switch(collisionEvent.getCollisionSide())
 		{
-			groundCollidables.add(collisionEvent.getCollided());
+			case COLLISIONSIDE_LEFT:
+			leftCollidables.add(collisionEvent.getCollided());
+			break;
+
+			case COLLISIONSIDE_TOP:
+			topCollidables.add(collisionEvent.getCollided());
+			break;
+
+			case COLLISIONSIDE_RIGHT:
+			rightCollidables.add(collisionEvent.getCollided());
+			break;
+
+			case COLLISIONSIDE_BOTTOM:
+			bottomCollidables.add(collisionEvent.getCollided());
+			break;
 		}
 		Collidable::onCollision(collisionEvent);
 	}
 
 	void Entity::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
-		if(collisionEvent.getCollisionSide()==COLLISIONSIDE_BOTTOM)
+		switch(collisionEvent.getCollisionSide())
 		{
-			size_t collidableIndex = groundCollidables.indexOf(collisionEvent.getCollided());
-			if(collidableIndex!=-1)
+			case COLLISIONSIDE_LEFT:
 			{
-				groundCollidables.remove(collidableIndex);
+				size_t collidableIndex = leftCollidables.indexOf(collisionEvent.getCollided());
+				if(collidableIndex!=-1)
+				{
+					leftCollidables.remove(collidableIndex);
+				}
 			}
+			break;
+
+			case COLLISIONSIDE_TOP:
+			{
+				size_t collidableIndex = topCollidables.indexOf(collisionEvent.getCollided());
+				if(collidableIndex!=-1)
+				{
+					topCollidables.remove(collidableIndex);
+				}
+			}
+			break;
+
+			case COLLISIONSIDE_RIGHT:
+			{
+				size_t collidableIndex = rightCollidables.indexOf(collisionEvent.getCollided());
+				if(collidableIndex!=-1)
+				{
+					rightCollidables.remove(collidableIndex);
+				}
+			}
+			break;
+
+			case COLLISIONSIDE_BOTTOM:
+			{
+				size_t collidableIndex = bottomCollidables.indexOf(collisionEvent.getCollided());
+				if(collidableIndex!=-1)
+				{
+					bottomCollidables.remove(collidableIndex);
+				}
+			}
+			break;
 		}
 		Collidable::onCollisionFinish(collisionEvent);
 	}
@@ -296,16 +390,48 @@ namespace fl
 
 	bool Entity::isOnGround() const
 	{
-		if(groundCollidables.size() > 0)
+		if(bottomCollidables.size() > 0)
 		{
 			return true;
 		}
 		return false;
 	}
 
-	const fgl::ArrayList<Collidable*>& Entity::getGroundCollidables() const
+	const fgl::ArrayList<Collidable*>& Entity::getCollided(CollisionSide side) const
 	{
-		return groundCollidables;
+		switch(side)
+		{
+			case COLLISIONSIDE_LEFT:
+			return leftCollidables;
+
+			case COLLISIONSIDE_TOP:
+			return topCollidables;
+			break;
+
+			case COLLISIONSIDE_RIGHT:
+			return rightCollidables;
+
+			case COLLISIONSIDE_BOTTOM:
+			return bottomCollidables;
+		}
+		throw fgl::IllegalArgumentException("side", "not a valid enum value");
+	}
+
+	bool Entity::isStaticCollidableOnSide(CollisionSide side) const
+	{
+		auto& collided = getCollided(side);
+		for(auto collidable : collided)
+		{
+			if(collidable->isStaticCollisionBody())
+			{
+				return true;
+			}
+			else if(collidable->getFlag("Entity") && static_cast<Entity*>(collidable)->isStaticCollidableOnSide(side))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
