@@ -50,7 +50,7 @@ namespace fl
 			if(platforms.size() > 0)
 			{
 				auto platform = static_cast<Platform*>(platforms[0]);
-				velocity += platform->getFriction(this)*appData.getFrameSpeedMultiplier();
+				velocity += platform->getFriction(this, COLLISIONSIDE_TOP)*appData.getFrameSpeedMultiplier();
 			}
 		}
 		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))

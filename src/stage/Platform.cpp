@@ -37,10 +37,14 @@ namespace fl
 		return position;
 	}
 
-	fgl::Vector2d Platform::getFriction(Entity* entity) const
+	fgl::Vector2d Platform::getFriction(Entity* entity, CollisionSide side) const
 	{
-		auto velocity = entity->getVelocity();
-		return fgl::Vector2d(-velocity.x*12, 0);
+		if(side==COLLISIONSIDE_TOP)
+		{
+			auto velocity = entity->getVelocity();
+			return fgl::Vector2d(-velocity.x*12, 0);
+		}
+		return fgl::Vector2d(0, 0);
 	}
 	
 	float Platform::getScale() const

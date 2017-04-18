@@ -17,7 +17,7 @@ namespace fl
 		virtual void update(const fgl::ApplicationData& appData) override;
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 
-		virtual fgl::Vector2d getFriction(Entity* entity) const;
+		virtual fgl::Vector2d getFriction(Entity* entity, CollisionSide side) const;
 		
 		float getScale() const;
 		void setScale(float scale);
