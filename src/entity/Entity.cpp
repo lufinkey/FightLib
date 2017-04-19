@@ -38,7 +38,8 @@ namespace fl
 			if(movesWithGround())
 			{
 				auto ground = bottomCollidables[0];
-				shift(ground->getVelocity()*appData.getFrameSpeedMultiplier());
+				auto groundMovement = ground->getVelocity()*appData.getFrameSpeedMultiplier();
+				shift(fgl::Vector2d(groundMovement.x, 0));
 			}
 			auto platforms = bottomCollidables.filter([](fl::Collidable* const & collidable) -> bool {
 				if(collidable->getFlag("Platform"))
