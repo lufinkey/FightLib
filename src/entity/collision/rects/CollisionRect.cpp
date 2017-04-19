@@ -203,7 +203,7 @@ namespace fl
 			fgl::RectangleD pastRect2 = prevRect2;
 			pastRect2.x += velocityRight1;
 			pastRect2.width -= velocityRight1;
-			pastRect2.width += velocityLeft;
+			pastRect2.width += velocityLeft1;
 			pastRect2.y += velocityBottom1;
 			pastRect2.height -= velocityBottom1;
 			pastRect2.height += velocityTop1;
@@ -213,7 +213,7 @@ namespace fl
 			if(pastRect2_bottom <= rect1.y)
 				//above frame1
 			{
-				if(pastRect2_right <= rect1.x)
+				if(pastRect2_right < rect1.x)
 					//top left
 				{
 					fgl::LineD lineBL(pastRect2.x, pastRect2_bottom, pastRect2.x-velocityLeft, pastRect2_bottom-velocityBottom);
@@ -248,7 +248,7 @@ namespace fl
 					//push up
 					return DIR_UP;
 				}
-				else if(pastRect2.x >= rect1_right)
+				else if(pastRect2.x > rect1_right)
 					//top right
 				{
 					fgl::LineD lineBR(pastRect2_right, pastRect2_bottom, pastRect2_right-velocityRight, pastRect2_bottom-velocityBottom);
