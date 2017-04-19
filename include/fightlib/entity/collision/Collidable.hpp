@@ -16,6 +16,8 @@ namespace fl
 		
 		virtual void update(const fgl::ApplicationData& appData) override;
 
+		virtual void shift(const fgl::Vector2d& offset) = 0;
+
 		virtual double getMass() const;
 		virtual bool isStaticCollisionBody() const = 0;
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;
@@ -30,8 +32,6 @@ namespace fl
 		bool checkCollision(Collidable* collidable) const;
 
 	protected:
-		virtual void shift(const fgl::Vector2d& offset) = 0;
-
 		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
 
 		virtual void onCollision(const CollisionEvent& collisionEvent);

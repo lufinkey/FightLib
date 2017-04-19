@@ -16,6 +16,7 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(const fgl::ApplicationData& appData) override;
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
+		virtual void shift(const fgl::Vector2d& offset) override;
 
 		virtual fgl::Vector2d getFriction(Entity* entity, CollisionSide side) const;
 		
@@ -26,8 +27,6 @@ namespace fl
 		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 		
 	protected:
-		virtual void shift(const fgl::Vector2d& offset) override;
-		
 		void setCollisionMethod(CollisionMethod collisionMethod);
 		CollisionMethod getCollisionMethod() const;
 		

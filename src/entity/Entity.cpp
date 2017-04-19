@@ -222,6 +222,21 @@ namespace fl
 		setOptionalArg(rotation, anchorRotation)
 			return fullOffset;
 	}
+
+	void Entity::shift(const fgl::Vector2d& shiftOffset)
+	{
+		if(parentEntity!=nullptr)
+		{
+			parentEntity->shift(shiftOffset);
+			return;
+		}
+		offset.x += shiftOffset.x;
+		offset.y += shiftOffset.y;
+
+		//TODO I may not need this anymore, but I should do some thorough tests before removing it
+		offset.y = fgl::Math::round(offset.y, 12);
+		offset.x = fgl::Math::round(offset.x, 12);
+	} 
 	
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
 	{
@@ -488,21 +503,6 @@ namespace fl
 	Entity* Entity::getParentEntity() const
 	{
 		return parentEntity;
-	}
-
-	void Entity::shift(const fgl::Vector2d& shiftOffset)
-	{
-		if(parentEntity!=nullptr)
-		{
-			parentEntity->shift(shiftOffset);
-			return;
-		}
-		offset.x += shiftOffset.x;
-		offset.y += shiftOffset.y;
-
-		//TODO I may not need this anymore, but I should do some thorough tests before removing it
-		offset.y = fgl::Math::round(offset.y, 12);
-		offset.x = fgl::Math::round(offset.x, 12);
 	}
 
 	Entity::Anchor Entity::getAnchor(const Entity* entity) const

@@ -37,6 +37,11 @@ namespace fl
 		return position;
 	}
 
+	void Platform::shift(const fgl::Vector2d& offset)
+	{
+		position += offset;
+	}
+
 	fgl::Vector2d Platform::getFriction(Entity* entity, CollisionSide side) const
 	{
 		if(side==COLLISIONSIDE_TOP)
@@ -79,11 +84,6 @@ namespace fl
 	fgl::ArrayList<CollisionRect*> Platform::getCollisionRects() const
 	{
 		return collisionRectManager.getCollisionRects();
-	}
-	
-	void Platform::shift(const fgl::Vector2d& offset)
-	{
-		position += offset;
 	}
 	
 	void Platform::setCollisionMethod(CollisionMethod collisionMethod)

@@ -29,6 +29,7 @@ namespace fl
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
+		virtual void shift(const fgl::Vector2d& offset) override;
 		
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 
@@ -51,8 +52,6 @@ namespace fl
 		bool isOnGround() const;
 
 	protected:
-		virtual void shift(const fgl::Vector2d& offset) override;
-
 		virtual AnimationOrientation getAnimationOrientation() const override;
 
 		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
