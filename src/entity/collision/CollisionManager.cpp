@@ -42,25 +42,6 @@ namespace fl
 		}
 		throw fgl::IllegalArgumentException("shiftAmount", "cannot be 0,0");
 	}
-	
-	CollisionSide CollisionManager::getOppositeCollisionSide(CollisionSide side)
-	{
-		switch(side)
-		{
-			case COLLISIONSIDE_LEFT:
-				return COLLISIONSIDE_RIGHT;
-				
-			case COLLISIONSIDE_RIGHT:
-				return COLLISIONSIDE_LEFT;
-				
-			case COLLISIONSIDE_TOP:
-				return COLLISIONSIDE_BOTTOM;
-				
-			case COLLISIONSIDE_BOTTOM:
-				return COLLISIONSIDE_TOP;
-		}
-		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
-	}
 
 #define DOUBLECHECK_COLLISIONS
 
@@ -108,7 +89,7 @@ namespace fl
 						if(!(shiftAmount.x==0 && shiftAmount.y==0))
 						{
 							CollisionSide collisionSide1 = getCollisionSide(shiftAmount);
-							CollisionSide collisionSide2 = getOppositeCollisionSide(collisionSide1);
+							CollisionSide collisionSide2 = CollisionSide_getOpposite(collisionSide1);
 							CollisionRectTagPair rectTagPair = CollisionRectTagPair(rectPair.first->getTag(), rectPair.second->getTag());
 							//make sure that this collision wasn't previously ignored
 							if(pair.shouldIgnoreCollision(rectPair.first, rectPair.second))
@@ -371,7 +352,7 @@ namespace fl
 						{
 							//the previous collision pair doesn't have this collision side, so it is a new collision
 							auto collisionEvent1 = CollisionEvent(collidable2, collisionSide, COLLISIONSTATE_NEW);
-							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide), COLLISIONSTATE_NEW);
+							auto collisionEvent2 = CollisionEvent(collidable1, CollisionSide_getOpposite(collisionSide), COLLISIONSTATE_NEW);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
@@ -409,7 +390,7 @@ namespace fl
 						{
 							//the previous collision pair has this collision side, so it's an updated collision
 							auto collisionEvent1 = CollisionEvent(collidable2, collisionSide, COLLISIONSTATE_UPDATED);
-							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(collisionSide), COLLISIONSTATE_UPDATED);
+							auto collisionEvent2 = CollisionEvent(collidable1, CollisionSide_getOpposite(collisionSide), COLLISIONSTATE_UPDATED);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionCalls.add([=] {
@@ -451,7 +432,7 @@ namespace fl
 						if(!newPair.sides.contains(prevCollisionSide))
 						{
 							auto collisionEvent1 = CollisionEvent(collidable2, prevCollisionSide, COLLISIONSTATE_FINISHED);
-							auto collisionEvent2 = CollisionEvent(collidable1, getOppositeCollisionSide(prevCollisionSide), COLLISIONSTATE_FINISHED);
+							auto collisionEvent2 = CollisionEvent(collidable1, CollisionSide_getOpposite(prevCollisionSide), COLLISIONSTATE_FINISHED);
 							if(collidable1->isStaticCollisionBody())
 							{
 								onCollisionFinishCalls.add([=]{

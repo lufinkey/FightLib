@@ -18,7 +18,6 @@ namespace fl
 
 	private:
 		CollisionSide getCollisionSide(const fgl::Vector2d& shiftAmount) const;
-		CollisionSide getOppositeCollisionSide(CollisionSide side);
 
 		fgl::ArrayList<Collidable*> collidables;
 		fgl::ArrayList<CollisionPair> previousCollisions;

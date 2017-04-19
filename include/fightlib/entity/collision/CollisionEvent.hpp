@@ -13,6 +13,8 @@ namespace fl
 		COLLISIONSIDE_RIGHT
 	} CollisionSide;
 	
+	CollisionSide CollisionSide_getOpposite(CollisionSide side);
+	
 	typedef enum
 	{
 		COLLISIONSTATE_NEW,
