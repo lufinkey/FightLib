@@ -76,7 +76,7 @@ namespace fl
 	fgl::Vector2d Stage::getAirResistance(Entity* entity) const
 	{
 		auto velocity = entity->getVelocity();
-		return fgl::Vector2d(-velocity.x*4, 0);
+		return fgl::Vector2d(-velocity.x*2, 0);
 	}
 	
 	Fight* Stage::getFight() const
