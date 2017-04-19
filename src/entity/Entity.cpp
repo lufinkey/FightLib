@@ -41,7 +41,11 @@ namespace fl
 				auto groundMovement = ground->getVelocity()*appData.getFrameSpeedMultiplier();
 				shift(fgl::Vector2d(groundMovement.x, 0));
 			}
-			auto platforms = bottomCollidables.filter([](fl::Collidable* const & collidable) -> bool {
+		}
+		for(auto collisionSide : {COLLISIONSIDE_BOTTOM, COLLISIONSIDE_TOP, COLLISIONSIDE_LEFT, COLLISIONSIDE_RIGHT})
+		{
+			auto collidables = getCollided(collisionSide);
+			auto platforms = collidables.filter([](fl::Collidable* const & collidable) -> bool {
 				if(collidable->getFlag("Platform"))
 				{
 					return true;
@@ -51,7 +55,7 @@ namespace fl
 			if(platforms.size() > 0)
 			{
 				auto platform = static_cast<Platform*>(platforms[0]);
-				velocity += platform->getFriction(this, COLLISIONSIDE_TOP)*appData.getFrameSpeedMultiplier();
+				velocity += platform->getFriction(this, CollisionSide_getOpposite(collisionSide))*appData.getFrameSpeedMultiplier();
 			}
 		}
 		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
