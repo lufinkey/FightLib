@@ -38,9 +38,6 @@ namespace fl
 		Orientation getOrientation() const;
 		void setOrientation(Orientation orientation);
 
-		CollisionMethod getCollisionMethod() const;
-		void setCollisionMethod(CollisionMethod method);
-
 		virtual bool isStaticCollisionBody() const override;
 		virtual bool respondsToGravity() const;
 		virtual bool movesWithGround() const;
@@ -80,6 +77,9 @@ namespace fl
 
 		const fgl::ArrayList<Collidable*>& getCollided(CollisionSide side) const;
 		bool isStaticCollidableOnSide(CollisionSide side) const;
+		
+		CollisionMethod getCollisionMethod() const;
+		void setCollisionMethod(CollisionMethod method);
 
 		struct Anchor
 		{
