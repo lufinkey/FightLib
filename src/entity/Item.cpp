@@ -6,7 +6,8 @@ namespace fl
 {
 	Item::Item(const fgl::Vector2d& position, Orientation orientation)
 		: ActionEntity(position, orientation),
-		parentCharacter(nullptr)
+		parentCharacter(nullptr),
+		beingUsed(false)
 	{
 		//
 	}
@@ -71,6 +72,29 @@ namespace fl
 		return parentCharacter;
 	}
 	
+	void Item::startUse()
+	{
+		if(!beingUsed)
+		{
+			beingUsed = true;
+			onStartUse();
+		}
+	}
+	
+	void Item::stopUse()
+	{
+		if(beingUsed)
+		{
+			beingUsed = false;
+			onStopUse();
+		}
+	}
+	
+	bool Item::isBeingUsed() const
+	{
+		return beingUsed;
+	}
+	
 	bool Item::respondsToCollision(Collidable* collided, CollisionSide side) const
 	{
 		if(collided->getFlag("Character"))
@@ -86,6 +110,16 @@ namespace fl
 	}
 	
 	void Item::onDiscard(Character* character)
+	{
+		//
+	}
+	
+	void Item::onStartUse()
+	{
+		//
+	}
+	
+	void Item::onStopUse()
 	{
 		//
 	}
