@@ -36,6 +36,12 @@ namespace fl
 	{
 		return velocity;
 	}
+	
+	void Collidable::applyForce(const fgl::Vector2d& force)
+	{
+		auto acceleration = force/getMass();
+		velocity += acceleration;
+	}
 
 	bool Collidable::respondsToCollision(Collidable* collided, CollisionSide side) const
 	{

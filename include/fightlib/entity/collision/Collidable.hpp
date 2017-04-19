@@ -25,6 +25,8 @@ namespace fl
 		void setVelocity(const fgl::Vector2d& velocity);
 		const fgl::Vector2d& getVelocity() const;
 		
+		void applyForce(const fgl::Vector2d& force);
+		
 		bool checkCollision(Collidable* collidable) const;
 
 	protected:
