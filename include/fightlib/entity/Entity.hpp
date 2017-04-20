@@ -30,6 +30,7 @@ namespace fl
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 		virtual void shift(const fgl::Vector2d& offset) override;
+		virtual fgl::Vector2d getTerminalVelocity() const;
 		
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 

@@ -30,9 +30,33 @@ namespace fl
 
 	void Entity::update(const fgl::ApplicationData& appData)
 	{
+		auto velocity = getVelocity();
+		//make sure velocity is not larger than terminal velocity
+		auto terminalVelocity = getTerminalVelocity();
+		terminalVelocity.x = fgl::Math::abs(terminalVelocity.x);
+		terminalVelocity.y = fgl::Math::abs(terminalVelocity.y);
+		if(velocity.x > terminalVelocity.x)
+		{
+			velocity.x = terminalVelocity.x;
+		}
+		else if(velocity.x < -terminalVelocity.x)
+		{
+			velocity.x = -terminalVelocity.x;
+		}
+		if(velocity.y > terminalVelocity.y)
+		{
+			velocity.y = terminalVelocity.y;
+		}
+		else if(velocity.y < -terminalVelocity.y)
+		{
+			velocity.y = -terminalVelocity.y;
+		}
+		setVelocity(velocity);
+
 		Collidable::update(appData);
 		
-		auto velocity = getVelocity();
+		velocity = getVelocity();
+		//make entities move when on top of other collidables
 		if(bottomCollidables.size() > 0)
 		{
 			if(movesWithGround())
@@ -42,6 +66,7 @@ namespace fl
 				shift(fgl::Vector2d(groundMovement.x, 0));
 			}
 		}
+		//update friction
 		for(auto collisionSide : {COLLISIONSIDE_BOTTOM, COLLISIONSIDE_TOP, COLLISIONSIDE_LEFT, COLLISIONSIDE_RIGHT})
 		{
 			auto collidables = getCollided(collisionSide);
@@ -58,6 +83,7 @@ namespace fl
 				velocity += platform->getFriction(this, CollisionSide_getOpposite(collisionSide))*appData.getFrameSpeedMultiplier();
 			}
 		}
+		//stop velocity on static collisions
 		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
 		{
 			if(velocity.x < 0)
@@ -236,7 +262,12 @@ namespace fl
 		//TODO I may not need this anymore, but I should do some thorough tests before removing it
 		offset.y = fgl::Math::round(offset.y, 12);
 		offset.x = fgl::Math::round(offset.x, 12);
-	} 
+	}
+
+	fgl::Vector2d Entity::getTerminalVelocity() const
+	{
+		return fgl::Vector2d(1000000, 1000000);
+	}
 	
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
 	{
