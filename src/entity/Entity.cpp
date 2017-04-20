@@ -266,7 +266,7 @@ namespace fl
 
 	fgl::Vector2d Entity::getTerminalVelocity() const
 	{
-		return fgl::Vector2d(1000000, 1000000);
+		return fgl::Vector2d(10000, 10000);
 	}
 	
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
