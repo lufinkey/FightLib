@@ -111,6 +111,16 @@ namespace fl
 	{
 		return platforms;
 	}
+
+	void Stage::addDrawable(Drawable* drawable, double zLayer)
+	{
+		drawManager.addDrawable(drawable, zLayer);
+	}
+
+	void Stage::removeDrawable(Drawable* drawable)
+	{
+		drawManager.removeDrawable(drawable);
+	}
 	
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{

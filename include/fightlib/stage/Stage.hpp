@@ -35,6 +35,9 @@ namespace fl
 		const fgl::ArrayList<Item*>& getItems() const;
 		const fgl::ArrayList<Character*>& getCharacters() const;
 		const fgl::ArrayList<Platform*>& getPlatforms() const;
+
+		void addDrawable(Drawable* drawable, double zLayer=0.5);
+		void removeDrawable(Drawable* drawable);
 		
 		void addEntity(Entity* entity, double zLayer=0.5);
 		void removeEntity(Entity* entity);
