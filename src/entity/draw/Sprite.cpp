@@ -3,8 +3,9 @@
 
 namespace fl
 {
-	Sprite::Sprite()
-		: currentAnimationData(nullptr),
+	Sprite::Sprite(const fgl::Vector2d& position)
+		: position(position),
+		currentAnimationData(nullptr),
 		currentAnimationFrame(0),
 		currentAnimationLastFrameTime(0),
 		currentAnimationEventHandler(nullptr),
@@ -70,6 +71,15 @@ namespace fl
 			}
 		} while(animationChanged || frameChanged);
 	}
+
+	fgl::Vector2d Sprite::getDrawPosition(float* rotation) const
+	{
+		if(rotation!=nullptr)
+		{
+			*rotation = 0;
+		}
+		return position;
+	}
 	
 	float Sprite::getDrawScale() const
 	{
@@ -94,6 +104,33 @@ namespace fl
 		{
 			currentAnimationData->drawFrame(currentAnimationFrame, graphics, getAnimationOrientation());
 		}
+	}
+
+	fgl::Vector2d Sprite::getPosition(float* rotation) const
+	{
+		if(rotation!=nullptr)
+		{
+			*rotation = 0;
+		}
+		return position;
+	}
+
+	void Sprite::setPosition(const fgl::Vector2d& position_arg)
+	{
+		position = position_arg;
+
+		//TODO I may not need this anymore, but I should do some thorough tests before removing it
+		position.y = fgl::Math::round(position.y, 12);
+		position.x = fgl::Math::round(position.x, 12);
+	}
+
+	void Sprite::shift(const fgl::Vector2d& offset)
+	{
+		position += offset;
+
+		//TODO I may not need this anymore, but I should do some thorough tests before removing it
+		position.y = fgl::Math::round(position.y, 12);
+		position.x = fgl::Math::round(position.x, 12);
 	}
 
 	fgl::Vector2d Sprite::getSize() const

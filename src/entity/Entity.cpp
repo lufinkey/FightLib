@@ -10,7 +10,6 @@ namespace fl
 
 	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
 		: Collidable(position),
-		offset(position),
 		scale(1.0f),
 		orientation(orientation),
 		parentEntity(nullptr),
@@ -119,12 +118,7 @@ namespace fl
 
 	fgl::Vector2d Entity::getDrawPosition(float* rotation) const
 	{
-		//TODO find some better way to actually use this when I'm sober
-		if(rotation!=nullptr)
-		{
-			*rotation = 0;
-		}
-		return offset;
+		return Collidable::getDrawPosition(rotation);
 	}
 	
 	float Entity::getDrawScale() const
@@ -140,6 +134,7 @@ namespace fl
 	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
 	{
 		fgl::Graphics childGraphics = graphics;
+		fgl::Vector2d offset = Collidable::getDrawPosition();
 		if(parentEntity==nullptr)
 		{
 			childGraphics.translate(offset.x, offset.y);
@@ -217,14 +212,18 @@ namespace fl
 
 	fgl::Vector2d Entity::getPosition(float* rotation) const
 	{
-		fgl::Vector2d childOffset = fgl::Vector2d(offset.x, offset.y);
-		if(parentEntity!=nullptr)
+		if(parentEntity==nullptr)
 		{
-			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
-			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
-			{
-				childOffset.x = -childOffset.x;
-			}
+			return Collidable::getPosition(rotation);
+		}
+		float childRotation = 0;
+		fgl::Vector2d childOffset = Collidable::getPosition(&childRotation);
+
+		//if parent orientation is right, the offset should be flipped
+		AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
+		if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
+		{
+			childOffset.x = -childOffset.x;
 		}
 
 		fgl::Vector2d parentOffset;
@@ -238,30 +237,31 @@ namespace fl
 			rotationTransform.rotate(anchorRotation, anchorRotationPoint);
 			fullOffset = rotationTransform.transform(fullOffset);
 		}
-		if(parentEntity!=nullptr)
-		{
-			float parentRotation = 0;
-			fgl::Vector2d parentPosition = parentEntity->getPosition(&parentRotation);
-			setOptionalArg(rotation, parentRotation+anchorRotation)
-				return parentPosition+fullOffset;
-		}
-		setOptionalArg(rotation, anchorRotation)
-			return fullOffset;
+
+		float parentRotation = 0;
+		fgl::Vector2d parentPosition = parentEntity->getPosition(&parentRotation);
+		setOptionalArg(rotation, parentRotation+anchorRotation+childRotation)
+		return parentPosition+fullOffset;
 	}
 
-	void Entity::shift(const fgl::Vector2d& shiftOffset)
+	void Entity::setPosition(const fgl::Vector2d& position_arg)
 	{
 		if(parentEntity!=nullptr)
 		{
-			parentEntity->shift(shiftOffset);
+			//position can't be changed while anchored to a parent entity (atleast for now...)
 			return;
 		}
-		offset.x += shiftOffset.x;
-		offset.y += shiftOffset.y;
+		Collidable::setPosition(position_arg);
+	}
 
-		//TODO I may not need this anymore, but I should do some thorough tests before removing it
-		offset.y = fgl::Math::round(offset.y, 12);
-		offset.x = fgl::Math::round(offset.x, 12);
+	void Entity::shift(const fgl::Vector2d& offset)
+	{
+		if(parentEntity!=nullptr)
+		{
+			parentEntity->shift(offset);
+			return;
+		}
+		Collidable::shift(offset);
 	}
 
 	fgl::Vector2d Entity::getTerminalVelocity() const
@@ -498,8 +498,7 @@ namespace fl
 		}
 		//TODO check for another item attached at the same place? idk revisit this when I'm sober
 		Anchor anchor;
-		child->offset.x = childOffset.x;
-		child->offset.y = childOffset.y;
+		child->setPosition(childOffset);
 		child->parentEntity = this;
 		anchor.entity = child;
 		anchor.childPoint = childPoint;
@@ -518,10 +517,10 @@ namespace fl
 			{
 				fgl::Vector2d position = child->getPosition();
 				//TODO do something about rotation when it gets released? maybe pass a pointer as an optional parameter? idk
-				child->offset.x = position.x;
-				child->offset.y = position.y;
 				child->parentEntity = nullptr;
 				anchoredEntities.remove(i);
+				child->setPosition(position);
+				return;
 			}
 		}
 	}
@@ -589,6 +588,7 @@ namespace fl
 			}
 
 			fgl::Vector2d parentSize = parentEntity->getSize();
+			//get the offset of the parent point from the parent entity's center
 			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-(parentSize.x/2), ((double)parentMetaPoint.y*parentEntity->scale)-(parentSize.y/2));
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			AnimationOrientation parentAnimationOrientation = parentAnimData->getOrientation();
@@ -599,6 +599,7 @@ namespace fl
 			}
 
 			fgl::Vector2d childSize = getSize();
+			//get the offset of the child point from the child entity's (this entity's) center
 			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-(childSize.x/2), ((double)childMetaPoint.y*scale)-(childSize.y/2));
 			AnimationOrientation childOrientation = getAnimationOrientation();
 			AnimationOrientation childAnimationOrientation = childAnimData->getOrientation();

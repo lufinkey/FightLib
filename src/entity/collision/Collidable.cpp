@@ -4,7 +4,8 @@
 namespace fl
 {
 	Collidable::Collidable(const fgl::Vector2d& position)
-		: previousPosition(position)
+		: Sprite(position),
+		previousPosition(position)
 	{
 		//
 	}

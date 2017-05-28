@@ -29,6 +29,7 @@ namespace fl
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
+		virtual void setPosition(const fgl::Vector2d& position) override;
 		virtual void shift(const fgl::Vector2d& offset) override;
 		virtual fgl::Vector2d getTerminalVelocity() const;
 		
@@ -95,8 +96,6 @@ namespace fl
 		const fgl::ArrayList<Anchor>& getAnchoredEntities() const;
 
 	private:
-		fgl::Vector2d offset;
-
 		float scale;
 
 		Orientation orientation;

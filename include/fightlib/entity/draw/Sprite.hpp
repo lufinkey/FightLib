@@ -18,14 +18,16 @@ namespace fl
 	class Sprite : public Drawable
 	{
 	public:
-		Sprite();
+		Sprite(const fgl::Vector2d& position);
 		virtual ~Sprite();
 
 		virtual void update(const fgl::ApplicationData& appData) override;
 		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
 
 		fgl::Vector2d getSize() const;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const = 0;
+		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const;
+		virtual void setPosition(const fgl::Vector2d& position);
+		virtual void shift(const fgl::Vector2d& offset);
 
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
@@ -42,10 +44,12 @@ namespace fl
 		AnimationData* getCurrentAnimationData() const;
 		AnimationData* getAnimationData(const fgl::String& name) const;
 		
-		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const = 0;
+		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
 		virtual float getDrawScale() const;
 
 	private:
+		fgl::Vector2d position;
+
 		fgl::ArrayList<AnimationData*> animations;
 
 		AnimationData* currentAnimationData;
