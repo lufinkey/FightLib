@@ -248,7 +248,7 @@ namespace fl
 		return true;
 	}
 	
-	void AnimationMetaPoint::draw(fgl::Graphics graphics) const
+	void AnimationMetaPoint::draw(fgl::Graphics graphics, double pointSize) const
 	{
 		if(behind)
 		{
@@ -292,7 +292,7 @@ namespace fl
 		}
 		fgl::RectangleD frame = getRect();
 		graphics.drawRect(frame);
-		graphics.fillRect(x-0.5, y-0.5, 1.0, 1.0);
+		graphics.fillRect(x-(pointSize/2), y-(pointSize/2), pointSize, pointSize);
 		
 		graphics.setColor(graphics.getColor().negative());
 		switch(orientation)

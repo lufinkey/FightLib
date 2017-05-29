@@ -43,7 +43,7 @@ namespace fl
 		bool loadFromDictionary(const fgl::Dictionary& dictionary, fgl::String* error);
 		bool saveToDictionary(fgl::Dictionary* dictionary, fgl::String* error) const;
 		
-		void draw(fgl::Graphics graphics) const;
+		void draw(fgl::Graphics graphics, double pointSize=1) const;
 		
 		fgl::RectangleD getRect() const;
 		
