@@ -6,7 +6,6 @@ namespace fl
 {
 	Platform::Platform(const fgl::Vector2d& position)
 		: Collidable(position),
-		position(position),
 		scale(1.0f)
 	{
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
@@ -27,20 +26,6 @@ namespace fl
 		
 		collisionRectManager.update(appData, this);
 	}
-	
-	fgl::Vector2d Platform::getPosition(float* rotation) const
-	{
-		if(rotation!=nullptr)
-		{
-			*rotation = 0;
-		}
-		return position;
-	}
-
-	void Platform::shift(const fgl::Vector2d& offset)
-	{
-		position += offset;
-	}
 
 	fgl::Vector2d Platform::getFriction(Entity* entity, CollisionSide side) const
 	{
@@ -60,15 +45,6 @@ namespace fl
 	void Platform::setScale(float scale_arg)
 	{
 		scale = scale_arg;
-	}
-
-	fgl::Vector2d Platform::getDrawPosition(float* rotation) const
-	{
-		if(rotation!=nullptr)
-		{
-			*rotation = 0;
-		}
-		return position;
 	}
 	
 	float Platform::getDrawScale() const
