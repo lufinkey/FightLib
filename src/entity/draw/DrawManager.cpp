@@ -65,6 +65,17 @@ namespace fl
 		drawables.remove(index);
 		addDrawable(drawable, zLayer);
 	}
+
+	fgl::ArrayList<Drawable*> DrawManager::getDrawables() const
+	{
+		fgl::ArrayList<Drawable*> drawablePtrs;
+		drawablePtrs.reserve(drawables.size());
+		for(auto& drawableData : drawables)
+		{
+			drawablePtrs.add(drawableData.drawable);
+		}
+		return drawablePtrs;
+	}
 	
 	void DrawManager::update(const fgl::ApplicationData& appData)
 	{

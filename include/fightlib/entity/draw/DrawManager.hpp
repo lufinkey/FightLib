@@ -13,6 +13,8 @@ namespace fl
 
 		float getDrawableZLayer(Drawable* drawable) const;
 		void setDrawableZLayer(Drawable* drawable, float zLayer);
+
+		fgl::ArrayList<Drawable*> getDrawables() const;
 		
 		void update(const fgl::ApplicationData& appData);
 		void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;

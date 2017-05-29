@@ -10,13 +10,9 @@ namespace fl
 	
 	Stage::~Stage()
 	{
-		for(auto entity : entities)
+		for(auto drawable : drawManager.getDrawables())
 		{
-			delete entity;
-		}
-		for(auto platform : platforms)
-		{
-			delete platform;
+			delete drawable;
 		}
 	}
 	
@@ -120,6 +116,11 @@ namespace fl
 	void Stage::removeDrawable(Drawable* drawable)
 	{
 		drawManager.removeDrawable(drawable);
+	}
+
+	fgl::ArrayList<Drawable*> Stage::getDrawables() const
+	{
+		return drawManager.getDrawables();
 	}
 	
 	void Stage::addEntity(Entity* entity, double zLayer)

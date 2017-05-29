@@ -31,6 +31,7 @@ namespace fl
 		
 		fgl::ArrayList<Item*> getAccessibleItems(Character* character) const;
 		
+		fgl::ArrayList<Drawable*> getDrawables() const;
 		const fgl::ArrayList<Entity*>& getEntities() const;
 		const fgl::ArrayList<Item*>& getItems() const;
 		const fgl::ArrayList<Character*>& getCharacters() const;
@@ -55,9 +56,8 @@ namespace fl
 	private:
 		Fight* fight;
 		
-		fgl::ArrayList<Entity*> entities;
 		fgl::ArrayList<Platform*> platforms;
-
+		fgl::ArrayList<Entity*> entities;
 		fgl::ArrayList<Item*> items;
 		fgl::ArrayList<Character*> characters;
 		
