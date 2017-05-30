@@ -8,7 +8,7 @@ namespace fl
 	class AnimationAssetManager : public fgl::AssetManager
 	{
 	public:
-		AnimationAssetManager(fgl::AssetManager* assetManager);
+		using AssetManager::AssetManager;
 		virtual ~AnimationAssetManager();
 
 		bool loadAnimationData(const fgl::String& path, fgl::String* error=nullptr);

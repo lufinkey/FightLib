@@ -7,7 +7,7 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 {
 	setFPS(60);
 	
-	animationAssetManager = new fl::AnimationAssetManager(assetManager);
+	animationAssetManager = new fl::AnimationAssetManager(assetManager->getWindow(), assetManager->getRootDirectory());
 	
 	auto player = new Player(animationAssetManager, fgl::Vector2d(300, 200), fl::ORIENTATION_LEFT);
 	auto controller = new fl::KeyboardCharacterController(player);

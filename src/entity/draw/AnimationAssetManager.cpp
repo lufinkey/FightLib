@@ -3,11 +3,6 @@
 
 namespace fl
 {
-	AnimationAssetManager::AnimationAssetManager(fgl::AssetManager* assetManager) : AssetManager(assetManager->getWindow(), assetManager->getRootDirectory())
-	{
-		addAssetManager(assetManager);
-	}
-
 	AnimationAssetManager::~AnimationAssetManager()
 	{
 		unloadAllAnimationData();
