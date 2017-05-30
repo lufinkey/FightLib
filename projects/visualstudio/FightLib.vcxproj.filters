@@ -183,6 +183,9 @@
     <ClInclude Include="..\..\include\fightlib\entity\action\AttackAction.hpp">
       <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp">
+      <Filter>include\fightlib\stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -289,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\action\AttackAction.cpp">
       <Filter>src\entity\action</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\stage\StageSection.cpp">
+      <Filter>src\stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

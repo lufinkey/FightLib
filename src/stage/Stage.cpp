@@ -10,6 +10,11 @@ namespace fl
 	
 	Stage::~Stage()
 	{
+		for(auto section : sections)
+		{
+			unloadSection(section);
+			delete section;
+		}
 		for(auto drawable : drawManager.getDrawables())
 		{
 			delete drawable;
@@ -209,6 +214,50 @@ namespace fl
 		{
 			characters.remove(characterIndex);
 		}
+	}
+
+	void Stage::addSection(StageSection* section)
+	{
+		if(section->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("section", "already added to a Stage");
+		}
+		sections.add(section);
+		section->stage = this;
+		loadSection(section);
+	}
+
+	void Stage::removeSection(StageSection* section)
+	{
+		if(section->stage!=this)
+		{
+			return;
+		}
+		unloadSection(section);
+		sections.removeFirstEqual(section);
+		section->stage = nullptr;
+	}
+
+	void Stage::loadSection(StageSection* section)
+	{
+		if(section->loaded)
+		{
+			return;
+		}
+		//TODO saving and loading section states
+		section->onLoad({});
+		section->loaded = true;
+	}
+
+	void Stage::unloadSection(StageSection* section)
+	{
+		if(!section->loaded)
+		{
+			return;
+		}
+		//TODO saving and loading section states
+		section->onUnload();
+		section->loaded = false;
 	}
 
 	const fgl::ArrayList<Character*>& Stage::getCharacters() const

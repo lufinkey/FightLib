@@ -8,6 +8,7 @@
 #include <fightlib/entity/Entity.hpp>
 #include <fightlib/entity/Item.hpp>
 #include "Platform.hpp"
+#include "StageSection.hpp"
 
 namespace fl
 {
@@ -37,6 +38,9 @@ namespace fl
 		const fgl::ArrayList<Character*>& getCharacters() const;
 		const fgl::ArrayList<Platform*>& getPlatforms() const;
 
+		void addPlatform(Platform* platform, double zLayer=0.5);
+		void removePlatform(Platform* platform);
+
 		void addDrawable(Drawable* drawable, double zLayer=0.5);
 		void removeDrawable(Drawable* drawable);
 		
@@ -49,17 +53,21 @@ namespace fl
 		void addCharacter(Character* character, double zLayer=0.5);
 		void removeCharacter(Character* character);
 
-	protected:
-		void addPlatform(Platform* platform, double zLayer=0.5);
-		void removePlatform(Platform* platform);
+		void addSection(StageSection* section);
+		void removeSection(StageSection* section);
 		
 	private:
+		void loadSection(StageSection* section);
+		void unloadSection(StageSection* section);
+
 		Fight* fight;
 		
 		fgl::ArrayList<Platform*> platforms;
 		fgl::ArrayList<Entity*> entities;
 		fgl::ArrayList<Item*> items;
 		fgl::ArrayList<Character*> characters;
+
+		fgl::ArrayList<StageSection*> sections;
 		
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		
