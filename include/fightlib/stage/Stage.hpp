@@ -54,12 +54,16 @@ namespace fl
 
 		void addSection(StageSection* section);
 		void removeSection(StageSection* section);
+
+		void addSubStage(Stage* stage, double zLayer=0.5);
+		void removeSubStage(Stage* stage);
 		
 	private:
 		void loadSection(StageSection* section);
 		void unloadSection(StageSection* section);
 
 		Fight* fight;
+		Stage* parentStage;
 		
 		fgl::ArrayList<Platform*> platforms;
 		fgl::ArrayList<Entity*> entities;
@@ -67,6 +71,7 @@ namespace fl
 		fgl::ArrayList<Character*> characters;
 
 		fgl::ArrayList<StageSection*> sections;
+		fgl::ArrayList<Stage*> subStages;
 		
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		

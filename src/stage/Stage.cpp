@@ -3,7 +3,7 @@
 
 namespace fl
 {
-	Stage::Stage() : fight(nullptr)
+	Stage::Stage() : fight(nullptr), parentStage(nullptr)
 	{
 		//
 	}
@@ -231,6 +231,28 @@ namespace fl
 		unloadSection(section);
 		sections.removeFirstEqual(section);
 		section->stage = nullptr;
+	}
+
+	void Stage::addSubStage(Stage* stage, double zLayer)
+	{
+		if(stage->parentStage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("stage", "already added to a Stage");
+		}
+		subStages.add(stage);
+		drawManager.addDrawable(stage);
+		stage->parentStage = this;
+	}
+
+	void Stage::removeSubStage(Stage* stage)
+	{
+		if(stage->parentStage!=nullptr && stage->parentStage!=this)
+		{
+			throw fgl::IllegalArgumentException("stage", "belongs to a different stage");
+		}
+		subStages.removeFirstEqual(stage);
+		drawManager.removeDrawable(stage);
+		stage->parentStage = nullptr;
 	}
 
 	void Stage::loadSection(StageSection* section)
