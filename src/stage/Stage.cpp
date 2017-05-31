@@ -84,6 +84,11 @@ namespace fl
 	{
 		return fight;
 	}
+
+	Stage* Stage::getParentStage() const
+	{
+		return parentStage;
+	}
 	
 	fgl::ArrayList<Item*> Stage::getAccessibleItems(fl::Character* character) const
 	{

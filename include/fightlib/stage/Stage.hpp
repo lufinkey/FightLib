@@ -29,6 +29,7 @@ namespace fl
 		virtual fgl::Vector2d getAirResistance(Entity* entity) const;
 		
 		Fight* getFight() const;
+		Stage* getParentStage() const;
 		
 		fgl::ArrayList<Item*> getAccessibleItems(Character* character) const;
 		
