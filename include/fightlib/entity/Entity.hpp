@@ -25,8 +25,8 @@ namespace fl
 		Entity(const fgl::Vector2d& position, Orientation orientation);
 		
 		virtual bool getFlag(const fgl::String& flag) const override;
-		virtual void update(const fgl::ApplicationData& appData) override;
-		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const override;
+		virtual void update(fgl::ApplicationData appData) override;
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 		virtual void setPosition(const fgl::Vector2d& position) override;

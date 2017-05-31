@@ -27,7 +27,7 @@ namespace fl
 		return Collidable::getFlag(flag);
 	}
 
-	void Entity::update(const fgl::ApplicationData& appData)
+	void Entity::update(fgl::ApplicationData appData)
 	{
 		auto velocity = getVelocity();
 		//make sure velocity is not larger than terminal velocity
@@ -131,7 +131,7 @@ namespace fl
 		return true;
 	}
 
-	void Entity::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		fgl::Graphics childGraphics = graphics;
 		fgl::Vector2d offset = Collidable::getDrawPosition();

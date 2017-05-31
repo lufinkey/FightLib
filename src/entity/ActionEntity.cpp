@@ -29,7 +29,7 @@ namespace fl
 		return Entity::getFlag(flag);
 	}
 
-	void ActionEntity::update(const fgl::ApplicationData& appData)
+	void ActionEntity::update(fgl::ApplicationData appData)
 	{
 		Entity::update(appData);
 		for(auto actionPair : actions)

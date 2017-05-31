@@ -19,7 +19,7 @@ namespace fl
 		return ActionEntity::getFlag(flag);
 	}
 
-	void Character::update(const fgl::ApplicationData& appData)
+	void Character::update(fgl::ApplicationData appData)
 	{
 		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWMOVEMENT))
 		{

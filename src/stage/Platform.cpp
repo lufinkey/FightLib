@@ -20,7 +20,7 @@ namespace fl
 		return Collidable::getFlag(flag);
 	}
 	
-	void Platform::update(const fgl::ApplicationData& appData)
+	void Platform::update(fgl::ApplicationData appData)
 	{
 		Collidable::update(appData);
 		

@@ -10,7 +10,7 @@ namespace fl
 		//
 	}
 	
-	void Collidable::update(const fgl::ApplicationData& appData)
+	void Collidable::update(fgl::ApplicationData appData)
 	{
 		Sprite::update(appData);
 		

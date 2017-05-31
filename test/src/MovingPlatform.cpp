@@ -8,7 +8,7 @@ MovingPlatform::MovingPlatform(fl::AnimationAssetManager* assetManager, const fg
 	setVelocity(fgl::Vector2d(100, 0));
 }
 
-void MovingPlatform::update(const fgl::ApplicationData& appData)
+void MovingPlatform::update(fgl::ApplicationData appData)
 {
 	auto position = getPosition();
 	if(position.x >= 600)

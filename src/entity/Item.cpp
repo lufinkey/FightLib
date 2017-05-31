@@ -21,7 +21,7 @@ namespace fl
 		return ActionEntity::getFlag(flag);
 	}
 	
-	void Item::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	void Item::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		//don't draw if the item is being held as a powerup and is not anchored to anything
 		if(!(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp()))

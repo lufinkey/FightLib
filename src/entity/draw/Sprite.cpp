@@ -19,7 +19,7 @@ namespace fl
 		//
 	}
 
-	void Sprite::update(const fgl::ApplicationData& appData)
+	void Sprite::update(fgl::ApplicationData appData)
 	{
 		long long currentTimeMillis = appData.getTime().getMilliseconds();
 
@@ -86,7 +86,7 @@ namespace fl
 		return 1.0f;
 	}
 
-	void Sprite::draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const
+	void Sprite::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		float rotation = 0;
 		auto position = getDrawPosition(&rotation);

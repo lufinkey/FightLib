@@ -22,7 +22,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	addAction("punch", new PunchAttack());
 }
 
-void Player::update(const fgl::ApplicationData& appData)
+void Player::update(fgl::ApplicationData appData)
 {
 	Character::update(appData);
 }

@@ -14,7 +14,7 @@ namespace fl
 	public:
 		Collidable(const fgl::Vector2d& position);
 		
-		virtual void update(const fgl::ApplicationData& appData) override;
+		virtual void update(fgl::ApplicationData appData) override;
 
 		virtual double getMass() const;
 		virtual bool isStaticCollisionBody() const = 0;

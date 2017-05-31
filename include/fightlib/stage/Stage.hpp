@@ -14,7 +14,7 @@ namespace fl
 {
 	class Fight;
 	
-	class Stage
+	class Stage : Drawable
 	{
 		friend class Fight;
 		friend class Character;
@@ -22,8 +22,8 @@ namespace fl
 		Stage();
 		virtual ~Stage();
 		
-		virtual void update(fgl::ApplicationData appData);
-		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+		virtual void update(fgl::ApplicationData appData) override;
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 		
 		virtual fgl::Vector2d getGravity(Entity* entity) const;
 		virtual fgl::Vector2d getAirResistance(Entity* entity) const;
@@ -32,7 +32,6 @@ namespace fl
 		
 		fgl::ArrayList<Item*> getAccessibleItems(Character* character) const;
 		
-		fgl::ArrayList<Drawable*> getDrawables() const;
 		const fgl::ArrayList<Entity*>& getEntities() const;
 		const fgl::ArrayList<Item*>& getItems() const;
 		const fgl::ArrayList<Character*>& getCharacters() const;

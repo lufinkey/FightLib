@@ -122,11 +122,6 @@ namespace fl
 	{
 		drawManager.removeDrawable(drawable);
 	}
-
-	fgl::ArrayList<Drawable*> Stage::getDrawables() const
-	{
-		return drawManager.getDrawables();
-	}
 	
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{

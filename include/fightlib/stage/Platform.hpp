@@ -14,7 +14,7 @@ namespace fl
 		Platform(const fgl::Vector2d& position);
 		
 		virtual bool getFlag(const fgl::String& flag) const override;
-		virtual void update(const fgl::ApplicationData& appData) override;
+		virtual void update(fgl::ApplicationData appData) override;
 
 		virtual fgl::Vector2d getFriction(Entity* entity, CollisionSide side) const;
 		

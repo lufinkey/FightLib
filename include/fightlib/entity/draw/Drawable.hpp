@@ -10,8 +10,8 @@ namespace fl
 	public:
 		virtual ~Drawable() {}
 
-		virtual void update(const fgl::ApplicationData& appData) {}
-		virtual void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const = 0;
+		virtual void update(fgl::ApplicationData appData) {}
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const = 0;
 
 		virtual bool getFlag(const fgl::String& flag) const { return false; }
 	};
