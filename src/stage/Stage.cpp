@@ -20,6 +20,15 @@ namespace fl
 			delete drawable;
 		}
 	}
+
+	bool Stage::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Stage")
+		{
+			return true;
+		}
+		return Drawable::getFlag(flag);
+	}
 	
 	void Stage::update(fgl::ApplicationData appData)
 	{

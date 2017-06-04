@@ -22,6 +22,7 @@ namespace fl
 		Stage();
 		virtual ~Stage();
 		
+		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 		
