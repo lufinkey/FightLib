@@ -21,7 +21,8 @@ namespace fl
 
 		virtual fgl::ArrayList<MetaPointType> getAnchorPoints() const = 0;
 		virtual bool isPickedUpByTouching() const;
-		virtual bool isPowerUp() const;
+
+		bool isEquippable() const;
 		
 		Character* getParentCharacter() const;
 		
@@ -34,8 +35,11 @@ namespace fl
 		
 		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
 		
-		virtual void onPickUp(Character* character);
-		virtual void onDiscard(Character* character);
+		virtual void onPickUp();
+		virtual void onDiscard();
+
+		virtual void onEquip();
+		virtual void onUnequip();
 		
 		virtual void onStartUse();
 		virtual void onStopUse();

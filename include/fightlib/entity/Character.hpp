@@ -23,8 +23,13 @@ namespace fl
 		
 		bool pickUpItem(Item* item);
 		void discardItem(Item* item);
-		bool isHoldingItem(Item* item) const;
-		fgl::ArrayList<Item*> getHeldItems() const;
+		bool isCarryingItem(Item* item) const;
+		fgl::ArrayList<Item*> getEquippedItems() const;
+		fgl::ArrayList<Item*> getUnequippedItems() const;
+		fgl::ArrayList<Item*> getItems() const;
+		bool setItemEquipped(Item* item, bool equipped);
+		bool isItemEquipped(Item* item) const;
+		bool isItemEquippable(Item* item) const;
 
 		void setDirection(const fgl::Vector2f& direction);
 		const fgl::Vector2f& getDirection() const;
@@ -40,20 +45,30 @@ namespace fl
 		
 		virtual void onFinishCollisionUpdates() override;
 		
-		virtual bool shouldPickUpItem(Item* item);
+		virtual bool canPickUpItem(Item* item) const;
 		virtual void onPickUpItem(Item* item);
 		virtual void onDiscardItem(Item* item);
+		virtual bool canEquipItem(Item* item) const;
+		virtual void onEquipItem(Item* item);
+		virtual void onUnequipItem(Item* item);
 
 	private:
+		struct EquipPoint
+		{
+			MetaPointType anchorPoint;
+			size_t anchorPointIndex;
+		};
+		fgl::ArrayList<EquipPoint> getMatchingEquipPoints(Item* item) const;
+
 		fgl::Vector2f direction;
 		
-		struct HeldItem
+		struct ItemContainer
 		{
 			Item* item;
 			MetaPointType anchorPoint;
 			size_t anchorPointIndex;
+			bool equipped;
 		};
-		fgl::ArrayList<HeldItem> heldItems;
-		fgl::ArrayList<Item*> heldPowerups;
+		fgl::ArrayList<ItemContainer> itemContainers;
 	};
 }

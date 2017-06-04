@@ -23,17 +23,19 @@ namespace fl
 	
 	void Item::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
-		//don't draw if the item is being held as a powerup and is not anchored to anything
-		if(!(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp()))
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
 		{
-			ActionEntity::draw(appData, graphics);
+			//don't draw if the item is held but is not equipped
+			return;
 		}
+		ActionEntity::draw(appData, graphics);
 	}
 	
 	fgl::Vector2d Item::getDrawPosition(float* rotation) const
 	{
-		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp())
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
 		{
+			//return the parent character's position if the item is held but not equipped
 			return getParentCharacter()->getPosition(rotation);
 		}
 		return ActionEntity::getDrawPosition(rotation);
@@ -41,8 +43,9 @@ namespace fl
 	
 	fgl::Vector2d Item::getPosition(float* rotation) const
 	{
-		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr && isPowerUp())
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
 		{
+			//return the parent character's position if the item is held but not equipped
 			return getParentCharacter()->getPosition(rotation);
 		}
 		return ActionEntity::getPosition(rotation);
@@ -61,9 +64,13 @@ namespace fl
 	{
 		return false;
 	}
-	
-	bool Item::isPowerUp() const
+
+	bool Item::isEquippable() const
 	{
+		if(getAnchorPoints().size() > 0)
+		{
+			return true;
+		}
 		return false;
 	}
 	
@@ -101,15 +108,30 @@ namespace fl
 		{
 			return false;
 		}
-		return true;
+		else if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
+		{
+			//don't allow collisions if the item is held but not equipped
+			return false;
+		}
+		return ActionEntity::respondsToCollision(collided, side);
 	}
 	
-	void Item::onPickUp(Character* character)
+	void Item::onPickUp()
 	{
 		//
 	}
 	
-	void Item::onDiscard(Character* character)
+	void Item::onDiscard()
+	{
+		//
+	}
+
+	void Item::onEquip()
+	{
+		//
+	}
+
+	void Item::onUnequip()
 	{
 		//
 	}

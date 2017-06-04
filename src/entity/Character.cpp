@@ -96,13 +96,9 @@ namespace fl
 	fgl::ArrayList<MetaPointType> Character::getAvailableItemAnchorPoints() const
 	{
 		auto availablePoints = getItemAnchorPoints();
-		for(auto& heldItem : heldItems)
+		for(auto& container : itemContainers)
 		{
-			size_t anchorPointIndex = availablePoints.indexOf(heldItem.anchorPoint);
-			if(anchorPointIndex!=-1)
-			{
-				availablePoints.remove(anchorPointIndex);
-			}
+			availablePoints.removeFirstEqual(container.anchorPoint);
 		}
 		return availablePoints;
 	}
@@ -113,167 +109,234 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("item", "already being held by a character");
 		}
-		
-		if(item->isPowerUp())
+
+		if(canPickUpItem(item))
 		{
-			//powerup items don't get anchored to the character entity
-			
-			if(shouldPickUpItem(item))
+			//make sure no other characters can see the item as accessible
+			auto stage = getStage();
+			if(stage!=nullptr)
 			{
-				//make sure no other characters can see the item as accessible
-				auto stage = getStage();
-				if(stage!=nullptr)
-				{
-					stage->removeAccessibleItem(item);
-				}
-				
-				heldPowerups.add(item);
-				item->parentCharacter = this;
-				
-				item->onPickUp(this);
-				onPickUpItem(item);
-				
-				return true;
+				stage->removeAccessibleItem(item);
 			}
-		}
-		else
-		{
-			//non-powerup items must get anchored to the character entity
-			
-			auto anchorPoints = item->getAnchorPoints();
-			auto availableAnchorPoints = getAvailableItemAnchorPoints();
-			fgl::ArrayList<MetaPointType> matchingAnchorPoints;
-			//find points shared between the item's supported points and the parent's available points
-			for(auto& anchorPoint : anchorPoints)
-			{
-				for(auto& availablePoint : availableAnchorPoints)
-				{
-					if(anchorPoint == availablePoint)
-					{
-						matchingAnchorPoints.add(anchorPoint);
-						break;
-					}
-				}
-			}
-			
-			if(matchingAnchorPoints.size()==0)
-			{
-				//no available anchor points for the item
-				return false;
-			}
-			
-			MetaPointType chosenPoint = matchingAnchorPoints[0];
-			size_t chosenIndex = 0;
-			
-			//look for an available anchor point index
-			bool chosenIndexTaken = false;
-			do
-			{
-				chosenIndexTaken = false;
-				for(auto& heldItem : heldItems)
-				{
-					if(heldItem.anchorPoint==chosenPoint && heldItem.anchorPointIndex==chosenIndex)
-					{
-						chosenIndexTaken = true;
-						chosenIndex++;
-						break;
-					}
-				}
-			} while(chosenIndexTaken);
-			
-			if(shouldPickUpItem(item))
-			{
-				//make sure no other characters can see the item as accessible
-				auto stage = getStage();
-				if(stage!=nullptr)
-				{
-					stage->removeAccessibleItem(item);
-				}
-				
-				//add to held items
-				HeldItem heldItem;
-				heldItem.item = item;
-				heldItem.anchorPoint = chosenPoint;
-				heldItem.anchorPointIndex = chosenIndex;
-				heldItems.add(heldItem);
-				
-				//anchor the item
-				anchorChildEntity(item, METAPOINT_HANDLE, 0, chosenPoint, chosenIndex);
-				
-				item->parentCharacter = this;
-				
-				item->onPickUp(this);
-				onPickUpItem(item);
-				
-				return true;
-			}
+
+			ItemContainer container;
+			container.item = item;
+			container.anchorPointIndex = 0;
+			container.anchorPoint = 0;
+			container.equipped = false;
+
+			itemContainers.add(container);
+			item->parentCharacter = this;
+
+			item->onPickUp();
+			onPickUpItem(item);
+
+			return true;
 		}
 		return false;
 	}
 	
 	void Character::discardItem(Item* item)
 	{
-		for(size_t i=0; i<heldItems.size(); i++)
+		for(size_t i=0; i<itemContainers.size(); i++)
 		{
-			auto& heldItem = heldItems[i];
-			if(heldItem.item==item)
+			auto& container = itemContainers[i];
+			if(container.item==item)
 			{
-				heldItems.remove(i);
+				setItemEquipped(item, false);
+				itemContainers.remove(i);
 				removeAnchoredEntity(item);
 				item->parentCharacter = nullptr;
 				
-				item->onDiscard(this);
+				item->onDiscard();
 				onDiscardItem(item);
-				
-				return;
-			}
-		}
-		for(size_t i=0; i<heldPowerups.size(); i++)
-		{
-			auto powerupItem = heldPowerups[i];
-			if(powerupItem==item)
-			{
-				heldPowerups.remove(i);
-				item->parentCharacter = nullptr;
-				
-				item->onDiscard(this);
-				onDiscardItem(item);
+
 				return;
 			}
 		}
 	}
 	
-	bool Character::isHoldingItem(Item* item) const
+	bool Character::isCarryingItem(Item* item) const
 	{
-		for(auto& heldItem : heldItems)
+		for(auto& container : itemContainers)
 		{
-			if(heldItem.item==item)
+			if(container.item==item)
 			{
 				return true;
 			}
 		}
-		if(heldPowerups.contains(item))
+		return false;
+	}
+
+	fgl::ArrayList<Item*> Character::getEquippedItems() const
+	{
+		fgl::ArrayList<Item*> equippedItems;
+		equippedItems.reserve(itemContainers.size());
+		for(auto& container : itemContainers)
 		{
-			return true;
+			if(container.equipped)
+			{
+				equippedItems.add(container.item);
+			}
+		}
+		return equippedItems;
+	}
+
+	fgl::ArrayList<Item*> Character::getUnequippedItems() const
+	{
+		fgl::ArrayList<Item*> unequippedItems;
+		unequippedItems.reserve(itemContainers.size());
+		for(auto& container : itemContainers)
+		{
+			if(!container.equipped)
+			{
+				unequippedItems.add(container.item);
+			}
+		}
+		return unequippedItems;
+	}
+
+	fgl::ArrayList<Item*> Character::getItems() const
+	{
+		fgl::ArrayList<Item*> items;
+		items.reserve(itemContainers.size());
+		for(auto& container : itemContainers)
+		{
+			items.add(container.item);
+		}
+		return items;
+	}
+
+	bool Character::setItemEquipped(Item* item, bool equipped)
+	{
+		if(item->parentCharacter!=this)
+		{
+			throw fgl::IllegalArgumentException("item", "must be held by this Character in order to equip and unequip");
+		}
+		for(auto& container : itemContainers)
+		{
+			if(container.item==item)
+			{
+				if(equipped)
+				{
+					if(container.equipped)
+					{
+						return true;
+					}
+
+					//item is not equipped. equip it
+					if(!canEquipItem(item))
+					{
+						//can't equip that item
+						return false;
+					}
+					auto equipPoints = getMatchingEquipPoints(item);
+					if(equipPoints.size() == 0)
+					{
+						//no available anchor points to equip item to
+						return false;
+					}
+
+					auto equipPoint = equipPoints[0];
+					container.anchorPoint = equipPoint.anchorPoint;
+					container.anchorPointIndex = equipPoint.anchorPointIndex;
+					container.equipped = true;
+					anchorChildEntity(item, METAPOINT_HANDLE, 0, container.anchorPoint, container.anchorPointIndex);
+
+					container.item->onEquip();
+					onEquipItem(container.item);
+				}
+				else
+				{
+					if(!container.equipped)
+					{
+						return true;
+					}
+
+					//item is equipped. unequip it
+					removeAnchoredEntity(item);
+					container.equipped = false;
+
+					container.item->onUnequip();
+					onUnequipItem(container.item);
+				}
+				return true;
+			}
+		}
+		throw fgl::IllegalStateException("inconsistant item->parentCharacter state");
+	}
+
+	bool Character::isItemEquipped(Item* item) const
+	{
+		for(auto& container : itemContainers)
+		{
+			if(container.item==item)
+			{
+				return container.equipped;
+			}
 		}
 		return false;
 	}
-	
-	fgl::ArrayList<Item*> Character::getHeldItems() const
+
+	bool Character::isItemEquippable(Item* item) const
 	{
-		fgl::ArrayList<Item*> items;
-		items.reserve(heldItems.size() + heldPowerups.size());
-		
-		for(auto& heldItem : heldItems)
+		if(item->parentCharacter!=this)
 		{
-			items.add(heldItem.item);
+			return false;
 		}
-		for(auto& item : heldPowerups)
+		auto equipPoints = getMatchingEquipPoints(item);
+		if(equipPoints.size()==0)
 		{
-			items.add(item);
+			return false;
 		}
-		
-		return items;
+		return true;
+	}
+
+	fgl::ArrayList<Character::EquipPoint> Character::getMatchingEquipPoints(Item* item) const
+	{
+		auto anchorPoints = item->getAnchorPoints().unique();
+		if(anchorPoints.size()==0)
+		{
+			return {};
+		}
+		auto availableAnchorPoints = getAvailableItemAnchorPoints();
+		fgl::ArrayList<EquipPoint> matchingEquipPoints;
+		//find points shared between the item's supported points and the parent's available points
+		for(auto& anchorPoint : anchorPoints)
+		{
+			//add all the matching anchor point indexes
+			for(size_t i=0; i<availableAnchorPoints.size(); i++)
+			{
+				auto availablePoint = availableAnchorPoints[i];
+				if(anchorPoint == availablePoint)
+				{
+					EquipPoint equipPoint;
+					equipPoint.anchorPoint = anchorPoint;
+					equipPoint.anchorPointIndex = i;
+					matchingEquipPoints.add(equipPoint);
+				}
+			}
+		}
+
+		if(matchingEquipPoints.size()==0)
+		{
+			//no available anchor points for the item
+			return {};
+		}
+
+		for(auto& container : itemContainers)
+		{
+			for(size_t i=0; i<matchingEquipPoints.size(); i++)
+			{
+				auto& equipPoint = matchingEquipPoints[i];
+				if(container.equipped && equipPoint.anchorPoint==container.anchorPoint && equipPoint.anchorPointIndex==container.anchorPointIndex)
+				{
+					matchingEquipPoints.remove(i);
+					break;
+				}
+			}
+		}
+		return matchingEquipPoints;
 	}
 	
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
@@ -313,7 +376,7 @@ namespace fl
 		ActionEntity::onFinishCollisionUpdates();
 	}
 	
-	bool Character::shouldPickUpItem(Item* item)
+	bool Character::canPickUpItem(Item* item) const
 	{
 		return true;
 	}
@@ -324,6 +387,21 @@ namespace fl
 	}
 	
 	void Character::onDiscardItem(Item* item)
+	{
+		//
+	}
+
+	bool Character::canEquipItem(Item* item) const
+	{
+		return true;
+	}
+
+	void Character::onEquipItem(Item* item)
+	{
+		//
+	}
+
+	void Character::onUnequipItem(Item* item)
 	{
 		//
 	}

@@ -10,7 +10,14 @@ void PickUpItemAction::onPerform(fl::ActionParamsPtr params)
 		auto availableItems = stage->getAccessibleItems(character);
 		if(availableItems.size() > 0)
 		{
-			character->pickUpItem(availableItems[0]);
+			auto& item = availableItems[0];
+			if(character->pickUpItem(item))
+			{
+				if(item->isEquippable())
+				{
+					character->setItemEquipped(item, true);
+				}
+			}
 		}
 	}
 	
