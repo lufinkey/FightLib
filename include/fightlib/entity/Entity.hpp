@@ -76,6 +76,9 @@ namespace fl
 		
 		virtual void onFinishHitboxUpdates();
 
+		virtual void onAddToStage(Stage* stage);
+		virtual void onRemoveFromStage(Stage* stage);
+
 		const fgl::ArrayList<Collidable*>& getCollided(CollisionSide side) const;
 		bool isStaticCollidableOnSide(CollisionSide side) const;
 		

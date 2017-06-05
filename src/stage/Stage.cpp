@@ -148,6 +148,7 @@ namespace fl
 		collisionManager.addCollidable(entity);
 		hitboxCollisionManager.addEntity(entity);
 		drawManager.addDrawable(entity, zLayer);
+		entity->onAddToStage(this);
 	}
 	
 	void Stage::removeEntity(Entity* entity)
@@ -165,6 +166,7 @@ namespace fl
 		collisionManager.removeCollidable(entity);
 		hitboxCollisionManager.removeEntity(entity);
 		drawManager.removeDrawable(entity);
+		entity->onRemoveFromStage(this);
 	}
 
 	const fgl::ArrayList<Entity*>& Stage::getEntities() const

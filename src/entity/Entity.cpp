@@ -439,6 +439,16 @@ namespace fl
 		//
 	}
 
+	void Entity::onAddToStage(Stage* stage)
+	{
+		//
+	}
+
+	void Entity::onRemoveFromStage(Stage* stage)
+	{
+		//
+	}
+
 	bool Entity::isOnGround() const
 	{
 		if(bottomCollidables.size() > 0)
