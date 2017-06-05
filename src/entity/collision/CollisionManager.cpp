@@ -55,9 +55,9 @@ namespace fl
 
 		//handle collisions
 		#ifdef DOUBLECHECK_COLLISIONS
+		//checking all of the collisions twice fixes collision jerking
 		for(size_t i=0; i<2; i++)
 		#endif
-		//checking all of the collisions twice fixed collision jerking
 		{
 			for(auto& pair : pairs)
 			{
