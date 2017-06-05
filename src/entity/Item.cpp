@@ -79,29 +79,6 @@ namespace fl
 		return parentCharacter;
 	}
 	
-	void Item::startUse()
-	{
-		if(!beingUsed)
-		{
-			beingUsed = true;
-			onStartUse();
-		}
-	}
-	
-	void Item::stopUse()
-	{
-		if(beingUsed)
-		{
-			beingUsed = false;
-			onStopUse();
-		}
-	}
-	
-	bool Item::isBeingUsed() const
-	{
-		return beingUsed;
-	}
-	
 	bool Item::respondsToCollision(Collidable* collided, CollisionSide side) const
 	{
 		if(collided->getFlag("Character"))
@@ -132,16 +109,6 @@ namespace fl
 	}
 
 	void Item::onUnequip()
-	{
-		//
-	}
-	
-	void Item::onStartUse()
-	{
-		//
-	}
-	
-	void Item::onStopUse()
 	{
 		//
 	}

@@ -25,10 +25,6 @@ namespace fl
 		bool isEquippable() const;
 		
 		Character* getParentCharacter() const;
-		
-		void startUse();
-		void stopUse();
-		bool isBeingUsed() const;
 
 	protected:
 		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
@@ -40,9 +36,6 @@ namespace fl
 
 		virtual void onEquip();
 		virtual void onUnequip();
-		
-		virtual void onStartUse();
-		virtual void onStopUse();
 		
 	private:
 		Character* parentCharacter;
