@@ -152,9 +152,9 @@ namespace fl
 	
 	void Stage::removeEntity(Entity* entity)
 	{
-		if(entity->stage!=nullptr && entity->stage!=this)
+		if(entity->stage!=this)
 		{
-			throw fgl::IllegalArgumentException("entity", "belongs to a different Stage");
+			return;
 		}
 		entity->stage = nullptr;
 		size_t index = entities.indexOf(entity);
@@ -184,9 +184,9 @@ namespace fl
 
 	void Stage::removeItem(Item* item)
 	{
-		if(item->stage!=nullptr && item->stage!=this)
+		if(item->stage!=this)
 		{
-			throw fgl::IllegalArgumentException("item", "belongs to a different Stage");
+			return;
 		}
 		removeEntity(item);
 		size_t itemIndex = items.indexOf(item);
@@ -205,7 +205,7 @@ namespace fl
 	{
 		if(character->stage!=nullptr)
 		{
-			throw fgl::IllegalArgumentException("item", "cannot be added to multiple Stage objects");
+			throw fgl::IllegalArgumentException("character", "cannot be added to multiple Stage objects");
 		}
 		addEntity(character, zLayer);
 		characters.add(character);
@@ -213,9 +213,9 @@ namespace fl
 
 	void Stage::removeCharacter(Character* character)
 	{
-		if(character->stage!=nullptr && character->stage!=this)
+		if(character->stage!=this)
 		{
-			throw fgl::IllegalArgumentException("character", "belongs to a different Stage");
+			return;
 		}
 		removeEntity(character);
 		size_t characterIndex = characters.indexOf(character);
@@ -260,9 +260,9 @@ namespace fl
 
 	void Stage::removeSubStage(Stage* stage)
 	{
-		if(stage->parentStage!=nullptr && stage->parentStage!=this)
+		if(stage->parentStage!=this)
 		{
-			throw fgl::IllegalArgumentException("stage", "belongs to a different stage");
+			return;
 		}
 		subStages.removeFirstEqual(stage);
 		drawManager.removeDrawable(stage);
