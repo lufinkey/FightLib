@@ -126,6 +126,11 @@ namespace fl
 		return true;
 	}
 
+	void Entity::drawMain(fgl::ApplicationData appData, fgl::Graphics graphics) const
+	{
+		Collidable::draw(appData, graphics);
+	}
+
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		fgl::Graphics childGraphics = graphics;
@@ -190,7 +195,7 @@ namespace fl
 			}
 		}
 
-		Collidable::draw(appData, graphics);
+		drawMain(appData, graphics);
 
 		for(size_t i=0; i<frontAnchorDatas.size(); i++)
 		{

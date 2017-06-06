@@ -54,6 +54,8 @@ namespace fl
 		bool isOnGround() const;
 
 	protected:
+		virtual void drawMain(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+
 		virtual AnimationOrientation getAnimationOrientation() const override;
 
 		virtual float getDrawScale() const override;
