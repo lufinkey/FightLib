@@ -115,11 +115,6 @@ namespace fl
 
 		collisionRectManager.update(appData, this);
 	}
-
-	fgl::Vector2d Entity::getDrawPosition(float* rotation) const
-	{
-		return Collidable::getDrawPosition(rotation);
-	}
 	
 	float Entity::getDrawScale() const
 	{
@@ -134,7 +129,7 @@ namespace fl
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		fgl::Graphics childGraphics = graphics;
-		fgl::Vector2d offset = Collidable::getDrawPosition();
+		fgl::Vector2d offset = getDrawPosition();
 		if(parentEntity==nullptr)
 		{
 			childGraphics.translate(offset.x, offset.y);
