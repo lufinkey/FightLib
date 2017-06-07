@@ -98,7 +98,10 @@ namespace fl
 		auto availablePoints = getItemAnchorPoints();
 		for(auto& container : itemContainers)
 		{
-			availablePoints.removeFirstEqual(container.anchorPoint);
+			if(container.equipped)
+			{
+				availablePoints.removeFirstEqual(container.anchorPoint);
+			}
 		}
 		return availablePoints;
 	}
