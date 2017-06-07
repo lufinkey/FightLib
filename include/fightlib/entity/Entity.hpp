@@ -80,7 +80,7 @@ namespace fl
 		virtual void onAddToStage(Stage* stage);
 		virtual void onRemoveFromStage(Stage* stage);
 
-		const fgl::ArrayList<Collidable*>& getCollided(CollisionSide side) const;
+		fgl::ArrayList<Collidable*> getCollided(CollisionSide side) const;
 		bool isStaticCollidableOnSide(CollisionSide side) const;
 		
 		CollisionMethod getCollisionMethod() const;
@@ -110,10 +110,12 @@ namespace fl
 		
 		Stage* stage;
 
-		fgl::ArrayList<Collidable*> leftCollidables;
-		fgl::ArrayList<Collidable*> topCollidables;
-		fgl::ArrayList<Collidable*> rightCollidables;
-		fgl::ArrayList<Collidable*> bottomCollidables;
+		struct CollidedObject
+		{
+			Collidable* collidable;
+			CollisionSide side;
+		};
+		fgl::ArrayList<CollidedObject> collidedObjects;
 
 		Anchor getAnchor(const Entity* entity) const;
 		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;

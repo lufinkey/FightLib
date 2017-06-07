@@ -56,6 +56,7 @@ namespace fl
 		
 		velocity = getVelocity();
 		//make entities move when on top of other collidables
+		auto bottomCollidables = getCollided(COLLISIONSIDE_BOTTOM);
 		if(bottomCollidables.size() > 0)
 		{
 			if(movesWithGround())
@@ -326,70 +327,25 @@ namespace fl
 
 	void Entity::onCollision(const CollisionEvent& collisionEvent)
 	{
-		switch(collisionEvent.getCollisionSide())
-		{
-			case COLLISIONSIDE_LEFT:
-			leftCollidables.add(collisionEvent.getCollided());
-			break;
-
-			case COLLISIONSIDE_TOP:
-			topCollidables.add(collisionEvent.getCollided());
-			break;
-
-			case COLLISIONSIDE_RIGHT:
-			rightCollidables.add(collisionEvent.getCollided());
-			break;
-
-			case COLLISIONSIDE_BOTTOM:
-			bottomCollidables.add(collisionEvent.getCollided());
-			break;
-		}
+		CollidedObject collidedObject;
+		collidedObject.collidable = collisionEvent.getCollided();
+		collidedObject.side = collisionEvent.getCollisionSide();
+		collidedObjects.add(collidedObject);
 		Collidable::onCollision(collisionEvent);
 	}
 
 	void Entity::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
-		switch(collisionEvent.getCollisionSide())
+		auto collidable = collisionEvent.getCollided();
+		auto side = collisionEvent.getCollisionSide();
+		for(size_t i=0; i<collidedObjects.size(); i++)
 		{
-			case COLLISIONSIDE_LEFT:
+			auto& collidedObject = collidedObjects[i];
+			if(collidedObject.collidable==collidable && collidedObject.side==side)
 			{
-				size_t collidableIndex = leftCollidables.indexOf(collisionEvent.getCollided());
-				if(collidableIndex!=-1)
-				{
-					leftCollidables.remove(collidableIndex);
-				}
+				collidedObjects.remove(i);
+				break;
 			}
-			break;
-
-			case COLLISIONSIDE_TOP:
-			{
-				size_t collidableIndex = topCollidables.indexOf(collisionEvent.getCollided());
-				if(collidableIndex!=-1)
-				{
-					topCollidables.remove(collidableIndex);
-				}
-			}
-			break;
-
-			case COLLISIONSIDE_RIGHT:
-			{
-				size_t collidableIndex = rightCollidables.indexOf(collisionEvent.getCollided());
-				if(collidableIndex!=-1)
-				{
-					rightCollidables.remove(collidableIndex);
-				}
-			}
-			break;
-
-			case COLLISIONSIDE_BOTTOM:
-			{
-				size_t collidableIndex = bottomCollidables.indexOf(collisionEvent.getCollided());
-				if(collidableIndex!=-1)
-				{
-					bottomCollidables.remove(collidableIndex);
-				}
-			}
-			break;
 		}
 		Collidable::onCollisionFinish(collisionEvent);
 	}
@@ -451,45 +407,44 @@ namespace fl
 
 	bool Entity::isOnGround() const
 	{
-		if(bottomCollidables.size() > 0)
+		for(auto& collidedObject : collidedObjects)
 		{
-			return true;
+			if(collidedObject.side==COLLISIONSIDE_BOTTOM)
+			{
+				return true;
+			}
 		}
 		return false;
 	}
 
-	const fgl::ArrayList<Collidable*>& Entity::getCollided(CollisionSide side) const
+	fgl::ArrayList<Collidable*> Entity::getCollided(CollisionSide side) const
 	{
-		switch(side)
+		fgl::ArrayList<Collidable*> collidables;
+		for(auto& collidedObject : collidedObjects)
 		{
-			case COLLISIONSIDE_LEFT:
-			return leftCollidables;
-
-			case COLLISIONSIDE_TOP:
-			return topCollidables;
-			break;
-
-			case COLLISIONSIDE_RIGHT:
-			return rightCollidables;
-
-			case COLLISIONSIDE_BOTTOM:
-			return bottomCollidables;
+			if(collidedObject.side==side)
+			{
+				collidables.add(collidedObject.collidable);
+			}
 		}
-		throw fgl::IllegalArgumentException("side", "not a valid enum value");
+		return collidables;
 	}
 
 	bool Entity::isStaticCollidableOnSide(CollisionSide side) const
 	{
-		auto& collided = getCollided(side);
-		for(auto collidable : collided)
+		for(auto collidedObject : collidedObjects)
 		{
-			if(collidable->isStaticCollisionBody())
+			if(collidedObject.side==side)
 			{
-				return true;
-			}
-			else if(collidable->getFlag("Entity") && static_cast<Entity*>(collidable)->isStaticCollidableOnSide(side))
-			{
-				return true;
+				auto collidable = collidedObject.collidable;
+				if(collidable->isStaticCollisionBody())
+				{
+					return true;
+				}
+				else if(collidable->getFlag("Entity") && static_cast<Entity*>(collidable)->isStaticCollidableOnSide(side))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
