@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>name</key>
+		<string>sneak-idle</string>
+		<key>orientation</key>
+		<string>LEFT</string>
+		<key>fps</key>
+		<real>1</real>
+		<key>files</key>
+		<array>
+			<dict>
+				<key>filename</key>
+				<string>sneak-idle.png</string>
+				<key>rows</key>
+				<integer>1</integer>
+				<key>columns</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>framedata</key>
+		<array>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>22</real>
+						<key>y</key>
+						<real>20</real>
+						<key>radius</key>
+						<real>5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>14</real>
+						<key>y</key>
+						<real>26</real>
+						<key>radius</key>
+						<real>3</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>32</real>
+						<key>y</key>
+						<real>26</real>
+						<key>radius</key>
+						<real>3</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>16</real>
+						<key>y</key>
+						<real>16</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>26</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</plist>
