@@ -36,7 +36,7 @@ namespace fl
 			{
 				return fgl::Vector2d(-velocity.x, 0);
 			}
-			return fgl::Vector2d(-velocity.x*(12*appData.getFrameSpeedMultiplier()), 0);
+			return fgl::Vector2d(-velocity.x*(appData.getFrameSpeedMultiplier()/0.2), 0);
 		}
 		return fgl::Vector2d(0, 0);
 	}
