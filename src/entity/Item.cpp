@@ -20,6 +20,15 @@ namespace fl
 		}
 		return ActionEntity::getFlag(flag);
 	}
+
+	void Item::update(fgl::ApplicationData appData)
+	{
+		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
+		{
+			setVelocity(fgl::Vector2d(0, 0));
+		}
+		ActionEntity::update(appData);
+	}
 	
 	void Item::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
