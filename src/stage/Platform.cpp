@@ -27,12 +27,16 @@ namespace fl
 		collisionRectManager.update(appData, this);
 	}
 
-	fgl::Vector2d Platform::getFriction(Entity* entity, CollisionSide side) const
+	fgl::Vector2d Platform::getFriction(const fgl::ApplicationData& appData, Entity* entity, CollisionSide side) const
 	{
 		if(side==COLLISIONSIDE_TOP)
 		{
 			auto velocity = entity->getVelocity();
-			return fgl::Vector2d(-velocity.x*12, 0);
+			if(fgl::Math::abs(velocity.x) < 100)
+			{
+				return fgl::Vector2d(-velocity.x, 0);
+			}
+			return fgl::Vector2d(-velocity.x*(12*appData.getFrameSpeedMultiplier()), 0);
 		}
 		return fgl::Vector2d(0, 0);
 	}

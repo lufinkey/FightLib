@@ -16,7 +16,7 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 
-		virtual fgl::Vector2d getFriction(Entity* entity, CollisionSide side) const;
+		virtual fgl::Vector2d getFriction(const fgl::ApplicationData& appData, Entity* entity, CollisionSide side) const;
 		
 		float getScale() const;
 		void setScale(float scale);
