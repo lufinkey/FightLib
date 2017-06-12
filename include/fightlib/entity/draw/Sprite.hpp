@@ -45,7 +45,7 @@ namespace fl
 		AnimationData* getAnimationData(const fgl::String& name) const;
 		
 		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
-		virtual float getDrawScale() const;
+		virtual fgl::Vector2d getDrawScale() const;
 
 	private:
 		fgl::Vector2d position;

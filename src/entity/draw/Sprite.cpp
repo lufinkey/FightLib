@@ -81,9 +81,9 @@ namespace fl
 		return position;
 	}
 	
-	float Sprite::getDrawScale() const
+	fgl::Vector2d Sprite::getDrawScale() const
 	{
-		return 1.0f;
+		return fgl::Vector2d(1,1);
 	}
 
 	void Sprite::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
@@ -98,8 +98,8 @@ namespace fl
 		{
 			graphics.rotate(rotation);
 		}
-		double scale = (double)getDrawScale();
-		graphics.scale(scale, scale);
+		auto scale = getDrawScale();
+		graphics.scale(scale);
 		if(currentAnimationData!=nullptr)
 		{
 			currentAnimationData->drawFrame(currentAnimationFrame, graphics, getAnimationOrientation());
@@ -139,7 +139,7 @@ namespace fl
 		{
 			return fgl::Vector2d(0, 0);
 		}
-		return ((fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame)) * (double)getDrawScale();
+		return ((fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame)) * getDrawScale();
 	}
 
 	bool Sprite::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)

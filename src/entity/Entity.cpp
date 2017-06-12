@@ -117,9 +117,9 @@ namespace fl
 		collisionRectManager.update(appData, this);
 	}
 	
-	float Entity::getDrawScale() const
+	fgl::Vector2d Entity::getDrawScale() const
 	{
-		return scale;
+		return fgl::Vector2d((double)scale, (double)scale);
 	}
 	
 	bool Entity::shouldUseParentMetaPointRotation() const

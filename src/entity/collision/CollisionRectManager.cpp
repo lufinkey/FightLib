@@ -58,7 +58,7 @@ namespace fl
 				fgl::Vector2d previousPosition = collidable->getPreviousPosition();
 				fgl::Vector2d position = collidable->getPosition(&rotation);
 				fgl::Vector2d positionDiff = position - previousPosition;
-				double scale = (double)collidable->getDrawScale();
+				fgl::Vector2d scale = collidable->getDrawScale();
 				fgl::RectangleD rect = fgl::RectangleD(position.x-(size.x/2), position.y-(size.y/2), size.x, size.y);
 				fgl::RectangleD lastRect = rect;
 				lastRect.x -= positionDiff.x;
@@ -76,9 +76,9 @@ namespace fl
 				}
 				if(rotation!=0.0)
 				{
-					return {new BoxCollisionRect("all", rect, lastRect, rotation, fgl::Vector2d(size.x/2, size.y/2), fgl::Vector2d((double)scale, (double)scale))};
+					return {new BoxCollisionRect("all", rect, lastRect, rotation, fgl::Vector2d(size.x/2, size.y/2), scale)};
 				}
-				return {new BoxCollisionRect("all", rect, lastRect, fgl::Vector2d((double)scale, (double)scale))};
+				return {new BoxCollisionRect("all", rect, lastRect, scale)};
 			}
 				
 			case COLLISIONMETHOD_BOUNDS:
@@ -88,7 +88,7 @@ namespace fl
 				fgl::Vector2d previousPosition = collidable->getPreviousPosition();
 				fgl::Vector2d position = collidable->getPosition(&rotation);
 				fgl::Vector2d positionDiff = position - previousPosition;
-				double scale = (double)collidable->getDrawScale();
+				fgl::Vector2d scale = collidable->getDrawScale();
 				AnimationData* animData = collidable->getCurrentAnimationData();
 				if(animData==nullptr)
 				{
@@ -106,7 +106,7 @@ namespace fl
 				for(size_t i=0; i<boundsList.size(); i++)
 				{
 					auto& metaBounds = boundsList[i];
-					fgl::RectangleD rect = fgl::RectangleD((metaBounds.rect.x*scale), (metaBounds.rect.y*scale), metaBounds.rect.width*scale, metaBounds.rect.height*scale);
+					fgl::RectangleD rect = fgl::RectangleD((metaBounds.rect.x*scale.x), (metaBounds.rect.y*scale.y), (metaBounds.rect.width*scale.x), (metaBounds.rect.height*scale.y));
 					fgl::Vector2d origin = fgl::Vector2d(rect.x-(size.x/2), rect.y-(size.y/2));
 					rect = fgl::RectangleD(position.x+origin.x, position.y+origin.y, rect.width, rect.height);
 					fgl::String tag;
@@ -134,9 +134,9 @@ namespace fl
 					}
 					if(rotation!=0.0)
 					{
-						newCollisionRects.add(new BoxCollisionRect(tag, rect, lastRect, rotation, origin, fgl::Vector2d((double)scale, (double)scale)));
+						newCollisionRects.add(new BoxCollisionRect(tag, rect, lastRect, rotation, origin, scale));
 					}
-					newCollisionRects.add(new BoxCollisionRect(tag, rect, lastRect, fgl::Vector2d((double)scale, (double)scale)));
+					newCollisionRects.add(new BoxCollisionRect(tag, rect, lastRect, scale));
 				}
 				return newCollisionRects;
 			}

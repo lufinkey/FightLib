@@ -58,7 +58,7 @@ namespace fl
 
 		virtual AnimationOrientation getAnimationOrientation() const override;
 
-		virtual float getDrawScale() const override;
+		virtual fgl::Vector2d getDrawScale() const override;
 		virtual bool shouldUseParentMetaPointRotation() const;
 
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;

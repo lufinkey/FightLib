@@ -5,8 +5,7 @@
 namespace fl
 {
 	Platform::Platform(const fgl::Vector2d& position)
-		: Collidable(position),
-		scale(1.0f)
+		: Collidable(position)
 	{
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
@@ -39,21 +38,6 @@ namespace fl
 			return fgl::Vector2d(-velocity.x*(appData.getFrameSpeedMultiplier()/0.2), 0);
 		}
 		return fgl::Vector2d(0, 0);
-	}
-	
-	float Platform::getScale() const
-	{
-		return scale;
-	}
-	
-	void Platform::setScale(float scale_arg)
-	{
-		scale = scale_arg;
-	}
-	
-	float Platform::getDrawScale() const
-	{
-		return scale;
 	}
 	
 	bool Platform::isStaticCollisionBody() const
