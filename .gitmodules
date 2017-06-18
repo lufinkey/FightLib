@@ -3,5 +3,4 @@
 	url = https://github.com/lufinkey/GameLibrary
 [submodule "external/Box2D"]
 	path = external/Box2D
-	url = https://github.com/louis-langholtz/Box2D
-	ignore = dirty
+	url = https://github.com/erincatto/Box2D
