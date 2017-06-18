@@ -153,12 +153,14 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -172,6 +174,7 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -196,8 +199,17 @@
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>building depencencies...</Message>
+      <Message>Building dependencies...</Message>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\clean_dependencies.ps1" -FightLibPath "$(ProjectDir)../.."</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Cleaning dependencies...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>dependency_clean.log</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -222,8 +234,17 @@
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>building depencencies...</Message>
+      <Message>Building dependencies...</Message>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\clean_dependencies.ps1" -FightLibPath "$(ProjectDir)../.."</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Cleaning dependencies...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>dependency_clean.log</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -252,13 +273,13 @@
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>Building depencencies...</Message>
+      <Message>Building dependencies...</Message>
     </PreBuildEvent>
     <CustomBuildStep>
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\clean_dependencies.ps1" -FightLibPath "$(ProjectDir)../.."</Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Cleaning dependencies</Message>
+      <Message>Cleaning dependencies...</Message>
       <Outputs>dependency_clean.log</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -272,7 +293,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -289,8 +310,17 @@
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>building depencencies...</Message>
+      <Message>Building dependencies...</Message>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\clean_dependencies.ps1" -FightLibPath "$(ProjectDir)../.."</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Cleaning dependencies...</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>dependency_clean.log</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
