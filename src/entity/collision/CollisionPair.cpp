@@ -3,76 +3,36 @@
 
 namespace fl
 {
-	CollisionPair::CollisionPair(Collidable* collidable1, Collidable* collidable2)
-		: collidable1(collidable1), collidable2(collidable2)
+	CollisionPair::CollisionPair(Collidable* collidable1, Collidable* collidable2, const CollisionData& data)
+		: collidable1(collidable1),
+		collidable2(collidable2),
+		wasIgnored(false),
+		ignored(false)
 	{
-		//
+		collisions.add(data);
 	}
 
-	bool CollisionPair::operator==(const CollisionPair& pair) const
+	void CollisionPair::removeCollision(b2Fixture* fixture1, b2Fixture* fixture2)
 	{
-		if((collidable1==pair.collidable1 && collidable2==pair.collidable2) || (collidable1==pair.collidable2 && collidable2==pair.collidable1))
+		for(size_t collisions_size=collisions.size(), i=0; i<collisions_size; i++)
 		{
-			return true;
-		}
-		return false;
-	}
-
-	bool CollisionPair::operator!=(const CollisionPair& pair) const
-	{
-		return !operator==(pair);
-	}
-
-	bool CollisionPair::shouldIgnoreCollision(CollisionRect* rect1, CollisionRect* rect2) const
-	{
-		for(auto& tagPair : ignoredCollisions)
-		{
-			if(tagPair.first==rect1->getTag() && tagPair.second==rect2->getTag())
+			auto& collision = collisions[i];
+			if(collision.getFixture1()==fixture1 && collision.getFixture2()==fixture2)
 			{
-				return true;
+				collisions.remove(i);
+				return;
 			}
 		}
-		return false;
 	}
 
-	fgl::ArrayList<CollisionRectPair> CollisionPair::getCollisionRectPairs(const fgl::ArrayList<CollisionRect*>& rects1, const fgl::ArrayList<CollisionRect*>& rects2) const
+	fgl::ArrayList<CollisionData> CollisionPair::getReversedCollisions() const
 	{
-		size_t pair_count = rects1.size()*rects2.size();
-		fgl::ArrayList<CollisionRectPair> pairs;
-		pairs.reserve(pair_count);
-		for(auto& priorityRect : priorityRects)
+		fgl::ArrayList<CollisionData> reversedCollisions;
+		reversedCollisions.reserve(collisions.size());
+		for(auto& collision : collisions)
 		{
-			size_t rectIndex1 = rects1.indexWhere([&priorityRect](CollisionRect* const & rect) -> bool {
-				if(rect->getTag()==priorityRect.first)
-				{
-					return true;
-				}
-				return false;
-			});
-			size_t rectIndex2 = rects2.indexWhere([&priorityRect](CollisionRect* const & rect) -> bool {
-				if(rect->getTag()==priorityRect.second)
-				{
-					return true;
-				}
-				return false;
-			});
-			if(rectIndex1!=-1 && rectIndex2!=-1)
-			{
-				pairs.add(CollisionRectPair(rects1[rectIndex1], rects2[rectIndex2]));
-			}
+			reversedCollisions.add(collision.reversed());
 		}
-		fgl::ArrayList<CollisionRectPair> priorityPairs = pairs;
-		for(auto& rect1 : rects1)
-		{
-			for(auto& rect2 : rects2)
-			{
-				CollisionRectPair pair(rect1, rect2);
-				if(priorityPairs.indexOf(pair)==(size_t)-1)
-				{
-					pairs.add(pair);
-				}
-			}
-		}
-		return pairs;
+		return reversedCollisions;
 	}
 }

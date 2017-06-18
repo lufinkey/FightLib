@@ -1,8 +1,7 @@
 
 #include <fightlib/entity/Entity.hpp>
-#include <fightlib/entity/collision/rects/BoxCollisionRect.hpp>
-#include <fightlib/entity/collision/rects/PixelCollisionRect.hpp>
-#include <fightlib/stage/Platform.hpp>
+#include <fightlib/entity/collision/CollisionManager.hpp>
+#include <Box2D/Box2D.h>
 
 namespace fl
 {
@@ -53,68 +52,6 @@ namespace fl
 		setVelocity(velocity);
 
 		Collidable::update(appData);
-		
-		velocity = getVelocity();
-		//make entities move when on top of other collidables
-		auto bottomCollidables = getCollided(COLLISIONSIDE_BOTTOM);
-		if(bottomCollidables.size() > 0)
-		{
-			if(movesWithGround())
-			{
-				auto ground = bottomCollidables[0];
-				auto groundMovement = ground->getVelocity()*appData.getFrameSpeedMultiplier();
-				shift(fgl::Vector2d(groundMovement.x, 0));
-			}
-		}
-		//update friction
-		for(auto collisionSide : {COLLISIONSIDE_BOTTOM, COLLISIONSIDE_TOP, COLLISIONSIDE_LEFT, COLLISIONSIDE_RIGHT})
-		{
-			auto collidables = getCollided(collisionSide);
-			auto platforms = collidables.filter([](fl::Collidable* const & collidable) -> bool {
-				if(collidable->getFlag("Platform"))
-				{
-					return true;
-				}
-				return false;
-			});
-			if(platforms.size() > 0)
-			{
-				auto platform = static_cast<Platform*>(platforms[0]);
-				velocity += platform->getFriction(appData, this, CollisionSide_getOpposite(collisionSide));
-			}
-		}
-		//stop velocity on static collisions
-		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
-		{
-			if(velocity.x < 0)
-			{
-				velocity.x = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_TOP))
-		{
-			if(velocity.y < 0)
-			{
-				velocity.y = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_RIGHT))
-		{
-			if(velocity.x > 0)
-			{
-				velocity.x = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_BOTTOM))
-		{
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
-			}
-		}
-		setVelocity(velocity);
-
-		collisionRectManager.update(appData, this);
 	}
 	
 	fgl::Vector2d Entity::getDrawScale() const
@@ -166,7 +103,7 @@ namespace fl
 		{
 			Entity* entity;
 			fgl::Vector2d offset;
-			float rotation;
+			double rotation;
 			fgl::Vector2d rotationPoint;
 			bool behind;
 			bool visible;
@@ -211,60 +148,6 @@ namespace fl
 		}
 	}
 
-	fgl::Vector2d Entity::getPosition(float* rotation) const
-	{
-		if(parentEntity==nullptr)
-		{
-			return Collidable::getPosition(rotation);
-		}
-		float childRotation = 0;
-		fgl::Vector2d childOffset = Collidable::getPosition(&childRotation);
-
-		//if parent orientation is right, the offset should be flipped
-		AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
-		if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
-		{
-			childOffset.x = -childOffset.x;
-		}
-
-		fgl::Vector2d parentOffset;
-		float anchorRotation;
-		fgl::Vector2d anchorRotationPoint;
-		getAnchorData(&parentOffset, &anchorRotation, &anchorRotationPoint, nullptr, nullptr);
-		fgl::Vector2d fullOffset = parentOffset+childOffset;
-		if(anchorRotation!=0)
-		{
-			fgl::TransformD rotationTransform;
-			rotationTransform.rotate(anchorRotation, anchorRotationPoint);
-			fullOffset = rotationTransform.transform(fullOffset);
-		}
-
-		float parentRotation = 0;
-		fgl::Vector2d parentPosition = parentEntity->getPosition(&parentRotation);
-		setOptionalArg(rotation, parentRotation+anchorRotation+childRotation)
-		return parentPosition+fullOffset;
-	}
-
-	void Entity::setPosition(const fgl::Vector2d& position_arg)
-	{
-		if(parentEntity!=nullptr)
-		{
-			//position can't be changed while anchored to a parent entity (atleast for now...)
-			return;
-		}
-		Collidable::setPosition(position_arg);
-	}
-
-	void Entity::shift(const fgl::Vector2d& offset)
-	{
-		if(parentEntity!=nullptr)
-		{
-			parentEntity->shift(offset);
-			return;
-		}
-		Collidable::shift(offset);
-	}
-
 	fgl::Vector2d Entity::getTerminalVelocity() const
 	{
 		return fgl::Vector2d(10000, 10000);
@@ -295,16 +178,6 @@ namespace fl
 		orientation = orientation_arg;
 	}
 
-	CollisionMethod Entity::getCollisionMethod() const
-	{
-		return collisionRectManager.getCollisionMethod();
-	}
-
-	void Entity::setCollisionMethod(CollisionMethod collisionMethod)
-	{
-		collisionRectManager.setCollisionMethod(collisionMethod);
-	}
-
 	bool Entity::isStaticCollisionBody() const
 	{
 		return false;
@@ -325,29 +198,141 @@ namespace fl
 		return true;
 	}
 
-	void Entity::onCollision(const CollisionEvent& collisionEvent)
+	void Entity::setNeedsAnchorsUpdate()
 	{
-		CollidedObject collidedObject;
-		collidedObject.collidable = collisionEvent.getCollided();
-		collidedObject.side = collisionEvent.getCollisionSide();
-		collidedObjects.add(collidedObject);
-		Collidable::onCollision(collisionEvent);
+		needsAnchorsUpdate = true;
 	}
 
-	void Entity::onCollisionFinish(const CollisionEvent& collisionEvent)
+	void Entity::updateAnchors()
 	{
-		auto collidable = collisionEvent.getCollided();
-		auto side = collisionEvent.getCollisionSide();
-		for(size_t i=0; i<collidedObjects.size(); i++)
+		for(auto& anchor : anchoredEntities)
 		{
-			auto& collidedObject = collidedObjects[i];
-			if(collidedObject.collidable==collidable && collidedObject.side==side)
-			{
-				collidedObjects.remove(i);
-				break;
-			}
+			updateAnchor(anchor);
 		}
-		Collidable::onCollisionFinish(collisionEvent);
+		needsAnchorsUpdate = false;
+	}
+
+	void Entity::updateAnchor(Anchor& anchor)
+	{
+		auto collisionMgr = getCollisionManager();
+		if(collisionMgr==nullptr)
+		{
+			return;
+		}
+		auto world = collisionMgr->getWorld();
+
+		//destroy the old joint
+		if(anchor.joint!=nullptr)
+		{
+			world->DestroyJoint(anchor.joint);
+			anchor.joint = nullptr;
+		}
+
+		//place the anchored entity where it should be when anchored
+		double intendedRotation = 0;
+		fgl::Vector2d intendedChildPos = anchor.entity->getIntendedEntityPosition(&intendedRotation);
+		anchor.entity->setPosition(intendedChildPos);
+		anchor.entity->setRotation(intendedRotation);
+		anchor.entity->setVelocity(fgl::Vector2d(0, 0));
+		anchor.entity->setRotationalVelocity(0);
+
+		//get the anchor points and rotations
+		double parentRotation = 0;
+		fgl::Vector2d parentOffset = getMetaPointOffset(anchor.parentPoint, anchor.parentPointIndex, &parentRotation);
+		double childRotation = 0;
+		fgl::Vector2d childOffset = anchor.entity->getMetaPointOffset(anchor.childPoint, anchor.childPointIndex, &childRotation);
+
+		//create the new joint
+		auto parentBody = getPhysicsBody();
+		auto childBody = anchor.entity->getPhysicsBody();
+		if(parentBody==nullptr || childBody==nullptr)
+		{
+			return;
+		}
+		b2WeldJointDef jointDef;
+		jointDef.bodyA = parentBody;
+		jointDef.bodyB = childBody;
+		jointDef.collideConnected = false;
+		if(anchor.entity->shouldUseParentMetaPointRotation())
+		{
+			jointDef.referenceAngle = fgl::Math::degtorad(parentRotation+childRotation);
+		}
+		else
+		{
+			jointDef.referenceAngle = fgl::Math::degtorad(childRotation);
+		}
+		jointDef.localAnchorA = b2Vec2((float32)parentOffset.x, (float32)parentOffset.y);
+		jointDef.localAnchorB = b2Vec2((float32)childOffset.x, (float32)childOffset.y);
+		anchor.joint = static_cast<b2WeldJoint*>(world->CreateJoint(&jointDef));
+	}
+
+	fgl::Vector2d Entity::getMetaPointOffset(MetaPointType metaPointType, size_t metaPointIndex, double* rotation) const
+	{
+		auto animData = getCurrentAnimationData();
+		if(animData==nullptr)
+		{
+			setOptionalArg(rotation, 0)
+				return fgl::Vector2d(0, 0);
+		}
+		size_t frameIndex = getCurrentAnimationFrameIndex();
+		auto metaPoints = animData->getMetaPoints(frameIndex, metaPointType);
+		if(metaPointIndex >= metaPoints.size())
+		{
+			setOptionalArg(rotation, 0);
+			return fgl::Vector2d(0, 0);
+		}
+		auto metaPoint = metaPoints[metaPointIndex];
+
+		auto size = getSize();
+		//get the offset of the point from the entity's center
+		fgl::Vector2d offset = fgl::Vector2d(((double)metaPoint.x*scale)-(size.x/2), ((double)metaPoint.y*scale)-(size.y/2));
+		double metaRotation = (double)metaPoint.rotation;
+
+		//flip the offset if the orientation is flipped
+		AnimationOrientation orientation = getAnimationOrientation();
+		AnimationOrientation animOrientation = animData->getOrientation();
+		if(orientation!=animOrientation && animOrientation!=ANIMATIONORIENTATION_NEUTRAL)
+		{
+			offset.x = -offset.x;
+			metaRotation = -metaRotation;
+		}
+
+		setOptionalArg(rotation, metaRotation);
+		return offset;
+	}
+
+	fgl::Vector2d Entity::getIntendedEntityPosition(double* rotation) const
+	{
+		if(parentEntity==nullptr)
+		{
+			setOptionalArg(rotation, getRotation());
+			return getPosition();
+		}
+
+		fgl::Vector2d offset;
+		double anchorRotation;
+		fgl::Vector2d anchorRotationPoint;
+		getAnchorData(&offset, &anchorRotation, &anchorRotationPoint, nullptr, nullptr);
+		if(anchorRotation!=0)
+		{
+			fgl::TransformD rotationTransform;
+			rotationTransform.rotate(anchorRotation, anchorRotationPoint);
+			offset = rotationTransform.transform(offset);
+		}
+
+		double parentRotation = parentEntity->getRotation();
+		fgl::Vector2d parentPosition = parentEntity->getPosition();
+		setOptionalArg(rotation, parentRotation+anchorRotation)
+			return parentPosition+offset;
+	}
+
+	void Entity::onBeginCollisionUpdates()
+	{
+		Collidable::onBeginCollisionUpdates();
+		if(needsAnchorsUpdate)
+		{
+			updateAnchors();
+		}
 	}
 	
 	bool Entity::respondsToHitboxClash(Entity* clashedEntity) const
@@ -358,6 +343,18 @@ namespace fl
 	bool Entity::canCollideWithEntityHitbox(Entity* collidedEntity) const
 	{
 		return false;
+	}
+
+	void Entity::onBeginHitboxUpdates()
+	{
+		if(needsCollisionPolygonsUpdate())
+		{
+			updateCollisionPolygons();
+		}
+		if(needsAnchorsUpdate)
+		{
+			updateAnchors();
+		}
 	}
 
 	void Entity::onHitboxClash(const HitboxClashEvent& clashEvent)
@@ -407,52 +404,49 @@ namespace fl
 
 	bool Entity::isOnGround() const
 	{
-		for(auto& collidedObject : collidedObjects)
+		//TODO make this be perpendicular to gravity with a 90 degree threshold
+		if(getCollided(COLLISIONSIDE_BOTTOM).size() > 0)
 		{
-			if(collidedObject.side==COLLISIONSIDE_BOTTOM)
-			{
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}
 
 	fgl::ArrayList<Collidable*> Entity::getCollided(CollisionSide side) const
 	{
-		fgl::ArrayList<Collidable*> collidables;
-		for(auto& collidedObject : collidedObjects)
+		auto collisionManager = getCollisionManager();
+		if(collisionManager==nullptr)
 		{
-			if(collidedObject.side==side)
-			{
-				collidables.add(collidedObject.collidable);
-			}
+			return {};
 		}
-		return collidables;
-	}
-
-	bool Entity::isStaticCollidableOnSide(CollisionSide side) const
-	{
-		for(auto collidedObject : collidedObjects)
+		fgl::ArrayList<Collidable*> collided;
+		for(auto& pair : collisionManager->getCollisionPairs())
 		{
-			if(collidedObject.side==side)
+			if(pair.collidable1==this)
 			{
-				auto collidable = collidedObject.collidable;
-				if(collidable->isStaticCollisionBody())
+				for(auto& data : pair.previousCollisions)
 				{
-					return true;
-				}
-				else if(collidable->getFlag("Entity") && static_cast<Entity*>(collidable)->isStaticCollidableOnSide(side))
-				{
-					return true;
+					if(data.getSide()==side)
+					{
+						collided.add(pair.collidable2);
+						break;
+					}
 				}
 			}
+			else if(pair.collidable2==this)
+			{
+				CollisionSide oppSide = CollisionSide_getOpposite(side);
+				for(auto& data : pair.previousCollisions)
+				{
+					if(data.getSide()==oppSide)
+					{
+						collided.add(pair.collidable1);
+						break;
+					}
+				}
+			}
 		}
-		return false;
-	}
-
-	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
-	{
-		return collisionRectManager.getCollisionRects();
+		return collided;
 	}
 	
 	void Entity::anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
@@ -470,7 +464,9 @@ namespace fl
 		anchor.childPointIndex = childPointIndex;
 		anchor.parentPoint = parentPoint;
 		anchor.parentPointIndex = parentPointIndex;
+		anchor.joint = nullptr;
 		anchoredEntities.add(anchor);
+		updateAnchor(anchor);
 	}
 	
 	void Entity::removeAnchoredEntity(Entity* child)
@@ -512,7 +508,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("entity", "no anchor exists for the given entity");
 	}
 
-	bool Entity::getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
+	bool Entity::getAnchorData(fgl::Vector2d* posOffset, double* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
 	{
 		//TODO determine how offset should behave with orientation
 		if(parentEntity!=nullptr)
@@ -544,8 +540,8 @@ namespace fl
 			}
 			AnimationMetaPoint parentMetaPoint = parentMetaPoints[anchor.parentPointIndex];
 			AnimationMetaPoint childMetaPoint = childMetaPoints[anchor.childPointIndex];
-			float parentRotation = parentMetaPoint.rotation;
-			float childRotation = childMetaPoint.rotation;
+			double parentRotation = (double)parentMetaPoint.rotation;
+			double childRotation = (double)childMetaPoint.rotation;
 			
 			if(!shouldUseParentMetaPointRotation())
 			{

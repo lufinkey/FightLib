@@ -77,9 +77,9 @@ namespace fl
 		
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		
-		CollisionManager collisionManager;
-		HitboxCollisionManager hitboxCollisionManager;
-		DrawManager drawManager;
+		CollisionManager* collisionManager;
+		HitboxCollisionManager* hitboxCollisionManager;
+		DrawManager* drawManager;
 		
 		void removeAccessibleItem(Item* item);
 	};

@@ -1,44 +1,89 @@
 
 #pragma once
 
-#include <fightlib/entity/draw/Sprite.hpp>
-#include "rects/CollisionRect.hpp"
+#include <fightlib/entity/draw/Animatable.hpp>
+#include "PhysicalState.hpp"
 #include "CollisionEvent.hpp"
+
+class b2Body;
+class b2World;
 
 namespace fl
 {
-	class Collidable : public Sprite
+	class CollisionManager;
+
+	typedef enum : fgl::Uint8
+	{
+		COLLISIONMETHOD_PIXEL,
+		COLLISIONMETHOD_BOUNDS,
+		COLLISIONMETHOD_FRAME
+	} CollisionMethod;
+
+	class Collidable : public Animatable
 	{
 		friend class CollisionManager;
-		friend class CollisionRectManager;
+		friend class Box2DCollisionHandler;
 	public:
 		Collidable(const fgl::Vector2d& position);
-		
-		virtual void update(fgl::ApplicationData appData) override;
+		virtual ~Collidable();
 
-		virtual double getMass() const;
 		virtual bool isStaticCollisionBody() const = 0;
-		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const = 0;
-		
-		const fgl::Vector2d& getPreviousPosition() const;
-		
+		virtual bool isRotationFixed() const;
+		virtual double getFriction(size_t polygonIndex) const;
+
+		virtual fgl::Vector2d getPosition() const override;
+		void setPosition(const fgl::Vector2d& position) override;
+
+		virtual double getRotation() const override;
+		virtual void setRotation(double degrees) override;
+
+		fgl::Vector2d getVelocity() const;
 		void setVelocity(const fgl::Vector2d& velocity);
-		const fgl::Vector2d& getVelocity() const;
+
+		double getRotationalVelocity() const;
+		void setRotationalVelocity(double degreesPerSecond);
 		
 		void applyForce(const fgl::Vector2d& force);
-		
-		bool checkCollision(Collidable* collidable) const;
+		void applyForce(const fgl::Vector2d& force, const fgl::Vector2d& point);
+
+		fgl::ArrayList<fgl::PolygonD> getTransformedCollisionPolygons() const;
+
+		b2Body* getPhysicsBody();
+		CollisionManager* getCollisionManager() const;
 
 	protected:
-		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
+		virtual fgl::Vector2d getDrawPosition() const override;
+		virtual double getDrawRotation() const override;
+		virtual fgl::Vector2d getDrawScale() const override;
 
+		virtual void onBeginCollisionUpdates();
+		virtual bool respondsToCollision(Collidable* collided, CollisionData data) const;
 		virtual void onCollision(const CollisionEvent& collisionEvent);
 		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent);
 		virtual void onCollisionFinish(const CollisionEvent& collisionEvent);
 		virtual void onFinishCollisionUpdates();
-		
+
+		virtual fgl::ArrayList<fgl::PolygonD> getCollisionPolygons() const;
+		void setNeedsCollisionPolygonsUpdate();
+		bool needsCollisionPolygonsUpdate() const;
+		void updateCollisionPolygons();
+
+		void setCollisionMethod(CollisionMethod collisionMethod);
+		CollisionMethod getCollisionMethod() const;
+
 	private:
-		fgl::Vector2d previousPosition;
-		fgl::Vector2d velocity;
+		void initPhysicsBody();
+		void deinitPhysicsBody();
+		
+		CollisionManager* collisionManager;
+		union
+		{
+			//when added to a CollisionManager
+			b2Body* physicsBody;
+			//when NOT added to a CollisionManager
+			PhysicalState* physicalState;
+		};
+		CollisionMethod collisionMethod;
+		bool needsPolygonsUpdate;
 	};
 }

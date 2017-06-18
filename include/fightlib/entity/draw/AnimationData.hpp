@@ -43,6 +43,7 @@ namespace fl
 		size_t addMetaPoint(size_t frameIndex, const AnimationMetaPoint& metaPoint);
 		void removeMetaPoint(size_t frameIndex, size_t metaPointIndex);
 
+		fgl::ArrayList<fgl::PolygonD> getPolygons(size_t frameIndex) const;
 		fgl::ArrayList<TaggedBox> getBounds(size_t frameIndex, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL) const;
 		
 		bool isMirrored(AnimationOrientation drawnOrientation) const;
@@ -51,6 +52,7 @@ namespace fl
 		struct FrameData
 		{
 			fgl::ArrayList<AnimationMetaPoint> metapoints;
+			fgl::ArrayList<fgl::PolygonD> polygons;
 		};
 
 		fgl::String name;

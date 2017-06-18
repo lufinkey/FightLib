@@ -3,7 +3,12 @@
 
 namespace fl
 {
-	Stage::Stage() : fight(nullptr), parentStage(nullptr)
+	Stage::Stage()
+		: fight(nullptr),
+		parentStage(nullptr),
+		collisionManager(new CollisionManager()),
+		hitboxCollisionManager(new HitboxCollisionManager()),
+		drawManager(new DrawManager())
 	{
 		//
 	}
@@ -15,10 +20,13 @@ namespace fl
 			unloadSection(section);
 			delete section;
 		}
-		for(auto drawable : drawManager.getDrawables())
+		delete collisionManager;
+		delete hitboxCollisionManager;
+		for(auto drawable : drawManager->getDrawables())
 		{
 			delete drawable;
 		}
+		delete drawManager;
 	}
 
 	bool Stage::getFlag(const fgl::String& flag) const
@@ -39,25 +47,21 @@ namespace fl
 		{
 			if(entity->getParentEntity()==nullptr && entity->respondsToGravity())
 			{
-				auto velocity = entity->getVelocity();
-
-				velocity += getGravity(entity)*appData.getFrameSpeedMultiplier();
+				entity->applyForce(getGravity(entity));
 				if(!entity->isOnGround())
 				{
-					velocity += getAirResistance(entity)*appData.getFrameSpeedMultiplier();
+					entity->applyForce(getAirResistance(entity));
 				}
-
-				entity->setVelocity(velocity);
 			}
 		}
 		
 		//update all these damn managers
-		drawManager.update(appData);
-		hitboxCollisionManager.update(appData);
-		collisionManager.update(appData);
+		drawManager->update(appData);
+		hitboxCollisionManager->update(appData);
+		collisionManager->update(appData);
 		
-		//update the list of items that characters are able to pick up
-		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> accessibleItems;
+		//TODO update the list of items that characters are able to pick up
+		/*fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> accessibleItems;
 		for(auto character : characters)
 		{
 			for(auto item : items)
@@ -69,13 +73,13 @@ namespace fl
 				}
 			}
 		}
-		characterAccessibleItems = accessibleItems;
+		characterAccessibleItems = accessibleItems;*/
 	}
 	
 	void Stage::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		appData.additionalData["stage"] = this;
-		drawManager.draw(appData, graphics);
+		drawManager->draw(appData, graphics);
 	}
 	
 	fgl::Vector2d Stage::getGravity(Entity* entity) const
@@ -107,8 +111,8 @@ namespace fl
 	void Stage::addPlatform(Platform* platform, double zLayer)
 	{
 		platforms.add(platform);
-		collisionManager.addCollidable(platform);
-		drawManager.addDrawable(platform, zLayer);
+		collisionManager->addCollidable(platform);
+		drawManager->addDrawable(platform, zLayer);
 	}
 	
 	void Stage::removePlatform(Platform* platform)
@@ -118,8 +122,8 @@ namespace fl
 		{
 			platforms.remove(index);
 		}
-		collisionManager.removeCollidable(platform);
-		drawManager.removeDrawable(platform);
+		collisionManager->removeCollidable(platform);
+		drawManager->removeDrawable(platform);
 	}
 
 	const fgl::ArrayList<Platform*>& Stage::getPlatforms() const
@@ -129,12 +133,12 @@ namespace fl
 
 	void Stage::addDrawable(Drawable* drawable, double zLayer)
 	{
-		drawManager.addDrawable(drawable, zLayer);
+		drawManager->addDrawable(drawable, zLayer);
 	}
 
 	void Stage::removeDrawable(Drawable* drawable)
 	{
-		drawManager.removeDrawable(drawable);
+		drawManager->removeDrawable(drawable);
 	}
 	
 	void Stage::addEntity(Entity* entity, double zLayer)
@@ -145,9 +149,9 @@ namespace fl
 		}
 		entity->stage = this;
 		entities.add(entity);
-		collisionManager.addCollidable(entity);
-		hitboxCollisionManager.addEntity(entity);
-		drawManager.addDrawable(entity, zLayer);
+		collisionManager->addCollidable(entity);
+		hitboxCollisionManager->addEntity(entity);
+		drawManager->addDrawable(entity, zLayer);
 		entity->onAddToStage(this);
 	}
 	
@@ -163,9 +167,9 @@ namespace fl
 		{
 			entities.remove(index);
 		}
-		collisionManager.removeCollidable(entity);
-		hitboxCollisionManager.removeEntity(entity);
-		drawManager.removeDrawable(entity);
+		collisionManager->removeCollidable(entity);
+		hitboxCollisionManager->removeEntity(entity);
+		drawManager->removeDrawable(entity);
 		entity->onRemoveFromStage(this);
 	}
 
@@ -256,7 +260,7 @@ namespace fl
 			throw fgl::IllegalArgumentException("stage", "already added to a Stage");
 		}
 		subStages.add(stage);
-		drawManager.addDrawable(stage);
+		drawManager->addDrawable(stage);
 		stage->parentStage = this;
 	}
 
@@ -267,7 +271,7 @@ namespace fl
 			return;
 		}
 		subStages.removeFirstEqual(stage);
-		drawManager.removeDrawable(stage);
+		drawManager->removeDrawable(stage);
 		stage->parentStage = nullptr;
 	}
 

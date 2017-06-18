@@ -28,18 +28,18 @@
     <ClInclude Include="..\..\include\fightlib\entity\action\AttackAction.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionData.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRectManager.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PhysicalState.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PhysicsConstants.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationAssetManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationMetaPoint.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\DrawManager.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Animatable.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Entity.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashEvent.hpp" />
@@ -57,6 +57,7 @@
     <ClInclude Include="..\..\include\fightlib\stage\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp" />
+    <ClInclude Include="..\..\src\entity\collision\Box2DCollisionHandler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\base\Event.cpp" />
@@ -67,18 +68,18 @@
     <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp" />
     <ClCompile Include="..\..\src\entity\action\AttackAction.cpp" />
     <ClCompile Include="..\..\src\entity\Character.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\Box2DCollisionHandler.cpp" />
     <ClCompile Include="..\..\src\entity\collision\Collidable.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\CollisionData.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionEvent.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
-    <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\PhysicalState.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationAssetManager.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp" />
     <ClCompile Include="..\..\src\entity\draw\AnimationMetaPoint.cpp" />
     <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp" />
+    <ClCompile Include="..\..\src\entity\draw\Animatable.cpp" />
     <ClCompile Include="..\..\src\entity\draw\Sprite.cpp" />
     <ClCompile Include="..\..\src\entity\Entity.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxClashEvent.cpp" />
@@ -179,13 +180,23 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>lib/$(Platform)/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>building depencencies...</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -195,13 +206,23 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>lib/$(Platform)/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>building depencencies...</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -213,7 +234,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -222,6 +243,16 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>lib/$(Platform)/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>building depencencies...</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -233,7 +264,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -242,6 +273,16 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>lib/$(Platform)/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>building depencencies...</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,24 +2,15 @@
 #pragma once
 
 #include <fightlib/base/Event.hpp>
+#include <fightlib/entity/collision/CollisionData.hpp>
 
 namespace fl
 {
 	typedef enum
 	{
-		COLLISIONSIDE_TOP,
-		COLLISIONSIDE_BOTTOM,
-		COLLISIONSIDE_LEFT,
-		COLLISIONSIDE_RIGHT
-	} CollisionSide;
-	
-	CollisionSide CollisionSide_getOpposite(CollisionSide side);
-	
-	typedef enum
-	{
-		COLLISIONSTATE_NEW,
+		COLLISIONSTATE_STARTED,
 		COLLISIONSTATE_UPDATED,
-		COLLISIONSTATE_FINISHED
+		COLLISIONSTATE_ENDED
 	} CollisionState;
 
 	extern const EventType EVENT_COLLISION;
@@ -29,17 +20,17 @@ namespace fl
 	class CollisionEvent : public Event
 	{
 	public:
-		CollisionEvent(Collidable* collided, CollisionSide side, CollisionState state);
+		CollisionEvent(Collidable* collided, CollisionState state, const fgl::ArrayList<CollisionData>& collisions);
 
 		virtual EventType getEventType() const override;
 		
 		Collidable* getCollided() const;
-		CollisionSide getCollisionSide() const;
 		CollisionState getCollisionState() const;
+		const fgl::ArrayList<CollisionData>& getCollisions() const;
 		
 	private:
 		Collidable* collided;
-		CollisionSide side;
 		CollisionState state;
+		fgl::ArrayList<CollisionData> collisions;
 	};
 }

@@ -2,7 +2,6 @@
 #pragma once
 
 #include <fightlib/entity/draw/AnimationMetaPoint.hpp>
-#include <fightlib/entity/collision/rects/CollisionRect.hpp>
 #include "HitboxInfo.hpp"
 
 namespace fl
@@ -10,10 +9,10 @@ namespace fl
 	class HitboxCollision
 	{
 	public:
-		HitboxCollision(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, const fgl::String& hitCollisionRectTag);
+		HitboxCollision(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, size_t hitPolygonIndex);
 
 		TaggedBox hitbox;
 		HitboxInfo hitboxInfo;
-		fgl::String hitCollisionRectTag;
+		size_t hitPolygonIndex;
 	};
 }

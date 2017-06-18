@@ -11,7 +11,7 @@ public:
 	virtual void update(fgl::ApplicationData appData) override;
 	
 protected:
-	virtual bool respondsToCollision(fl::Collidable* collided, fl::CollisionSide side) const override;
+	virtual bool respondsToCollision(fl::Collidable* collided, fl::CollisionData data) const override;
 	
 	virtual void onCollision(const fl::CollisionEvent& collisionEvent) override;
 };

@@ -4,6 +4,7 @@
 /projects/visualstudio/*.opendb
 /projects/visualstudio/*.sdf
 /projects/visualstudio/.vs
+/projects/visualstudio/lib
 /projects/visualstudio/build
 /projects/visualstudio/bin
 /projects/visualstudio/test/*.VC.db

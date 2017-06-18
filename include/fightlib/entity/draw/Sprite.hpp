@@ -1,61 +1,36 @@
 
 #pragma once
 
-#include "AnimationData.hpp"
-#include "AnimationAssetManager.hpp"
-#include "Drawable.hpp"
-#include <functional>
+#include "Animatable.hpp"
 
 namespace fl
 {
-	typedef enum
-	{
-		ANIMATIONEVENT_FRAMECHANGED,
-		ANIMATIONEVENT_FINISHED,
-		ANIMATIONEVENT_CHANGED
-	} AnimationEventType;
-
-	class Sprite : public Drawable
+	class Sprite : public Animatable
 	{
 	public:
 		Sprite(const fgl::Vector2d& position);
-		virtual ~Sprite();
 
-		virtual void update(fgl::ApplicationData appData) override;
-		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
+		virtual fgl::Vector2d getPosition() const override;
+		virtual void setPosition(const fgl::Vector2d& position) override;
 
-		fgl::Vector2d getSize() const;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const;
-		virtual void setPosition(const fgl::Vector2d& position);
-		virtual void shift(const fgl::Vector2d& offset);
+		virtual double getRotation() const override;
+		virtual void setRotation(double degrees) override;
 
-		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
-		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
-		fgl::Animation* getAnimation(const fgl::String& name) const;
-		fgl::Animation* getCurrentAnimation() const;
-		fgl::String getCurrentAnimationName() const;
-		size_t getCurrentAnimationFrameIndex() const;
-		
-		fgl::ArrayList<TaggedBox> getMetaPointBoxes(MetaPointType metaPointType) const;
+		virtual fgl::Vector2d getScale() const;
+		virtual void setScale(const fgl::Vector2d& scale);
+
+		virtual AnimationOrientation getAnimationOrientation() const override;
+		virtual void setAnimationOrientation(AnimationOrientation animationOrientation);
 
 	protected:
-		virtual AnimationOrientation getAnimationOrientation() const;
-
-		AnimationData* getCurrentAnimationData() const;
-		AnimationData* getAnimationData(const fgl::String& name) const;
-		
-		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
-		virtual fgl::Vector2d getDrawScale() const;
+		virtual fgl::Vector2d getDrawPosition() const override;
+		virtual double getDrawRotation() const override;
+		virtual fgl::Vector2d getDrawScale() const override;
 
 	private:
 		fgl::Vector2d position;
-
-		fgl::ArrayList<AnimationData*> animations;
-
-		AnimationData* currentAnimationData;
-		size_t currentAnimationFrame;
-		long long currentAnimationLastFrameTime;
-		std::function<void(AnimationEventType)> currentAnimationEventHandler;
-		bool animationChanged;
+		fgl::Vector2d scale;
+		double rotation;
+		fl::AnimationOrientation animationOrientation;
 	};
 }

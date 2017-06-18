@@ -69,11 +69,11 @@ namespace fl
 		{
 			auto entity1 = entityPair.entity1;
 			auto& hitboxes1 = entityPair.hitboxes1;
-			auto collisionRects1 = entity1->getCollisionRects();
+			auto polygons1 = entity1->getTransformedCollisionPolygons();
 			
 			auto entity2 = entityPair.entity2;
 			auto& hitboxes2 = entityPair.hitboxes2;
-			auto collisionRects2 = entity2->getCollisionRects();
+			auto polygons2 = entity2->getTransformedCollisionPolygons();
 			
 			//check for hitboxes hitting each other
 			fgl::ArrayList<HitboxClash> hitboxClashes;
@@ -236,13 +236,14 @@ namespace fl
 				{
 					for(auto& hitbox1 : hitboxes1)
 					{
-						for(auto collisionRect : collisionRects2)
+						for(size_t i=0; i<polygons2.size(); i++)
 						{
-							if(CollisionRect::checkCollision(collisionRect, hitbox1.rect))
+							auto& polygon = polygons2[i];
+							if(polygon.intersects(hitbox1.rect.toPolygon()))
 							{
 								auto info = entity1->getHitboxInfo(hitbox1.tag);
 								priority1 += info.getPriority();
-								hitboxCollisions1.add(HitboxCollision(hitbox1, info, collisionRect->getTag()));
+								hitboxCollisions1.add(HitboxCollision(hitbox1, info, i));
 							}
 						}
 					}
@@ -254,13 +255,14 @@ namespace fl
 				{
 					for(auto& hitbox2 : hitboxes2)
 					{
-						for(auto collisionRect : collisionRects1)
+						for(size_t i=0; i<polygons1.size(); i++)
 						{
-							if(CollisionRect::checkCollision(collisionRect, hitbox2.rect))
+							auto& polygon = polygons1[i];
+							if(polygon.intersects(hitbox2.rect.toPolygon()))
 							{
 								auto info = entity2->getHitboxInfo(hitbox2.tag);
 								priority2 += info.getPriority();
-								hitboxCollisions2.add(HitboxCollision(hitbox2, info, collisionRect->getTag()));
+								hitboxCollisions2.add(HitboxCollision(hitbox2, info, i));
 							}
 						}
 					}

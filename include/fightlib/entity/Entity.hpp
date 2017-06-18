@@ -2,10 +2,11 @@
 #pragma once
 
 #include "collision/Collidable.hpp"
-#include "collision/CollisionRectManager.hpp"
 #include "hitbox/HitboxInfo.hpp"
 #include "hitbox/HitboxClashEvent.hpp"
 #include "hitbox/HitboxCollisionEvent.hpp"
+
+class b2WeldJoint;
 
 namespace fl
 {
@@ -28,9 +29,6 @@ namespace fl
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
-		virtual void setPosition(const fgl::Vector2d& position) override;
-		virtual void shift(const fgl::Vector2d& offset) override;
 		virtual fgl::Vector2d getTerminalVelocity() const;
 		
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
@@ -46,8 +44,6 @@ namespace fl
 		virtual bool movesWithGround() const;
 		virtual bool usesHitboxes() const;
 
-		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
-
 		Entity* getParentEntity() const;
 		Stage* getStage() const;
 
@@ -61,12 +57,13 @@ namespace fl
 		virtual fgl::Vector2d getDrawScale() const override;
 		virtual bool shouldUseParentMetaPointRotation() const;
 
-		virtual void onCollision(const CollisionEvent& collisionEvent) override;
-		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
+		virtual void onBeginCollisionUpdates() override;
 		
 		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
 		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
 		
+		virtual void onBeginHitboxUpdates();
+
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxClashFinish(const HitboxClashEvent& clashEvent);
@@ -81,10 +78,6 @@ namespace fl
 		virtual void onRemoveFromStage(Stage* stage);
 
 		fgl::ArrayList<Collidable*> getCollided(CollisionSide side) const;
-		bool isStaticCollidableOnSide(CollisionSide side) const;
-		
-		CollisionMethod getCollisionMethod() const;
-		void setCollisionMethod(CollisionMethod method);
 
 		struct Anchor
 		{
@@ -93,31 +86,31 @@ namespace fl
 			size_t parentPointIndex;
 			MetaPointType childPoint;
 			size_t childPointIndex;
+			b2WeldJoint* joint;
 		};
 
 		void anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset = fgl::Vector2d(0, 0));
 		void removeAnchoredEntity(Entity* child);
 		const fgl::ArrayList<Anchor>& getAnchoredEntities() const;
 
+		void setNeedsAnchorsUpdate();
+		void updateAnchors();
+
 	private:
+		Anchor getAnchor(const Entity* entity) const;
+		bool getAnchorData(fgl::Vector2d* posOffset, double* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
+		void updateAnchor(Anchor& anchor);
+		fgl::Vector2d getMetaPointOffset(MetaPointType metaPointType, size_t metaPointIndex, double* rotation) const;
+		fgl::Vector2d getIntendedEntityPosition(double* rotation) const;
+
 		float scale;
 
 		Orientation orientation;
-		CollisionRectManager collisionRectManager;
+		bool needsAnchorsUpdate;
 
 		fgl::ArrayList<Anchor> anchoredEntities;
 		Entity* parentEntity;
 		
 		Stage* stage;
-
-		struct CollidedObject
-		{
-			Collidable* collidable;
-			CollisionSide side;
-		};
-		fgl::ArrayList<CollidedObject> collidedObjects;
-
-		Anchor getAnchor(const Entity* entity) const;
-		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
 	};
 }

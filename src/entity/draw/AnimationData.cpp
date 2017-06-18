@@ -248,6 +248,7 @@ namespace fl
 
 		fgl::ArrayList<FrameData> frmDatas;
 		fgl::ArrayList<fgl::Any> frameDataArray = fgl::extract<fgl::ArrayList<fgl::Any>>(plist, "framedata");
+		frmDatas.reserve(frameDataArray.size());
 		for(size_t i=0; i<frameDataArray.size(); i++)
 		{
 			FrameData frame;
@@ -294,11 +295,22 @@ namespace fl
 			std::function<void()> func = loadingFunctions[i];
 			func();
 		}
+		//load all the frame polygons
+		frmDatas.resize(anim->getTotalFrames());
+		for(size_t i=0; i<anim->getTotalFrames(); i++)
+		{
+			auto image = anim->getImage(i);
+			auto sourceRect = anim->getImageSourceRect(i);
+			auto polygon = image->traceOutline(sourceRect);
+			frmDatas[i].polygons = {polygon};
+		}
+		//delete old animation
 		if(animation!=nullptr)
 		{
 			delete animation;
 			animation = nullptr;
 		}
+		//set new properties
 		name = animName;
 		animation = anim;
 		orientation = orientationValue;
@@ -643,6 +655,15 @@ namespace fl
 	void AnimationData::removeMetaPoint(size_t frameIndex, size_t metaPointIndex)
 	{
 		frameDatas[frameIndex].metapoints.remove(metaPointIndex);
+	}
+
+	fgl::ArrayList<fgl::PolygonD> AnimationData::getPolygons(size_t frameIndex) const
+	{
+		if(frameIndex >= frameDatas.size())
+		{
+			return {};
+		}
+		return frameDatas[frameIndex].polygons;
 	}
 
 	fgl::ArrayList<TaggedBox> AnimationData::getBounds(size_t frameIndex, AnimationOrientation drawnOrientation) const

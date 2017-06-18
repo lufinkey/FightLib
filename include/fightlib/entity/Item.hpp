@@ -16,9 +16,6 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
-
-		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
 
 		virtual fgl::ArrayList<MetaPointType> getAnchorPoints() const = 0;
 		virtual bool isPickedUpByTouching() const;
@@ -28,9 +25,8 @@ namespace fl
 		Character* getParentCharacter() const;
 
 	protected:
-		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
-		
-		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
+		virtual fgl::ArrayList<fgl::PolygonD> getCollisionPolygons() const override;
+		virtual bool respondsToCollision(Collidable* collided, CollisionData data) const override;
 		
 		virtual void onPickUp();
 		virtual void onDiscard();

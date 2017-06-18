@@ -3,31 +3,12 @@
 
 namespace fl
 {
-	CollisionSide CollisionSide_getOpposite(CollisionSide side)
-	{
-		switch(side)
-		{
-			case COLLISIONSIDE_LEFT:
-				return COLLISIONSIDE_RIGHT;
-				
-			case COLLISIONSIDE_RIGHT:
-				return COLLISIONSIDE_LEFT;
-				
-			case COLLISIONSIDE_TOP:
-				return COLLISIONSIDE_BOTTOM;
-				
-			case COLLISIONSIDE_BOTTOM:
-				return COLLISIONSIDE_TOP;
-		}
-		throw fgl::IllegalArgumentException("side", "invalid CollisionSide enum value");
-	}
-	
 	const EventType EVENT_COLLISION = registerEventType();
 
-	CollisionEvent::CollisionEvent(Collidable* collided, CollisionSide side, CollisionState state)
+	CollisionEvent::CollisionEvent(Collidable* collided, CollisionState state, const fgl::ArrayList<CollisionData>& collisions)
 		: collided(collided),
-		side(side),
-		state(state)
+		state(state),
+		collisions(collisions)
 	{
 		//
 	}
@@ -42,13 +23,13 @@ namespace fl
 		return collided;
 	}
 	
-	CollisionSide CollisionEvent::getCollisionSide() const
-	{
-		return side;
-	}
-	
 	CollisionState CollisionEvent::getCollisionState() const
 	{
 		return state;
+	}
+
+	const fgl::ArrayList<CollisionData>& CollisionEvent::getCollisions() const
+	{
+		return collisions;
 	}
 }

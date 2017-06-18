@@ -22,9 +22,9 @@ void MovingPlatform::update(fgl::ApplicationData appData)
 	Platform::update(appData);
 }
 
-bool MovingPlatform::respondsToCollision(fl::Collidable* collided, fl::CollisionSide side) const
+bool MovingPlatform::respondsToCollision(fl::Collidable* collided, fl::CollisionData data) const
 {
-	if(side==fl::COLLISIONSIDE_TOP)
+	if(data.getSide()==fl::COLLISIONSIDE_TOP)
 	{
 		return true;
 	}

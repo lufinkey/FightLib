@@ -25,18 +25,6 @@
     <Filter Include="include\fightlib\game">
       <UniqueIdentifier>{140ca6d2-eeb9-4e07-baa8-e32232cb5e6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\fightlib\entity\collision">
-      <UniqueIdentifier>{2ea4db99-59e0-4cd0-81e8-824bd9c5144d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\entity\collision">
-      <UniqueIdentifier>{9eb770c1-3680-4a7c-bb01-6a203c1ae648}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\fightlib\entity\collision\rects">
-      <UniqueIdentifier>{5315be7c-4df5-4b9b-8083-28878d407d95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\entity\collision\rects">
-      <UniqueIdentifier>{52fadc34-e2fb-4d24-a357-da33dff971ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game">
       <UniqueIdentifier>{e473c8be-d1bf-48f8-b322-7a96627bcf09}</UniqueIdentifier>
     </Filter>
@@ -70,17 +58,14 @@
     <Filter Include="include\fightlib\base">
       <UniqueIdentifier>{c32a21ce-aa83-459d-9efa-3eb05517cc3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\entity\collision">
+      <UniqueIdentifier>{1936c93e-afb2-4d1f-86e9-9befd5922bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\entity\collision">
+      <UniqueIdentifier>{67c9e431-a62d-4c24-b323-d5061e58f90a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
-      <Filter>include\fightlib\entity\collision\rects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp">
-      <Filter>include\fightlib\entity\collision\rects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp">
-      <Filter>include\fightlib\entity\collision\rects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\Character.hpp">
       <Filter>include\fightlib\entity</Filter>
     </ClInclude>
@@ -96,20 +81,11 @@
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp">
       <Filter>include\fightlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp">
-      <Filter>include\fightlib\entity\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp">
-      <Filter>include\fightlib\entity\collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\action\Action.hpp">
       <Filter>include\fightlib\entity\action</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\ActionEntity.hpp">
       <Filter>include\fightlib\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp">
-      <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\draw\Drawable.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
@@ -120,14 +96,8 @@
     <ClInclude Include="..\..\include\fightlib\entity\draw\AnimationData.hpp">
       <Filter>include\fightlib\entity\draw</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp">
-      <Filter>include\fightlib\entity\collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\action\ActionInterruptEvent.hpp">
       <Filter>include\fightlib\entity\action</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRectManager.hpp">
-      <Filter>include\fightlib\entity\collision</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp">
       <Filter>include\fightlib\stage</Filter>
@@ -152,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionEvent.hpp">
-      <Filter>include\fightlib\entity\collision</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClashEvent.hpp">
       <Filter>include\fightlib\entity\hitbox</Filter>
@@ -186,25 +153,40 @@
     <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp">
       <Filter>include\fightlib\stage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Animatable.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\draw\Sprite.hpp">
+      <Filter>include\fightlib\entity\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\Collidable.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionEvent.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PhysicalState.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\PhysicsConstants.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\entity\collision\Box2DCollisionHandler.hpp">
+      <Filter>src\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionData.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
       <Filter>src\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp">
-      <Filter>src\entity\collision\rects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp">
-      <Filter>src\entity\collision\rects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp">
-      <Filter>src\entity\collision\rects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp">
-      <Filter>src\entity\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp">
-      <Filter>src\entity\collision</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\game\Fight.cpp">
       <Filter>src\game</Filter>
@@ -218,9 +200,6 @@
     <ClCompile Include="..\..\src\entity\Character.cpp">
       <Filter>src\entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\entity\draw\Sprite.cpp">
-      <Filter>src\entity\draw</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\entity\draw\AnimationData.cpp">
       <Filter>src\entity\draw</Filter>
     </ClCompile>
@@ -230,17 +209,11 @@
     <ClCompile Include="..\..\src\entity\action\ActionInterruptEvent.cpp">
       <Filter>src\entity\action</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp">
-      <Filter>src\entity\collision</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\entity\draw\DrawManager.cpp">
       <Filter>src\entity\draw</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\stage\Stage.cpp">
       <Filter>src\stage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\Collidable.cpp">
-      <Filter>src\entity\collision</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\Item.cpp">
       <Filter>src\entity</Filter>
@@ -262,9 +235,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp">
       <Filter>src\entity\hitbox</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\entity\collision\CollisionEvent.cpp">
-      <Filter>src\entity\collision</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\entity\hitbox\HitboxClashEvent.cpp">
       <Filter>src\entity\hitbox</Filter>
@@ -295,6 +265,33 @@
     </ClCompile>
     <ClCompile Include="..\..\src\stage\StageSection.cpp">
       <Filter>src\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\Animatable.cpp">
+      <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\draw\Sprite.cpp">
+      <Filter>src\entity\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\Collidable.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionEvent.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\PhysicalState.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\Box2DCollisionHandler.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionData.cpp">
+      <Filter>src\entity\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp">
+      <Filter>src\entity\collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

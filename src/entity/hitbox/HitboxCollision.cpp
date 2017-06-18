@@ -3,10 +3,10 @@
 
 namespace fl
 {
-	HitboxCollision::HitboxCollision(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, const fgl::String& hitCollisionRectTag)
+	HitboxCollision::HitboxCollision(const TaggedBox& hitbox, const HitboxInfo& hitboxInfo, size_t hitPolygonIndex)
 		: hitbox(hitbox),
 		hitboxInfo(hitboxInfo),
-		hitCollisionRectTag(hitCollisionRectTag)
+		hitPolygonIndex(hitPolygonIndex)
 	{
 		//
 	}

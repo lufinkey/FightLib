@@ -84,7 +84,7 @@ void TestStage::update(fgl::ApplicationData appData)
 		{
 			newPosition.y = -40;
 		}
-		character->shift(newPosition-position);
+		character->setPosition(newPosition);
 	}
 	Stage::update(appData);
 }
