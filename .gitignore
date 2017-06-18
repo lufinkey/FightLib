@@ -3,6 +3,7 @@
 /projects/visualstudio/*.VC.db
 /projects/visualstudio/*.opendb
 /projects/visualstudio/*.sdf
+/projects/visualstudio/*.log
 /projects/visualstudio/.vs
 /projects/visualstudio/lib
 /projects/visualstudio/build

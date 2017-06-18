@@ -165,6 +165,7 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>build\$(Platform)\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
+    <CustomBuildAfterTargets>Clean</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -251,8 +252,15 @@
       <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
-      <Message>building depencencies...</Message>
+      <Message>Building depencencies...</Message>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\clean_dependencies.ps1" -FightLibPath "$(ProjectDir)../.."</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Cleaning dependencies</Message>
+      <Outputs>dependency_clean.log</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
