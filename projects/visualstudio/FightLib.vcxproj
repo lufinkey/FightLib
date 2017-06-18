@@ -184,7 +184,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -196,7 +196,7 @@
       <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
-      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Building dependencies...</Message>
@@ -219,7 +219,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -231,7 +231,7 @@
       <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
-      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Building dependencies...</Message>
@@ -256,7 +256,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\GameLibrary\include;..\..\external\Box2D;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -270,7 +270,7 @@
       <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
-      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Building dependencies...</Message>
@@ -307,7 +307,7 @@
       <AdditionalDependencies>Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
-      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)" -ToolsVersion "$(MSBuildToolsVersion)"</Command>
+      <Command>powershell -NoProfile -ExecutionPolicy Unrestricted -File "$(ProjectDir)\build_dependencies.ps1" -FightLibPath "$(ProjectDir)../.." -Config "$(Configuration)" -Platform "$(Platform)" -PlatformToolset "$(DefaultPlatformToolset)"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Building dependencies...</Message>

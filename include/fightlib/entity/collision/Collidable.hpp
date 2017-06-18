@@ -5,8 +5,11 @@
 #include "PhysicalState.hpp"
 #include "CollisionEvent.hpp"
 
-class b2Body;
-class b2World;
+namespace box2d
+{
+	class Body;
+	class World;
+}
 
 namespace fl
 {
@@ -48,7 +51,7 @@ namespace fl
 
 		fgl::ArrayList<fgl::PolygonD> getTransformedCollisionPolygons() const;
 
-		b2Body* getPhysicsBody();
+		box2d::Body* getPhysicsBody();
 		CollisionManager* getCollisionManager() const;
 
 	protected:
@@ -79,7 +82,7 @@ namespace fl
 		union
 		{
 			//when added to a CollisionManager
-			b2Body* physicsBody;
+			box2d::Body* physicsBody;
 			//when NOT added to a CollisionManager
 			PhysicalState* physicalState;
 		};

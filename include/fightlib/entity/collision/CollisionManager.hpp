@@ -4,8 +4,11 @@
 #include "Collidable.hpp"
 #include "CollisionPair.hpp"
 
-class b2World;
-class b2Fixture;
+namespace box2d
+{
+	class World;
+	class Fixture;
+}
 
 namespace fl
 {
@@ -25,11 +28,11 @@ namespace fl
 
 		void update(const fgl::ApplicationData& appData);
 
-		b2World* getWorld();
+		box2d::World* getWorld();
 		const fgl::ArrayList<CollisionPair>& getCollisionPairs() const;
 
 	private:
-		b2World* world;
+		box2d::World* world;
 		fgl::ArrayList<Collidable*> collidables;
 		Box2DCollisionHandler* collisionHandler;
 	};

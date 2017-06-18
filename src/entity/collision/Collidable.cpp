@@ -2,7 +2,7 @@
 #include <fightlib/entity/collision/Collidable.hpp>
 #include <fightlib/entity/collision/CollisionManager.hpp>
 #include <fightlib/entity/collision/PhysicsConstants.hpp>
-#include <Box2D/Box2D.h>
+#include <Box2D/Box2D.hpp>
 
 namespace fl
 {
@@ -20,7 +20,7 @@ namespace fl
 		if(collisionManager!=nullptr)
 		{
 			auto world = collisionManager->getWorld();
-			world->DestroyBody(physicsBody);
+			world->Destroy(physicsBody);
 		}
 		else
 		{
@@ -42,7 +42,7 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			b2Vec2 pos = physicsBody->GetPosition();
+			auto pos = physicsBody->GetLocation();
 			return fgl::Vector2d((double)pos.x * METERS_TO_PIXELS, (double)pos.y * METERS_TO_PIXELS);
 		}
 		else
@@ -55,8 +55,8 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			b2Vec2 pos((float32)(position.x * PIXELS_TO_METERS), (float32)(position.y * PIXELS_TO_METERS));
-			float32 angle = physicsBody->GetAngle();
+			box2d::Length2D pos((box2d::RealNum)(position.x * PIXELS_TO_METERS), (box2d::RealNum)(position.y * PIXELS_TO_METERS));
+			auto angle = physicsBody->GetAngle();
 			physicsBody->SetTransform(pos, angle);
 		}
 		else
@@ -81,8 +81,8 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			b2Vec2 pos = physicsBody->GetPosition();
-			physicsBody->SetTransform(pos, (float32)fgl::Math::degtorad(degrees));
+			auto pos = physicsBody->GetLocation();
+			physicsBody->SetTransform(pos, (box2d::RealNum)fgl::Math::degtorad(degrees));
 		}
 		else
 		{
@@ -94,7 +94,7 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			b2Vec2 vel = physicsBody->GetLinearVelocity();
+			auto vel = physicsBody->GetVelocity().linear;
 			return fgl::Vector2d((double)vel.x * METERS_TO_PIXELS, (double)vel.y * METERS_TO_PIXELS);
 		}
 		else
@@ -107,8 +107,9 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			b2Vec2 vel((float32)(velocity.x * PIXELS_TO_METERS), (float32)(velocity.y * PIXELS_TO_METERS));
-			physicsBody->SetLinearVelocity(vel);
+			auto vel = physicsBody->GetVelocity();
+			vel.linear = box2d::LinearVelocity2D((box2d::RealNum)(velocity.x * PIXELS_TO_METERS), (box2d::RealNum)(velocity.y * PIXELS_TO_METERS));
+			physicsBody->SetVelocity(vel);
 		}
 		else
 		{
@@ -120,7 +121,7 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			return fgl::Math::radtodeg((double)physicsBody->GetAngularVelocity());
+			return fgl::Math::radtodeg((double)physicsBody->GetVelocity().angular);
 		}
 		else
 		{
@@ -132,7 +133,9 @@ namespace fl
 	{
 		if(collisionManager!=nullptr)
 		{
-			physicsBody->SetAngularVelocity((float32)fgl::Math::degtorad(degreesPerSecond));
+			auto vel = physicsBody->GetVelocity();
+			vel.angular = (box2d::RealNum)fgl::Math::degtorad(degreesPerSecond);
+			physicsBody->SetVelocity(vel);
 		}
 		else
 		{

@@ -9,20 +9,20 @@ namespace fl
 		//
 	}
 
-	float Box2DCollisionHandler::getContactAngle(b2Contact* contact)
+	float Box2DCollisionHandler::getContactAngle(const box2d::Contact& contact)
 	{
-		auto localNormal = contact->GetManifold()->localNormal;
-		switch(contact->GetManifold()->type)
+		auto localNormal = contact.GetManifold().GetLocalNormal();
+		switch(contact.GetManifold().GetType())
 		{
-			case b2Manifold::e_circles:
+			case box2d::Manifold::Type::e_circles:
 			//TODO get the angle from fixtureA's center to fixtureB's center
 			throw fgl::NotImplementedException("I haven't implemented box2d e_circles");
 			break;
 
-			case b2Manifold::e_faceA:
+			case box2d::Manifold::Type::e_faceA:
 			return fgl::Math::normalizeDegrees(fgl::Math::radtodeg(fgl::Math::atan2((double)localNormal.x, (double)localNormal.y))+180.0);
 
-			case b2Manifold::e_faceB:
+			case box2d::Manifold::Type::e_faceB:
 			return fgl::Math::radtodeg(fgl::Math::atan2((double)localNormal.x, (double)localNormal.y));
 
 			default:
@@ -30,7 +30,7 @@ namespace fl
 		}
 	}
 
-	bool Box2DCollisionHandler::ShouldCollide(b2Fixture* fixture1, b2Fixture* fixture2)
+	bool Box2DCollisionHandler::ShouldCollide(const box2d::Fixture* fixture1, const box2d::Fixture* fixture2)
 	{
 		auto collidable1 = (Collidable*)fixture1->GetBody()->GetUserData();
 		auto collidable2 = (Collidable*)fixture2->GetBody()->GetUserData();
@@ -49,10 +49,10 @@ namespace fl
 		return true;
 	}
 
-	void Box2DCollisionHandler::BeginContact(b2Contact* contact)
+	void Box2DCollisionHandler::BeginContact(box2d::Contact& contact)
 	{
-		auto fixture1 = contact->GetFixtureA();
-		auto fixture2 = contact->GetFixtureB();
+		auto fixture1 = contact.GetFixtureA();
+		auto fixture2 = contact.GetFixtureB();
 
 		auto collidable1 = (Collidable*)fixture1->GetBody()->GetUserData();
 		auto collidable2 = (Collidable*)fixture2->GetBody()->GetUserData();
@@ -116,10 +116,10 @@ namespace fl
 		collisionPairs.add(pair);
 	}
 
-	void Box2DCollisionHandler::EndContact(b2Contact* contact)
+	void Box2DCollisionHandler::EndContact(box2d::Contact& contact)
 	{
-		auto fixture1 = contact->GetFixtureA();
-		auto fixture2 = contact->GetFixtureB();
+		auto fixture1 = contact.GetFixtureA();
+		auto fixture2 = contact.GetFixtureB();
 
 		auto collidable1 = (Collidable*)fixture1->GetBody()->GetUserData();
 		auto collidable2 = (Collidable*)fixture2->GetBody()->GetUserData();
@@ -145,10 +145,10 @@ namespace fl
 		}
 	}
 
-	void Box2DCollisionHandler::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
+	void Box2DCollisionHandler::PreSolve(box2d::Contact& contact, const box2d::Manifold& oldManifold)
 	{
-		auto fixture1 = contact->GetFixtureA();
-		auto fixture2 = contact->GetFixtureB();
+		auto fixture1 = contact.GetFixtureA();
+		auto fixture2 = contact.GetFixtureB();
 
 		auto collidable1 = (Collidable*)fixture1->GetBody()->GetUserData();
 		auto collidable2 = (Collidable*)fixture2->GetBody()->GetUserData();
@@ -168,13 +168,13 @@ namespace fl
 			{
 				if(pair.ignored)
 				{
-					contact->SetEnabled(false);
+					contact.SetEnabled(false);
 				}
 				else if(!collidable1->respondsToCollision(collidable2, data)
 					|| !collidable2->respondsToCollision(collidable1, revData))
 				{
 					pair.ignored = true;
-					contact->SetEnabled(false);
+					contact.SetEnabled(false);
 				}
 				return;
 			}
@@ -182,20 +182,20 @@ namespace fl
 			{
 				if(pair.ignored)
 				{
-					contact->SetEnabled(false);
+					contact.SetEnabled(false);
 				}
 				else if(!collidable1->respondsToCollision(collidable2, data)
 					|| !collidable2->respondsToCollision(collidable1, revData))
 				{
 					pair.ignored = true;
-					contact->SetEnabled(false);
+					contact.SetEnabled(false);
 				}
 				return;
 			}
 		}
 	}
 
-	void Box2DCollisionHandler::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+	void Box2DCollisionHandler::PostSolve(box2d::Contact& contact, const box2d::ContactImpulsesList& impulses, iteration_type solved)
 	{
 		//nuthin' to do here
 	}
