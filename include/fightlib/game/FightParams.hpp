@@ -4,7 +4,7 @@
 #include <fightlib/controls/CharacterController.hpp>
 #include <fightlib/entity/Character.hpp>
 #include <fightlib/stage/Stage.hpp>
-#include "Camera.hpp"
+#include "camera/Camera.hpp"
 
 namespace fl
 {
@@ -12,6 +12,9 @@ namespace fl
 	{
 	public:
 		FightParams();
+
+		void setFrame(const fgl::RectangleD& frame);
+		const fgl::RectangleD& getFrame() const;
 		
 		void setStage(Stage* stage);
 		Stage* getStage() const;
@@ -28,6 +31,7 @@ namespace fl
 		const fgl::ArrayList<CharacterController*>& getCharacterControllers() const;
 
 	private:
+		fgl::RectangleD frame;
 		Stage* stage;
 		Camera* camera;
 		fgl::ArrayList<Character*> characters;

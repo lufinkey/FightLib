@@ -4,7 +4,8 @@
 namespace fl
 {
 	Fight::Fight(const FightParams& params)
-		: stage(params.getStage()),
+		: frame(params.getFrame()),
+		stage(params.getStage()),
 		camera(params.getCamera()),
 		characterControllers(params.getCharacterControllers()),
 		firstUpdate(true)
@@ -83,7 +84,28 @@ namespace fl
 	void Fight::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		appData.additionalData["fight"] = this;
+		graphics.translate(frame.x, frame.y);
+		graphics.clip(fgl::RectangleD(0, 0, frame.width, frame.height));
+		graphics.drawRect(0, 0, frame.width, frame.height);
 		camera->drawStage(appData, graphics);
+	}
+
+	void Fight::setFrame(const fgl::RectangleD& frame_arg)
+	{
+		auto oldFrame = frame;
+		frame = frame_arg;
+		if(!firstUpdate)
+		{
+			if(frame.width!=oldFrame.width || frame.height!=oldFrame.height)
+			{
+				camera->onFrameSizeChange(fgl::Vector2d(oldFrame.width, oldFrame.height), fgl::Vector2d(frame.width, frame.height));
+			}
+		}
+	}
+
+	const fgl::RectangleD& Fight::getFrame() const
+	{
+		return frame;
 	}
 	
 	Stage* Fight::getStage() const

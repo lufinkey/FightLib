@@ -13,6 +13,9 @@ namespace fl
 		
 		virtual void update(fgl::ApplicationData appData);
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
+
+		void setFrame(const fgl::RectangleD& frame);
+		const fgl::RectangleD& getFrame() const;
 		
 		Stage* getStage() const;
 		Camera* getCamera() const;

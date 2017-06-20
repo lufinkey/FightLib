@@ -12,12 +12,16 @@ namespace fl
 		friend class Fight;
 	public:
 		Camera();
+		virtual ~Camera();
+
+		fgl::Vector2d getFrameSize() const;
 
 	protected:
+		virtual void onBeginFight(Fight* fight);
+		virtual void onFrameSizeChange(fgl::Vector2d oldSize, fgl::Vector2d newSize);
+
 		virtual void update(fgl::ApplicationData appData);
 		virtual void drawStage(fgl::ApplicationData appData, fgl::Graphics graphics) const;
-
-		virtual void onBeginFight(Fight* fight);
 
 	private:
 		Fight* fight;

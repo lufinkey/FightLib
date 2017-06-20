@@ -70,6 +70,12 @@
     <Filter Include="include\fightlib\base">
       <UniqueIdentifier>{c32a21ce-aa83-459d-9efa-3eb05517cc3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\fightlib\game\camera">
+      <UniqueIdentifier>{427064dd-32b9-44ce-ae54-531313d679b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\camera">
+      <UniqueIdentifier>{495b5f73-3d26-4f10-83aa-cb4b5d0c2cf7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp">
@@ -186,8 +192,8 @@
     <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp">
       <Filter>include\fightlib\stage</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\fightlib\game\Camera.hpp">
-      <Filter>include\fightlib\game</Filter>
+    <ClInclude Include="..\..\include\fightlib\game\camera\Camera.hpp">
+      <Filter>include\fightlib\game\camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,8 +305,8 @@
     <ClCompile Include="..\..\src\stage\StageSection.cpp">
       <Filter>src\stage</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\game\Camera.cpp">
-      <Filter>src\game</Filter>
+    <ClCompile Include="..\..\src\game\camera\Camera.cpp">
+      <Filter>src\game\camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

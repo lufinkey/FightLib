@@ -28,3 +28,5 @@
 
 #include "game/Fight.hpp"
 #include "game/FightParams.hpp"
+#include "game/camera/Camera.hpp"
+#include "game/camera/FollowerCamera.hpp"

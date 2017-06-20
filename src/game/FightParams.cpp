@@ -4,10 +4,21 @@
 namespace fl
 {
 	FightParams::FightParams()
-		: stage(nullptr),
+		: frame(0,0,640,480),
+		stage(nullptr),
 		camera(nullptr)
 	{
 		//
+	}
+
+	void FightParams::setFrame(const fgl::RectangleD& frame_arg)
+	{
+		frame = frame_arg;
+	}
+
+	const fgl::RectangleD& FightParams::getFrame() const
+	{
+		return frame;
 	}
 	
 	void FightParams::setStage(Stage* stage_arg)
