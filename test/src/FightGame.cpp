@@ -16,9 +16,12 @@ void FightGame::loadContent(fgl::AssetManager* assetManager)
 	controller->setKeyDownAction(fgl::Keyboard::O, "punch");
 	
 	auto stage = new TestStage(animationAssetManager);
+	auto camera = new fl::FollowerCamera();
+	camera->setFocus(player);
 	
 	fl::FightParams params;
 	params.setStage(stage);
+	params.setCamera(camera);
 	params.addCharacter(player);
 	params.addCharacterController(controller);
 	

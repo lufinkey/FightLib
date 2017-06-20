@@ -195,6 +195,9 @@
     <ClInclude Include="..\..\include\fightlib\game\camera\Camera.hpp">
       <Filter>include\fightlib\game\camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\game\camera\FollowerCamera.hpp">
+      <Filter>include\fightlib\game\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -306,6 +309,9 @@
       <Filter>src\stage</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\game\camera\Camera.cpp">
+      <Filter>src\game\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\camera\FollowerCamera.cpp">
       <Filter>src\game\camera</Filter>
     </ClCompile>
   </ItemGroup>

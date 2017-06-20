@@ -62,29 +62,5 @@ TestStage::~TestStage()
 
 void TestStage::update(fgl::ApplicationData appData)
 {
-	for(auto character : getCharacters())
-	{
-		auto window = appData.getWindow();
-		auto winSize = window->getSize();
-		auto position = character->getPosition();
-		auto newPosition = position;
-		if(newPosition.x < -40)
-		{
-			newPosition.x = (double)winSize.x+40;
-		}
-		else if(newPosition.x > (winSize.x+40))
-		{
-			newPosition.x = -40;
-		}
-		if(newPosition.y < -40)
-		{
-			newPosition.y = (double)winSize.y+40;
-		}
-		else if(newPosition.y > (winSize.y+40))
-		{
-			newPosition.y = -40;
-		}
-		character->shift(newPosition-position);
-	}
 	Stage::update(appData);
 }
