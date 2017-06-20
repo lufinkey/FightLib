@@ -186,6 +186,9 @@
     <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp">
       <Filter>include\fightlib\stage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\game\Camera.hpp">
+      <Filter>include\fightlib\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -295,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\stage\StageSection.cpp">
       <Filter>src\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\Camera.cpp">
+      <Filter>src\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

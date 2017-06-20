@@ -4,6 +4,7 @@
 #include <fightlib/controls/CharacterController.hpp>
 #include <fightlib/entity/Character.hpp>
 #include <fightlib/stage/Stage.hpp>
+#include "Camera.hpp"
 
 namespace fl
 {
@@ -15,6 +16,9 @@ namespace fl
 		void setStage(Stage* stage);
 		Stage* getStage() const;
 
+		void setCamera(Camera* camera);
+		Camera* getCamera() const;
+
 		void addCharacter(Character* character);
 		void setCharacters(const fgl::ArrayList<Character*>& characters);
 		const fgl::ArrayList<Character*>& getCharacters() const;
@@ -25,6 +29,7 @@ namespace fl
 
 	private:
 		Stage* stage;
+		Camera* camera;
 		fgl::ArrayList<Character*> characters;
 		fgl::ArrayList<CharacterController*> characterControllers;
 	};

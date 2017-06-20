@@ -5,7 +5,9 @@ namespace fl
 {
 	Fight::Fight(const FightParams& params)
 		: stage(params.getStage()),
-		characterControllers(params.getCharacterControllers())
+		camera(params.getCamera()),
+		characterControllers(params.getCharacterControllers()),
+		firstUpdate(true)
 	{
 		if(stage==nullptr)
 		{
@@ -22,6 +24,12 @@ namespace fl
 		{
 			stage->addCharacter(character);
 		}
+
+		if(camera==nullptr)
+		{
+			camera = new Camera();
+		}
+		camera->fight = this;
 	}
 
 	Fight::~Fight()
@@ -33,10 +41,18 @@ namespace fl
 		
 		stage->fight = nullptr;
 		delete stage;
+		camera->fight = nullptr;
+		delete camera;
 	}
 
 	void Fight::update(fgl::ApplicationData appData)
 	{
+		if(firstUpdate)
+		{
+			firstUpdate = false;
+			camera->onBeginFight(this);
+		}
+
 		appData.additionalData["fight"] = this;
 		
 		//automatically pick up items that can be picked up by touching them
@@ -59,17 +75,25 @@ namespace fl
 		
 		//update stage
 		stage->update(appData);
+
+		//update camera
+		camera->update(appData);
 	}
 
 	void Fight::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		appData.additionalData["fight"] = this;
-		stage->draw(appData, graphics);
+		camera->drawStage(appData, graphics);
 	}
 	
 	Stage* Fight::getStage() const
 	{
 		return stage;
+	}
+
+	Camera* Fight::getCamera() const
+	{
+		return camera;
 	}
 	
 	const fgl::ArrayList<CharacterController*>& Fight::getCharacterControllers() const

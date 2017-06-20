@@ -15,12 +15,16 @@ namespace fl
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 		
 		Stage* getStage() const;
+		Camera* getCamera() const;
 		const fgl::ArrayList<CharacterController*>& getCharacterControllers() const;
 
 	private:
 		fgl::RectangleD frame;
 		
 		Stage* stage;
+		Camera* camera;
 		fgl::ArrayList<CharacterController*> characterControllers;
+
+		bool firstUpdate;
 	};
 }

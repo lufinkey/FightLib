@@ -4,7 +4,8 @@
 namespace fl
 {
 	FightParams::FightParams()
-		: stage(nullptr)
+		: stage(nullptr),
+		camera(nullptr)
 	{
 		//
 	}
@@ -17,6 +18,16 @@ namespace fl
 	Stage* FightParams::getStage() const
 	{
 		return stage;
+	}
+
+	void FightParams::setCamera(Camera* camera_arg)
+	{
+		camera = camera_arg;
+	}
+
+	Camera* FightParams::getCamera() const
+	{
+		return camera;
 	}
 	
 	void FightParams::addCharacter(Character* character)
