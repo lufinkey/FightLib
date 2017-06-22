@@ -55,6 +55,7 @@ namespace fl
 			camera->onBeginFight(this);
 		}
 
+		appData.setTime(time);
 		appData.additionalData["fight"] = this;
 		
 		//automatically pick up items that can be picked up by touching them
