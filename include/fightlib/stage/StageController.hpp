@@ -22,7 +22,34 @@ namespace fl
 		virtual void onAddToStage(Stage* stage);
 		virtual void onRemoveFromStage(Stage* stage);
 
+		fgl::TimeInterval getTime() const;
+
+		void easeValue(const fgl::String& name, long long duration, const std::function<void(double progress)>& onprogress);
+		void easeValue(long long duration, const std::function<void(double progress)>& onprogress);
+		void stopEasedValue(const fgl::String& name);
+
+		void createTimer(const fgl::String& name, long long duration, const std::function<void()>& oncompletion);
+		void createTimer(long long duration, const std::function<void()>& oncompletion);
+		void destroyTimer(const fgl::String& name);
+
 	private:
 		Stage* stage;
+
+		struct EasedValue
+		{
+			fgl::String name;
+			long long startTime;
+			long long duration;
+			std::function<void(double)> onprogress;
+		};
+		fgl::ArrayList<EasedValue> easedValues;
+
+		struct Timer
+		{
+			fgl::String name;
+			long long fireTime;
+			std::function<void()> oncompletion;
+		};
+		fgl::ArrayList<Timer> timers;
 	};
 }
