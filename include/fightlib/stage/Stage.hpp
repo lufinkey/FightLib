@@ -9,6 +9,7 @@
 #include <fightlib/entity/Item.hpp>
 #include "Platform.hpp"
 #include "StageSection.hpp"
+#include "StageController.hpp"
 
 namespace fl
 {
@@ -59,6 +60,9 @@ namespace fl
 
 		void addSubStage(Stage* stage, double zLayer=0.5);
 		void removeSubStage(Stage* stage);
+
+		void addController(StageController* controller);
+		void removeController(StageController* controller);
 		
 	private:
 		void loadSection(StageSection* section);
@@ -74,6 +78,7 @@ namespace fl
 
 		fgl::ArrayList<StageSection*> sections;
 		fgl::ArrayList<Stage*> subStages;
+		fgl::ArrayList<StageController*> controllers;
 		
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 		

@@ -58,6 +58,7 @@
     <ClInclude Include="..\..\include\fightlib\game\FightParams.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\Platform.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\Stage.hpp" />
+    <ClInclude Include="..\..\include\fightlib\stage\StageController.hpp" />
     <ClInclude Include="..\..\include\fightlib\stage\StageSection.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <ClCompile Include="..\..\src\game\FightParams.cpp" />
     <ClCompile Include="..\..\src\stage\Platform.cpp" />
     <ClCompile Include="..\..\src\stage\Stage.cpp" />
+    <ClCompile Include="..\..\src\stage\StageController.cpp" />
     <ClCompile Include="..\..\src\stage\StageSection.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -50,6 +50,12 @@ namespace fl
 				entity->setVelocity(velocity);
 			}
 		}
+
+		//update the stage controllers
+		for(auto controller : controllers)
+		{
+			controller->update(appData);
+		}
 		
 		//update all these damn managers
 		drawManager.update(appData);
@@ -269,6 +275,28 @@ namespace fl
 		subStages.removeFirstEqual(stage);
 		drawManager.removeDrawable(stage);
 		stage->parentStage = nullptr;
+	}
+
+	void Stage::addController(StageController* controller)
+	{
+		if(controller->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("controller", "already added to a Stage");
+		}
+		controllers.add(controller);
+		controller->stage = this;
+		controller->onAddToStage(this);
+	}
+
+	void Stage::removeController(StageController* controller)
+	{
+		if(controller->stage!=this)
+		{
+			return;
+		}
+		controllers.removeFirstEqual(controller);
+		controller->stage = nullptr;
+		controller->onRemoveFromStage(this);
 	}
 
 	void Stage::loadSection(StageSection* section)
