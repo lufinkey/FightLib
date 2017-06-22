@@ -51,6 +51,7 @@ namespace fl
 		if(firstUpdate)
 		{
 			firstUpdate = false;
+			time.start();
 			camera->onBeginFight(this);
 		}
 
@@ -106,6 +107,11 @@ namespace fl
 	const fgl::RectangleD& Fight::getFrame() const
 	{
 		return frame;
+	}
+
+	fgl::TimeInterval Fight::getTime() const
+	{
+		return time;
 	}
 	
 	Stage* Fight::getStage() const

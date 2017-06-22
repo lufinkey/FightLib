@@ -16,6 +16,8 @@ namespace fl
 
 		void setFrame(const fgl::RectangleD& frame);
 		const fgl::RectangleD& getFrame() const;
+
+		fgl::TimeInterval getTime() const;
 		
 		Stage* getStage() const;
 		Camera* getCamera() const;
@@ -23,6 +25,8 @@ namespace fl
 
 	private:
 		fgl::RectangleD frame;
+
+		fgl::TimeInterval time;
 		
 		Stage* stage;
 		Camera* camera;
