@@ -37,19 +37,27 @@ namespace fl
 
 		struct EasedValue
 		{
+			size_t id;
 			fgl::String name;
 			long long startTime;
 			long long duration;
 			std::function<void(double)> onprogress;
 		};
+		size_t EasedValue_nextID;
+		size_t EasedValue_getNextID();
+		void stopEasedValue(size_t id);
 		fgl::ArrayList<EasedValue> easedValues;
 
 		struct Timer
 		{
+			size_t id;
 			fgl::String name;
 			long long fireTime;
 			std::function<void()> oncompletion;
 		};
+		size_t Timer_nextID;
+		size_t Timer_getNextID();
+		void destroyTimer(size_t id);
 		fgl::ArrayList<Timer> timers;
 	};
 }
