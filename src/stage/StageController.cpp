@@ -153,7 +153,7 @@ namespace fl
 		easeValue("", duration, onprogress);
 	}
 
-	void StageController::stopEasedValue(const fgl::String& name)
+	double StageController::stopEasedValue(const fgl::String& name)
 	{
 		//eased values with no name can't get removed
 		if(name.length()==0)
@@ -161,13 +161,21 @@ namespace fl
 			return;
 		}
 
+		double progress = 0;
 		easedValues.removeFirstWhere([&](const EasedValue& value) -> bool {
 			if(value.name==name)
 			{
+				auto time = getTime().getMilliseconds();
+				auto elapsed = time - value.startTime;
+				if(elapsed < value.duration)
+				{
+					progress = (double)((long double)elapsed/(long double)value.duration);
+				}
 				return true;
 			}
 			return false;
 		});
+		return progress;
 	}
 
 	void StageController::stopEasedValue(size_t id)

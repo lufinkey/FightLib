@@ -26,7 +26,7 @@ namespace fl
 
 		void easeValue(const fgl::String& name, long long duration, const std::function<void(double progress)>& onprogress);
 		void easeValue(long long duration, const std::function<void(double progress)>& onprogress);
-		void stopEasedValue(const fgl::String& name);
+		double stopEasedValue(const fgl::String& name);
 
 		void createTimer(const fgl::String& name, long long duration, const std::function<void()>& oncompletion);
 		void createTimer(long long duration, const std::function<void()>& oncompletion);
