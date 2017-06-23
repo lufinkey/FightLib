@@ -25,6 +25,7 @@
 
 #include "stage/Platform.hpp"
 #include "stage/Stage.hpp"
+#include "stage/StageController.hpp"
 
 #include "game/Fight.hpp"
 #include "game/FightParams.hpp"
