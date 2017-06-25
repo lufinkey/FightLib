@@ -75,4 +75,13 @@ namespace fl
 		}
 		return pairs;
 	}
+
+	bool CollisionPair::isContacting() const
+	{
+		if(sides.size() > 0 || ignoredCollisions.size() > 0)
+		{
+			return true;
+		}
+		return false;
+	}
 }

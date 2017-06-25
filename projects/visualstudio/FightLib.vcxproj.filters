@@ -201,6 +201,9 @@
     <ClInclude Include="..\..\include\fightlib\stage\StageController.hpp">
       <Filter>include\fightlib\stage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\fightlib\entity\collision\ContactEvent.hpp">
+      <Filter>include\fightlib\entity\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\entity\Entity.cpp">
@@ -319,6 +322,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\stage\StageController.cpp">
       <Filter>src\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\entity\collision\ContactEvent.cpp">
+      <Filter>src\entity\collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

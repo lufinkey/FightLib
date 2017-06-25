@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionManager.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionPair.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\CollisionRectManager.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\collision\ContactEvent.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\BoxCollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\CollisionRect.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\collision\rects\PixelCollisionRect.hpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="..\..\src\entity\collision\CollisionManager.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionPair.cpp" />
     <ClCompile Include="..\..\src\entity\collision\CollisionRectManager.cpp" />
+    <ClCompile Include="..\..\src\entity\collision\ContactEvent.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\BoxCollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\CollisionRect.cpp" />
     <ClCompile Include="..\..\src\entity\collision\rects\PixelCollisionRect.cpp" />

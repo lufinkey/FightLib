@@ -49,6 +49,9 @@ namespace fl
 	{
 		fgl::ArrayList<CollisionPair> pairs = getCollisionPairs();
 		fgl::ArrayList<CollisionPair> collisions;
+
+		fgl::ArrayList<std::function<void()>> onContactCalls;
+		fgl::ArrayList<std::function<void()>> onContactFinishCalls;
 		
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
@@ -80,7 +83,7 @@ namespace fl
 				{
 					fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
 					fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
-				
+					
 					fgl::ArrayList<CollisionRectPair> rectPairs = pair.getCollisionRectPairs(rects1, rects2);
 					//check each CollisionRect for a collision
 					for(auto& rectPair : rectPairs)
@@ -345,6 +348,125 @@ namespace fl
 				if(i==1)
 				#endif
 				{
+					//check if is/was contacting
+					if(newPair.isContacting())
+					{
+						if(pair.isContacting())
+						{
+							//updated contact
+							auto contactEvent1 = ContactEvent(collidable2, CONTACTSTATE_UPDATED);
+							auto contactEvent2 = ContactEvent(collidable1, CONTACTSTATE_UPDATED);
+							if(collidable1->isStaticCollisionBody())
+							{
+								onContactCalls.add([=] {
+									collidable2->onContactUpdate(contactEvent2);
+									collidable1->onContactUpdate(contactEvent1);
+								});
+							}
+							else if(collidable2->isStaticCollisionBody())
+							{
+								onContactCalls.add([=] {
+									collidable1->onContactUpdate(contactEvent1);
+									collidable2->onContactUpdate(contactEvent2);
+								});
+							}
+							else
+							{
+								double randomFirst = fgl::Math::random();
+								if(randomFirst < 0.5)
+								{
+									onContactCalls.add([=] {
+										collidable1->onContactUpdate(contactEvent1);
+										collidable2->onContactUpdate(contactEvent2);
+									});
+								}
+								else
+								{
+									onContactCalls.add([=] {
+										collidable2->onContactUpdate(contactEvent2);
+										collidable1->onContactUpdate(contactEvent1);
+									});
+								}
+							}
+						}
+						else
+						{
+							//new contact
+							auto contactEvent1 = ContactEvent(collidable2, CONTACTSTATE_NEW);
+							auto contactEvent2 = ContactEvent(collidable1, CONTACTSTATE_NEW);
+							if(collidable1->isStaticCollisionBody())
+							{
+								onContactCalls.add([=] {
+									collidable2->onContact(contactEvent2);
+									collidable1->onContact(contactEvent1);
+								});
+							}
+							else if(collidable2->isStaticCollisionBody())
+							{
+								onContactCalls.add([=] {
+									collidable1->onContact(contactEvent1);
+									collidable2->onContact(contactEvent2);
+								});
+							}
+							else
+							{
+								double randomFirst = fgl::Math::random();
+								if(randomFirst < 0.5)
+								{
+									onContactCalls.add([=] {
+										collidable1->onContact(contactEvent1);
+										collidable2->onContact(contactEvent2);
+									});
+								}
+								else
+								{
+									onContactCalls.add([=] {
+										collidable2->onContact(contactEvent2);
+										collidable1->onContact(contactEvent1);
+									});
+								}
+							}
+						}
+					}
+					else if(pair.isContacting())
+					{
+						//finished contact
+						auto contactEvent1 = ContactEvent(collidable2, CONTACTSTATE_FINISHED);
+						auto contactEvent2 = ContactEvent(collidable1, CONTACTSTATE_FINISHED);
+						if(collidable1->isStaticCollisionBody())
+						{
+							onContactFinishCalls.add([=] {
+								collidable2->onContactFinish(contactEvent2);
+								collidable1->onContactFinish(contactEvent1);
+							});
+						}
+						else if(collidable2->isStaticCollisionBody())
+						{
+							onContactFinishCalls.add([=] {
+								collidable1->onContactFinish(contactEvent1);
+								collidable2->onContactFinish(contactEvent2);
+							});
+						}
+						else
+						{
+							double randomFirst = fgl::Math::random();
+							if(randomFirst < 0.5)
+							{
+								onContactFinishCalls.add([=] {
+									collidable1->onContactFinish(contactEvent1);
+									collidable2->onContactFinish(contactEvent2);
+								});
+							}
+							else
+							{
+								onContactFinishCalls.add([=] {
+									collidable2->onContactFinish(contactEvent2);
+									collidable1->onContactFinish(contactEvent1);
+								});
+							}
+						}
+					}
+
 					//check for new/updated collision calls
 					for(auto collisionSide : newPair.sides)
 					{
@@ -477,6 +599,18 @@ namespace fl
 		for(auto& onCollisionFinish : onCollisionFinishCalls)
 		{
 			onCollisionFinish();
+		}
+
+		//call finished contacts
+		for(auto& onContactFinish : onContactFinishCalls)
+		{
+			onContactFinish();
+		}
+
+		//call current contacts
+		for(auto& onContact : onContactCalls)
+		{
+			onContact();
 		}
 		
 		//call current collisions

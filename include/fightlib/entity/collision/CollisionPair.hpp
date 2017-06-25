@@ -31,5 +31,7 @@ namespace fl
 		bool shouldIgnoreCollision(CollisionRect* rect1, CollisionRect* rect2) const;
 
 		fgl::ArrayList<CollisionRectPair> getCollisionRectPairs(const fgl::ArrayList<CollisionRect*>& rects1, const fgl::ArrayList<CollisionRect*>& rects2) const;
+
+		bool isContacting() const;
 	};
 }

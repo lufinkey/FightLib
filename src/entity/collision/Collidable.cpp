@@ -44,6 +44,21 @@ namespace fl
 		velocity += acceleration;
 	}
 
+	void Collidable::onContact(const ContactEvent& contactEvent)
+	{
+		//
+	}
+
+	void Collidable::onContactUpdate(const ContactEvent& contactEvent)
+	{
+		//
+	}
+
+	void Collidable::onContactFinish(const ContactEvent& contactEvent)
+	{
+		//
+	}
+
 	bool Collidable::respondsToCollision(Collidable* collided, CollisionSide side) const
 	{
 		return true;

@@ -3,6 +3,7 @@
 
 #include <fightlib/entity/draw/Sprite.hpp>
 #include "rects/CollisionRect.hpp"
+#include "ContactEvent.hpp"
 #include "CollisionEvent.hpp"
 
 namespace fl
@@ -30,6 +31,10 @@ namespace fl
 		bool checkCollision(Collidable* collidable) const;
 
 	protected:
+		virtual void onContact(const ContactEvent& contactEvent);
+		virtual void onContactUpdate(const ContactEvent& contactEvent);
+		virtual void onContactFinish(const ContactEvent& contactEvent);
+
 		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
 
 		virtual void onCollision(const CollisionEvent& collisionEvent);
