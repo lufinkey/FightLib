@@ -15,6 +15,10 @@ namespace fl
 			unloadSection(section);
 			delete section;
 		}
+		for(auto controller : controllers)
+		{
+			delete controller;
+		}
 		for(auto drawable : drawManager.getDrawables())
 		{
 			delete drawable;
