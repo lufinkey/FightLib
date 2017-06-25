@@ -167,7 +167,7 @@ namespace fl
 		//eased values with no name can't get removed
 		if(name.length()==0)
 		{
-			return;
+			return 0;
 		}
 
 		std::function<void(double)> easeFunc;
