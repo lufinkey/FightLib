@@ -132,6 +132,15 @@ namespace fl
 			}
 		}
 
+		if(duration<=0)
+		{
+			if(onprogress)
+			{
+				onprogress(1.0);
+			}
+			return;
+		}
+
 		//add the eased value
 		EasedValue value;
 		value.id = EasedValue_getNextID();
@@ -228,6 +237,15 @@ namespace fl
 			{
 				throw fgl::IllegalArgumentException("name", "timer already exists with the name \""+name+"\"");
 			}
+		}
+
+		if(duration<=0)
+		{
+			if(oncompletion)
+			{
+				oncompletion();
+			}
+			return;
 		}
 
 		//add the timer
