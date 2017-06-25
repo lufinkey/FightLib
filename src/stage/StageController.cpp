@@ -162,7 +162,7 @@ namespace fl
 		easeValue("", duration, onprogress);
 	}
 
-	double StageController::stopEasedValue(const fgl::String& name)
+	double StageController::stopEasedValue(const fgl::String& name, bool finishEase)
 	{
 		//eased values with no name can't get removed
 		if(name.length()==0)
@@ -170,6 +170,7 @@ namespace fl
 			return;
 		}
 
+		std::function<void(double)> easeFunc;
 		double progress = 0;
 		easedValues.removeFirstWhere([&](const EasedValue& value) -> bool {
 			if(value.name==name)
@@ -180,10 +181,18 @@ namespace fl
 				{
 					progress = (double)((long double)elapsed/(long double)value.duration);
 				}
+				if(finishEase)
+				{
+					easeFunc = value.onprogress;
+				}
 				return true;
 			}
 			return false;
 		});
+		if(easeFunc)
+		{
+			easeFunc(1.0);
+		}
 		return progress;
 	}
 
@@ -262,7 +271,7 @@ namespace fl
 		createTimer("", duration, oncompletion);
 	}
 
-	void StageController::destroyTimer(const fgl::String& name)
+	void StageController::destroyTimer(const fgl::String& name, bool callTimer)
 	{
 		//timers with no name can't get removed
 		if(name.length()==0)
@@ -270,13 +279,22 @@ namespace fl
 			return;
 		}
 
+		std::function<void()> timerFunc;
 		timers.removeFirstWhere([&](const Timer& timer) -> bool {
 			if(timer.name==name)
 			{
+				if(callTimer)
+				{
+					timerFunc = timer.oncompletion;
+				}
 				return true;
 			}
 			return false;
 		});
+		if(timerFunc)
+		{
+			timerFunc();
+		}
 	}
 
 	void StageController::destroyTimer(size_t id)
