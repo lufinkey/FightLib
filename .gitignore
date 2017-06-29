@@ -27,3 +27,14 @@
 /projects/xcode*/test/*.xcworkspace/xcuserdata
 /projects/xcode*/test/Build
 /projects/xcode*/test/DerivedData
+
+#Code::Blocks
+/projects/codeblocks/*.layout
+/projects/codeblocks/*.depend
+/projects/codeblocks/obj
+/projects/codeblocks/bin
+/projects/codeblocks/test/*.layout
+/projects/codeblocks/test/*.depend
+/projects/codeblocks/test/obj
+/projects/codeblocks/test/bin
+
