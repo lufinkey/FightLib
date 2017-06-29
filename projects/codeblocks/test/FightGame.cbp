@@ -16,12 +16,6 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add option="-lSDL2" />
-					<Add option="-lSDL2_image" />
-					<Add option="-lSDL2_mixer" />
-					<Add option="-lSDL2_ttf" />
-					<Add option="-lSDL2_gfx" />
-					<Add option="-lpthread" />
 					<Add library="../bin/Debug/libFightLib.a" />
 					<Add library="../../../external/GameLibrary/projects/codeblocks/bin/Debug/libGameLibrary.a" />
 				</Linker>
@@ -41,12 +35,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lSDL2" />
-					<Add option="-lSDL2_image" />
-					<Add option="-lSDL2_mixer" />
-					<Add option="-lSDL2_ttf" />
-					<Add option="-lSDL2_gfx" />
-					<Add option="-lpthread" />
 					<Add library="../bin/Release/libFightLib.a" />
 					<Add library="../../../external/GameLibrary/projects/codeblocks/bin/Release/libGameLibrary.a" />
 				</Linker>
@@ -62,6 +50,14 @@
 			<Add directory="../../../include" />
 			<Add directory="../../../external/GameLibrary/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lSDL2" />
+			<Add option="-lSDL2_image" />
+			<Add option="-lSDL2_mixer" />
+			<Add option="-lSDL2_ttf" />
+			<Add option="-lSDL2_gfx" />
+			<Add option="-lpthread" />
+		</Linker>
 		<Unit filename="../../../test/src/FightGame.cpp" />
 		<Unit filename="../../../test/src/FightGame.hpp" />
 		<Unit filename="../../../test/src/HurtAction.cpp" />
