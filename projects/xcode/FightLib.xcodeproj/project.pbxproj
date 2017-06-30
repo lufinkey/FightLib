@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0E135E91F05DAF400023E22 /* StageController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A0E135E71F05DAF400023E22 /* StageController.hpp */; };
+		A0E135EA1F05DAF400023E22 /* StageSection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A0E135E81F05DAF400023E22 /* StageSection.hpp */; };
+		A0E135ED1F05DB0900023E22 /* StageController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135EB1F05DB0900023E22 /* StageController.cpp */; };
+		A0E135EE1F05DB0900023E22 /* StageSection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135EC1F05DB0900023E22 /* StageSection.cpp */; };
+		A0E135F51F05DD3F00023E22 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135F31F05DD2800023E22 /* Camera.cpp */; };
+		A0E135F61F05DD4200023E22 /* FollowerCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135F41F05DD2800023E22 /* FollowerCamera.cpp */; };
+		A0E135F81F05DDA500023E22 /* ContactEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135F71F05DDA500023E22 /* ContactEvent.cpp */; };
+		A0E135FA1F05DDD700023E22 /* ContactEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A0E135F91F05DDD700023E22 /* ContactEvent.hpp */; };
 		F14EE0391EA51C260055AC89 /* AttackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F14EE0381EA51C260055AC89 /* AttackAction.cpp */; };
 		F15A1FB51E549FAE008D83E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F15A1FAF1E549FAE008D83E5 /* Entity.cpp */; };
 		F15BDFC11E9547E500B92754 /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */; };
@@ -48,6 +56,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0E135E71F05DAF400023E22 /* StageController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageController.hpp; sourceTree = "<group>"; };
+		A0E135E81F05DAF400023E22 /* StageSection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageSection.hpp; sourceTree = "<group>"; };
+		A0E135EB1F05DB0900023E22 /* StageController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageController.cpp; sourceTree = "<group>"; };
+		A0E135EC1F05DB0900023E22 /* StageSection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageSection.cpp; sourceTree = "<group>"; };
+		A0E135F01F05DD1800023E22 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		A0E135F11F05DD1800023E22 /* FollowerCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FollowerCamera.hpp; sourceTree = "<group>"; };
+		A0E135F31F05DD2800023E22 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		A0E135F41F05DD2800023E22 /* FollowerCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FollowerCamera.cpp; sourceTree = "<group>"; };
+		A0E135F71F05DDA500023E22 /* ContactEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContactEvent.cpp; sourceTree = "<group>"; };
+		A0E135F91F05DDD700023E22 /* ContactEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ContactEvent.hpp; sourceTree = "<group>"; };
 		F1209DF81E68AF5A00E1BF4F /* Fight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Fight.hpp; sourceTree = "<group>"; };
 		F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
 		F14EE0371EA51C130055AC89 /* AttackAction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AttackAction.hpp; sourceTree = "<group>"; };
@@ -135,9 +153,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0E135EF1F05DD1800023E22 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				A0E135F01F05DD1800023E22 /* Camera.hpp */,
+				A0E135F11F05DD1800023E22 /* FollowerCamera.hpp */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
+		A0E135F21F05DD2800023E22 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				A0E135F31F05DD2800023E22 /* Camera.cpp */,
+				A0E135F41F05DD2800023E22 /* FollowerCamera.cpp */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
 		F1209DF71E68AF5A00E1BF4F /* game */ = {
 			isa = PBXGroup;
 			children = (
+				A0E135EF1F05DD1800023E22 /* camera */,
 				F1209DF81E68AF5A00E1BF4F /* Fight.hpp */,
 				F1BA75CE1E92849D00647E41 /* FightParams.hpp */,
 			);
@@ -147,6 +184,7 @@
 		F1209DF91E68AF8E00E1BF4F /* game */ = {
 			isa = PBXGroup;
 			children = (
+				A0E135F21F05DD2800023E22 /* camera */,
 				F1209DFA1E68AF8E00E1BF4F /* Fight.cpp */,
 				F1BA75C81E92846400647E41 /* FightParams.cpp */,
 			);
@@ -227,6 +265,7 @@
 				F17BBBF61E6496C200A7F8F4 /* CollisionManager.hpp */,
 				F17BBBF71E6496C200A7F8F4 /* CollisionPair.hpp */,
 				F18196231E8AB995009BD55F /* CollisionRectManager.hpp */,
+				A0E135F91F05DDD700023E22 /* ContactEvent.hpp */,
 			);
 			path = collision;
 			sourceTree = "<group>";
@@ -278,6 +317,7 @@
 				F17BBBEC1E64965E00A7F8F4 /* CollisionManager.cpp */,
 				F17BBBED1E64965E00A7F8F4 /* CollisionPair.cpp */,
 				F18196241E8ABAB7009BD55F /* CollisionRectManager.cpp */,
+				A0E135F71F05DDA500023E22 /* ContactEvent.cpp */,
 			);
 			path = collision;
 			sourceTree = "<group>";
@@ -287,6 +327,8 @@
 			children = (
 				F17A3A861E97CD2500D07EBE /* Platform.hpp */,
 				F15F24F01E8E9541005EE4F1 /* Stage.hpp */,
+				A0E135E71F05DAF400023E22 /* StageController.hpp */,
+				A0E135E81F05DAF400023E22 /* StageSection.hpp */,
 			);
 			path = stage;
 			sourceTree = "<group>";
@@ -296,6 +338,8 @@
 			children = (
 				F17A3A881E97CD3500D07EBE /* Platform.cpp */,
 				F15F24F21E8E9550005EE4F1 /* Stage.cpp */,
+				A0E135EB1F05DB0900023E22 /* StageController.cpp */,
+				A0E135EC1F05DB0900023E22 /* StageSection.cpp */,
 			);
 			path = stage;
 			sourceTree = "<group>";
@@ -425,7 +469,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E135FA1F05DDD700023E22 /* ContactEvent.hpp in Headers */,
 				F17D96CD1E6DB50B003F4D85 /* Action.hpp in Headers */,
+				A0E135EA1F05DAF400023E22 /* StageSection.hpp in Headers */,
+				A0E135E91F05DAF400023E22 /* StageController.hpp in Headers */,
 				F17D96D01E6DB51B003F4D85 /* ActionEntity.hpp in Headers */,
 				F17A3A871E97CD2500D07EBE /* Platform.hpp in Headers */,
 			);
@@ -499,11 +546,13 @@
 				F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */,
 				F1A7DF4B1E893E2F00472DB2 /* AnimationAssetManager.cpp in Sources */,
 				F17A3A891E97CD3500D07EBE /* Platform.cpp in Sources */,
+				A0E135F61F05DD4200023E22 /* FollowerCamera.cpp in Sources */,
 				F14EE0391EA51C260055AC89 /* AttackAction.cpp in Sources */,
 				F17A3A711E97C43A00D07EBE /* AnimationMetaPoint.cpp in Sources */,
 				F15F24F31E8E9550005EE4F1 /* Stage.cpp in Sources */,
 				F18196381E8ADADC009BD55F /* DrawManager.cpp in Sources */,
 				F17F94801EA1135B00D9CACB /* HitboxCollisionPair.cpp in Sources */,
+				A0E135ED1F05DB0900023E22 /* StageController.cpp in Sources */,
 				F16D60851E9FF91C007E7740 /* HitboxCollisionManager.cpp in Sources */,
 				F16D60521E9FCF61007E7740 /* HitboxClashEvent.cpp in Sources */,
 				F16971CB1EA4EEC4007E1893 /* HitboxClash.cpp in Sources */,
@@ -519,10 +568,13 @@
 				F1BA75C91E92846400647E41 /* FightParams.cpp in Sources */,
 				F1BA75C71E92845700647E41 /* CharacterController.cpp in Sources */,
 				F16539AA1E94069700F11ACB /* KeyboardCharacterController.cpp in Sources */,
+				A0E135F51F05DD3F00023E22 /* Camera.cpp in Sources */,
 				F17F947E1EA1135600D9CACB /* HitboxClashPair.cpp in Sources */,
+				A0E135EE1F05DB0900023E22 /* StageSection.cpp in Sources */,
 				F17D96D81E6DB53B003F4D85 /* Character.cpp in Sources */,
 				F16971CD1EA4EEC8007E1893 /* HitboxCollision.cpp in Sources */,
 				F1A7DF4C1E893E2F00472DB2 /* AnimationData.cpp in Sources */,
+				A0E135F81F05DDA500023E22 /* ContactEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
