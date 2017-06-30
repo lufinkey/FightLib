@@ -18,7 +18,7 @@ namespace fl
 		{
 			throw fgl::IllegalArgumentException("params", "stage cannot be added to multiple Fight objects");
 		}
-		
+
 		stage->fight = this;
 
 		for(auto character : params.getCharacters())
@@ -39,7 +39,7 @@ namespace fl
 		{
 			delete characterController;
 		}
-		
+
 		stage->fight = nullptr;
 		delete stage;
 		camera->fight = nullptr;
@@ -57,7 +57,7 @@ namespace fl
 
 		appData.setTime(time);
 		appData.additionalData["fight"] = this;
-		
+
 		//automatically pick up items that can be picked up by touching them
 		for(auto character : stage->getCharacters())
 		{
@@ -69,13 +69,13 @@ namespace fl
 				}
 			}
 		}
-		
+
 		//update controllers
 		for(auto controller : characterControllers)
 		{
 			controller->update(appData);
 		}
-		
+
 		//update stage
 		stage->update(appData);
 
@@ -88,7 +88,6 @@ namespace fl
 		appData.additionalData["fight"] = this;
 		graphics.translate(frame.x, frame.y);
 		graphics.clip(fgl::RectangleD(0, 0, frame.width, frame.height));
-		graphics.drawRect(0, 0, frame.width, frame.height);
 		camera->drawStage(appData, graphics);
 	}
 
@@ -114,7 +113,7 @@ namespace fl
 	{
 		return time;
 	}
-	
+
 	Stage* Fight::getStage() const
 	{
 		return stage;
@@ -124,7 +123,7 @@ namespace fl
 	{
 		return camera;
 	}
-	
+
 	const fgl::ArrayList<CharacterController*>& Fight::getCharacterControllers() const
 	{
 		return characterControllers;

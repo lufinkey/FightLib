@@ -4,7 +4,9 @@
 namespace fl
 {
 	FollowerCamera::FollowerCamera()
-		: focus(nullptr)
+		: focus(nullptr),
+		center(0,0),
+		followRegion(0.25, 0.25, 0.75, 0.75)
 	{
 		//
 	}
@@ -22,15 +24,38 @@ namespace fl
 	void FollowerCamera::update(fgl::ApplicationData appData)
 	{
 		Camera::update(appData);
+		if(focus!=nullptr)
+		{
+			auto position = focus->getPosition();
+			auto rect = getRect();
+			if(position.x < (rect.x+(followRegion.left*rect.width)))
+			{
+				center.x -= 10;
+			}
+			if(position.x > (rect.x+(followRegion.right*rect.width)))
+			{
+				center.x += 10;
+			}
+			if(position.y < (rect.y+(followRegion.top*rect.height)))
+			{
+				center.y -= 10;
+			}
+			if(position.y > (rect.y+(followRegion.bottom*rect.height)))
+			{
+				center.y += 10;
+			}
+		}
 	}
 
 	void FollowerCamera::drawStage(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
-		if(focus!=nullptr)
-		{
-			auto frameSize = getFrameSize();
-			graphics.translate(-focus->getPosition()+(frameSize/2.0));
-		}
+		graphics.translate(-center+(getFrameSize()/2.0));
 		Camera::drawStage(appData, graphics);
+	}
+
+	fgl::RectangleD FollowerCamera::getRect() const
+	{
+		auto size = getFrameSize();
+		return fgl::RectangleD(center.x-(size.x/2), center.y-(size.y/2), size.x, size.y);
 	}
 }
