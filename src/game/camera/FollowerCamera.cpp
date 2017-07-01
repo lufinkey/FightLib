@@ -26,16 +26,18 @@ namespace fl
 		Camera::update(appData);
 		if(focus!=nullptr)
 		{
-			auto velocity = focus->getVelocity();
+			lastFocusPosition = focusPosition;
+			focusPosition = focus->getPosition();
+			auto velocity = focusPosition - lastFocusPosition;
 			velocity.x = fgl::Math::abs(velocity.x);
 			velocity.y = fgl::Math::abs(velocity.y);
-			if(velocity.x < 100.0)
+			if(velocity.x < 200.0)
 			{
-				velocity.x = 100.0;
+				velocity.x = 200.0;
 			}
-			if(velocity.y < 100.0)
+			if(velocity.y < 200.0)
 			{
-				velocity.y = 100.0;
+				velocity.y = 200.0;
 			}
 			auto position = focus->getPosition();
 			auto rect = getRect();

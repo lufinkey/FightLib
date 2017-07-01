@@ -26,6 +26,8 @@ namespace fl
 		fgl::RectangleD getRect() const;
 
 		Character* focus;
+		fgl::Vector2d focusPosition;
+		fgl::Vector2d lastFocusPosition;
 		fgl::Vector2d center;
 		fgl::RectD followRegion;
 	};
