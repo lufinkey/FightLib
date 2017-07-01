@@ -26,23 +26,34 @@ namespace fl
 		Camera::update(appData);
 		if(focus!=nullptr)
 		{
+			auto velocity = focus->getVelocity();
+			velocity.x = fgl::Math::abs(velocity.x);
+			velocity.y = fgl::Math::abs(velocity.y);
+			if(velocity.x < 100.0)
+			{
+				velocity.x = 100.0;
+			}
+			if(velocity.y < 100.0)
+			{
+				velocity.y = 100.0;
+			}
 			auto position = focus->getPosition();
 			auto rect = getRect();
 			if(position.x < (rect.x+(followRegion.left*rect.width)))
 			{
-				center.x -= 10;
+				center.x -= velocity.x*appData.getFrameSpeedMultiplier();
 			}
 			if(position.x > (rect.x+(followRegion.right*rect.width)))
 			{
-				center.x += 10;
+				center.x += velocity.x*appData.getFrameSpeedMultiplier();
 			}
 			if(position.y < (rect.y+(followRegion.top*rect.height)))
 			{
-				center.y -= 10;
+				center.y -= velocity.y*appData.getFrameSpeedMultiplier();
 			}
 			if(position.y > (rect.y+(followRegion.bottom*rect.height)))
 			{
-				center.y += 10;
+				center.y += velocity.y*appData.getFrameSpeedMultiplier();
 			}
 		}
 	}
