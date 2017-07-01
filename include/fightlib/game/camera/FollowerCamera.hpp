@@ -10,7 +10,7 @@ namespace fl
 	class FollowerCamera : public Camera
 	{
 	public:
-		FollowerCamera();
+		FollowerCamera(const fgl::Vector2d& center=fgl::Vector2d(0,0));
 
 		void setFocus(Character* focus);
 		Character* getFocus() const;

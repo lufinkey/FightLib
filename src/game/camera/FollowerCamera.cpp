@@ -3,9 +3,11 @@
 
 namespace fl
 {
-	FollowerCamera::FollowerCamera()
+	FollowerCamera::FollowerCamera(const fgl::Vector2d& center)
 		: focus(nullptr),
-		center(0,0),
+		center(center),
+		focusPosition(center),
+		lastFocusPosition(center),
 		followRegion(0.34, 0.34, 0.66, 0.66)
 	{
 		//
