@@ -6,7 +6,7 @@ namespace fl
 	FollowerCamera::FollowerCamera()
 		: focus(nullptr),
 		center(0,0),
-		followRegion(0.25, 0.25, 0.75, 0.75)
+		followRegion(0.34, 0.34, 0.66, 0.66)
 	{
 		//
 	}
