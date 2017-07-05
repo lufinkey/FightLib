@@ -52,7 +52,7 @@ namespace fl
 
 		fgl::ArrayList<std::function<void()>> onContactCalls;
 		fgl::ArrayList<std::function<void()>> onContactFinishCalls;
-		
+
 		fgl::ArrayList<std::function<void()>> onCollisionCalls;
 		fgl::ArrayList<std::function<void()>> onCollisionFinishCalls;
 
@@ -78,12 +78,12 @@ namespace fl
 						}
 					}
 				#endif
-			
+
 				if(!(collidable1->isStaticCollisionBody() && collidable2->isStaticCollisionBody()))
 				{
 					fgl::ArrayList<CollisionRect*> rects1 = collidable1->getCollisionRects();
 					fgl::ArrayList<CollisionRect*> rects2 = collidable2->getCollisionRects();
-					
+
 					fgl::ArrayList<CollisionRectPair> rectPairs = pair.getCollisionRectPairs(rects1, rects2);
 					//check each CollisionRect for a collision
 					for(auto& rectPair : rectPairs)
@@ -317,7 +317,7 @@ namespace fl
 									}
 								}
 							}
-							
+
 							//add the rect pair to the priority rects, so that it will be checked first on the next frame
 							if(!newPair.priorityRects.contains(rectTagPair))
 							{
@@ -343,7 +343,7 @@ namespace fl
 					}
 					#endif
 				}
-			
+
 				#ifdef DOUBLECHECK_COLLISIONS
 				if(i==1)
 				#endif
@@ -592,9 +592,9 @@ namespace fl
 				}
 			}
 		}
-		
+
 		previousCollisions = collisions;
-		
+
 		//call finished collisions
 		for(auto& onCollisionFinish : onCollisionFinishCalls)
 		{
@@ -612,19 +612,21 @@ namespace fl
 		{
 			onContact();
 		}
-		
+
 		//call current collisions
 		for(auto& onCollision : onCollisionCalls)
 		{
 			onCollision();
 		}
-		
+
 		//set the previous positions of the collidables
 		for(auto collidable : collidables)
 		{
-			collidable->previousPosition = collidable->getPosition();
+			auto position = collidable->getPosition();
+			collidable->displacement = (position - collidable->previousPosition);
+			collidable->previousPosition = position;
 		}
-		
+
 		//tell updated collidables that their collision updates have finished
 		for(auto collidable : collidables)
 		{

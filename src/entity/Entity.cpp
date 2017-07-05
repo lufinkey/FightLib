@@ -17,7 +17,7 @@ namespace fl
 	{
 		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
 	}
-	
+
 	bool Entity::getFlag(const fgl::String& flag) const
 	{
 		if(flag=="Entity")
@@ -53,7 +53,7 @@ namespace fl
 		setVelocity(velocity);
 
 		Collidable::update(appData);
-		
+
 		velocity = getVelocity();
 		//make entities move when on top of other collidables
 		auto bottomCollidables = getCollided(COLLISIONSIDE_BOTTOM);
@@ -62,7 +62,7 @@ namespace fl
 			if(movesWithGround())
 			{
 				auto ground = bottomCollidables[0];
-				auto groundMovement = ground->getVelocity()*appData.getFrameSpeedMultiplier();
+				auto groundMovement = ground->getDisplacement();
 				shift(fgl::Vector2d(groundMovement.x, 0));
 			}
 		}
@@ -116,12 +116,12 @@ namespace fl
 
 		collisionRectManager.update(appData, this);
 	}
-	
+
 	fgl::Vector2d Entity::getDrawScale() const
 	{
 		return fgl::Vector2d((double)scale, (double)scale);
 	}
-	
+
 	bool Entity::shouldUseParentMetaPointRotation() const
 	{
 		return true;
@@ -147,7 +147,7 @@ namespace fl
 			{
 				return;
 			}
-			
+
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			if(parentOrientation==ANIMATIONORIENTATION_RIGHT)
 			{
@@ -158,7 +158,7 @@ namespace fl
 				childGraphics.translate(offset.x, offset.y);
 			}
 		}
-		
+
 		auto childrenAppData = appData;
 		childrenAppData.additionalData["DrawnFromParent"] = true;
 
@@ -269,7 +269,7 @@ namespace fl
 	{
 		return fgl::Vector2d(10000, 10000);
 	}
-	
+
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
 	{
 		return NULL_HITBOX_INFO;
@@ -309,17 +309,17 @@ namespace fl
 	{
 		return false;
 	}
-	
+
 	bool Entity::respondsToGravity() const
 	{
 		return true;
 	}
-	
+
 	bool Entity::movesWithGround() const
 	{
 		return true;
 	}
-	
+
 	bool Entity::usesHitboxes() const
 	{
 		return true;
@@ -349,12 +349,12 @@ namespace fl
 		}
 		Collidable::onCollisionFinish(collisionEvent);
 	}
-	
+
 	bool Entity::respondsToHitboxClash(Entity* clashedEntity) const
 	{
 		return false;
 	}
-	
+
 	bool Entity::canCollideWithEntityHitbox(Entity* collidedEntity) const
 	{
 		return false;
@@ -364,32 +364,32 @@ namespace fl
 	{
 		//
 	}
-	
+
 	void Entity::onHitboxClashUpdate(const fl::HitboxClashEvent& clashEvent)
 	{
 		//
 	}
-	
+
 	void Entity::onHitboxClashFinish(const fl::HitboxClashEvent& clashEvent)
 	{
 		//
 	}
-	
+
 	void Entity::onHitboxCollision(const HitboxCollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Entity::onHitboxCollisionUpdate(const fl::HitboxCollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Entity::onHitboxCollisionFinish(const fl::HitboxCollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Entity::onFinishHitboxUpdates()
 	{
 		//
@@ -454,7 +454,7 @@ namespace fl
 	{
 		return collisionRectManager.getCollisionRects();
 	}
-	
+
 	void Entity::anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
 	{
 		if(child->parentEntity!=nullptr)
@@ -472,7 +472,7 @@ namespace fl
 		anchor.parentPointIndex = parentPointIndex;
 		anchoredEntities.add(anchor);
 	}
-	
+
 	void Entity::removeAnchoredEntity(Entity* child)
 	{
 		for(size_t anchoredEntities_size=anchoredEntities.size(), i=0; i<anchoredEntities_size; i++)
@@ -494,7 +494,7 @@ namespace fl
 	{
 		return anchoredEntities;
 	}
-	
+
 	Entity* Entity::getParentEntity() const
 	{
 		return parentEntity;
@@ -546,7 +546,7 @@ namespace fl
 			AnimationMetaPoint childMetaPoint = childMetaPoints[anchor.childPointIndex];
 			float parentRotation = parentMetaPoint.rotation;
 			float childRotation = childMetaPoint.rotation;
-			
+
 			if(!shouldUseParentMetaPointRotation())
 			{
 				parentRotation = 0;
@@ -575,7 +575,7 @@ namespace fl
 			}
 
 			fgl::Vector2d totalOffset = parentPointOffset - childPointOffset;
-			
+
 			setOptionalArg(posOffset, totalOffset)
 			setOptionalArg(rotation, parentRotation+childRotation)
 			setOptionalArg(rotationPoint, parentPointOffset)
@@ -603,7 +603,7 @@ namespace fl
 		}
 		throw fgl::IllegalStateException("Entity::orientation has an invalid value");
 	}
-	
+
 	Stage* Entity::getStage() const
 	{
 		return stage;

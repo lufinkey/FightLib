@@ -5,15 +5,16 @@ namespace fl
 {
 	Collidable::Collidable(const fgl::Vector2d& position)
 		: Sprite(position),
-		previousPosition(position)
+		previousPosition(position),
+		displacement(0, 0)
 	{
 		//
 	}
-	
+
 	void Collidable::update(fgl::ApplicationData appData)
 	{
 		Sprite::update(appData);
-		
+
 		//offset for velocity
 		shift(velocity*appData.getFrameSpeedMultiplier());
 	}
@@ -22,22 +23,27 @@ namespace fl
 	{
 		return 1.0;
 	}
-	
+
 	const fgl::Vector2d& Collidable::getPreviousPosition() const
 	{
 		return previousPosition;
 	}
-	
+
 	void Collidable::setVelocity(const fgl::Vector2d& velocity_arg)
 	{
 		velocity = velocity_arg;
 	}
-	
+
 	const fgl::Vector2d& Collidable::getVelocity() const
 	{
 		return velocity;
 	}
-	
+
+	const fgl::Vector2d& Collidable::getDisplacement() const
+	{
+		return displacement;
+	}
+
 	void Collidable::applyForce(const fgl::Vector2d& force)
 	{
 		auto acceleration = force/getMass();
@@ -63,7 +69,7 @@ namespace fl
 	{
 		return true;
 	}
-	
+
 	bool Collidable::checkCollision(Collidable* collidable) const
 	{
 		auto collisionRects1 = getCollisionRects();
@@ -80,22 +86,22 @@ namespace fl
 		}
 		return false;
 	}
-	
+
 	void Collidable::onCollision(const CollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Collidable::onCollisionUpdate(const CollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Collidable::onCollisionFinish(const CollisionEvent& collisionEvent)
 	{
 		//
 	}
-	
+
 	void Collidable::onFinishCollisionUpdates()
 	{
 		//
