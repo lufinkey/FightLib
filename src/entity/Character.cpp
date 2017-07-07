@@ -50,22 +50,34 @@ namespace fl
 		return fgl::Vector2d(0.0, 0.0);
 	}
 
+	bool Character::movementUsesVelocity() const
+	{
+		return true;
+	}
+
 	void Character::updateMovement(const fgl::ApplicationData& appData)
 	{
 		double moveSpeed = getMoveSpeed();
 		auto moveDirection = getMoveDirection();
 		auto moveAmount = moveDirection*moveSpeed;
-		auto velocity = getVelocity();
-		//TODO add gradual movement toward the move speed
-		if((moveAmount.x > 0 && moveAmount.x > velocity.x) || (moveAmount.x < 0 && moveAmount.x < velocity.x))
+		if(movementUsesVelocity())
 		{
-			velocity.x = moveAmount.x;
+			//TODO add gradual movement toward the move speed
+			auto velocity = getVelocity();
+			if((moveAmount.x > 0 && moveAmount.x > velocity.x) || (moveAmount.x < 0 && moveAmount.x < velocity.x))
+			{
+				velocity.x = moveAmount.x;
+			}
+			if((moveAmount.y > 0 && moveAmount.y > velocity.y) || (moveAmount.y < 0 && moveAmount.y < velocity.y))
+			{
+				velocity.y = moveAmount.y;
+			}
+			setVelocity(velocity);
 		}
-		if((moveAmount.y > 0 && moveAmount.y > velocity.y) || (moveAmount.y < 0 && moveAmount.y < velocity.y))
+		else
 		{
-			velocity.y = moveAmount.y;
+			setPosition(getPosition()+(moveAmount*appData.getFrameSpeedMultiplier()));
 		}
-		setVelocity(velocity);
 
 		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWORIENTATIONCHANGE))
 		{
