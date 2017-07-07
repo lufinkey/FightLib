@@ -10,17 +10,17 @@ namespace fl
 	{
 	public:
 		Character(const fgl::Vector2d& position, Orientation orientation);
-		
+
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 
-		virtual fgl::String getIdleAnimationName() const = 0;
-		virtual fgl::String getMoveAnimationName(double amount) const = 0;
-		virtual double getMoveSpeed(double amount) const;
-		
+		virtual fgl::String getDefaultAnimationName() const = 0;
+		virtual double getMoveSpeed() const;
+		virtual fgl::Vector2d getMoveDirection() const;
+
 		virtual fgl::ArrayList<MetaPointType> getItemAnchorPoints() const;
 		fgl::ArrayList<MetaPointType> getAvailableItemAnchorPoints() const;
-		
+
 		bool pickUpItem(Item* item);
 		void discardItem(Item* item);
 		bool isCarryingItem(Item* item) const;
@@ -36,15 +36,15 @@ namespace fl
 
 	protected:
 		virtual void updateMovement(const fgl::ApplicationData& appData);
-		virtual void updateMoveAnimation();
-		
+		virtual void updateDefaultAnimation();
+
 		virtual void onActionEnd(Action* action) override;
 
 		virtual bool respondsToHitboxClash(Entity* clashedEntity) const override;
 		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const override;
-		
+
 		virtual void onFinishCollisionUpdates() override;
-		
+
 		virtual bool canPickUpItem(Item* item) const;
 		virtual void onPickUpItem(Item* item);
 		virtual void onDiscardItem(Item* item);
@@ -61,7 +61,7 @@ namespace fl
 		fgl::ArrayList<EquipPoint> getMatchingEquipPoints(Item* item) const;
 
 		fgl::Vector2f direction;
-		
+
 		struct ItemContainer
 		{
 			Item* item;

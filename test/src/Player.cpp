@@ -16,7 +16,7 @@ Player::Player(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& pos
 	loadAnimation("assets/animations/player/fall.plist", assetManager);
 	loadAnimation("assets/animations/player/punch.plist", assetManager);
 	changeAnimation("idle");
-	
+
 	addAction("jump", new JumpAction());
 	addAction("pickUp", new PickUpItemAction());
 	addAction("punch", new PunchAttack());
@@ -27,19 +27,14 @@ void Player::update(fgl::ApplicationData appData)
 	Character::update(appData);
 }
 
-fgl::String Player::getIdleAnimationName() const
+fgl::String Player::getDefaultAnimationName() const
 {
 	if(isOnGround())
 	{
-		return "idle";
-	}
-	return "fall";
-}
-
-fgl::String Player::getMoveAnimationName(double amount) const
-{
-	if(isOnGround())
-	{
+		if(getDirection().x==0)
+		{
+			return "idle";
+		}
 		return "walk";
 	}
 	return "fall";

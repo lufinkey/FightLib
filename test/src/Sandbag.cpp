@@ -10,16 +10,11 @@ Sandbag::Sandbag(fl::AnimationAssetManager* assetManager, const fgl::Vector2d& p
 	loadAnimation("assets/animations/sandbag/idle.plist", assetManager);
 	loadAnimation("assets/animations/sandbag/hit-front.plist", assetManager);
 	changeAnimation("idle");
-	
+
 	addAction("hurt", new HurtAction());
 }
 
-fgl::String Sandbag::getIdleAnimationName() const
-{
-	return "idle";
-}
-
-fgl::String Sandbag::getMoveAnimationName(double amount) const
+fgl::String Sandbag::getDefaultAnimationName() const
 {
 	return "idle";
 }

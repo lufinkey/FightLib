@@ -10,8 +10,7 @@ public:
 
 	virtual void update(fgl::ApplicationData appData) override;
 
-	virtual fgl::String getIdleAnimationName() const override;
-	virtual fgl::String getMoveAnimationName(double amount) const override;
-	
+	virtual fgl::String getDefaultAnimationName() const override;
+
 	virtual fgl::ArrayList<fl::MetaPointType> getItemAnchorPoints() const override;
 };

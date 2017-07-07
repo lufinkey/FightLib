@@ -9,7 +9,7 @@ namespace fl
 	{
 		//
 	}
-	
+
 	bool Character::getFlag(const fgl::String& flag) const
 	{
 		if(flag=="Character")
@@ -27,33 +27,45 @@ namespace fl
 		}
 		if(getCurrentAction()==nullptr)
 		{
-			updateMoveAnimation();
+			updateDefaultAnimation();
 		}
-		//TODO if the character is standing on a moving platform, shift it by the platform's velocity
 		ActionEntity::update(appData);
 	}
 
-	double Character::getMoveSpeed(double amount) const
+	double Character::getMoveSpeed() const
 	{
 		return 200;
 	}
 
+	fgl::Vector2d Character::getMoveDirection() const
+	{
+		if(direction.x < 0)
+		{
+            return fgl::Vector2d(-1.0, 0.0);
+		}
+		else if(direction.x > 0)
+		{
+			return fgl::Vector2d(1.0, 0.0);
+		}
+		return fgl::Vector2d(0.0, 0.0);
+	}
+
 	void Character::updateMovement(const fgl::ApplicationData& appData)
 	{
-		double moveSpeed = 0;
-		double moveAmount = fgl::Math::abs(getDirection().x);
-		if(moveAmount!=0)
-		{
-			moveSpeed = getMoveSpeed(moveAmount);
-		}
+		double moveSpeed = getMoveSpeed();
+		auto moveDirection = getMoveDirection();
+		auto moveAmount = moveDirection*moveSpeed;
+		auto velocity = getVelocity();
 		//TODO add gradual movement toward the move speed
-		fgl::Vector2d velocity = getVelocity();
-		double realSpeed = (direction.x >= 0) ? moveSpeed : -moveSpeed;
-		if((realSpeed > 0 && realSpeed > velocity.x) || (realSpeed < 0 && realSpeed < velocity.x))
+		if((moveAmount.x > 0 && moveAmount.x > velocity.x) || (moveAmount.x < 0 && moveAmount.x < velocity.x))
 		{
-			velocity.x = realSpeed;
-			setVelocity(velocity);
+			velocity.x = moveAmount.x;
 		}
+		if((moveAmount.y > 0 && moveAmount.y > velocity.y) || (moveAmount.y < 0 && moveAmount.y < velocity.y))
+		{
+			velocity.y = moveAmount.y;
+		}
+		setVelocity(velocity);
 
 		if(getCurrentAction()==nullptr || getCurrentAction()->getFlag(ACTIONFLAG_ALLOWORIENTATIONCHANGE))
 		{
@@ -68,18 +80,10 @@ namespace fl
 		}
 	}
 
-	void Character::updateMoveAnimation()
+	void Character::updateDefaultAnimation()
 	{
-		double moveAmount = fgl::Math::abs(getDirection().x);
-		fgl::String animName;
-		if(moveAmount==0)
-		{
-			animName = getIdleAnimationName();
-		}
-		else
-		{
-			animName = getMoveAnimationName(moveAmount);
-		}
+		auto moveDir = getMoveDirection();
+		fgl::String animName = getDefaultAnimationName();
 		//TODO maybe throw some sort of exception if either function returns an empty string?
 		if(animName.length() > 0 && animName!=getCurrentAnimationName())
 		{
@@ -92,7 +96,7 @@ namespace fl
 	{
 		return {};
 	}
-	
+
 	fgl::ArrayList<MetaPointType> Character::getAvailableItemAnchorPoints() const
 	{
 		auto availablePoints = getItemAnchorPoints();
@@ -105,7 +109,7 @@ namespace fl
 		}
 		return availablePoints;
 	}
-	
+
 	bool Character::pickUpItem(Item* item)
 	{
 		if(item->parentCharacter != nullptr)
@@ -138,7 +142,7 @@ namespace fl
 		}
 		return false;
 	}
-	
+
 	void Character::discardItem(Item* item)
 	{
 		for(size_t i=0; i<itemContainers.size(); i++)
@@ -150,7 +154,7 @@ namespace fl
 				itemContainers.remove(i);
 				removeAnchoredEntity(item);
 				item->parentCharacter = nullptr;
-				
+
 				item->onDiscard();
 				onDiscardItem(item);
 
@@ -158,7 +162,7 @@ namespace fl
 			}
 		}
 	}
-	
+
 	bool Character::isCarryingItem(Item* item) const
 	{
 		for(auto& container : itemContainers)
@@ -341,7 +345,7 @@ namespace fl
 		}
 		return matchingEquipPoints;
 	}
-	
+
 	void Character::setDirection(const fgl::Vector2f& direction_arg)
 	{
 		direction = direction_arg;
@@ -351,12 +355,12 @@ namespace fl
 	{
 		return direction;
 	}
-	
+
 	void Character::onActionEnd(Action* action)
 	{
 		if(getCurrentAction()==nullptr)
 		{
-			updateMoveAnimation();
+			updateDefaultAnimation();
 		}
 	}
 
@@ -369,26 +373,26 @@ namespace fl
 	{
 		return true;
 	}
-	
+
 	void Character::onFinishCollisionUpdates()
 	{
 		if(getCurrentAction()==nullptr)
 		{
-			updateMoveAnimation();
+			updateDefaultAnimation();
 		}
 		ActionEntity::onFinishCollisionUpdates();
 	}
-	
+
 	bool Character::canPickUpItem(Item* item) const
 	{
 		return true;
 	}
-	
+
 	void Character::onPickUpItem(Item* item)
 	{
 		//
 	}
-	
+
 	void Character::onDiscardItem(Item* item)
 	{
 		//
