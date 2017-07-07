@@ -10,7 +10,7 @@
 namespace fl
 {
 	class Stage;
-	
+
 	typedef enum : fgl::Uint8
 	{
 		ORIENTATION_LEFT,
@@ -23,7 +23,7 @@ namespace fl
 		friend class HitboxCollisionManager;
 	public:
 		Entity(const fgl::Vector2d& position, Orientation orientation);
-		
+
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
@@ -31,8 +31,10 @@ namespace fl
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
 		virtual void setPosition(const fgl::Vector2d& position) override;
 		virtual void shift(const fgl::Vector2d& offset) override;
+
 		virtual fgl::Vector2d getTerminalVelocity() const;
-		
+		virtual double getGravityScale() const;
+
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 
 		float getScale() const;
@@ -63,18 +65,18 @@ namespace fl
 
 		virtual void onCollision(const CollisionEvent& collisionEvent) override;
 		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
-		
+
 		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
 		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
-		
+
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent);
 		virtual void onHitboxClashFinish(const HitboxClashEvent& clashEvent);
-		
+
 		virtual void onHitboxCollision(const HitboxCollisionEvent& collisionEvent);
 		virtual void onHitboxCollisionUpdate(const HitboxCollisionEvent& collisionEvent);
 		virtual void onHitboxCollisionFinish(const HitboxCollisionEvent& collisionEvent);
-		
+
 		virtual void onFinishHitboxUpdates();
 
 		virtual void onAddToStage(Stage* stage);
@@ -82,7 +84,7 @@ namespace fl
 
 		fgl::ArrayList<Collidable*> getCollided(CollisionSide side) const;
 		bool isStaticCollidableOnSide(CollisionSide side) const;
-		
+
 		CollisionMethod getCollisionMethod() const;
 		void setCollisionMethod(CollisionMethod method);
 
@@ -107,7 +109,7 @@ namespace fl
 
 		fgl::ArrayList<Anchor> anchoredEntities;
 		Entity* parentEntity;
-		
+
 		Stage* stage;
 
 		struct CollidedObject

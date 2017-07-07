@@ -270,6 +270,11 @@ namespace fl
 		return fgl::Vector2d(10000, 10000);
 	}
 
+	double Entity::getGravityScale() const
+	{
+		return 1.0;
+	}
+
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
 	{
 		return NULL_HITBOX_INFO;

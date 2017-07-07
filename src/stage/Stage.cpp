@@ -7,7 +7,7 @@ namespace fl
 	{
 		//
 	}
-	
+
 	Stage::~Stage()
 	{
 		for(auto section : sections)
@@ -33,11 +33,11 @@ namespace fl
 		}
 		return Drawable::getFlag(flag);
 	}
-	
+
 	void Stage::update(fgl::ApplicationData appData)
 	{
 		appData.additionalData["stage"] = this;
-		
+
 		//update gravity
 		for(auto entity : entities)
 		{
@@ -45,7 +45,7 @@ namespace fl
 			{
 				auto velocity = entity->getVelocity();
 
-				velocity += getGravity(entity)*appData.getFrameSpeedMultiplier();
+				velocity += getGravity(entity)*entity->getGravityScale()*appData.getFrameSpeedMultiplier();
 				if(!entity->isOnGround())
 				{
 					velocity += getAirResistance(entity)*appData.getFrameSpeedMultiplier();
@@ -60,12 +60,12 @@ namespace fl
 		{
 			controller->update(appData);
 		}
-		
+
 		//update all these damn managers
 		drawManager.update(appData);
 		hitboxCollisionManager.update(appData);
 		collisionManager.update(appData);
-		
+
 		//update the list of items that characters are able to pick up
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> accessibleItems;
 		for(auto character : characters)
@@ -81,13 +81,13 @@ namespace fl
 		}
 		characterAccessibleItems = accessibleItems;
 	}
-	
+
 	void Stage::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		appData.additionalData["stage"] = this;
 		drawManager.draw(appData, graphics);
 	}
-	
+
 	fgl::Vector2d Stage::getGravity(Entity* entity) const
 	{
 		return fgl::Vector2d(0, 1800);
@@ -98,7 +98,7 @@ namespace fl
 		auto velocity = entity->getVelocity();
 		return fgl::Vector2d(-velocity.x*2, 0);
 	}
-	
+
 	Fight* Stage::getFight() const
 	{
 		return fight;
@@ -108,19 +108,19 @@ namespace fl
 	{
 		return parentStage;
 	}
-	
+
 	fgl::ArrayList<Item*> Stage::getAccessibleItems(fl::Character* character) const
 	{
 		return characterAccessibleItems.get(character, {});
 	}
-	
+
 	void Stage::addPlatform(Platform* platform, double zLayer)
 	{
 		platforms.add(platform);
 		collisionManager.addCollidable(platform);
 		drawManager.addDrawable(platform, zLayer);
 	}
-	
+
 	void Stage::removePlatform(Platform* platform)
 	{
 		size_t index = platforms.indexOf(platform);
@@ -146,7 +146,7 @@ namespace fl
 	{
 		drawManager.removeDrawable(drawable);
 	}
-	
+
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{
 		if(entity->stage!=nullptr)
@@ -160,7 +160,7 @@ namespace fl
 		drawManager.addDrawable(entity, zLayer);
 		entity->onAddToStage(this);
 	}
-	
+
 	void Stage::removeEntity(Entity* entity)
 	{
 		if(entity->stage!=this)
@@ -329,7 +329,7 @@ namespace fl
 	{
 		return characters;
 	}
-	
+
 	void Stage::removeAccessibleItem(Item* item)
 	{
 		for(auto& listPair : characterAccessibleItems)
