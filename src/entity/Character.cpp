@@ -94,7 +94,6 @@ namespace fl
 
 	void Character::updateDefaultAnimation()
 	{
-		auto moveDir = getMoveDirection();
 		fgl::String animName = getDefaultAnimationName();
 		//TODO maybe throw some sort of exception if either function returns an empty string?
 		if(animName.length() > 0 && animName!=getCurrentAnimationName())
