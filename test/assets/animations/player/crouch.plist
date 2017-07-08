@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>name</key>
+		<string>crouch</string>
+		<key>orientation</key>
+		<string>LEFT</string>
+		<key>fps</key>
+		<real>1</real>
+		<key>files</key>
+		<array>
+			<dict>
+				<key>filename</key>
+				<string>crouch.png</string>
+				<key>rows</key>
+				<integer>1</integer>
+				<key>columns</key>
+				<integer>1</integer>
+			</dict>
+		</array>
+		<key>framedata</key>
+		<array>
+			<dict>
+				<key>metapoints</key>
+				<array>
+					<dict>
+						<key>type</key>
+						<string>HEAD</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>16.5</real>
+						<key>y</key>
+						<real>29.5</real>
+						<key>radius</key>
+						<real>4.5</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>RIGHT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>15.5</real>
+						<key>y</key>
+						<real>28.5</real>
+						<key>radius</key>
+						<real>3</real>
+						<key>rotation</key>
+						<real>58</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<true />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>LEFT_HAND</string>
+						<key>orientation</key>
+						<string>LEFT</string>
+						<key>x</key>
+						<real>19.5</real>
+						<key>y</key>
+						<real>29</real>
+						<key>radius</key>
+						<real>3</real>
+						<key>rotation</key>
+						<real>59</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_TOPLEFT</string>
+						<key>x</key>
+						<real>16</real>
+						<key>y</key>
+						<real>25</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+					<dict>
+						<key>type</key>
+						<string>BOUNDS_BOTTOMRIGHT</string>
+						<key>x</key>
+						<real>26</real>
+						<key>y</key>
+						<real>38</real>
+						<key>visible</key>
+						<true />
+						<key>behind</key>
+						<false />
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</plist>
