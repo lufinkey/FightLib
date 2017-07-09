@@ -102,6 +102,11 @@ namespace fl
 		//
 	}
 
+	void Collidable::onBeginCollisionUpdates()
+	{
+		//
+	}
+
 	void Collidable::onFinishCollisionUpdates()
 	{
 		//

@@ -47,6 +47,11 @@ namespace fl
 
 	void CollisionManager::update(const fgl::ApplicationData& appData)
 	{
+		for(auto& collidable : collidables)
+		{
+			collidable->onBeginCollisionUpdates();
+		}
+
 		fgl::ArrayList<CollisionPair> pairs = getCollisionPairs();
 		fgl::ArrayList<CollisionPair> collisions;
 
@@ -620,7 +625,7 @@ namespace fl
 		}
 
 		//set the previous positions of the collidables
-		for(auto collidable : collidables)
+		for(auto& collidable : collidables)
 		{
 			auto position = collidable->getPosition();
 			collidable->displacement = (position - collidable->previousPosition);
@@ -628,7 +633,7 @@ namespace fl
 		}
 
 		//tell updated collidables that their collision updates have finished
-		for(auto collidable : collidables)
+		for(auto& collidable : collidables)
 		{
 			collidable->onFinishCollisionUpdates();
 		}
