@@ -39,20 +39,20 @@ namespace fl
 		appData.additionalData["stage"] = this;
 
 		//update gravity
-		for(auto entity : entities)
+		for(auto object : objects)
 		{
-			if(entity->getParentEntity()==nullptr && entity->respondsToGravity())
+			auto velocity = object->getVelocity();
+
+			if(object->respondsToGravity())
 			{
-				auto velocity = entity->getVelocity();
-
-				velocity += getGravity(entity)*entity->getGravityScale()*appData.getFrameSpeedMultiplier();
-				if(!entity->isOnGround())
-				{
-					velocity += getAirResistance(entity)*appData.getFrameSpeedMultiplier();
-				}
-
-				entity->setVelocity(velocity);
+				velocity += getGravity(object)*appData.getFrameSpeedMultiplier();
 			}
+			if(object->respondsToAirResistance())
+			{
+				velocity += getAirResistance(object)*appData.getFrameSpeedMultiplier();
+			}
+
+			object->setVelocity(velocity);
 		}
 
 		//update the stage controllers
@@ -88,14 +88,14 @@ namespace fl
 		drawManager.draw(appData, graphics);
 	}
 
-	fgl::Vector2d Stage::getGravity(Entity* entity) const
+	fgl::Vector2d Stage::getGravity(StageObject* object) const
 	{
 		return fgl::Vector2d(0, 1800);
 	}
 
-	fgl::Vector2d Stage::getAirResistance(Entity* entity) const
+	fgl::Vector2d Stage::getAirResistance(StageObject* object) const
 	{
-		auto velocity = entity->getVelocity();
+		auto velocity = object->getVelocity();
 		return fgl::Vector2d(-velocity.x*2, 0);
 	}
 
@@ -109,27 +109,90 @@ namespace fl
 		return parentStage;
 	}
 
+	CollisionManager* Stage::getCollisionManager()
+	{
+		return &collisionManager;
+	}
+
+	const CollisionManager* Stage::getCollisionManager() const
+	{
+		return &collisionManager;
+	}
+
+	HitboxCollisionManager* Stage::getHitboxCollisionManager()
+	{
+		return &hitboxCollisionManager;
+	}
+
+	const HitboxCollisionManager* Stage::getHitboxCollisionManager() const
+	{
+		return &hitboxCollisionManager;
+	}
+
+	DrawManager* Stage::getDrawManager()
+	{
+		return &drawManager;
+	}
+
+	const DrawManager* Stage::getDrawManager() const
+	{
+		return &drawManager;
+	}
+
 	fgl::ArrayList<Item*> Stage::getAccessibleItems(fl::Character* character) const
 	{
 		return characterAccessibleItems.get(character, {});
 	}
 
+	void Stage::addObject(StageObject* object, double zLayer)
+	{
+		if(object->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("object", "already added to a stage");
+		}
+		objects.add(object);
+		collisionManager.addCollidable(object);
+		drawManager.addDrawable(object, zLayer);
+		object->stage = this;
+		object->onAddToStage(this);
+	}
+
+	void Stage::removeObject(StageObject* object)
+	{
+		if(object->stage!=this)
+		{
+			return;
+		}
+		objects.removeFirstEqual(object);
+		collisionManager.removeCollidable(object);
+		drawManager.removeDrawable(object);
+		object->stage = nullptr;
+		object->onRemoveFromStage(this);
+	}
+
+	const fgl::ArrayList<StageObject*>& Stage::getObjects() const
+	{
+		return objects;
+	}
+
 	void Stage::addPlatform(Platform* platform, double zLayer)
 	{
+		if(platform->stage!=nullptr)
+		{
+			throw fgl::IllegalArgumentException("platform", "already added to a stage");
+		}
 		platforms.add(platform);
-		collisionManager.addCollidable(platform);
-		drawManager.addDrawable(platform, zLayer);
+		addObject(platform, zLayer);
 	}
 
 	void Stage::removePlatform(Platform* platform)
 	{
-		size_t index = platforms.indexOf(platform);
-		if(index!=-1)
+		if(platform->stage!=this)
 		{
-			platforms.remove(index);
+			return;
 		}
-		collisionManager.removeCollidable(platform);
-		drawManager.removeDrawable(platform);
+		platforms.removeFirstEqual(platform);
+		removeObject(platform);
 	}
 
 	const fgl::ArrayList<Platform*>& Stage::getPlatforms() const
@@ -137,28 +200,15 @@ namespace fl
 		return platforms;
 	}
 
-	void Stage::addDrawable(Drawable* drawable, double zLayer)
-	{
-		drawManager.addDrawable(drawable, zLayer);
-	}
-
-	void Stage::removeDrawable(Drawable* drawable)
-	{
-		drawManager.removeDrawable(drawable);
-	}
-
 	void Stage::addEntity(Entity* entity, double zLayer)
 	{
 		if(entity->stage!=nullptr)
 		{
-			throw fgl::IllegalArgumentException("entity", "cannot be added to multiple Stage objects");
+			throw fgl::IllegalArgumentException("entity", "already added to a stage");
 		}
-		entity->stage = this;
 		entities.add(entity);
-		collisionManager.addCollidable(entity);
 		hitboxCollisionManager.addEntity(entity);
-		drawManager.addDrawable(entity, zLayer);
-		entity->onAddToStage(this);
+		addObject(entity, zLayer);
 	}
 
 	void Stage::removeEntity(Entity* entity)
@@ -167,16 +217,9 @@ namespace fl
 		{
 			return;
 		}
-		entity->stage = nullptr;
-		size_t index = entities.indexOf(entity);
-		if(index!=-1)
-		{
-			entities.remove(index);
-		}
-		collisionManager.removeCollidable(entity);
+		entities.removeFirstEqual(entity);
 		hitboxCollisionManager.removeEntity(entity);
-		drawManager.removeDrawable(entity);
-		entity->onRemoveFromStage(this);
+		removeObject(entity);
 	}
 
 	const fgl::ArrayList<Entity*>& Stage::getEntities() const
@@ -188,10 +231,10 @@ namespace fl
 	{
 		if(item->stage!=nullptr)
 		{
-			throw fgl::IllegalArgumentException("item", "cannot be added to multiple Stage objects");
+			throw fgl::IllegalArgumentException("item", "already added to a stage");
 		}
-		addEntity(item, zLayer);
 		items.add(item);
+		addEntity(item, zLayer);
 	}
 
 	void Stage::removeItem(Item* item)
@@ -200,12 +243,8 @@ namespace fl
 		{
 			return;
 		}
+		items.removeFirstEqual(item);
 		removeEntity(item);
-		size_t itemIndex = items.indexOf(item);
-		if(itemIndex!=-1)
-		{
-			items.remove(itemIndex);
-		}
 	}
 
 	const fgl::ArrayList<Item*>& Stage::getItems() const
@@ -217,10 +256,10 @@ namespace fl
 	{
 		if(character->stage!=nullptr)
 		{
-			throw fgl::IllegalArgumentException("character", "cannot be added to multiple Stage objects");
+			throw fgl::IllegalArgumentException("character", "already added to a stage");
 		}
-		addEntity(character, zLayer);
 		characters.add(character);
+		addEntity(character, zLayer);
 	}
 
 	void Stage::removeCharacter(Character* character)
@@ -229,12 +268,8 @@ namespace fl
 		{
 			return;
 		}
+		characters.removeFirstEqual(character);
 		removeEntity(character);
-		size_t characterIndex = characters.indexOf(character);
-		if(characterIndex!=-1)
-		{
-			characters.remove(characterIndex);
-		}
 	}
 
 	void Stage::addSection(StageSection* section)

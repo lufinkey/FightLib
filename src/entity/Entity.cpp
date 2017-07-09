@@ -9,13 +9,12 @@ namespace fl
 #define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
 
 	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
-		: Collidable(position),
+		: StageObject(position),
 		scale(1.0f),
 		orientation(orientation),
-		parentEntity(nullptr),
-		stage(nullptr)
+		parentEntity(nullptr)
 	{
-		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
+		//
 	}
 
 	bool Entity::getFlag(const fgl::String& flag) const
@@ -24,37 +23,14 @@ namespace fl
 		{
 			return true;
 		}
-		return Collidable::getFlag(flag);
+		return StageObject::getFlag(flag);
 	}
 
 	void Entity::update(fgl::ApplicationData appData)
 	{
+		StageObject::update(appData);
+
 		auto velocity = getVelocity();
-		//make sure velocity is not larger than terminal velocity
-		auto terminalVelocity = getTerminalVelocity();
-		terminalVelocity.x = fgl::Math::abs(terminalVelocity.x);
-		terminalVelocity.y = fgl::Math::abs(terminalVelocity.y);
-		if(velocity.x > terminalVelocity.x)
-		{
-			velocity.x = terminalVelocity.x;
-		}
-		else if(velocity.x < -terminalVelocity.x)
-		{
-			velocity.x = -terminalVelocity.x;
-		}
-		if(velocity.y > terminalVelocity.y)
-		{
-			velocity.y = terminalVelocity.y;
-		}
-		else if(velocity.y < -terminalVelocity.y)
-		{
-			velocity.y = -terminalVelocity.y;
-		}
-		setVelocity(velocity);
-
-		Collidable::update(appData);
-
-		velocity = getVelocity();
 		//make entities move when on top of other collidables
 		auto bottomCollidables = getCollided(COLLISIONSIDE_BOTTOM);
 		if(bottomCollidables.size() > 0)
@@ -113,8 +89,6 @@ namespace fl
 			}
 		}
 		setVelocity(velocity);
-
-		collisionRectManager.update(appData, this);
 	}
 
 	fgl::Vector2d Entity::getDrawScale() const
@@ -129,7 +103,7 @@ namespace fl
 
 	void Entity::drawMain(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
-		Collidable::draw(appData, graphics);
+		StageObject::draw(appData, graphics);
 	}
 
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
@@ -215,10 +189,10 @@ namespace fl
 	{
 		if(parentEntity==nullptr)
 		{
-			return Collidable::getPosition(rotation);
+			return StageObject::getPosition(rotation);
 		}
 		float childRotation = 0;
-		fgl::Vector2d childOffset = Collidable::getPosition(&childRotation);
+		fgl::Vector2d childOffset = StageObject::getPosition(&childRotation);
 
 		//if parent orientation is right, the offset should be flipped
 		AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
@@ -252,7 +226,7 @@ namespace fl
 			//position can't be changed while anchored to a parent entity (atleast for now...)
 			return;
 		}
-		Collidable::setPosition(position_arg);
+		StageObject::setPosition(position_arg);
 	}
 
 	void Entity::shift(const fgl::Vector2d& offset)
@@ -262,17 +236,7 @@ namespace fl
 			parentEntity->shift(offset);
 			return;
 		}
-		Collidable::shift(offset);
-	}
-
-	fgl::Vector2d Entity::getTerminalVelocity() const
-	{
-		return fgl::Vector2d(10000, 10000);
-	}
-
-	double Entity::getGravityScale() const
-	{
-		return 1.0;
+		StageObject::shift(offset);
 	}
 
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
@@ -300,23 +264,17 @@ namespace fl
 		orientation = orientation_arg;
 	}
 
-	CollisionMethod Entity::getCollisionMethod() const
-	{
-		return collisionRectManager.getCollisionMethod();
-	}
-
-	void Entity::setCollisionMethod(CollisionMethod collisionMethod)
-	{
-		collisionRectManager.setCollisionMethod(collisionMethod);
-	}
-
 	bool Entity::isStaticCollisionBody() const
 	{
 		return false;
 	}
 
-	bool Entity::respondsToGravity() const
+	bool Entity::respondsToAirResistance() const
 	{
+		if(isOnGround())
+		{
+			return false;
+		}
 		return true;
 	}
 
@@ -400,16 +358,6 @@ namespace fl
 		//
 	}
 
-	void Entity::onAddToStage(Stage* stage)
-	{
-		//
-	}
-
-	void Entity::onRemoveFromStage(Stage* stage)
-	{
-		//
-	}
-
 	bool Entity::isOnGround() const
 	{
 		for(auto& collidedObject : collidedObjects)
@@ -453,11 +401,6 @@ namespace fl
 			}
 		}
 		return false;
-	}
-
-	fgl::ArrayList<CollisionRect*> Entity::getCollisionRects() const
-	{
-		return collisionRectManager.getCollisionRects();
 	}
 
 	void Entity::anchorChildEntity(Entity* child, MetaPointType childPoint, size_t childPointIndex, MetaPointType parentPoint, size_t parentPointIndex, const fgl::Vector2d& childOffset)
@@ -607,10 +550,5 @@ namespace fl
 			return ANIMATIONORIENTATION_RIGHT;
 		}
 		throw fgl::IllegalStateException("Entity::orientation has an invalid value");
-	}
-
-	Stage* Entity::getStage() const
-	{
-		return stage;
 	}
 }

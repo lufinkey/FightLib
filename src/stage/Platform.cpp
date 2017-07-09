@@ -5,11 +5,11 @@
 namespace fl
 {
 	Platform::Platform(const fgl::Vector2d& position)
-		: Collidable(position)
+		: StageObject(position)
 	{
-		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
+		//
 	}
-	
+
 	bool Platform::getFlag(const fgl::String& flag) const
 	{
 		if(flag=="Platform")
@@ -17,13 +17,6 @@ namespace fl
 			return true;
 		}
 		return Collidable::getFlag(flag);
-	}
-	
-	void Platform::update(fgl::ApplicationData appData)
-	{
-		Collidable::update(appData);
-		
-		collisionRectManager.update(appData, this);
 	}
 
 	fgl::Vector2d Platform::getFriction(const fgl::ApplicationData& appData, Entity* entity, CollisionSide side) const
@@ -39,24 +32,19 @@ namespace fl
 		}
 		return fgl::Vector2d(0, 0);
 	}
-	
+
 	bool Platform::isStaticCollisionBody() const
 	{
 		return true;
 	}
-	
-	fgl::ArrayList<CollisionRect*> Platform::getCollisionRects() const
+
+	bool Platform::respondsToGravity() const
 	{
-		return collisionRectManager.getCollisionRects();
+		return false;
 	}
-	
-	void Platform::setCollisionMethod(CollisionMethod collisionMethod)
+
+	bool Platform::respondsToAirResistance() const
 	{
-		collisionRectManager.setCollisionMethod(collisionMethod);
-	}
-	
-	CollisionMethod Platform::getCollisionMethod() const
-	{
-		return collisionRectManager.getCollisionMethod();
+		return false;
 	}
 }

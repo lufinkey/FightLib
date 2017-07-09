@@ -1,25 +1,21 @@
 
 #pragma once
 
-#include "collision/Collidable.hpp"
-#include "collision/CollisionRectManager.hpp"
+#include "StageObject.hpp"
 #include "hitbox/HitboxInfo.hpp"
 #include "hitbox/HitboxClashEvent.hpp"
 #include "hitbox/HitboxCollisionEvent.hpp"
 
 namespace fl
 {
-	class Stage;
-
 	typedef enum : fgl::Uint8
 	{
 		ORIENTATION_LEFT,
 		ORIENTATION_RIGHT,
 	} Orientation;
 
-	class Entity : public Collidable
+	class Entity : public StageObject
 	{
-		friend class Stage;
 		friend class HitboxCollisionManager;
 	public:
 		Entity(const fgl::Vector2d& position, Orientation orientation);
@@ -32,9 +28,6 @@ namespace fl
 		virtual void setPosition(const fgl::Vector2d& position) override;
 		virtual void shift(const fgl::Vector2d& offset) override;
 
-		virtual fgl::Vector2d getTerminalVelocity() const;
-		virtual double getGravityScale() const;
-
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 
 		float getScale() const;
@@ -44,14 +37,11 @@ namespace fl
 		void setOrientation(Orientation orientation);
 
 		virtual bool isStaticCollisionBody() const override;
-		virtual bool respondsToGravity() const;
+		virtual bool respondsToAirResistance() const override;
 		virtual bool movesWithGround() const;
 		virtual bool usesHitboxes() const;
 
-		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
-
 		Entity* getParentEntity() const;
-		Stage* getStage() const;
 
 		bool isOnGround() const;
 
@@ -79,14 +69,8 @@ namespace fl
 
 		virtual void onFinishHitboxUpdates();
 
-		virtual void onAddToStage(Stage* stage);
-		virtual void onRemoveFromStage(Stage* stage);
-
 		fgl::ArrayList<Collidable*> getCollided(CollisionSide side) const;
 		bool isStaticCollidableOnSide(CollisionSide side) const;
-
-		CollisionMethod getCollisionMethod() const;
-		void setCollisionMethod(CollisionMethod method);
 
 		struct Anchor
 		{
@@ -105,12 +89,9 @@ namespace fl
 		float scale;
 
 		Orientation orientation;
-		CollisionRectManager collisionRectManager;
 
 		fgl::ArrayList<Anchor> anchoredEntities;
 		Entity* parentEntity;
-
-		Stage* stage;
 
 		struct CollidedObject
 		{

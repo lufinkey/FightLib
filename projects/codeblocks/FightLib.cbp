@@ -44,6 +44,7 @@
 		<Unit filename="../../include/fightlib/entity/Character.hpp" />
 		<Unit filename="../../include/fightlib/entity/Entity.hpp" />
 		<Unit filename="../../include/fightlib/entity/Item.hpp" />
+		<Unit filename="../../include/fightlib/entity/StageObject.hpp" />
 		<Unit filename="../../include/fightlib/entity/action/Action.hpp" />
 		<Unit filename="../../include/fightlib/entity/action/ActionInterruptEvent.hpp" />
 		<Unit filename="../../include/fightlib/entity/action/AttackAction.hpp" />
@@ -86,6 +87,7 @@
 		<Unit filename="../../src/entity/Character.cpp" />
 		<Unit filename="../../src/entity/Entity.cpp" />
 		<Unit filename="../../src/entity/Item.cpp" />
+		<Unit filename="../../src/entity/StageObject.cpp" />
 		<Unit filename="../../src/entity/action/Action.cpp" />
 		<Unit filename="../../src/entity/action/ActionInterruptEvent.cpp" />
 		<Unit filename="../../src/entity/action/AttackAction.cpp" />
