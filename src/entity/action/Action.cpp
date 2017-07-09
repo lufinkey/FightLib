@@ -12,7 +12,7 @@ namespace fl
 	{
 		//
 	}
-	
+
 	ActionParams::~ActionParams()
 	{
 		//
@@ -22,7 +22,12 @@ namespace fl
 	{
 		return flags.get(flag, false);
 	}
-	
+
+	ActionParamsPtr createActionFlags(const fgl::BasicDictionary<fgl::String, bool>& flags)
+	{
+		return ActionParamsPtr(new ActionParams(flags));
+	}
+
 	Action::Action()
 		: entity(nullptr),
 		performing(false)
@@ -34,12 +39,12 @@ namespace fl
 	{
 		//
 	}
-	
+
 	ActionEntity* Action::getEntity() const
 	{
 		return entity;
 	}
-	
+
 	bool Action::isPerforming() const
 	{
 		return performing;

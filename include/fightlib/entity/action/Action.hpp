@@ -6,7 +6,7 @@
 namespace fl
 {
 	class ActionEntity;
-	
+
 	class ActionParams
 	{
 	public:
@@ -18,16 +18,19 @@ namespace fl
 	private:
 		fgl::BasicDictionary<fgl::String, bool> flags;
 	};
-	
+
 	typedef std::shared_ptr<ActionParams> ActionParamsPtr;
-	
+
+	ActionParamsPtr createActionFlags(const fgl::BasicDictionary<fgl::String, bool>& flags);
+
+
 	class Action
 	{
 		friend class ActionEntity;
 	public:
 		Action();
 		virtual ~Action();
-		
+
 		ActionEntity* getEntity() const;
 		bool isPerforming() const;
 
@@ -40,12 +43,12 @@ namespace fl
 		virtual void onEvent(EventPtr event);
 
 		void end();
-		
+
 	private:
 		ActionEntity* entity;
 		bool performing;
 	};
-	
+
 	extern const fgl::String ACTIONFLAG_ALLOWMOVEMENT;
 	extern const fgl::String ACTIONFLAG_ALLOWORIENTATIONCHANGE;
 }
