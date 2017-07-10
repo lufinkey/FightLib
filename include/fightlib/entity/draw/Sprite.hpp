@@ -35,15 +35,14 @@ namespace fl
 		fgl::Animation* getCurrentAnimation() const;
 		fgl::String getCurrentAnimationName() const;
 		size_t getCurrentAnimationFrameIndex() const;
-		
+		AnimationData* getCurrentAnimationData() const;
+		AnimationData* getAnimationData(const fgl::String& name) const;
+
 		fgl::ArrayList<TaggedBox> getMetaPointBoxes(MetaPointType metaPointType) const;
 
 	protected:
 		virtual AnimationOrientation getAnimationOrientation() const;
 
-		AnimationData* getCurrentAnimationData() const;
-		AnimationData* getAnimationData(const fgl::String& name) const;
-		
 		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
 		virtual fgl::Vector2d getDrawScale() const;
 
