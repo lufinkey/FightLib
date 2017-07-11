@@ -32,10 +32,10 @@ namespace fl
 
 		bool checkCollision(Collidable* collidable) const;
 
+		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
+
 	protected:
 		virtual void onBeginCollisionUpdates();
-
-		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const;
 
 		virtual void onContact(const ContactEvent& contactEvent);
 		virtual void onContactUpdate(const ContactEvent& contactEvent);
