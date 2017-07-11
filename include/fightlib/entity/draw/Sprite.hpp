@@ -28,6 +28,7 @@ namespace fl
 		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const;
 		virtual void setPosition(const fgl::Vector2d& position);
 		virtual void shift(const fgl::Vector2d& offset);
+		virtual fgl::RectangleD getFrame() const;
 
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);

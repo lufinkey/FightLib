@@ -80,7 +80,7 @@ namespace fl
 		}
 		return position;
 	}
-	
+
 	fgl::Vector2d Sprite::getDrawScale() const
 	{
 		return fgl::Vector2d(1,1);
@@ -140,6 +140,14 @@ namespace fl
 			return fgl::Vector2d(0, 0);
 		}
 		return ((fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame)) * getDrawScale();
+	}
+
+	fgl::RectangleD Sprite::getFrame() const
+	{
+		auto size = getSize();
+		auto position = getPosition();
+		//TODO take rotation into account
+		return fgl::RectangleD(position.x-(size.x/2.0), position.y-(size.y/2.0), size.x, size.y);
 	}
 
 	bool Sprite::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
@@ -230,7 +238,7 @@ namespace fl
 		}
 		return nullptr;
 	}
-	
+
 	fgl::ArrayList<TaggedBox> Sprite::getMetaPointBoxes(MetaPointType metaPointType) const
 	{
 		if(currentAnimationData==nullptr || currentAnimationData->getAnimation()->getTotalFrames()==0)
@@ -244,22 +252,22 @@ namespace fl
 			{
 				return {};
 			}
-			
+
 			float rotation = 0;
 			fgl::Vector2d position = getPosition(&rotation);
 			fgl::Vector2d size = getSize();
 			fgl::Vector2d topLeft = position - (size/2.0);
-			
+
 			fgl::Vector2d animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
 			fgl::Vector2d sizeScale = size/animSize;
 			bool mirrored = currentAnimationData->isMirrored(getAnimationOrientation());
-			
+
 			fgl::TransformD transform;
 			if(rotation!=0)
 			{
 				transform.rotate((double)rotation, position);
 			}
-			
+
 			fgl::ArrayList<TaggedBox> boxes;
 			boxes.reserve(metaPoints.size());
 			for(auto& metaPoint : metaPoints)
