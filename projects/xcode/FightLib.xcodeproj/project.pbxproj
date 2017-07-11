@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A05336481F155CD700042E3F /* StageObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A05336471F155CD700042E3F /* StageObject.cpp */; };
 		A0E135E91F05DAF400023E22 /* StageController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A0E135E71F05DAF400023E22 /* StageController.hpp */; };
 		A0E135EA1F05DAF400023E22 /* StageSection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A0E135E81F05DAF400023E22 /* StageSection.hpp */; };
 		A0E135ED1F05DB0900023E22 /* StageController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A0E135EB1F05DB0900023E22 /* StageController.cpp */; };
@@ -56,6 +57,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A05336451F155CBC00042E3F /* StageObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageObject.hpp; sourceTree = "<group>"; };
+		A05336471F155CD700042E3F /* StageObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageObject.cpp; sourceTree = "<group>"; };
 		A0E135E71F05DAF400023E22 /* StageController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageController.hpp; sourceTree = "<group>"; };
 		A0E135E81F05DAF400023E22 /* StageSection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StageSection.hpp; sourceTree = "<group>"; };
 		A0E135EB1F05DB0900023E22 /* StageController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageController.cpp; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 				F17BBBF11E6496A900A7F8F4 /* Character.hpp */,
 				F17BBBF21E6496A900A7F8F4 /* Entity.hpp */,
 				F17BBBF31E6496A900A7F8F4 /* Item.hpp */,
+				A05336451F155CBC00042E3F /* StageObject.hpp */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -294,6 +298,7 @@
 				F17D96D61E6DB53B003F4D85 /* Character.cpp */,
 				F15A1FAF1E549FAE008D83E5 /* Entity.cpp */,
 				F1BA75CA1E92847300647E41 /* Item.cpp */,
+				A05336471F155CD700042E3F /* StageObject.cpp */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				F15BDFC11E9547E500B92754 /* Fight.cpp in Sources */,
 				F17D96D31E6DB531003F4D85 /* Action.cpp in Sources */,
 				F1A7DF4D1E893E2F00472DB2 /* Sprite.cpp in Sources */,
+				A05336481F155CD700042E3F /* StageObject.cpp in Sources */,
 				F18196251E8ABAB7009BD55F /* CollisionRectManager.cpp in Sources */,
 				F16CDDA81E9E9A1500E4DB26 /* HitboxInfo.cpp in Sources */,
 				F17BBBEF1E64965E00A7F8F4 /* CollisionPair.cpp in Sources */,
