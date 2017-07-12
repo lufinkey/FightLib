@@ -62,8 +62,8 @@ namespace fl
 		}
 
 		//update all these damn managers
-		drawManager.update(appData);
 		hitboxCollisionManager.update(appData);
+		drawManager.update(appData);
 		collisionManager.update(appData);
 
 		//update the list of items that characters are able to pick up
