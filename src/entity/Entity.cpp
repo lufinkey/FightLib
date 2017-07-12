@@ -269,13 +269,22 @@ namespace fl
 		return false;
 	}
 
-	bool Entity::respondsToAirResistance() const
+	bool Entity::respondsToGravity() const
 	{
-		if(isOnGround())
+		if(parentEntity!=nullptr)
 		{
 			return false;
 		}
-		return true;
+		return StageObject::respondsToGravity();
+	}
+
+	bool Entity::respondsToAirResistance() const
+	{
+		if(isOnGround() || parentEntity!=nullptr)
+		{
+			return false;
+		}
+		return StageObject::respondsToAirResistance();
 	}
 
 	bool Entity::movesWithGround() const

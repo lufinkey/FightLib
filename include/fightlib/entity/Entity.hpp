@@ -37,6 +37,7 @@ namespace fl
 		void setOrientation(Orientation orientation);
 
 		virtual bool isStaticCollisionBody() const override;
+		virtual bool respondsToGravity() const override;
 		virtual bool respondsToAirResistance() const override;
 		virtual bool movesWithGround() const;
 		virtual bool usesHitboxes() const;

@@ -11,7 +11,7 @@ namespace fl
 	{
 		//
 	}
-	
+
 	bool Item::getFlag(const fgl::String& flag) const
 	{
 		if(flag=="Item")
@@ -29,7 +29,7 @@ namespace fl
 		}
 		ActionEntity::update(appData);
 	}
-	
+
 	void Item::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
@@ -39,7 +39,7 @@ namespace fl
 		}
 		ActionEntity::draw(appData, graphics);
 	}
-	
+
 	fgl::Vector2d Item::getDrawPosition(float* rotation) const
 	{
 		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
@@ -49,7 +49,7 @@ namespace fl
 		}
 		return ActionEntity::getDrawPosition(rotation);
 	}
-	
+
 	fgl::Vector2d Item::getPosition(float* rotation) const
 	{
 		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
@@ -59,7 +59,7 @@ namespace fl
 		}
 		return ActionEntity::getPosition(rotation);
 	}
-	
+
 	fgl::ArrayList<CollisionRect*> Item::getCollisionRects() const
 	{
 		if(getParentEntity()==nullptr)
@@ -68,7 +68,25 @@ namespace fl
 		}
 		return {};
 	}
-	
+
+	bool Item::respondsToGravity() const
+	{
+		if(getParentCharacter()!=nullptr)
+		{
+			return false;
+		}
+		return ActionEntity::respondsToGravity();
+	}
+
+	bool Item::respondsToAirResistance() const
+	{
+		if(getParentCharacter()!=nullptr)
+		{
+			return false;
+		}
+		return ActionEntity::respondsToAirResistance();
+	}
+
 	bool Item::isPickedUpByTouching() const
 	{
 		return false;
@@ -82,12 +100,12 @@ namespace fl
 		}
 		return false;
 	}
-	
+
 	Character* Item::getParentCharacter() const
 	{
 		return parentCharacter;
 	}
-	
+
 	bool Item::respondsToCollision(Collidable* collided, CollisionSide side) const
 	{
 		if(collided->getFlag("Character"))
@@ -101,12 +119,12 @@ namespace fl
 		}
 		return ActionEntity::respondsToCollision(collided, side);
 	}
-	
+
 	void Item::onPickUp()
 	{
 		//
 	}
-	
+
 	void Item::onDiscard()
 	{
 		//
