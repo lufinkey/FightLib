@@ -157,7 +157,7 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="LLDB Debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-std=c++14" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="../../include"/>
         <IncludePath Value="../../external/GameLibrary/include"/>
@@ -197,7 +197,7 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="LLDB Debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Release" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-std=c++14" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="../../include"/>
         <IncludePath Value="../../external/GameLibrary/include"/>
