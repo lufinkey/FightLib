@@ -17,13 +17,7 @@ namespace fl
 		virtual void update(fgl::ApplicationData appData);
 
 		Stage* getStage() const;
-
-	protected:
-		virtual void onAddToStage(Stage* stage);
-		virtual void onRemoveFromStage(Stage* stage);
-
-		fgl::TimeInterval getTime() const;
-
+		
 		void easeValue(const fgl::String& name, long long duration, const std::function<void(double progress)>& onprogress);
 		void easeValue(long long duration, const std::function<void(double progress)>& onprogress);
 		double stopEasedValue(const fgl::String& name, bool finishEase=false);
@@ -31,6 +25,12 @@ namespace fl
 		void createTimer(const fgl::String& name, long long duration, const std::function<void()>& oncompletion);
 		void createTimer(long long duration, const std::function<void()>& oncompletion);
 		void destroyTimer(const fgl::String& name, bool callTimer=false);
+
+	protected:
+		virtual void onAddToStage(Stage* stage);
+		virtual void onRemoveFromStage(Stage* stage);
+
+		fgl::TimeInterval getTime() const;
 
 	private:
 		Stage* stage;
