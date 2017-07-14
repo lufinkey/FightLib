@@ -105,7 +105,7 @@ namespace fl
 		}
 	}
 	
-	void DrawManager::addDrawFilter(const fgl::String& name, const std::function<void(Drawable*, double, fgl::Graphics&)>& filterFunc)
+	void DrawManager::addDrawFilter(const fgl::String& name, const std::function<void(Drawable*, float, fgl::Graphics&)>& filterFunc)
 	{
 		if(!filterFunc)
 		{

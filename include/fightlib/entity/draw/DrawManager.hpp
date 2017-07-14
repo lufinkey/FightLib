@@ -19,7 +19,7 @@ namespace fl
 		void update(const fgl::ApplicationData& appData);
 		void draw(const fgl::ApplicationData& appData, fgl::Graphics graphics) const;
 		
-		void addDrawFilter(const fgl::String& name, const std::function<void(Drawable* drawable, double zLayer, fgl::Graphics& graphics)>& filterFunc);
+		void addDrawFilter(const fgl::String& name, const std::function<void(Drawable* drawable, float zLayer, fgl::Graphics& graphics)>& filterFunc);
 		void removeDrawFilter(const fgl::String& name);
 		
 	private:
@@ -34,7 +34,7 @@ namespace fl
 		struct DrawFilter
 		{
 			fgl::String name;
-			std::function<void(Drawable*, double, fgl::Graphics&)> filterFunc;
+			std::function<void(Drawable*, float, fgl::Graphics&)> filterFunc;
 		};
 		
 		fgl::ArrayList<DrawFilter> drawFilters;
