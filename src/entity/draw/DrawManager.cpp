@@ -98,14 +98,14 @@ namespace fl
 				auto drawableGraphics = graphics;
 				for(auto& drawFilter : drawFilters)
 				{
-					drawFilter.filterFunc(drawableData.drawable, drawableGraphics);
+					drawFilter.filterFunc(drawableData.drawable, drawableData.zLayer, drawableGraphics);
 				}
 				drawableData.drawable->draw(appData, drawableGraphics);
 			}
 		}
 	}
 	
-	void DrawManager::addDrawFilter(const fgl::String& name, const std::function<void(Drawable*, fgl::Graphics&)>& filterFunc)
+	void DrawManager::addDrawFilter(const fgl::String& name, const std::function<void(Drawable*, double, fgl::Graphics&)>& filterFunc)
 	{
 		if(!filterFunc)
 		{
