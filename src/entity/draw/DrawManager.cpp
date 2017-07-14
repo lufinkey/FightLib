@@ -89,7 +89,51 @@ namespace fl
 	{
 		for(auto& drawableData : drawables)
 		{
-			drawableData.drawable->draw(appData, graphics);
+			if(drawFilters.size()==0)
+			{
+				drawableData.drawable->draw(appData, graphics);
+			}
+			else
+			{
+				auto drawableGraphics = graphics;
+				for(auto& drawFilter : drawFilters)
+				{
+					drawFilter.filterFunc(drawableData.drawable, drawableGraphics);
+				}
+				drawableData.drawable->draw(appData, drawableGraphics);
+			}
+		}
+	}
+	
+	void DrawManager::addDrawFilter(const fgl::String& name, const std::function<void(Drawable*, fgl::Graphics&)>& filterFunc)
+	{
+		if(!filterFunc)
+		{
+			throw fgl::IllegalArgumentException("filterFunc", "cannot be an empty function");
+		}
+		for(auto& drawFilter : drawFilters)
+		{
+			if(drawFilter.name==name)
+			{
+				throw fgl::IllegalArgumentException("name", "a filter already exist with this name");
+			}
+		}
+		
+		DrawFilter drawFilter;
+		drawFilter.name = name;
+		drawFilter.filterFunc = filterFunc;
+		drawFilters.add(drawFilter);
+	}
+	
+	void DrawManager::removeDrawFilter(const fgl::String& name)
+	{
+		for(size_t i=0; i<drawFilters.size(); i++)
+		{
+			auto& drawFilter = drawFilters[i];
+			if(drawFilter.name==name)
+			{
+				drawFilters.remove(i);
+			}
 		}
 	}
 }
