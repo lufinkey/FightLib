@@ -11,6 +11,7 @@ namespace fl
 		CharacterController(Character* character);
 		virtual ~CharacterController();
 
+		virtual bool getFlag(const fgl::String& flag) const;
 		virtual void update(fgl::ApplicationData appData) = 0;
 
 		Character* getCharacter() const;

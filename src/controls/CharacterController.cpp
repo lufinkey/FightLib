@@ -13,6 +13,11 @@ namespace fl
 	{
 		//
 	}
+	
+	bool CharacterController::getFlag(const fgl::String& flag) const
+	{
+		return false;
+	}
 
 	Character* CharacterController::getCharacter() const
 	{
