@@ -19,6 +19,8 @@ namespace fl
 		const fgl::RectD& getFollowRegion() const;
 
 	protected:
+		virtual void onBeginFight(Fight* fight) override;
+		
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void drawStage(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 

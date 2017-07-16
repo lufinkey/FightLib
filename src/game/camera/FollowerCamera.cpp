@@ -22,6 +22,16 @@ namespace fl
 	{
 		return focus;
 	}
+	
+	void FollowerCamera::onBeginFight(Fight* fight)
+	{
+		if(focus!=nullptr)
+		{
+			focusPosition = focus->getPosition();
+			lastFocusPosition = focusPosition;
+			center = focusPosition;
+		}
+	}
 
 	void FollowerCamera::update(fgl::ApplicationData appData)
 	{
@@ -41,21 +51,20 @@ namespace fl
 			{
 				velocity.y = 200.0;
 			}
-			auto position = focus->getPosition();
 			auto rect = getRect();
-			if(position.x < (rect.x+(followRegion.left*rect.width)))
+			if(focusPosition.x < (rect.x+(followRegion.left*rect.width)))
 			{
 				center.x -= velocity.x*appData.getFrameSpeedMultiplier();
 			}
-			if(position.x > (rect.x+(followRegion.right*rect.width)))
+			if(focusPosition.x > (rect.x+(followRegion.right*rect.width)))
 			{
 				center.x += velocity.x*appData.getFrameSpeedMultiplier();
 			}
-			if(position.y < (rect.y+(followRegion.top*rect.height)))
+			if(focusPosition.y < (rect.y+(followRegion.top*rect.height)))
 			{
 				center.y -= velocity.y*appData.getFrameSpeedMultiplier();
 			}
-			if(position.y > (rect.y+(followRegion.bottom*rect.height)))
+			if(focusPosition.y > (rect.y+(followRegion.bottom*rect.height)))
 			{
 				center.y += velocity.y*appData.getFrameSpeedMultiplier();
 			}
