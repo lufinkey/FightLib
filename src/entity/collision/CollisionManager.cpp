@@ -643,7 +643,9 @@ namespace fl
 	{
 		fgl::ArrayList<CollisionPair> pairs;
 		fgl::ArrayList<CollisionPair> prevStaticCollisions;
+		prevStaticCollisions.reserve(previousCollisions.size());
 		fgl::ArrayList<CollisionPair> prevNonstaticCollisions;
+		prevNonstaticCollisions.reserve(previousCollisions.size());
 		for(auto& collisionPair : previousCollisions)
 		{
 			if(collisionPair.collidable1->isStaticCollisionBody() || collisionPair.collidable2->isStaticCollisionBody())
@@ -655,9 +657,14 @@ namespace fl
 				prevNonstaticCollisions.add(collisionPair);
 			}
 		}
-		fgl::ArrayList<CollisionPair> staticCollisions;
-		fgl::ArrayList<CollisionPair> nonstaticCollisions;
+		
 		size_t collidables_size = collidables.size();
+		size_t nSquared = collidables_size*collidables_size;
+		
+		fgl::ArrayList<CollisionPair> staticCollisions;
+		staticCollisions.reserve(nSquared);
+		fgl::ArrayList<CollisionPair> nonstaticCollisions;
+		nonstaticCollisions.reserve(nSquared);
 		for(size_t i=0; i<collidables_size; i++)
 		{
 			for(size_t j=(i+1); j<collidables_size; j++)
@@ -665,13 +672,16 @@ namespace fl
 				CollisionPair pair(collidables[i], collidables[j]);
 				if(previousCollisions.indexOf(pair)==(size_t)-1)
 				{
-					if(pair.collidable1->isStaticCollisionBody() || pair.collidable2->isStaticCollisionBody())
+					if(!(pair.collidable1->isStaticCollisionBody() && pair.collidable2->isStaticCollisionBody()))
 					{
-						staticCollisions.add(pair);
-					}
-					else
-					{
-						nonstaticCollisions.add(pair);
+						if(pair.collidable1->isStaticCollisionBody() || pair.collidable2->isStaticCollisionBody())
+						{
+							staticCollisions.add(pair);
+						}
+						else
+						{
+							nonstaticCollisions.add(pair);
+						}
 					}
 				}
 			}
