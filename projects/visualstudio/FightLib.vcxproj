@@ -52,6 +52,7 @@
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxInfo.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\hitbox\HitboxClash.hpp" />
     <ClInclude Include="..\..\include\fightlib\entity\Item.hpp" />
+    <ClInclude Include="..\..\include\fightlib\entity\StageObject.hpp" />
     <ClInclude Include="..\..\include\fightlib\fightlib.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\camera\Camera.hpp" />
     <ClInclude Include="..\..\include\fightlib\game\camera\FollowerCamera.hpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="..\..\src\entity\hitbox\HitboxInfo.cpp" />
     <ClCompile Include="..\..\src\entity\hitbox\HitboxClash.cpp" />
     <ClCompile Include="..\..\src\entity\Item.cpp" />
+    <ClCompile Include="..\..\src\entity\StageObject.cpp" />
     <ClCompile Include="..\..\src\game\camera\Camera.cpp" />
     <ClCompile Include="..\..\src\game\camera\FollowerCamera.cpp" />
     <ClCompile Include="..\..\src\game\Fight.cpp" />
