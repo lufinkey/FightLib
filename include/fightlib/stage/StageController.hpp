@@ -15,6 +15,7 @@ namespace fl
 		virtual ~StageController();
 
 		virtual void update(fgl::ApplicationData appData);
+		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const;
 
 		Stage* getStage() const;
 		

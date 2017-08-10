@@ -86,6 +86,12 @@ namespace fl
 	{
 		appData.additionalData["stage"] = this;
 		drawManager.draw(appData, graphics);
+		
+		//draw StageControllers
+		for(auto& controller : controllers)
+		{
+			controller->draw(appData, graphics);
+		}
 	}
 
 	fgl::Vector2d Stage::getGravity(StageObject* object) const

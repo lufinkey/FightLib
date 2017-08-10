@@ -63,6 +63,11 @@ namespace fl
 			}
 		}
 	}
+	
+	void StageController::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
+	{
+		//
+	}
 
 	Stage* StageController::getStage() const
 	{
