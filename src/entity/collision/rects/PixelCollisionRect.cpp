@@ -62,7 +62,7 @@ namespace fl
 	bool PixelCollisionRect::check(const fgl::PixelIterator& iterator) const
 	{
 		double index = iterator.getCurrentPixelIndex();
-		if(index >= 0 && index < image->getSize())
+		if(index >= 0 && index < (double)image->getLength())
 		{
 			return image->checkPixel((unsigned int)index);
 		}
