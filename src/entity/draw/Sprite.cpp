@@ -48,16 +48,21 @@ namespace fl
 					frameChanged = true;
 					currentAnimationFrame++;
 					currentAnimationLastFrameTime = nextFrameTime;
-					if(currentAnimationFrame>=animation->getTotalFrames())
+					size_t totalFrames = animation->getTotalFrames();
+					if(currentAnimationFrame >= totalFrames)
 					{
 						currentAnimationFrame = 0;
 						if(currentAnimationEventHandler)
 						{
 							currentAnimationEventHandler(ANIMATIONEVENT_FINISHED);
-							if(!animationChanged)
+							if(!animationChanged && totalFrames > 1)
 							{
 								currentAnimationEventHandler(ANIMATIONEVENT_FRAMECHANGED);
 							}
+						}
+						if(!animationChanged && totalFrames > 1)
+						{
+							onAnimationFrameChange();
 						}
 					}
 					else
@@ -65,6 +70,10 @@ namespace fl
 						if(currentAnimationEventHandler)
 						{
 							currentAnimationEventHandler(ANIMATIONEVENT_FRAMECHANGED);
+						}
+						if(!animationChanged)
+						{
+							onAnimationFrameChange();
 						}
 					}
 				}
@@ -182,6 +191,7 @@ namespace fl
 		{
 			prevAnimationEventHandler(ANIMATIONEVENT_CHANGED);
 		}
+		onAnimationChange();
 	}
 
 	fgl::Animation* Sprite::getAnimation(const fgl::String& name) const
@@ -290,5 +300,15 @@ namespace fl
 			}
 			return boxes;
 		}
+	}
+	
+	void Sprite::onAnimationFrameChange()
+	{
+		//
+	}
+	
+	void Sprite::onAnimationChange()
+	{
+		//
 	}
 }

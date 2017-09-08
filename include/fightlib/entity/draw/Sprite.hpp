@@ -43,6 +43,9 @@ namespace fl
 
 	protected:
 		virtual AnimationOrientation getAnimationOrientation() const;
+		
+		virtual void onAnimationFrameChange();
+		virtual void onAnimationChange();
 
 		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
 		virtual fgl::Vector2d getDrawScale() const;
