@@ -72,6 +72,10 @@ namespace fl
 
 		void addController(StageController* controller);
 		void removeController(StageController* controller);
+		
+	protected:
+		virtual void onAddObject(StageObject* object);
+		virtual void onRemoveObject(StageObject* object);
 
 	private:
 		void loadSection(StageSection* section);

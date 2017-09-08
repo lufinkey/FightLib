@@ -161,6 +161,7 @@ namespace fl
 		drawManager.addDrawable(object, zLayer);
 		object->stage = this;
 		object->onAddToStage(this);
+		onAddObject(object);
 	}
 
 	void Stage::removeObject(StageObject* object)
@@ -174,6 +175,7 @@ namespace fl
 		drawManager.removeDrawable(object);
 		object->stage = nullptr;
 		object->onRemoveFromStage(this);
+		onRemoveObject(object);
 	}
 
 	const fgl::ArrayList<StageObject*>& Stage::getObjects() const
@@ -381,5 +383,15 @@ namespace fl
 				listPair.second.remove(itemIndex);
 			}
 		}
+	}
+	
+	void Stage::onAddObject(StageObject* object)
+	{
+		//
+	}
+	
+	void Stage::onRemoveObject(StageObject* object)
+	{
+		//
 	}
 }
