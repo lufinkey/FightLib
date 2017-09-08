@@ -45,7 +45,6 @@ namespace fl
 		setVelocity(velocity);
 
 		Collidable::update(appData);
-		collisionRectManager.update(appData, this);
 	}
 
 	fgl::Vector2d StageObject::getTerminalVelocity() const
@@ -92,4 +91,10 @@ namespace fl
     {
 		//
     }
+	
+	void StageObject::onBeginCollisionUpdates()
+	{
+		collisionRectManager.update(this);
+		Collidable::onBeginCollisionUpdates();
+	}
 }

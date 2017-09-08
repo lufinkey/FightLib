@@ -28,6 +28,8 @@ namespace fl
 	protected:
         virtual void onAddToStage(Stage* stage);
 		virtual void onRemoveFromStage(Stage* stage);
+		
+		virtual void onBeginCollisionUpdates() override;
 
 		CollisionMethod getCollisionMethod() const;
 		void setCollisionMethod(CollisionMethod method);

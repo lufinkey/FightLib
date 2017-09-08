@@ -34,17 +34,17 @@ namespace fl
 		return collisionRects;
 	}
 	
-	void CollisionRectManager::update(const fgl::ApplicationData& appData, fl::Collidable* collidable)
+	void CollisionRectManager::update(fl::Collidable* collidable)
 	{
 		auto previousRects = collisionRects;
-		collisionRects = createCollisionRects(appData, collidable);
+		collisionRects = createCollisionRects(collidable);
 		for(auto collisionRect : previousRects)
 		{
 			delete collisionRect;
 		}
 	}
 	
-	fgl::ArrayList<CollisionRect*> CollisionRectManager::createCollisionRects(const fgl::ApplicationData& appData, fl::Collidable* collidable) const
+	fgl::ArrayList<CollisionRect*> CollisionRectManager::createCollisionRects(fl::Collidable* collidable) const
 	{
 		switch(collisionMethod)
 		{
