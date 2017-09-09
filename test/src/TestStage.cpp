@@ -43,16 +43,19 @@ TestStage::TestStage(fl::AnimationAssetManager* assetManager)
 	
 	movingBlock = new MovingPlatform(assetManager, fgl::Vector2d(400, 150));
 	
-	addPlatform(block1);
-	addPlatform(block2);
-	addPlatform(block3);
-	addPlatform(block4);
-	addPlatform(block5);
-	addPlatform(block6);
-	addPlatform(block7);
-	addPlatform(movingBlock);
-	addItem(sword);
-	addCharacter(sandbag);
+	//platforms
+	addObject(block1);
+	addObject(block2);
+	addObject(block3);
+	addObject(block4);
+	addObject(block5);
+	addObject(block6);
+	addObject(block7);
+	addObject(movingBlock);
+	//items
+	addObject(sword);
+	//characters
+	addObject(sandbag);
 }
 
 TestStage::~TestStage()

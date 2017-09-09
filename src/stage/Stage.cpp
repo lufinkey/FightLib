@@ -157,6 +157,24 @@ namespace fl
 			throw fgl::IllegalArgumentException("object", "already added to a stage");
 		}
 		objects.add(object);
+		if(object->getFlag("Platform"))
+		{
+			platforms.add(static_cast<Platform*>(object));
+		}
+		if(object->getFlag("Entity"))
+		{
+			entities.add(static_cast<Entity*>(object));
+			hitboxCollisionManager.addEntity(static_cast<Entity*>(object));
+		}
+		if(object->getFlag("Item"))
+		{
+			items.add(static_cast<Item*>(object));
+		}
+		if(object->getFlag("Character"))
+		{
+			characters.add(static_cast<Character*>(object));
+		}
+		
 		collisionManager.addCollidable(object);
 		drawManager.addDrawable(object, zLayer);
 		object->stage = this;
@@ -171,7 +189,13 @@ namespace fl
 			return;
 		}
 		objects.removeFirstEqual(object);
+		platforms.removeFirstEqual(static_cast<Platform*>(object));
+		entities.removeFirstEqual(static_cast<Entity*>(object));
+		items.removeFirstEqual(static_cast<Item*>(object));
+		characters.removeFirstEqual(static_cast<Character*>(object));
+		
 		collisionManager.removeCollidable(object);
+		hitboxCollisionManager.removeEntity(static_cast<Entity*>(object));
 		drawManager.removeDrawable(object);
 		object->stage = nullptr;
 		object->onRemoveFromStage(this);
@@ -183,51 +207,9 @@ namespace fl
 		return objects;
 	}
 
-	void Stage::addPlatform(Platform* platform, double zLayer)
-	{
-		if(platform->stage!=nullptr)
-		{
-			throw fgl::IllegalArgumentException("platform", "already added to a stage");
-		}
-		platforms.add(platform);
-		addObject(platform, zLayer);
-	}
-
-	void Stage::removePlatform(Platform* platform)
-	{
-		if(platform->stage!=this)
-		{
-			return;
-		}
-		platforms.removeFirstEqual(platform);
-		removeObject(platform);
-	}
-
 	const fgl::ArrayList<Platform*>& Stage::getPlatforms() const
 	{
 		return platforms;
-	}
-
-	void Stage::addEntity(Entity* entity, double zLayer)
-	{
-		if(entity->stage!=nullptr)
-		{
-			throw fgl::IllegalArgumentException("entity", "already added to a stage");
-		}
-		entities.add(entity);
-		hitboxCollisionManager.addEntity(entity);
-		addObject(entity, zLayer);
-	}
-
-	void Stage::removeEntity(Entity* entity)
-	{
-		if(entity->stage!=this)
-		{
-			return;
-		}
-		entities.removeFirstEqual(entity);
-		hitboxCollisionManager.removeEntity(entity);
-		removeObject(entity);
 	}
 
 	const fgl::ArrayList<Entity*>& Stage::getEntities() const
@@ -235,49 +217,9 @@ namespace fl
 		return entities;
 	}
 
-	void Stage::addItem(Item* item, double zLayer)
-	{
-		if(item->stage!=nullptr)
-		{
-			throw fgl::IllegalArgumentException("item", "already added to a stage");
-		}
-		items.add(item);
-		addEntity(item, zLayer);
-	}
-
-	void Stage::removeItem(Item* item)
-	{
-		if(item->stage!=this)
-		{
-			return;
-		}
-		items.removeFirstEqual(item);
-		removeEntity(item);
-	}
-
 	const fgl::ArrayList<Item*>& Stage::getItems() const
 	{
 		return items;
-	}
-
-	void Stage::addCharacter(Character* character, double zLayer)
-	{
-		if(character->stage!=nullptr)
-		{
-			throw fgl::IllegalArgumentException("character", "already added to a stage");
-		}
-		characters.add(character);
-		addEntity(character, zLayer);
-	}
-
-	void Stage::removeCharacter(Character* character)
-	{
-		if(character->stage!=this)
-		{
-			return;
-		}
-		characters.removeFirstEqual(character);
-		removeEntity(character);
 	}
 
 	void Stage::addSection(StageSection* section)

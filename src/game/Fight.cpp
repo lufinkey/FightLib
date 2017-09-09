@@ -23,7 +23,7 @@ namespace fl
 
 		for(auto character : params.getCharacters())
 		{
-			stage->addCharacter(character);
+			stage->addObject(character);
 		}
 
 		if(camera==nullptr)

@@ -52,18 +52,6 @@ namespace fl
 		void addObject(StageObject* object, double zLayer=0.5);
 		void removeObject(StageObject* object);
 
-		void addPlatform(Platform* platform, double zLayer=0.5);
-		void removePlatform(Platform* platform);
-
-		void addEntity(Entity* entity, double zLayer=0.5);
-		void removeEntity(Entity* entity);
-
-		void addItem(Item* item, double zLayer=0.5);
-		void removeItem(Item* item);
-
-		void addCharacter(Character* character, double zLayer=0.5);
-		void removeCharacter(Character* character);
-
 		void addSection(StageSection* section);
 		void removeSection(StageSection* section);
 
