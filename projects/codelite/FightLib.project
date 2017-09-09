@@ -22,10 +22,10 @@
       </VirtualDirectory>
       <VirtualDirectory Name="draw">
         <File Name="../../src/entity/draw/AnimationMetaPoint.cpp"/>
-        <File Name="../../src/entity/draw/Sprite.cpp"/>
         <File Name="../../src/entity/draw/DrawManager.cpp"/>
         <File Name="../../src/entity/draw/AnimationData.cpp"/>
         <File Name="../../src/entity/draw/AnimationAssetManager.cpp"/>
+        <File Name="../../src/entity/draw/Sprite.cpp"/>
       </VirtualDirectory>
       <VirtualDirectory Name="action">
         <File Name="../../src/entity/action/Action.cpp"/>

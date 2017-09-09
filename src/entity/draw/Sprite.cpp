@@ -97,22 +97,34 @@ namespace fl
 
 	void Sprite::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
-		float rotation = 0;
-		auto position = getDrawPosition(&rotation);
-		if(position.x!=0 || position.y!=0)
-		{
-			graphics.translate(position);
-		}
-		if(rotation!=0)
-		{
-			graphics.rotate(rotation);
-		}
-		auto scale = getDrawScale();
-		graphics.scale(scale);
 		if(currentAnimationData!=nullptr)
 		{
+			float rotation = 0;
+			auto position = getDrawPosition(&rotation);
+			if(position.x!=0 || position.y!=0)
+			{
+				graphics.translate(position);
+			}
+			if(rotation!=0)
+			{
+				graphics.rotate(rotation);
+			}
+			auto scale = getDrawScale();
+			graphics.scale(scale);
+			
+			//offset for origin
+			auto origin = getOrigin()/scale;
+			auto animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
+			auto originOffset = (animSize/2.0) - origin;
+			graphics.translate(originOffset);
+			
 			currentAnimationData->drawFrame(currentAnimationFrame, graphics, getAnimationOrientation());
 		}
+	}
+	
+	fgl::Vector2d Sprite::getOrigin() const
+	{
+		return getSize()/2.0;
 	}
 
 	fgl::Vector2d Sprite::getPosition(float* rotation) const
@@ -154,9 +166,10 @@ namespace fl
 	fgl::RectangleD Sprite::getFrame() const
 	{
 		auto size = getSize();
+		auto origin = getOrigin();
 		auto position = getPosition();
 		//TODO take rotation into account
-		return fgl::RectangleD(position.x-(size.x/2.0), position.y-(size.y/2.0), size.x, size.y);
+		return fgl::RectangleD(position.x-origin.x, position.y-origin.y, size.x, size.y);
 	}
 
 	bool Sprite::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
@@ -265,8 +278,9 @@ namespace fl
 
 			float rotation = 0;
 			fgl::Vector2d position = getPosition(&rotation);
+			fgl::Vector2d origin = getOrigin();
 			fgl::Vector2d size = getSize();
-			fgl::Vector2d topLeft = position - (size/2.0);
+			fgl::Vector2d topLeft = position - origin;
 
 			fgl::Vector2d animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
 			fgl::Vector2d sizeScale = size/animSize;

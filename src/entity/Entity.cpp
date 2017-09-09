@@ -510,8 +510,9 @@ namespace fl
 			}
 
 			fgl::Vector2d parentSize = parentEntity->getSize();
+			fgl::Vector2d parentOrigin = parentEntity->getOrigin();
 			//get the offset of the parent point from the parent entity's center
-			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-(parentSize.x/2), ((double)parentMetaPoint.y*parentEntity->scale)-(parentSize.y/2));
+			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-parentOrigin.x, ((double)parentMetaPoint.y*parentEntity->scale)-parentOrigin.y);
 			AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
 			AnimationOrientation parentAnimationOrientation = parentAnimData->getOrientation();
 			if(parentOrientation!=parentAnimationOrientation && parentAnimationOrientation!=ANIMATIONORIENTATION_NEUTRAL)
@@ -521,8 +522,9 @@ namespace fl
 			}
 
 			fgl::Vector2d childSize = getSize();
+			fgl::Vector2d childOrigin = getOrigin();
 			//get the offset of the child point from the child entity's (this entity's) center
-			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-(childSize.x/2), ((double)childMetaPoint.y*scale)-(childSize.y/2));
+			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-childOrigin.x, ((double)childMetaPoint.y*scale)-childOrigin.y);
 			AnimationOrientation childOrientation = getAnimationOrientation();
 			AnimationOrientation childAnimationOrientation = childAnimData->getOrientation();
 			if(childOrientation!=childAnimationOrientation && childAnimationOrientation!=ANIMATIONORIENTATION_NEUTRAL)
