@@ -167,9 +167,16 @@ namespace fl
 	{
 		auto size = getSize();
 		auto origin = getOrigin();
-		auto position = getPosition();
-		//TODO take rotation into account
-		return fgl::RectangleD(position.x-origin.x, position.y-origin.y, size.x, size.y);
+		float rotation = 0;
+		auto position = getPosition(&rotation);
+		auto frame = fgl::RectangleD(position.x-origin.x, position.y-origin.y, size.x, size.y);
+		if(rotation!=0)
+		{
+			fgl::TransformD transform;
+			transform.rotate((double)rotation, position);
+			frame = transform.transform(frame);
+		}
+		return frame;
 	}
 
 	bool Sprite::loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error)
