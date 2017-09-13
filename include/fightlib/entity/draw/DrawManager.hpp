@@ -10,6 +10,7 @@ namespace fl
 	public:
 		void addDrawable(Drawable* drawable, float zLayer=0.5f);
 		void removeDrawable(Drawable* drawable);
+		void removeAllDrawables();
 
 		float getDrawableZLayer(Drawable* drawable) const;
 		void setDrawableZLayer(Drawable* drawable, float zLayer);

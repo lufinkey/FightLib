@@ -36,6 +36,11 @@ namespace fl
 			drawables.remove(index);
 		}
 	}
+	
+	void DrawManager::removeAllDrawables()
+	{
+		drawables.clear();
+	}
 
 	float DrawManager::getDrawableZLayer(Drawable* drawable) const
 	{

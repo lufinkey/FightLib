@@ -141,12 +141,6 @@
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
-  <Dependencies Name="Debug">
-    <Project Name="GameLibrary"/>
-  </Dependencies>
-  <Dependencies Name="Release">
-    <Project Name="GameLibrary"/>
-  </Dependencies>
   <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -238,4 +232,10 @@
       </Completion>
     </Configuration>
   </Settings>
+  <Dependencies Name="Debug">
+    <Project Name="GameLibrary"/>
+  </Dependencies>
+  <Dependencies Name="Release">
+    <Project Name="GameLibrary"/>
+  </Dependencies>
 </CodeLite_Project>
