@@ -509,7 +509,6 @@ namespace fl
 				parentRotation = 0;
 			}
 
-			fgl::Vector2d parentSize = parentEntity->getSize();
 			fgl::Vector2d parentOrigin = parentEntity->getOrigin();
 			//get the offset of the parent point from the parent entity's center
 			fgl::Vector2d parentPointOffset = fgl::Vector2d(((double)parentMetaPoint.x*parentEntity->scale)-parentOrigin.x, ((double)parentMetaPoint.y*parentEntity->scale)-parentOrigin.y);
@@ -521,7 +520,6 @@ namespace fl
 				parentRotation = -parentRotation;
 			}
 
-			fgl::Vector2d childSize = getSize();
 			fgl::Vector2d childOrigin = getOrigin();
 			//get the offset of the child point from the child entity's (this entity's) center
 			fgl::Vector2d childPointOffset = fgl::Vector2d(((double)childMetaPoint.x*scale)-childOrigin.x, ((double)childMetaPoint.y*scale)-childOrigin.y);

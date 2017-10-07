@@ -84,7 +84,6 @@ namespace fl
 				
 			case COLLISIONMETHOD_BOUNDS:
 			{
-				auto size = collidable->getSize();
 				auto origin = collidable->getOrigin();
 				float rotation = 0;
 				auto previousPosition = collidable->getPreviousPosition();
