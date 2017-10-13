@@ -469,7 +469,7 @@ namespace fl
 				fgl::RectangleD animFrame = animation->getRect(frameIndex);
 				drawMetaPoints(frameIndex, animFrame, graphics, drawnOrientation);
 				
-				graphics.setColor(fgl::Color::BLACK);
+				graphics.setColor(fgl::Colors::BLACK);
 				graphics.drawRect(animFrame);
 			}
 		}
@@ -494,7 +494,7 @@ namespace fl
 			}
 
 			fgl::ArrayList<TaggedBox> bounds = getBounds(frameIndex);
-			graphics.setColor(fgl::Color::SKYBLUE);
+			graphics.setColor(fgl::Colors::SKYBLUE);
 			for(size_t i=0; i<bounds.size(); i++)
 			{
 				graphics.drawRect(bounds[i].rect);
@@ -526,7 +526,7 @@ namespace fl
 			if(metaPointType==METAPOINT_BOUNDS_TOPLEFT || metaPointType==METAPOINT_BOUNDS_BOTTOMRIGHT)
 			{
 				fgl::ArrayList<TaggedBox> bounds = getBounds(frameIndex);
-				graphics.setColor(fgl::Color::SKYBLUE);
+				graphics.setColor(fgl::Colors::SKYBLUE);
 				for(auto& metaBounds : bounds)
 				{
 					if(metaPointType==METAPOINT_BOUNDS_TOPLEFT)

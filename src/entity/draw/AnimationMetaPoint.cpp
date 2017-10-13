@@ -263,31 +263,31 @@ namespace fl
 		switch(type)
 		{
 			case METAPOINT_HITBOX:
-				graphics.setColor(fgl::Color::GREEN);
+				graphics.setColor(fgl::Colors::GREEN);
 				break;
 				
 			case METAPOINT_HEAD:
-				graphics.setColor(fgl::Color::RED);
+				graphics.setColor(fgl::Colors::RED);
 				break;
 				
 			case METAPOINT_LEFTHAND:
-				graphics.setColor(fgl::Color::PINK);
+				graphics.setColor(fgl::Colors::PINK);
 				break;
 				
 			case METAPOINT_RIGHTHAND:
-				graphics.setColor(fgl::Color::VIOLET);
+				graphics.setColor(fgl::Colors::VIOLET);
 				break;
 				
 			case METAPOINT_BOUNDS_TOPLEFT:
-				graphics.setColor(fgl::Color::BLUE);
+				graphics.setColor(fgl::Colors::BLUE);
 				break;
 				
 			case METAPOINT_BOUNDS_BOTTOMRIGHT:
-				graphics.setColor(fgl::Color::SKYBLUE);
+				graphics.setColor(fgl::Colors::SKYBLUE);
 				break;
 				
 			case METAPOINT_HANDLE:
-				graphics.setColor(fgl::Color::ORANGE);
+				graphics.setColor(fgl::Colors::ORANGE);
 				break;
 		}
 		fgl::RectangleD frame = getRect();
