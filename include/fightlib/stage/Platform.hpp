@@ -14,7 +14,7 @@ namespace fl
 
 		virtual bool getFlag(const fgl::String& flag) const override;
 
-		virtual fgl::Vector2d getFriction(const fgl::ApplicationData& appData, Entity* entity, CollisionSide side) const;
+		virtual fgl::Vector2d getFriction(const fgl::ApplicationData& appData, Entity* entity, fgl::CollisionSide side) const;
 
 		virtual bool isStaticCollisionBody() const override;
 		virtual bool respondsToGravity() const override;

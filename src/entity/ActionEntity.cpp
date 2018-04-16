@@ -62,7 +62,7 @@ namespace fl
 		if(currentAction!=nullptr)
 		{
 			//send an ActionInterruptEvent to give the current action a chance to end itself
-			currentAction->onEvent(EventPtr(new ActionInterruptEvent(action)));
+			currentAction->onEvent(fgl::EventPtr(new ActionInterruptEvent(action)));
 			if(currentAction!=nullptr)
 			{
 				//the current action did not end itself
@@ -105,7 +105,7 @@ namespace fl
 		onActionEnd(action);
 	}
 	
-	void ActionEntity::sendActionEvent(EventPtr event, bool allActions)
+	void ActionEntity::sendActionEvent(fgl::EventPtr event, bool allActions)
 	{
 		if(allActions)
 		{
@@ -152,30 +152,30 @@ namespace fl
 		return currentAction;
 	}
 	
-	void ActionEntity::onCollision(const CollisionEvent& collisionEvent)
+	void ActionEntity::onCollision(const fgl::CollisionEvent& collisionEvent)
 	{
 		Entity::onCollision(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new CollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new fgl::CollisionEvent(collisionEvent)));
 		}
 	}
 	
-	void ActionEntity::onCollisionUpdate(const CollisionEvent& collisionEvent)
+	void ActionEntity::onCollisionUpdate(const fgl::CollisionEvent& collisionEvent)
 	{
 		Entity::onCollisionUpdate(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new CollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new fgl::CollisionEvent(collisionEvent)));
 		}
 	}
 	
-	void ActionEntity::onCollisionFinish(const CollisionEvent& collisionEvent)
+	void ActionEntity::onCollisionFinish(const fgl::CollisionEvent& collisionEvent)
 	{
 		Entity::onCollisionFinish(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new CollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new fgl::CollisionEvent(collisionEvent)));
 		}
 	}
 	
@@ -184,7 +184,7 @@ namespace fl
 		Entity::onHitboxClash(clashEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxClashEvent(clashEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxClashEvent(clashEvent)));
 		}
 	}
 	
@@ -193,7 +193,7 @@ namespace fl
 		Entity::onHitboxClashUpdate(clashEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxClashEvent(clashEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxClashEvent(clashEvent)));
 		}
 	}
 	
@@ -202,7 +202,7 @@ namespace fl
 		Entity::onHitboxClashFinish(clashEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxClashEvent(clashEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxClashEvent(clashEvent)));
 		}
 	}
 	
@@ -211,7 +211,7 @@ namespace fl
 		Entity::onHitboxCollision(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxCollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxCollisionEvent(collisionEvent)));
 		}
 	}
 	
@@ -220,7 +220,7 @@ namespace fl
 		Entity::onHitboxCollisionUpdate(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxCollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxCollisionEvent(collisionEvent)));
 		}
 	}
 	
@@ -229,7 +229,7 @@ namespace fl
 		Entity::onHitboxCollisionFinish(collisionEvent);
 		if(currentAction!=nullptr)
 		{
-			currentAction->onEvent(EventPtr(new HitboxCollisionEvent(collisionEvent)));
+			currentAction->onEvent(fgl::EventPtr(new HitboxCollisionEvent(collisionEvent)));
 		}
 	}
 }

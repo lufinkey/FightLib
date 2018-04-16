@@ -1,8 +1,8 @@
 
 #pragma once
 
+#include <GameLibrary/GameLibrary.hpp>
 #include <fightlib/entity/draw/AnimationMetaPoint.hpp>
-#include <fightlib/entity/collision/rects/CollisionRect.hpp>
 #include "HitboxInfo.hpp"
 
 namespace fl

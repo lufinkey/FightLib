@@ -16,9 +16,10 @@ namespace fl
 		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
+		
+		virtual fgl::TransformState getTransformState() const override;
 
-		virtual fgl::ArrayList<CollisionRect*> getCollisionRects() const override;
+		virtual fgl::ArrayList<fgl::CollisionRect*> getCollisionRects() const override;
 		virtual bool respondsToGravity() const override;
 		virtual bool respondsToAirResistance() const override;
 
@@ -30,9 +31,9 @@ namespace fl
 		Character* getParentCharacter() const;
 
 	protected:
-		virtual fgl::Vector2d getDrawPosition(float* rotation) const override;
+		virtual fgl::TransformState getDrawTransformState() const override;
 
-		virtual bool respondsToCollision(Collidable* collided, CollisionSide side) const override;
+		virtual bool respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side) const override;
 
 		virtual void onPickUp();
 		virtual void onDiscard();

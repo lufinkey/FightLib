@@ -4,10 +4,20 @@
 namespace fl
 {
 	StageObject::StageObject(const fgl::Vector2d& position)
-		: Collidable(position),
-		stage(nullptr)
+		: CollidableSprite(position),
+		stage(nullptr),
+		collisionMethod(COLLISIONMETHOD_BOUNDS)
 	{
-		setCollisionMethod(COLLISIONMETHOD_BOUNDS);
+		//
+	}
+	
+	StageObject::~StageObject()
+	{
+		for(auto collisionRect : collisionRects)
+		{
+			delete collisionRect;
+		}
+		collisionRects.clear();
 	}
 
 	bool StageObject::getFlag(const fgl::String& flag) const
@@ -16,7 +26,7 @@ namespace fl
 		{
 			return true;
 		}
-		return Collidable::getFlag(flag);
+		return CollidableSprite::getFlag(flag);
 	}
 
 	void StageObject::update(fgl::ApplicationData appData)
@@ -44,7 +54,7 @@ namespace fl
 		}
 		setVelocity(velocity);
 
-		Collidable::update(appData);
+		CollidableSprite::update(appData);
 	}
 
 	fgl::Vector2d StageObject::getTerminalVelocity() const
@@ -62,11 +72,6 @@ namespace fl
 		return true;
 	}
 
-	fgl::ArrayList<CollisionRect*> StageObject::getCollisionRects() const
-	{
-		return collisionRectManager.getCollisionRects();
-	}
-
 	Stage* StageObject::getStage() const
 	{
 		return stage;
@@ -74,12 +79,51 @@ namespace fl
 
 	CollisionMethod StageObject::getCollisionMethod() const
 	{
-		return collisionRectManager.getCollisionMethod();
+		return collisionMethod;
 	}
 
 	void StageObject::setCollisionMethod(CollisionMethod method)
 	{
-		collisionRectManager.setCollisionMethod(method);
+		collisionMethod = method;
+	}
+	
+	fgl::ArrayList<fgl::CollisionRect*> StageObject::getCollisionRects() const
+	{
+		return collisionRects;
+	}
+	
+	void StageObject::updateCollisionRects()
+	{
+		// save old collision rects
+		auto prevCollisionRects = collisionRects;
+		// update rects using collision method
+		fgl::Collidable* collidable = static_cast<fgl::Collidable*>(this);
+		switch(collisionMethod)
+		{
+			case COLLISIONMETHOD_NONE:
+				collisionRects = {};
+				break;
+				
+			case COLLISIONMETHOD_FRAME:
+				collisionRects = fgl::CollisionRectBuilder::fromFrame(collidable, prevCollisionRects, getSize(), getOrigin(), getDrawScale());
+				break;
+				
+			case COLLISIONMETHOD_PIXEL:
+				collisionRects = CollidableSprite::createCollisionRectsFromAnimation(this, prevCollisionRects);
+				break;
+				
+			case COLLISIONMETHOD_BOUNDS:
+				collisionRects = CollidableSprite::createCollisionRectsFromBoundsMetapoints(this, prevCollisionRects);
+				break;
+				
+			default:
+				throw new fgl::IllegalArgumentException("collisionMethod", "invalid enum value");
+		}
+		// delete old collision rects
+		for(auto collisionRect : prevCollisionRects)
+		{
+			delete collisionRect;
+		}
 	}
 
     void StageObject::onAddToStage(Stage* stage)
@@ -94,7 +138,7 @@ namespace fl
 	
 	void StageObject::onBeginCollisionUpdates()
 	{
-		collisionRectManager.update(this);
-		Collidable::onBeginCollisionUpdates();
+		updateCollisionRects();
+		CollidableSprite::onBeginCollisionUpdates();
 	}
 }

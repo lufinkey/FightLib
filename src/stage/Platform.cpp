@@ -19,9 +19,9 @@ namespace fl
 		return Collidable::getFlag(flag);
 	}
 
-	fgl::Vector2d Platform::getFriction(const fgl::ApplicationData& appData, Entity* entity, CollisionSide side) const
+	fgl::Vector2d Platform::getFriction(const fgl::ApplicationData& appData, Entity* entity, fgl::CollisionSide side) const
 	{
-		if(side==COLLISIONSIDE_TOP)
+		if(side==fgl::COLLISIONSIDE_TOP)
 		{
 			auto velocity = entity->getVelocity();
 			if(fgl::Math::abs(velocity.x) < 100)

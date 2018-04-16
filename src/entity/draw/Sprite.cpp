@@ -18,6 +18,15 @@ namespace fl
 	{
 		//
 	}
+	
+	bool Sprite::getFlag(const fgl::String& flag) const
+	{
+		if(flag=="Sprite")
+		{
+			return true;
+		}
+		return Drawable::getFlag(flag);
+	}
 
 	void Sprite::update(fgl::ApplicationData appData)
 	{
@@ -81,13 +90,9 @@ namespace fl
 		} while(animationChanged || frameChanged);
 	}
 
-	fgl::Vector2d Sprite::getDrawPosition(float* rotation) const
+	fgl::TransformState Sprite::getDrawTransformState() const
 	{
-		if(rotation!=nullptr)
-		{
-			*rotation = 0;
-		}
-		return position;
+		return fgl::TransformState(position, 0);
 	}
 
 	fgl::Vector2d Sprite::getDrawScale() const
@@ -99,8 +104,9 @@ namespace fl
 	{
 		if(currentAnimationData!=nullptr)
 		{
-			float rotation = 0;
-			auto position = getDrawPosition(&rotation);
+			auto drawTransform = getDrawTransformState();
+			auto position = drawTransform.position;
+			auto rotation = drawTransform.rotation;
 			if(position.x!=0 || position.y!=0)
 			{
 				graphics.translate(position);
@@ -126,28 +132,20 @@ namespace fl
 	{
 		return getSize()/2.0;
 	}
-
-	fgl::Vector2d Sprite::getPosition(float* rotation) const
+	
+	double Sprite::getRotation() const
 	{
-		if(rotation!=nullptr)
-		{
-			*rotation = 0;
-		}
+		return 0.0;
+	}
+
+	fgl::Vector2d Sprite::getPosition() const
+	{
 		return position;
 	}
 
 	void Sprite::setPosition(const fgl::Vector2d& position_arg)
 	{
 		position = position_arg;
-
-		//TODO I may not need this anymore, but I should do some thorough tests before removing it
-		position.y = fgl::Math::round(position.y, 12);
-		position.x = fgl::Math::round(position.x, 12);
-	}
-
-	void Sprite::shift(const fgl::Vector2d& offset)
-	{
-		position += offset;
 
 		//TODO I may not need this anymore, but I should do some thorough tests before removing it
 		position.y = fgl::Math::round(position.y, 12);
@@ -167,8 +165,8 @@ namespace fl
 	{
 		auto size = getSize();
 		auto origin = getOrigin();
-		float rotation = 0;
-		auto position = getPosition(&rotation);
+		auto position = getPosition();
+		auto rotation = getRotation();
 		auto frame = fgl::RectangleD(position.x-origin.x, position.y-origin.y, size.x, size.y);
 		if(rotation!=0)
 		{
@@ -283,14 +281,14 @@ namespace fl
 				return {};
 			}
 
-			float rotation = 0;
-			fgl::Vector2d position = getPosition(&rotation);
-			fgl::Vector2d origin = getOrigin();
-			fgl::Vector2d size = getSize();
-			fgl::Vector2d topLeft = position - origin;
+			auto position = getPosition();
+			auto rotation = getRotation();
+			auto origin = getOrigin();
+			auto size = getSize();
+			auto topLeft = position - origin;
 
-			fgl::Vector2d animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
-			fgl::Vector2d sizeScale = size/animSize;
+			auto animSize = (fgl::Vector2d)currentAnimationData->getSize(currentAnimationFrame);
+			auto sizeScale = size/animSize;
 			bool mirrored = currentAnimationData->isMirrored(getAnimationOrientation());
 
 			fgl::TransformD transform;

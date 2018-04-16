@@ -115,12 +115,12 @@ namespace fl
 		return parentStage;
 	}
 
-	CollisionManager* Stage::getCollisionManager()
+	fgl::CollisionManager* Stage::getCollisionManager()
 	{
 		return &collisionManager;
 	}
 
-	const CollisionManager* Stage::getCollisionManager() const
+	const fgl::CollisionManager* Stage::getCollisionManager() const
 	{
 		return &collisionManager;
 	}
@@ -175,7 +175,7 @@ namespace fl
 			characters.add(static_cast<Character*>(object));
 		}
 		
-		collisionManager.addCollidable(object);
+		collisionManager.addCollidable(static_cast<fgl::Collidable*>(object));
 		drawManager.addDrawable(object, zLayer);
 		object->stage = this;
 		object->onAddToStage(this);
@@ -194,9 +194,9 @@ namespace fl
 		items.removeFirstEqual(static_cast<Item*>(object));
 		characters.removeFirstEqual(static_cast<Character*>(object));
 		
-		collisionManager.removeCollidable(object);
+		collisionManager.removeCollidable(static_cast<fgl::Collidable*>(object));
 		hitboxCollisionManager.removeEntity(static_cast<Entity*>(object));
-		drawManager.removeDrawable(object);
+		drawManager.removeDrawable(static_cast<fl::Drawable*>(object));
 		object->stage = nullptr;
 		object->onRemoveFromStage(this);
 		onRemoveObject(object);

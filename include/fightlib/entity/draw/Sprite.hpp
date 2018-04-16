@@ -21,15 +21,16 @@ namespace fl
 		Sprite(const fgl::Vector2d& position);
 		virtual ~Sprite();
 
+		virtual bool getFlag(const fgl::String& flag) const override;
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
 		fgl::RectangleD getFrame() const;
 		fgl::Vector2d getSize() const;
 		virtual fgl::Vector2d getOrigin() const;
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const;
+		virtual double getRotation() const;
+		virtual fgl::Vector2d getPosition() const;
 		virtual void setPosition(const fgl::Vector2d& position);
-		virtual void shift(const fgl::Vector2d& offset);
 
 		bool loadAnimation(const fgl::String& path, AnimationAssetManager* assetManager, fgl::String* error=nullptr);
 		void changeAnimation(const fgl::String& name, const std::function<void(AnimationEventType)>& onevent=nullptr);
@@ -48,7 +49,7 @@ namespace fl
 		virtual void onAnimationFrameChange();
 		virtual void onAnimationChange();
 
-		virtual fgl::Vector2d getDrawPosition(float* rotation = nullptr) const;
+		virtual fgl::TransformState getDrawTransformState() const;
 		virtual fgl::Vector2d getDrawScale() const;
 
 	private:

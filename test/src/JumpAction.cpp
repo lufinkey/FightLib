@@ -61,7 +61,7 @@ void JumpAction::onUpdate(const fgl::ApplicationData& appData)
 	}
 }
 
-void JumpAction::onEvent(fl::EventPtr event)
+void JumpAction::onEvent(fgl::EventPtr event)
 {
 	if(isPerforming())
 	{

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <fightlib/base/Event.hpp>
+#include <GameLibrary/GameLibrary.hpp>
 
 namespace fl
 {
@@ -40,7 +40,7 @@ namespace fl
 		virtual void onPerform(ActionParamsPtr params = ActionParamsPtr(new ActionParams()));
 		virtual void onUpdate(const fgl::ApplicationData& appData);
 		virtual void onEnd();
-		virtual void onEvent(EventPtr event);
+		virtual void onEvent(fgl::EventPtr event);
 
 		void end();
 

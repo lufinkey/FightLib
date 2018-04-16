@@ -1,22 +1,22 @@
 
 #pragma once
 
-#include <fightlib/base/Event.hpp>
+#include <GameLibrary/GameLibrary.hpp>
 #include <fightlib/entity/draw/AnimationMetaPoint.hpp>
 #include "HitboxClash.hpp"
 
 namespace fl
 {
-	extern const EventType EVENT_HITBOXCLASH;
+	extern const fgl::EventType EVENT_HITBOXCLASH;
 
 	class Entity;
 	
-	class HitboxClashEvent : public Event
+	class HitboxClashEvent : public fgl::Event
 	{
 	public:
 		HitboxClashEvent(Entity* clashedEntity, const fgl::ArrayList<HitboxClash>& hitboxClashes, const fgl::ArrayList<HitboxClash>& previousHitboxClashes);
 
-		virtual EventType getEventType() const override;
+		virtual fgl::EventType getEventType() const override;
 		
 		Entity* getClashedEntity() const;
 		

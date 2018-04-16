@@ -238,7 +238,7 @@ namespace fl
 					{
 						for(auto collisionRect : collisionRects2)
 						{
-							if(CollisionRect::checkCollision(collisionRect, hitbox1.rect))
+							if(fgl::CollisionRect::checkCollision(collisionRect, hitbox1.rect))
 							{
 								auto info = entity1->getHitboxInfo(hitbox1.tag);
 								priority1 += info.getPriority();
@@ -256,7 +256,7 @@ namespace fl
 					{
 						for(auto collisionRect : collisionRects1)
 						{
-							if(CollisionRect::checkCollision(collisionRect, hitbox2.rect))
+							if(fgl::CollisionRect::checkCollision(collisionRect, hitbox2.rect))
 							{
 								auto info = entity2->getHitboxInfo(hitbox2.tag);
 								priority2 += info.getPriority();

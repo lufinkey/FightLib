@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <fightlib/entity/collision/CollisionManager.hpp>
+#include <GameLibrary/GameLibrary.hpp>
 #include <fightlib/entity/hitbox/HitboxCollisionManager.hpp>
 #include <fightlib/entity/draw/DrawManager.hpp>
 #include <fightlib/entity/StageObject.hpp>
@@ -34,8 +34,8 @@ namespace fl
 		Fight* getFight() const;
 		Stage* getParentStage() const;
 
-		CollisionManager* getCollisionManager();
-		const CollisionManager* getCollisionManager() const;
+		fgl::CollisionManager* getCollisionManager();
+		const fgl::CollisionManager* getCollisionManager() const;
 		HitboxCollisionManager* getHitboxCollisionManager();
 		const HitboxCollisionManager* getHitboxCollisionManager() const;
 		DrawManager* getDrawManager();
@@ -84,7 +84,7 @@ namespace fl
 
 		fgl::BasicDictionary<Character*, fgl::ArrayList<Item*>> characterAccessibleItems;
 
-		CollisionManager collisionManager;
+		fgl::CollisionManager collisionManager;
 		HitboxCollisionManager hitboxCollisionManager;
 		DrawManager drawManager;
 

@@ -10,5 +10,5 @@ public:
 	
 	virtual fl::HitboxInfo getHitboxInfo(size_t tag) const override;
 	
-	virtual void onEvent(fl::EventPtr event) override;
+	virtual void onEvent(fgl::EventPtr event) override;
 };

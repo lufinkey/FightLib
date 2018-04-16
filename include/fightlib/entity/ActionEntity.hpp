@@ -25,13 +25,13 @@ namespace fl
 		Action* getAction(const fgl::String& name) const;
 		const fgl::String& getActionName(Action* action) const;
 		Action* getCurrentAction() const;
-		void sendActionEvent(EventPtr event, bool allActions = false);
+		void sendActionEvent(fgl::EventPtr event, bool allActions = false);
 		
 		virtual void onActionEnd(Action* action);
 		
-		virtual void onCollision(const CollisionEvent& collisionEvent) override;
-		virtual void onCollisionUpdate(const CollisionEvent& collisionEvent) override;
-		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
+		virtual void onCollision(const fgl::CollisionEvent& collisionEvent) override;
+		virtual void onCollisionUpdate(const fgl::CollisionEvent& collisionEvent) override;
+		virtual void onCollisionFinish(const fgl::CollisionEvent& collisionEvent) override;
 		
 		virtual void onHitboxClash(const HitboxClashEvent& clashEvent) override;
 		virtual void onHitboxClashUpdate(const HitboxClashEvent& clashEvent) override;

@@ -3,7 +3,7 @@
 
 namespace fl
 {
-	const EventType EVENT_HITBOXCOLLISION = registerEventType();
+	const fgl::EventType EVENT_HITBOXCOLLISION = fgl::registerEventType();
 
 	HitboxCollisionEvent::HitboxCollisionEvent(Entity* hitEntity, const fgl::ArrayList<HitboxCollision>& hitboxCollisions, const fgl::ArrayList<HitboxCollision>& previousHitboxCollisions)
 		: hitEntity(hitEntity),
@@ -13,7 +13,7 @@ namespace fl
 		//
 	}
 
-	EventType HitboxCollisionEvent::getEventType() const
+	fgl::EventType HitboxCollisionEvent::getEventType() const
 	{
 		return EVENT_HITBOXCOLLISION;
 	}

@@ -7,19 +7,6 @@
   </Plugins>
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="entity">
-      <VirtualDirectory Name="collision">
-        <VirtualDirectory Name="rects">
-          <File Name="../../src/entity/collision/rects/BoxCollisionRect.cpp"/>
-          <File Name="../../src/entity/collision/rects/PixelCollisionRect.cpp"/>
-          <File Name="../../src/entity/collision/rects/CollisionRect.cpp"/>
-        </VirtualDirectory>
-        <File Name="../../src/entity/collision/CollisionRectManager.cpp"/>
-        <File Name="../../src/entity/collision/CollisionPair.cpp"/>
-        <File Name="../../src/entity/collision/ContactEvent.cpp"/>
-        <File Name="../../src/entity/collision/CollisionManager.cpp"/>
-        <File Name="../../src/entity/collision/Collidable.cpp"/>
-        <File Name="../../src/entity/collision/CollisionEvent.cpp"/>
-      </VirtualDirectory>
       <VirtualDirectory Name="draw">
         <File Name="../../src/entity/draw/AnimationMetaPoint.cpp"/>
         <File Name="../../src/entity/draw/DrawManager.cpp"/>
@@ -47,6 +34,9 @@
       <File Name="../../src/entity/Entity.cpp"/>
       <File Name="../../src/entity/Item.cpp"/>
       <File Name="../../src/entity/StageObject.cpp"/>
+      <VirtualDirectory Name="collision">
+        <File Name="../../src/entity/collision/CollidableSprite.cpp"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="game">
       <VirtualDirectory Name="camera">
@@ -60,9 +50,6 @@
       <File Name="../../src/controls/CharacterController.cpp"/>
       <File Name="../../src/controls/KeyboardCharacterController.cpp"/>
     </VirtualDirectory>
-    <VirtualDirectory Name="base">
-      <File Name="../../src/base/Event.cpp"/>
-    </VirtualDirectory>
     <VirtualDirectory Name="stage">
       <File Name="../../src/stage/StageSection.cpp"/>
       <File Name="../../src/stage/StageController.cpp"/>
@@ -73,19 +60,6 @@
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="fightlib">
       <VirtualDirectory Name="entity">
-        <VirtualDirectory Name="collision">
-          <VirtualDirectory Name="rects">
-            <File Name="../../include/fightlib/entity/collision/rects/CollisionRect.hpp"/>
-            <File Name="../../include/fightlib/entity/collision/rects/BoxCollisionRect.hpp"/>
-            <File Name="../../include/fightlib/entity/collision/rects/PixelCollisionRect.hpp"/>
-          </VirtualDirectory>
-          <File Name="../../include/fightlib/entity/collision/CollisionEvent.hpp"/>
-          <File Name="../../include/fightlib/entity/collision/CollisionPair.hpp"/>
-          <File Name="../../include/fightlib/entity/collision/Collidable.hpp"/>
-          <File Name="../../include/fightlib/entity/collision/CollisionRectManager.hpp"/>
-          <File Name="../../include/fightlib/entity/collision/CollisionManager.hpp"/>
-          <File Name="../../include/fightlib/entity/collision/ContactEvent.hpp"/>
-        </VirtualDirectory>
         <VirtualDirectory Name="draw">
           <File Name="../../include/fightlib/entity/draw/DrawManager.hpp"/>
           <File Name="../../include/fightlib/entity/draw/Sprite.hpp"/>
@@ -114,6 +88,9 @@
         <File Name="../../include/fightlib/entity/Item.hpp"/>
         <File Name="../../include/fightlib/entity/StageObject.hpp"/>
         <File Name="../../include/fightlib/entity/Character.hpp"/>
+        <VirtualDirectory Name="collision">
+          <File Name="../../include/fightlib/entity/collision/CollidableSprite.hpp"/>
+        </VirtualDirectory>
       </VirtualDirectory>
       <VirtualDirectory Name="game">
         <VirtualDirectory Name="camera">
@@ -126,9 +103,6 @@
       <VirtualDirectory Name="controls">
         <File Name="../../include/fightlib/controls/KeyboardCharacterController.hpp"/>
         <File Name="../../include/fightlib/controls/CharacterController.hpp"/>
-      </VirtualDirectory>
-      <VirtualDirectory Name="base">
-        <File Name="../../include/fightlib/base/Event.hpp"/>
       </VirtualDirectory>
       <VirtualDirectory Name="stage">
         <File Name="../../include/fightlib/stage/Stage.hpp"/>

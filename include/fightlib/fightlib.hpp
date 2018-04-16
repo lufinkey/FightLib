@@ -3,8 +3,6 @@
 
 #include <GameLibrary/GameLibrary.hpp>
 
-#include "base/Event.hpp"
-
 #include "controls/CharacterController.hpp"
 #include "controls/KeyboardCharacterController.hpp"
 
@@ -17,11 +15,7 @@
 #include "entity/action/ActionInterruptEvent.hpp"
 #include "entity/action/AttackAction.hpp"
 
-#include "entity/collision/rects/CollisionRect.hpp"
-#include "entity/collision/rects/BoxCollisionRect.hpp"
-#include "entity/collision/rects/PixelCollisionRect.hpp"
-#include "entity/collision/Collidable.hpp"
-#include "entity/collision/CollisionEvent.hpp"
+#include "entity/collision/CollidableSprite.hpp"
 
 #include "entity/hitbox/HitboxClashEvent.hpp"
 #include "entity/hitbox/HitboxCollisionEvent.hpp"

@@ -24,7 +24,7 @@ fl::HitboxInfo PunchAttack::getHitboxInfo(size_t tag) const
 	return AttackAction::getHitboxInfo(tag);
 }
 
-void PunchAttack::onEvent(fl::EventPtr event)
+void PunchAttack::onEvent(fgl::EventPtr event)
 {
 	if(event->getEventType()==fl::EVENT_HITBOXCOLLISION)
 	{

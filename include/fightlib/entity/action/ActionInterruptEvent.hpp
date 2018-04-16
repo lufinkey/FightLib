@@ -1,19 +1,19 @@
 
 #pragma once
 
-#include <fightlib/base/Event.hpp>
+#include <GameLibrary/GameLibrary.hpp>
 #include "Action.hpp"
 
 namespace fl
 {
-	extern const EventType EVENT_ACTIONINTERRUPT;
+	extern const fgl::EventType EVENT_ACTIONINTERRUPT;
 	
-	class ActionInterruptEvent : public Event
+	class ActionInterruptEvent : public fgl::Event
 	{
 	public:
 		ActionInterruptEvent(Action* interruptingAction);
 
-		virtual EventType getEventType() const override;
+		virtual fgl::EventType getEventType() const override;
 		
 		Action* getInterruptingAction() const;
 		

@@ -39,28 +39,28 @@ namespace fl
 		}
 		ActionEntity::draw(appData, graphics);
 	}
-
-	fgl::Vector2d Item::getDrawPosition(float* rotation) const
+	
+	fgl::TransformState Item::getTransformState() const
 	{
 		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
 		{
-			//return the parent character's position if the item is held but not equipped
-			return getParentCharacter()->getPosition(rotation);
+			//return the parent character's draw transform state if the item is held but not equipped
+			return getParentCharacter()->getTransformState();
 		}
-		return ActionEntity::getDrawPosition(rotation);
+		return ActionEntity::getTransformState();
 	}
 
-	fgl::Vector2d Item::getPosition(float* rotation) const
+	fgl::TransformState Item::getDrawTransformState() const
 	{
 		if(getParentCharacter()!=nullptr && getParentEntity()==nullptr)
 		{
-			//return the parent character's position if the item is held but not equipped
-			return getParentCharacter()->getPosition(rotation);
+			//return the parent character's transform state if the item is held but not equipped
+			return getParentCharacter()->getTransformState();
 		}
-		return ActionEntity::getPosition(rotation);
+		return ActionEntity::getDrawTransformState();
 	}
 
-	fgl::ArrayList<CollisionRect*> Item::getCollisionRects() const
+	fgl::ArrayList<fgl::CollisionRect*> Item::getCollisionRects() const
 	{
 		if(getParentEntity()==nullptr)
 		{
@@ -106,7 +106,7 @@ namespace fl
 		return parentCharacter;
 	}
 
-	bool Item::respondsToCollision(Collidable* collided, CollisionSide side) const
+	bool Item::respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side) const
 	{
 		if(collided->getFlag("Character"))
 		{

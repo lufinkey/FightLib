@@ -1,13 +1,11 @@
 
 #include <fightlib/entity/Entity.hpp>
-#include <fightlib/entity/collision/rects/BoxCollisionRect.hpp>
-#include <fightlib/entity/collision/rects/PixelCollisionRect.hpp>
 #include <fightlib/stage/Platform.hpp>
 
 namespace fl
 {
 #define setOptionalArg(arg, value) if(arg!=nullptr){ *arg = value; }
-
+	
 	Entity::Entity(const fgl::Vector2d& position, Orientation orientation)
 		: StageObject(position),
 		scale(1.0f),
@@ -32,7 +30,7 @@ namespace fl
 
 		auto velocity = getVelocity();
 		//make entities move when on top of other collidables
-		auto bottomCollidables = getCollided(COLLISIONSIDE_BOTTOM);
+		auto bottomCollidables = getCollided(fgl::COLLISIONSIDE_BOTTOM);
 		if(bottomCollidables.size() > 0)
 		{
 			if(movesWithGround())
@@ -43,10 +41,10 @@ namespace fl
 			}
 		}
 		//update friction
-		for(auto collisionSide : {COLLISIONSIDE_BOTTOM, COLLISIONSIDE_TOP, COLLISIONSIDE_LEFT, COLLISIONSIDE_RIGHT})
+		for(auto collisionSide : {fgl::COLLISIONSIDE_BOTTOM, fgl::COLLISIONSIDE_TOP, fgl::COLLISIONSIDE_LEFT, fgl::COLLISIONSIDE_RIGHT})
 		{
 			auto collidables = getCollided(collisionSide);
-			auto platforms = collidables.filter([](fl::Collidable* const & collidable) -> bool {
+			auto platforms = collidables.filter([](fgl::Collidable* const & collidable) -> bool {
 				if(collidable->getFlag("Platform"))
 				{
 					return true;
@@ -57,35 +55,6 @@ namespace fl
 			{
 				auto platform = static_cast<Platform*>(platforms[0]);
 				velocity += platform->getFriction(appData, this, CollisionSide_getOpposite(collisionSide));
-			}
-		}
-		//stop velocity on static collisions
-		if(isStaticCollidableOnSide(COLLISIONSIDE_LEFT))
-		{
-			if(velocity.x < 0)
-			{
-				velocity.x = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_TOP))
-		{
-			if(velocity.y < 0)
-			{
-				velocity.y = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_RIGHT))
-		{
-			if(velocity.x > 0)
-			{
-				velocity.x = 0;
-			}
-		}
-		if(isStaticCollidableOnSide(COLLISIONSIDE_BOTTOM))
-		{
-			if(velocity.y > 0)
-			{
-				velocity.y = 0;
 			}
 		}
 		setVelocity(velocity);
@@ -109,7 +78,8 @@ namespace fl
 	void Entity::draw(fgl::ApplicationData appData, fgl::Graphics graphics) const
 	{
 		fgl::Graphics childGraphics = graphics;
-		fgl::Vector2d offset = getDrawPosition();
+		auto transformStateOffset = getDrawTransformState();
+		auto offset = transformStateOffset.position;
 		if(parentEntity==nullptr)
 		{
 			childGraphics.translate(offset.x, offset.y);
@@ -117,7 +87,7 @@ namespace fl
 		else
 		{
 			//don't draw if entity is not being drawn from parent
-			if(!fgl::extract<bool>(appData.additionalData, "DrawnFromParent", false))
+			if(!fgl::extract<bool>(appData.additionalData, "DrawnFromEntityParent", false))
 			{
 				return;
 			}
@@ -134,13 +104,13 @@ namespace fl
 		}
 
 		auto childrenAppData = appData;
-		childrenAppData.additionalData["DrawnFromParent"] = true;
+		childrenAppData.additionalData["DrawnFromEntityParent"] = true;
 
 		struct AnchorDrawData
 		{
 			Entity* entity;
 			fgl::Vector2d offset;
-			float rotation;
+			double rotation;
 			fgl::Vector2d rotationPoint;
 			bool behind;
 			bool visible;
@@ -185,14 +155,15 @@ namespace fl
 		}
 	}
 
-	fgl::Vector2d Entity::getPosition(float* rotation) const
+	fgl::TransformState Entity::getTransformState() const
 	{
 		if(parentEntity==nullptr)
 		{
-			return StageObject::getPosition(rotation);
+			return StageObject::getTransformState();
 		}
-		float childRotation = 0;
-		fgl::Vector2d childOffset = StageObject::getPosition(&childRotation);
+		auto childOffsetTransformState = StageObject::getTransformState();
+		auto childOffset = childOffsetTransformState.position;
+		auto childRotation = childOffsetTransformState.rotation;
 
 		//if parent orientation is right, the offset should be flipped
 		AnimationOrientation parentOrientation = parentEntity->getAnimationOrientation();
@@ -202,7 +173,7 @@ namespace fl
 		}
 
 		fgl::Vector2d parentOffset;
-		float anchorRotation;
+		double anchorRotation = 0;
 		fgl::Vector2d anchorRotationPoint;
 		getAnchorData(&parentOffset, &anchorRotation, &anchorRotationPoint, nullptr, nullptr);
 		fgl::Vector2d fullOffset = parentOffset+childOffset;
@@ -213,10 +184,34 @@ namespace fl
 			fullOffset = rotationTransform.transform(fullOffset);
 		}
 
-		float parentRotation = 0;
-		fgl::Vector2d parentPosition = parentEntity->getPosition(&parentRotation);
-		setOptionalArg(rotation, parentRotation+anchorRotation+childRotation)
-		return parentPosition+fullOffset;
+		auto parentTransformState = parentEntity->getTransformState();
+		auto parentPosition= parentTransformState.position;
+		auto parentRotation = parentTransformState.rotation;
+		
+		return fgl::TransformState(parentPosition+fullOffset, parentRotation+anchorRotation+childRotation);
+	}
+	
+	void Entity::shift(const fgl::Vector2d& offset)
+	{
+		if(parentEntity != nullptr)
+		{
+			// shift parent
+			parentEntity->shift(offset);
+		}
+		else
+		{
+			StageObject::shift(offset);
+		}
+	}
+	
+	double Entity::getRotation() const
+	{
+		return Entity::getTransformState().rotation;
+	}
+	
+	fgl::Vector2d Entity::getPosition() const
+	{
+		return Entity::getTransformState().position;
 	}
 
 	void Entity::setPosition(const fgl::Vector2d& position_arg)
@@ -227,16 +222,6 @@ namespace fl
 			return;
 		}
 		StageObject::setPosition(position_arg);
-	}
-
-	void Entity::shift(const fgl::Vector2d& offset)
-	{
-		if(parentEntity!=nullptr)
-		{
-			parentEntity->shift(offset);
-			return;
-		}
-		StageObject::shift(offset);
 	}
 
 	HitboxInfo Entity::getHitboxInfo(size_t tag) const
@@ -297,7 +282,7 @@ namespace fl
 		return true;
 	}
 
-	void Entity::onCollision(const CollisionEvent& collisionEvent)
+	void Entity::onCollision(const fgl::CollisionEvent& collisionEvent)
 	{
 		CollidedObject collidedObject;
 		collidedObject.collidable = collisionEvent.getCollided();
@@ -306,7 +291,7 @@ namespace fl
 		Collidable::onCollision(collisionEvent);
 	}
 
-	void Entity::onCollisionFinish(const CollisionEvent& collisionEvent)
+	void Entity::onCollisionFinish(const fgl::CollisionEvent& collisionEvent)
 	{
 		auto collidable = collisionEvent.getCollided();
 		auto side = collisionEvent.getCollisionSide();
@@ -320,6 +305,41 @@ namespace fl
 			}
 		}
 		Collidable::onCollisionFinish(collisionEvent);
+	}
+	
+	void Entity::onFinishCollisionUpdates()
+	{
+		StageObject::onFinishCollisionUpdates();
+		auto velocity = getVelocity();
+		if(isStaticCollidableOnSide(fgl::COLLISIONSIDE_LEFT))
+		{
+			if(velocity.x < 0)
+			{
+				velocity.x = 0;
+			}
+		}
+		if(isStaticCollidableOnSide(fgl::COLLISIONSIDE_TOP))
+		{
+			if(velocity.y < 0)
+			{
+				velocity.y = 0;
+			}
+		}
+		if(isStaticCollidableOnSide(fgl::COLLISIONSIDE_RIGHT))
+		{
+			if(velocity.x > 0)
+			{
+				velocity.x = 0;
+			}
+		}
+		if(isStaticCollidableOnSide(fgl::COLLISIONSIDE_BOTTOM))
+		{
+			if(velocity.y > 0)
+			{
+				velocity.y = 0;
+			}
+		}
+		setVelocity(velocity);
 	}
 
 	bool Entity::respondsToHitboxClash(Entity* clashedEntity) const
@@ -371,7 +391,7 @@ namespace fl
 	{
 		for(auto& collidedObject : collidedObjects)
 		{
-			if(collidedObject.side==COLLISIONSIDE_BOTTOM)
+			if(collidedObject.side==fgl::COLLISIONSIDE_BOTTOM)
 			{
 				return true;
 			}
@@ -379,9 +399,9 @@ namespace fl
 		return false;
 	}
 
-	fgl::ArrayList<Collidable*> Entity::getCollided(CollisionSide side) const
+	fgl::ArrayList<fgl::Collidable*> Entity::getCollided(fgl::CollisionSide side) const
 	{
-		fgl::ArrayList<Collidable*> collidables;
+		fgl::ArrayList<fgl::Collidable*> collidables;
 		for(auto& collidedObject : collidedObjects)
 		{
 			if(collidedObject.side==side)
@@ -392,7 +412,7 @@ namespace fl
 		return collidables;
 	}
 
-	bool Entity::isStaticCollidableOnSide(CollisionSide side) const
+	bool Entity::isStaticCollidableOnSide(fgl::CollisionSide side) const
 	{
 		for(auto collidedObject : collidedObjects)
 		{
@@ -469,7 +489,7 @@ namespace fl
 		throw fgl::IllegalArgumentException("entity", "no anchor exists for the given entity");
 	}
 
-	bool Entity::getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
+	bool Entity::getAnchorData(fgl::Vector2d* posOffset, double* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const
 	{
 		//TODO determine how offset should behave with orientation
 		if(parentEntity!=nullptr)

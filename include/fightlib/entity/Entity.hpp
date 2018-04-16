@@ -24,9 +24,12 @@ namespace fl
 		virtual void update(fgl::ApplicationData appData) override;
 		virtual void draw(fgl::ApplicationData appData, fgl::Graphics graphics) const override;
 
-		virtual fgl::Vector2d getPosition(float* rotation = nullptr) const override;
-		virtual void setPosition(const fgl::Vector2d& position) override;
+		virtual fgl::TransformState getTransformState() const override;
 		virtual void shift(const fgl::Vector2d& offset) override;
+		
+		virtual double getRotation() const override;
+		virtual fgl::Vector2d getPosition() const override;
+		virtual void setPosition(const fgl::Vector2d& position) override;
 
 		virtual HitboxInfo getHitboxInfo(size_t tag) const;
 
@@ -54,8 +57,10 @@ namespace fl
 		virtual fgl::Vector2d getDrawScale() const override;
 		virtual bool shouldUseParentMetaPointRotation() const;
 
-		virtual void onCollision(const CollisionEvent& collisionEvent) override;
-		virtual void onCollisionFinish(const CollisionEvent& collisionEvent) override;
+		virtual void onCollision(const fgl::CollisionEvent& collisionEvent) override;
+		virtual void onCollisionFinish(const fgl::CollisionEvent& collisionEvent) override;
+		
+		virtual void onFinishCollisionUpdates() override;
 
 		virtual bool respondsToHitboxClash(Entity* clashedEntity) const;
 		virtual bool canCollideWithEntityHitbox(Entity* collidedEntity) const;
@@ -70,8 +75,8 @@ namespace fl
 
 		virtual void onFinishHitboxUpdates();
 
-		fgl::ArrayList<Collidable*> getCollided(CollisionSide side) const;
-		bool isStaticCollidableOnSide(CollisionSide side) const;
+		fgl::ArrayList<fgl::Collidable*> getCollided(fgl::CollisionSide side) const;
+		bool isStaticCollidableOnSide(fgl::CollisionSide side) const;
 
 		struct Anchor
 		{
@@ -96,12 +101,12 @@ namespace fl
 
 		struct CollidedObject
 		{
-			Collidable* collidable;
-			CollisionSide side;
+			fgl::Collidable* collidable;
+			fgl::CollisionSide side;
 		};
 		fgl::ArrayList<CollidedObject> collidedObjects;
 
 		Anchor getAnchor(const Entity* entity) const;
-		bool getAnchorData(fgl::Vector2d* posOffset, float* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
+		bool getAnchorData(fgl::Vector2d* posOffset, double* rotation, fgl::Vector2d* rotationPoint, bool* behind, bool* visible) const;
 	};
 }

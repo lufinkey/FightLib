@@ -70,7 +70,7 @@ namespace fl
 		//Open for implementation
 	}
 
-	void Action::onEvent(EventPtr event)
+	void Action::onEvent(fgl::EventPtr event)
 	{
 		//Open for implementation
 	}
