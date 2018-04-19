@@ -126,15 +126,15 @@ namespace fl
 		}
 	}
 
-    void StageObject::onAddToStage(Stage* stage)
-    {
-        //
-    }
-
-    void StageObject::onRemoveFromStage(Stage* stage)
-    {
+	void StageObject::onAddToStage(Stage* stage)
+	{
 		//
-    }
+	}
+
+	void StageObject::onRemoveFromStage(Stage* stage)
+	{
+		//
+	}
 	
 	void StageObject::onBeginCollisionUpdates()
 	{
