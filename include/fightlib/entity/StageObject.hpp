@@ -35,7 +35,7 @@ namespace fl
 		Stage* getStage() const;
 
 	protected:
-        virtual void onAddToStage(Stage* stage);
+		virtual void onAddToStage(Stage* stage);
 		virtual void onRemoveFromStage(Stage* stage);
 		
 		virtual void onBeginCollisionUpdates() override;
