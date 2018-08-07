@@ -11,11 +11,20 @@ namespace fl
 		CollidableSprite(const fgl::Vector2d& position);
 		
 		virtual bool getFlag(const fgl::String& flag) const override;
+		virtual void update(fgl::ApplicationData appData) override;
 		
 		virtual fgl::TransformState getTransformState() const override;
 		virtual void shift(const fgl::Vector2d& offset) override;
 		
+		fgl::Vector2d getVelocity() const;
+		void setVelocity(const fgl::Vector2d& velocity);
+		
+		void applyForce(const fgl::Vector2d& force);
+		
 		static fgl::ArrayList<fgl::CollisionRect*> createCollisionRectsFromAnimation(CollidableSprite* sprite, const fgl::ArrayList<fgl::CollisionRect*>& prevRects);
 		static fgl::ArrayList<fgl::CollisionRect*> createCollisionRectsFromBoundsMetapoints(CollidableSprite* sprite, const fgl::ArrayList<fgl::CollisionRect*>& prevRects);
+		
+	private:
+		fgl::Vector2d velocity;
 	};
 }

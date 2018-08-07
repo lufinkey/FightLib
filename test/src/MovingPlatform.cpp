@@ -22,7 +22,7 @@ void MovingPlatform::update(fgl::ApplicationData appData)
 	Platform::update(appData);
 }
 
-bool MovingPlatform::respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side) const
+bool MovingPlatform::respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side, fgl::CollisionRectPair rectPair) const
 {
 	if(side==fgl::COLLISIONSIDE_TOP)
 	{

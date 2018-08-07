@@ -5,7 +5,8 @@ namespace fl
 {
 	CollidableSprite::CollidableSprite(const fgl::Vector2d& position)
 		: Sprite(position),
-		Collidable(fgl::TransformState(position, 0))
+		Collidable(),
+		velocity(0,0)
 	{
 		//
 	}
@@ -17,6 +18,25 @@ namespace fl
 			return true;
 		}
 		return Sprite::getFlag(flag) || Collidable::getFlag(flag);
+	}
+	
+	void CollidableSprite::update(fgl::ApplicationData appData) {
+		auto position = getPosition();
+		position += (velocity * appData.getFrameSpeedMultiplier());
+		setPosition(position);
+		Sprite::update(appData);
+	}
+	
+	fgl::Vector2d CollidableSprite::getVelocity() const {
+		return velocity;
+	}
+	
+	void CollidableSprite::setVelocity(const fgl::Vector2d& velocity_arg) {
+		velocity = velocity_arg;
+	}
+	
+	void CollidableSprite::applyForce(const fgl::Vector2d& force) {
+		velocity += (force / getMass());
 	}
 	
 	fgl::TransformState CollidableSprite::getTransformState() const
@@ -46,7 +66,7 @@ namespace fl
 		auto frameIndex = collidable->getCurrentAnimationFrameIndex();
 		bool mirroredHorizontal = animData->isMirrored(collidable->getAnimationOrientation());
 		bool mirroredVertical = false;
-		return fgl::CollisionRectBuilder::fromAnimation(collidable, prevRects, collidable->getSize(), collidable->getOrigin(), anim, mirroredHorizontal, mirroredVertical);
+		return { fgl::CollisionRectBuilder::fromAnimation("all", collidable, prevRects, collidable->getSize(), collidable->getOrigin(), anim, mirroredHorizontal, mirroredVertical) };
 	}
 	
 	fgl::ArrayList<fgl::CollisionRect*> CollidableSprite::createCollisionRectsFromBoundsMetapoints(CollidableSprite* collidable, const fgl::ArrayList<fgl::CollisionRect*>& prevRects)

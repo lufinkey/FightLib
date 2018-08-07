@@ -33,7 +33,7 @@ namespace fl
 	protected:
 		virtual fgl::TransformState getDrawTransformState() const override;
 
-		virtual bool respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side) const override;
+		virtual bool respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side, fgl::CollisionRectPair rectPair) const override;
 
 		virtual void onPickUp();
 		virtual void onDiscard();

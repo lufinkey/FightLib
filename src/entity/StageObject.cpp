@@ -105,7 +105,7 @@ namespace fl
 				break;
 				
 			case COLLISIONMETHOD_FRAME:
-				collisionRects = fgl::CollisionRectBuilder::fromFrame(collidable, prevCollisionRects, getSize(), getOrigin(), getDrawScale());
+				collisionRects = { fgl::CollisionRectBuilder::fromFrame("all", collidable, prevCollisionRects, getSize(), getOrigin(), getDrawScale()) };
 				break;
 				
 			case COLLISIONMETHOD_PIXEL:

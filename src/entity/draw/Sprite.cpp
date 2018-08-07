@@ -57,7 +57,7 @@ namespace fl
 					frameChanged = true;
 					currentAnimationFrame++;
 					currentAnimationLastFrameTime = nextFrameTime;
-					size_t totalFrames = animation->getTotalFrames();
+					size_t totalFrames = animation->getFrameCount();
 					if(currentAnimationFrame >= totalFrames)
 					{
 						currentAnimationFrame = 0;
@@ -269,7 +269,7 @@ namespace fl
 
 	fgl::ArrayList<TaggedBox> Sprite::getMetaPointBoxes(MetaPointType metaPointType) const
 	{
-		if(currentAnimationData==nullptr || currentAnimationData->getAnimation()->getTotalFrames()==0)
+		if(currentAnimationData==nullptr || currentAnimationData->getAnimation()->getFrameCount()==0)
 		{
 			return {};
 		}

@@ -20,7 +20,7 @@ namespace fl
 		bool operator!=(const AnimationData&) const;
 
 		bool loadFromFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr);
-		bool saveToFile(const fgl::String& path, fgl::String* error=nullptr) const;
+		bool saveToFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error=nullptr) const;
 
 		void drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation=ANIMATIONORIENTATION_NEUTRAL, bool showFrames=false) const;
 		void drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation) const;

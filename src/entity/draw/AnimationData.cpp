@@ -235,13 +235,13 @@ namespace fl
 					sequence.add(fgl::Vector2u(row, column));
 				}
 				loadingFunctions.add([anim, assetManager, filePath, rows, cols, sequence]{
-					anim->addFrames(assetManager, filePath, rows, cols, sequence);
+					anim->addFrames(assetManager->loadTexture(filePath), rows, cols, sequence);
 				});
 			}
 			else
 			{
 				loadingFunctions.add([anim, assetManager, filePath, rows, cols]{
-					anim->addFrames(assetManager, filePath, rows, cols);
+					anim->addFrames(assetManager->loadTexture(filePath), rows, cols);
 				});
 			}
 		}
@@ -306,7 +306,7 @@ namespace fl
 		return true;
 	}
 
-	bool AnimationData::saveToFile(const fgl::String& path, fgl::String* error) const
+	bool AnimationData::saveToFile(const fgl::String& path, fgl::AssetManager* assetManager, fgl::String* error) const
 	{
 		fgl::Dictionary plist;
 
@@ -334,7 +334,14 @@ namespace fl
 		bool sequenceFinished = false;
 		for(auto& frame : animation->getFrames())
 		{
-			if(frame.file!=lastFile || frame.rows!=lastRows || frame.cols!=lastCols)
+			auto frameImg = frame.getImage();
+			auto frameFile = assetManager->getTexturePath(frameImg);
+			auto frameSrcRect = frame.getSourceRect();
+			unsigned int frameX = (unsigned int)fgl::Math::round((double)frameSrcRect.x / (double)frameSrcRect.width);
+			unsigned int frameY = (unsigned int)fgl::Math::round((double)frameSrcRect.y / (double)frameSrcRect.height);
+			unsigned int frameRows = (unsigned int)((double)frameImg->getHeight() / (double)frameSrcRect.height);
+			unsigned int frameCols = (unsigned int)((double)frameImg->getWidth() / (double)frameSrcRect.width);
+			if(frameFile!=lastFile || frameRows!=lastRows || frameCols!=lastCols)
 			{
 				if(lastFile.length()!=0)
 				{
@@ -364,9 +371,9 @@ namespace fl
 					files.add(file);
 				}
 
-				lastFile = frame.file;
-				lastRows = frame.rows;
-				lastCols = frame.cols;
+				lastFile = frameFile;
+				lastRows = frameRows;
+				lastCols = frameCols;
 				imageFrameCount = 0;
 				sequence = {};
 				framesNeedSequence = false;
@@ -380,19 +387,19 @@ namespace fl
 			else if(!framesNeedSequence)
 			{
 				//make sure the frame falls in sequence
-				unsigned int seqIndex = (frame.cols*frame.y)+frame.x;
+				unsigned int seqIndex = (frameCols*frameY)+frameX;
 				if(seqIndex!=imageFrameCount)
 				{
 					//sequence needs to be specified
 					framesNeedSequence = true;
 				}
-				else if(imageFrameCount==((frame.rows*frame.cols)-1))
+				else if(imageFrameCount==((frameRows*frameCols)-1))
 				{
 					//sequence should be complete
 					sequenceFinished = true;
 				}
 			}
-			sequence.add(fgl::Vector2u(frame.x, frame.y));
+			sequence.add(fgl::Vector2u(frameX, frameY));
 			imageFrameCount++;
 		}
 		//add the current file to the files array
@@ -455,7 +462,7 @@ namespace fl
 
 	void AnimationData::drawFrame(size_t frameIndex, fgl::Graphics graphics, AnimationOrientation drawnOrientation, bool showFrames) const
 	{
-		if(animation!=nullptr && animation->getTotalFrames() > 0)
+		if(animation!=nullptr && animation->getFrameCount() > 0)
 		{
 			if(isMirrored(drawnOrientation))
 			{
@@ -477,7 +484,7 @@ namespace fl
 	
 	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation) const
 	{
-		if(animation!=nullptr && animation->getTotalFrames() > 0)
+		if(animation!=nullptr && animation->getFrameCount() > 0)
 		{
 			graphics.translate(dstRect.x, dstRect.y);
 
@@ -504,7 +511,7 @@ namespace fl
 	
 	void AnimationData::drawMetaPoints(size_t frameIndex, const fgl::RectangleD& dstRect, fgl::Graphics graphics, AnimationOrientation drawnOrientation, MetaPointType metaPointType) const
 	{
-		if(animation!=nullptr && animation->getTotalFrames() > 0)
+		if(animation!=nullptr && animation->getFrameCount() > 0)
 		{
 			graphics.translate(dstRect.x, dstRect.y);
 			
@@ -580,7 +587,7 @@ namespace fl
 		{
 			return fgl::Vector2u(0, 0);
 		}
-		return animation->getFrameSize(frameIndex);
+		return (fgl::Vector2u)animation->getFrame(frameIndex).getSourceRect().getSize();
 	}
 
 	fgl::ArrayList<AnimationMetaPoint> AnimationData::getMetaPoints(size_t frameIndex) const

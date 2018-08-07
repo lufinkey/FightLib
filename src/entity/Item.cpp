@@ -106,7 +106,7 @@ namespace fl
 		return parentCharacter;
 	}
 
-	bool Item::respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side) const
+	bool Item::respondsToCollision(fgl::Collidable* collided, fgl::CollisionSide side, fgl::CollisionRectPair rectPair) const
 	{
 		if(collided->getFlag("Character"))
 		{
@@ -117,7 +117,7 @@ namespace fl
 			//don't allow collisions if the item is held but not equipped
 			return false;
 		}
-		return ActionEntity::respondsToCollision(collided, side);
+		return ActionEntity::respondsToCollision(collided, side, rectPair);
 	}
 
 	void Item::onPickUp()
