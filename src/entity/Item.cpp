@@ -60,7 +60,7 @@ namespace fl
 		return ActionEntity::getDrawTransformState();
 	}
 
-	fgl::ArrayList<fgl::CollisionRect*> Item::getCollisionRects() const
+	fgl::ArrayList<const fgl::CollisionRect*> Item::getCollisionRects() const
 	{
 		if(getParentEntity()==nullptr)
 		{

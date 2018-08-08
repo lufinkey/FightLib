@@ -21,8 +21,8 @@ namespace fl
 		
 		void applyForce(const fgl::Vector2d& force);
 		
-		static fgl::ArrayList<fgl::CollisionRect*> createCollisionRectsFromAnimation(CollidableSprite* sprite, const fgl::ArrayList<fgl::CollisionRect*>& prevRects);
-		static fgl::ArrayList<fgl::CollisionRect*> createCollisionRectsFromBoundsMetapoints(CollidableSprite* sprite, const fgl::ArrayList<fgl::CollisionRect*>& prevRects);
+		static fgl::ArrayList<const fgl::CollisionRect*> createCollisionRectsFromAnimation(CollidableSprite* sprite, const fgl::ArrayList<const fgl::CollisionRect*>& prevRects);
+		static fgl::ArrayList<const fgl::CollisionRect*> createCollisionRectsFromBoundsMetapoints(CollidableSprite* sprite, const fgl::ArrayList<const fgl::CollisionRect*>& prevRects);
 		
 	private:
 		fgl::Vector2d velocity;

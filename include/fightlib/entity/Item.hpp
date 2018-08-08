@@ -19,7 +19,7 @@ namespace fl
 		
 		virtual fgl::TransformState getTransformState() const override;
 
-		virtual fgl::ArrayList<fgl::CollisionRect*> getCollisionRects() const override;
+		virtual fgl::ArrayList<const fgl::CollisionRect*> getCollisionRects() const override;
 		virtual bool respondsToGravity() const override;
 		virtual bool respondsToAirResistance() const override;
 

@@ -87,7 +87,7 @@ namespace fl
 		collisionMethod = method;
 	}
 	
-	fgl::ArrayList<fgl::CollisionRect*> StageObject::getCollisionRects() const
+	fgl::ArrayList<const fgl::CollisionRect*> StageObject::getCollisionRects() const
 	{
 		return collisionRects;
 	}
@@ -105,7 +105,13 @@ namespace fl
 				break;
 				
 			case COLLISIONMETHOD_FRAME:
-				collisionRects = { fgl::CollisionRectBuilder::fromFrame("all", collidable, prevCollisionRects, getSize(), getOrigin(), getDrawScale()) };
+				{
+					auto origin = getOrigin();
+					auto size = getSize();
+					auto rect = fgl::RectangleD(-origin.x, -origin.y, size.x, size.y);
+					auto rotation = getTransformState().rotation;
+					collisionRects = { fgl::CollisionRectBuilder::fromRect("all", rect, prevCollisionRects, rotation, getDrawScale()) };
+				}
 				break;
 				
 			case COLLISIONMETHOD_PIXEL:

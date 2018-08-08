@@ -30,7 +30,7 @@ namespace fl
 		virtual bool respondsToGravity() const;
 		virtual bool respondsToAirResistance() const;
 
-		virtual fgl::ArrayList<fgl::CollisionRect*> getCollisionRects() const override;
+		virtual fgl::ArrayList<const fgl::CollisionRect*> getCollisionRects() const override;
 		
 		Stage* getStage() const;
 
@@ -47,7 +47,7 @@ namespace fl
 		void updateCollisionRects();
 	
 		Stage* stage;
-		fgl::ArrayList<fgl::CollisionRect*> collisionRects;
+		fgl::ArrayList<const fgl::CollisionRect*> collisionRects;
 		CollisionMethod collisionMethod;
 	};
 }
